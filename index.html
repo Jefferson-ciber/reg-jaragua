@@ -13,15 +13,245 @@
     tailwind.config={theme:{extend:{colors:{gold:'#c9a84c',goldLight:'#f0c96b',dark:'#0d0d0d',card:'#141418',cardBorder:'#2a2a32'},fontFamily:{display:['Bebas Neue','sans-serif'],heading:['Oswald','sans-serif'],body:['Roboto','sans-serif']}}}};
   </script>
   <style>
-    *{box-sizing:border-box}html{scroll-behavior:smooth}body{background:#0d0d0d;color:#e5e5e5;font-family:Roboto,sans-serif;min-height:100vh}
-    body:before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.025;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
-    nav,header,main,footer{position:relative;z-index:1}.mc-topbar{height:5px;background:linear-gradient(90deg,#b91c1c,#7f1d1d,#b91c1c)}.navbar{background:rgba(13,13,13,.96);backdrop-filter:blur(12px);border-bottom:1px solid #1e1e24}.hero{background:radial-gradient(ellipse 80% 60% at 50% 0%,rgba(185,28,28,.18),transparent 70%),linear-gradient(180deg,#141418,#0d0d0d);border-bottom:1px solid #1e1e24}.patch-badge{display:inline-flex;align-items:center;gap:8px;border:1px solid #c9a84c55;background:rgba(201,168,76,.08);color:#c9a84c;font:11px Oswald,sans-serif;letter-spacing:.12em;text-transform:uppercase;padding:6px 14px;border-radius:4px}.hero-divider{width:80px;height:3px;background:linear-gradient(90deg,transparent,#c9a84c,transparent);margin:auto}.panel{background:#141418;border:1px solid #2a2a32;border-radius:14px}.group-card{background:#141418;border:1px solid #2a2a32;border-radius:12px;transition:.2s}.group-card:hover{border-color:#c9a84c77;transform:translateY(-2px)}.gold-line{border:0;height:1px;background:linear-gradient(90deg,transparent,#c9a84c55,transparent)}.field{width:100%;background:#0d0d0d;border:1px solid #383842;border-radius:8px;padding:12px 14px;color:#f5f5f5;outline:none}.field:focus{border-color:#c9a84c;box-shadow:0 0 0 3px #c9a84c20}.btn{border-radius:8px;padding:11px 16px;font-weight:700;transition:.2s}.btn-primary{background:#c9a84c;color:#111}.btn-primary:hover{background:#f0c96b}.btn-secondary{border:1px solid #3f3f46;color:#eee}.btn-secondary:hover{border-color:#c9a84c;color:#c9a84c}.notice{border-left:3px solid #c9a84c;background:#c9a84c12;padding:12px;border-radius:5px}.muted{color:#a1a1aa}a{color:#f0c96b}a:focus-visible,button:focus-visible{outline:2px solid #f0c96b;outline-offset:3px}.hidden-view{display:none!important}
+
+        *, *::before, *::after { box-sizing: border-box; }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            background-color: #0d0d0d;
+            color: #e5e5e5;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        /* ── Textura de couro / grain ── */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+            opacity: 0.025;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* ── Barra de topo (cor MC) ── */
+        .mc-topbar {
+            background: linear-gradient(90deg, #b91c1c 0%, #7f1d1d 50%, #b91c1c 100%);
+            height: 5px;
+        }
+
+        /* ── Navbar ── */
+        .navbar {
+            background: rgba(13,13,13,0.95);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid #1e1e24;
+        }
+
+        /* ── Hero ── */
+        .hero {
+            background:
+                radial-gradient(ellipse 80% 60% at 50% 0%, rgba(185,28,28,0.18) 0%, transparent 70%),
+                linear-gradient(180deg, #141418 0%, #0d0d0d 100%);
+            border-bottom: 1px solid #1e1e24;
+        }
+
+        .hero-divider {
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #c9a84c, transparent);
+            margin: 0 auto;
+        }
+
+        /* ── Distintivo (patch style) ── */
+        .patch-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            border: 1px solid #c9a84c55;
+            background: linear-gradient(135deg, rgba(201,168,76,0.12) 0%, rgba(201,168,76,0.04) 100%);
+            color: #c9a84c;
+            font-family: 'Oswald', sans-serif;
+            font-size: 11px;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            padding: 6px 14px;
+            border-radius: 4px;
+        }
+
+        /* ── Cards de grupo ── */
+        .group-card {
+            background: #141418;
+            border: 1px solid #2a2a32;
+            border-radius: 12px;
+            transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+        }
+        .group-card:hover {
+            border-color: rgba(201,168,76,0.45);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.5), 0 0 0 1px rgba(201,168,76,0.1);
+            transform: translateY(-3px);
+        }
+
+        /* ── Badge de status ── */
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-family: 'Oswald', sans-serif;
+            font-size: 10px;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+
+        /* ── Linha dourada decorativa ── */
+        .gold-line {
+            border: none;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #c9a84c55, transparent);
+        }
+
+        /* ── Card SOS ── */
+        .sos-card {
+            background: linear-gradient(135deg, #1a0808 0%, #141418 100%);
+            border: 2px solid rgba(185,28,28,0.7);
+            border-radius: 12px;
+            box-shadow: 0 0 32px rgba(185,28,28,0.2), inset 0 0 40px rgba(185,28,28,0.05);
+        }
+
+        /* ── Cards do comando ── */
+        .role-card {
+            background: #111114;
+            border: 1px solid #222228;
+            border-radius: 10px;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+        .role-card:hover {
+            border-color: #c9a84c55;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+        }
+
+        /* ── Seção do comando ── */
+        .command-section {
+            background: linear-gradient(135deg, #141418 0%, #111114 100%);
+            border: 1px solid #2a2a32;
+            border-radius: 16px;
+        }
+
+        /* ── Anel dourado nos avatares ── */
+        .avatar-gold { border: 2px solid #c9a84c; box-shadow: 0 0 10px rgba(201,168,76,0.25); }
+        .avatar-red  { border: 2px solid #b91c1c; box-shadow: 0 0 10px rgba(185,28,28,0.3); }
+        .avatar-gray { border: 2px solid #52525b; }
+        .avatar-green { border: 2px solid #16a34a; }
+
+        /* ── Caveira de fundo (direita) ── */
+        .skull-bg {
+            position: fixed;
+            right: -80px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: min(520px, 55vw);
+            pointer-events: none;
+            z-index: 0;
+            mix-blend-mode: lighten;
+            opacity: 0.07;
+            user-select: none;
+        }
+
+        /* ── Logo Regional de fundo (esquerda) ── */
+        .logo-bg {
+            position: fixed;
+            left: -60px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: min(460px, 48vw);
+            pointer-events: none;
+            z-index: 0;
+            mix-blend-mode: lighten;
+            opacity: 0.06;
+            user-select: none;
+        }
+
+        /* Todo conteúdo fica acima dos elementos fixos */
+        nav, header, main, footer { position: relative; z-index: 1; }
+
+        /* ── Scrollbar custom ── */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #0d0d0d; }
+        ::-webkit-scrollbar-thumb { background: #2a2a32; border-radius: 3px; }
+        ::-webkit-scrollbar-thumb:hover { background: #c9a84c55; }
+
+        /* ── Pulse para SOS ── */
+        @keyframes sos-pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.55; }
+        }
+        .sos-pulse { animation: sos-pulse 1.8s ease-in-out infinite; }
+
+        /* ── Seleção ── */
+        ::selection { background: #c9a84c; color: #0d0d0d; }
+    
+
+        /* Regras do portal autenticado, preservando o visual do Guia Oficial */
+        .hidden-view { display: none !important; }
+        .panel { background: #141418; border: 1px solid #2a2a32; border-radius: 14px; }
+        .field { width:100%; background:#0d0d0d; border:1px solid #383842; border-radius:8px; padding:12px 14px; color:#f5f5f5; outline:none; }
+        .field:focus { border-color:#c9a84c; box-shadow:0 0 0 3px #c9a84c20; }
+        .btn { border-radius:8px; padding:11px 16px; font-weight:700; transition:.2s; }
+        .btn-primary { background:#c9a84c; color:#111; }
+        .btn-primary:hover { background:#f0c96b; }
+        .btn-secondary { border:1px solid #3f3f46; color:#eee; background:transparent; }
+        .btn-secondary:hover { border-color:#c9a84c; color:#c9a84c; }
+        .notice { border-left:3px solid #c9a84c; background:#c9a84c12; padding:12px; border-radius:5px; }
+        #login-view, #change-password-view, #error-view { position:relative; z-index:2; }
+        #portal-view { position:relative; z-index:2; }
+        nav, header, main, footer { position:relative; z-index:1; }
+        .portal-section-title { border-bottom:1px solid #2a2a32; padding-bottom:1rem; }
+        .role-card { background:#141418; border:1px solid #2a2a32; border-radius:12px; transition:border-color .25s ease,box-shadow .25s ease,transform .25s ease; }
+        .role-card:hover { border-color:rgba(201,168,76,.45); box-shadow:0 8px 32px rgba(0,0,0,.5),0 0 0 1px rgba(201,168,76,.1); transform:translateY(-3px); }
+        .sos-card { background:rgba(20,20,24,.96); border:1px solid rgba(185,28,28,.5); border-radius:12px; }
+        .muted { color:#a1a1aa; }
+        a:focus-visible, button:focus-visible { outline:2px solid #f0c96b; outline-offset:3px; }
+        /* Painel do administrador */
+        .tab-btn { border:1px solid #3f3f46; color:#d4d4d8; background:transparent; border-radius:8px; padding:9px 14px; font-family:'Oswald',sans-serif; font-size:13px; letter-spacing:.06em; transition:.2s; }
+        .tab-btn:hover { border-color:#c9a84c; color:#c9a84c; }
+        .tab-btn[aria-selected="true"] { background:#c9a84c; border-color:#c9a84c; color:#111; }
+        textarea.field { resize:vertical; min-height:96px; }
+        .row-card { background:#0f0f12; border:1px solid #2a2a32; border-radius:10px; padding:14px 16px; }
+        .row-card.is-off { opacity:.62; }
+        .btn-sm { padding:6px 12px; font-size:12px; border-radius:6px; font-weight:600; }
+        .btn-danger { border:1px solid #7f1d1d; color:#fca5a5; background:transparent; }
+        .btn-danger:hover { background:#7f1d1d; color:#fff; }
+        .btn:disabled { opacity:.5; cursor:not-allowed; }
+        /* Guia fixo (canais, SOS, comando) */
+        .guide-logo { width:80px; height:80px; border-radius:12px; object-fit:cover; flex-shrink:0; border:1px solid #3f3f46; background:#0d0d0d; }
+        @media (max-width:520px){ .guide-logo { width:60px; height:60px; } }
+        .tag { display:inline-flex; align-items:center; gap:6px; font-family:'Oswald',sans-serif; font-size:11px; letter-spacing:.1em; text-transform:uppercase; font-weight:600; padding:5px 10px; border-radius:5px; border:1px solid; white-space:nowrap; }
+        .tag-red { color:#fca5a5; border-color:#7f1d1d; background:rgba(185,28,28,.14); }
+        .tag-blue { color:#93c5fd; border-color:#1e3a8a; background:rgba(30,58,138,.28); }
+        .tag-gold { color:#c9a84c; border-color:#c9a84c55; background:rgba(201,168,76,.1); }
+        .rule-box { border-left:3px solid #b91c1c; background:rgba(185,28,28,.13); padding:12px 14px; border-radius:6px; }
+        .tip-box { border-left:3px solid #c9a84c; background:rgba(201,168,76,.1); padding:12px 14px; border-radius:6px; }
+        .sos-panel { background:linear-gradient(135deg,#1a0808 0%,#141418 100%); border:2px solid rgba(185,28,28,.7); border-radius:12px; box-shadow:0 0 32px rgba(185,28,28,.18), inset 0 0 40px rgba(185,28,28,.05); }
+        .sos-flag { position:absolute; top:-1px; right:-1px; background:#b91c1c; color:#fff; font-family:'Oswald',sans-serif; font-size:11px; letter-spacing:.1em; text-transform:uppercase; font-weight:600; padding:6px 14px; border-radius:0 10px 0 10px; }
+        .sos-inner { border:1px solid rgba(185,28,28,.45); background:rgba(127,29,29,.14); border-radius:10px; padding:16px; }
+        .cmd-icon { width:46px; height:46px; border-radius:10px; display:flex; align-items:center; justify-content:center; background:linear-gradient(135deg,rgba(201,168,76,.2),rgba(201,168,76,.06)); color:#c9a84c; font-size:18px; flex-shrink:0; }
+        .cmd-wa { font-size:22px; color:#25d366; transition:transform .2s; }
+        a.cmd-wa:hover { transform:scale(1.12); }
+        .cmd-wa.off { color:#166534; }
+        @media (prefers-reduced-motion:reduce){ .sos-pulse { animation:none; } }
+
   </style>
 </head>
-<body class="flex flex-col">
+<body class="min-h-screen flex flex-col">
+  <img src="cavera.jpg" alt="" class="skull-bg" aria-hidden="true">
+  <img src="reginal_jaragua.png" alt="" class="logo-bg" aria-hidden="true">
   <div class="mc-topbar"></div>
-  <nav class="navbar sticky top-0 z-50"><div class="max-w-5xl mx-auto px-5 py-3 flex items-center justify-between gap-4">
-    <div class="flex items-center gap-3"><div class="w-10 h-10 rounded-md flex items-center justify-center border border-[#2a2a32] text-gold"><i class="fa-solid fa-shield-halved text-xl"></i></div><div class="leading-tight"><div class="font-display text-white text-xl tracking-widest">INSANOS MC</div><div class="text-[10px] text-gold font-heading tracking-widest uppercase">Regional Jaraguá · XXXV</div></div></div>
+  <nav class="navbar sticky top-0 z-50"><div class="max-w-5xl mx-auto px-5 py-3 flex items-center justify-between">
+    <div class="flex items-center gap-3"><div class="w-9 h-9 rounded-md flex items-center justify-center" style="background:linear-gradient(135deg,#b91c1c,#7f1d1d)"><i class="fa-solid fa-motorcycle text-white text-base"></i></div><div class="leading-tight"><div class="font-display text-white text-xl tracking-widest">INSANOS MC</div><div class="text-[10px] text-gold font-heading tracking-widest uppercase">Regional Jaraguá · XXXV</div></div></div>
     <div id="nav-user" class="hidden-view flex items-center gap-3"><span id="user-email" class="hidden sm:inline text-xs text-gray-400"></span><button id="logout-btn" class="btn btn-secondary text-sm"><i class="fa-solid fa-right-from-bracket mr-2"></i>Sair</button></div>
   </div></nav>
   <header class="hero px-5 py-12 md:py-14"><div class="max-w-4xl mx-auto text-center space-y-5"><div class="patch-badge"><i class="fa-solid fa-lock"></i> Portal interno · Acesso restrito</div><h1 class="font-display text-white tracking-widest uppercase leading-none" style="font-size:clamp(2.3rem,8vw,5rem)">Guia Oficial de <span class="text-gold">Comunicação</span></h1><p class="text-gray-400 text-sm md:text-base max-w-2xl mx-auto leading-relaxed">Regional Jaraguá (XXXV). Orientações, comunicados e materiais disponíveis apenas para integrantes autorizados.</p><div class="hero-divider"></div><div class="font-heading text-gold text-sm tracking-widest uppercase">“O mundo é diferente da ponte pra cá”</div></div></header>
@@ -35,13 +265,72 @@
     <section id="loading-view" class="hidden-view text-center py-16"><i class="fa-solid fa-circle-notch fa-spin text-gold text-3xl"></i><p class="mt-4 text-gray-400">Verificando acesso...</p></section>
     <section id="portal-view" class="hidden-view space-y-10">
       <div class="flex flex-wrap items-end justify-between gap-4"><div><p class="text-xs text-gold font-heading tracking-widest uppercase mb-1">Área restrita</p><h2 class="font-display text-4xl tracking-widest">Bem-vindo ao Portal</h2><p id="welcome-text" class="text-sm text-gray-400 mt-2"></p></div><span id="role-badge" class="patch-badge"><i class="fa-solid fa-user-check"></i> Integrante autorizado</span></div>
-      <div id="admin-panel" class="hidden-view panel p-5 md:p-6 space-y-5"><div class="flex items-center gap-3"><i class="fa-solid fa-user-gear text-gold text-xl"></i><div><h3 class="font-heading text-xl uppercase">Administração de acessos</h3><p class="text-xs text-gray-400">Crie contas individuais. A senha inicial será definida por você e entregue ao integrante de forma privada.</p></div></div><form id="create-user-form" class="grid md:grid-cols-3 gap-3"><div><label class="block text-xs text-gray-300 mb-2" for="new-name">Nome do integrante</label><input class="field" id="new-name" required maxlength="100" placeholder="Nome completo"></div><div><label class="block text-xs text-gray-300 mb-2" for="new-email">E-mail</label><input class="field" id="new-email" type="email" required placeholder="integrante@email.com"></div><div><label class="block text-xs text-gray-300 mb-2" for="new-password">Senha temporária</label><input class="field" id="new-password" type="password" required minlength="12" autocomplete="new-password" placeholder="Mínimo 12 caracteres"></div><div class="md:col-span-3 flex flex-wrap items-center gap-3"><button id="create-user-btn" class="btn btn-primary" type="submit"><i class="fa-solid fa-user-plus mr-2"></i>Criar usuário</button><p id="admin-message" class="text-sm" role="status" aria-live="polite"></p></div></form><p class="text-xs text-gray-500">Nunca use a mesma senha para várias pessoas. Recomende a troca da senha após o primeiro acesso; não envie credenciais em grupos.</p></div>
+      <div id="admin-panel" class="hidden-view panel p-5 md:p-6 space-y-5">
+        <div class="flex items-center gap-3"><i class="fa-solid fa-user-gear text-gold text-xl"></i><div><h3 class="font-heading text-xl uppercase">Painel do administrador</h3><p class="text-xs text-gray-400">Publique comunicados, gerencie integrantes e crie novos acessos.</p></div></div>
+        <div class="flex flex-wrap gap-2" role="tablist" aria-label="Seções do painel">
+          <button type="button" class="tab-btn" role="tab" data-tab="content" aria-selected="true"><i class="fa-solid fa-bullhorn mr-2"></i>Comunicados</button>
+          <button type="button" class="tab-btn" role="tab" data-tab="members" aria-selected="false"><i class="fa-solid fa-users mr-2"></i>Integrantes</button>
+          <button type="button" class="tab-btn" role="tab" data-tab="access" aria-selected="false"><i class="fa-solid fa-user-plus mr-2"></i>Novo acesso</button>
+        </div>
+
+        <div id="tab-content" class="space-y-5" role="tabpanel">
+          <form id="content-form" class="grid md:grid-cols-3 gap-3" novalidate>
+            <input type="hidden" id="cc-id">
+            <div><label class="block text-xs text-gray-300 mb-2" for="cc-category">Categoria</label><input class="field" id="cc-category" list="cc-categories" maxlength="60" required placeholder="Ex.: WhatsApp Oficial"><datalist id="cc-categories"><option value="WhatsApp Oficial"><option value="Emergência"><option value="Orientação"><option value="Comunicado"></datalist></div>
+            <div class="md:col-span-2"><label class="block text-xs text-gray-300 mb-2" for="cc-title">Título</label><input class="field" id="cc-title" maxlength="150" required placeholder="Título do comunicado"></div>
+            <div class="md:col-span-3"><label class="block text-xs text-gray-300 mb-2" for="cc-body">Texto</label><textarea class="field" id="cc-body" rows="4" maxlength="5000" required placeholder="Escreva o texto autorizado para os integrantes."></textarea></div>
+            <div><label class="block text-xs text-gray-300 mb-2" for="cc-order">Ordem (menor aparece primeiro)</label><input class="field" id="cc-order" type="number" step="1" min="0" max="9999" value="100"></div>
+            <div class="flex items-end"><label class="flex items-center gap-2 text-sm text-gray-200 pb-3"><input type="checkbox" id="cc-published" checked class="accent-[#c9a84c] w-4 h-4"> Publicar para os integrantes</label></div>
+            <div class="flex items-end gap-2 pb-1"><button id="cc-save" class="btn btn-primary" type="submit"><i class="fa-solid fa-floppy-disk mr-2"></i>Publicar comunicado</button><button id="cc-cancel" class="btn btn-secondary hidden-view" type="button">Cancelar edição</button></div>
+            <p id="cc-message" class="md:col-span-3 text-sm" role="status" aria-live="polite"></p>
+          </form>
+          <hr class="gold-line">
+          <div id="admin-content-list" class="space-y-3"></div>
+        </div>
+
+        <div id="tab-members" class="hidden-view space-y-3" role="tabpanel">
+          <p class="text-xs text-gray-400">Desativar bloqueia o acesso aos comunicados na hora. O acesso pode ser reativado a qualquer momento. Você não pode desativar a própria conta.</p>
+          <p id="members-message" class="text-sm" role="status" aria-live="polite"></p>
+          <div id="members-list" class="space-y-2"></div>
+        </div>
+
+        <div id="tab-access" class="hidden-view" role="tabpanel">
+          <p class="text-xs text-gray-400 mb-4">Crie contas individuais. A senha inicial será definida por você e entregue ao integrante de forma privada.</p>
+          <form id="create-user-form" class="grid md:grid-cols-3 gap-3"><div><label class="block text-xs text-gray-300 mb-2" for="new-name">Nome do integrante</label><input class="field" id="new-name" required maxlength="100" placeholder="Nome completo"></div><div><label class="block text-xs text-gray-300 mb-2" for="new-email">E-mail</label><input class="field" id="new-email" type="email" required placeholder="integrante@email.com"></div><div><label class="block text-xs text-gray-300 mb-2" for="new-password">Senha temporária</label><input class="field" id="new-password" type="password" required minlength="12" autocomplete="new-password" placeholder="Mínimo 12 caracteres"></div><div class="md:col-span-3 flex flex-wrap items-center gap-3"><button id="create-user-btn" class="btn btn-primary" type="submit"><i class="fa-solid fa-user-plus mr-2"></i>Criar usuário</button><p id="admin-message" class="text-sm" role="status" aria-live="polite"></p></div></form>
+          <p class="text-xs text-gray-500 mt-4">Nunca use a mesma senha para várias pessoas. Não envie credenciais em grupos.</p>
+        </div>
+      </div>
+      <section id="guia-fixo" class="space-y-8">
+        <div class="notice flex gap-4 items-start p-5"><div class="w-12 h-12 rounded-lg flex items-center justify-center bg-[#c9a84c22] text-gold text-xl shrink-0"><i class="fa-solid fa-circle-info"></i></div><div><h3 class="font-heading text-gold text-lg uppercase font-bold">Seja bem-vindo, irmão!</h3><p class="text-sm text-gray-300 mt-1 leading-relaxed">A disciplina e a organização nos canais digitais mantêm a segurança e o respeito de todos. Leia atentamente cada orientação abaixo para utilizar os grupos de forma consciente e correta.</p></div></div>
+
+        <div>
+          <div class="portal-section-title flex flex-wrap items-end justify-between gap-3 mb-6"><div><p class="text-xs text-gold font-heading tracking-widest uppercase">WhatsApp oficial</p><h3 class="font-display text-4xl md:text-5xl tracking-widest text-white">Canais de comunicação</h3></div><span class="patch-badge"><i class="fa-brands fa-whatsapp"></i> 5 grupos</span></div>
+
+          <div class="space-y-4">
+            <article class="group-card p-5 md:p-6"><div class="flex gap-4 md:gap-5 items-start"><img src="INFORMAL_.png" alt="Ícone do grupo Informações Oficiais" class="guide-logo avatar-green" loading="lazy"><div class="flex-1 min-w-0"><div class="flex flex-wrap items-start justify-between gap-2"><h4 class="font-heading font-bold text-white text-xl uppercase">Informações oficiais</h4><span class="tag tag-red"><i class="fa-solid fa-ban"></i> Apenas reações</span></div><p class="text-gray-300 text-sm md:text-base mt-2">Canal oficial onde os integrantes recebem comunicados e orientações diretas do <strong class="text-gold font-medium">Comando Brasil</strong>.</p><div class="rule-box mt-4 text-sm text-gray-200"><i class="fa-solid fa-circle-exclamation text-red-400 mr-2"></i><strong class="text-red-300">REGRA:</strong> É totalmente proibido comentar ou digitar qualquer texto. O integrante pode <strong class="text-white">apenas reagir com emojis</strong> para manter o fluxo de avisos limpo.</div></div></div></article>
+
+            <article class="group-card p-5 md:p-6"><div class="flex gap-4 md:gap-5 items-start"><img src="escudo.png" alt="Ícone do grupo Informal de Divisão" class="guide-logo" loading="lazy"><div class="flex-1 min-w-0"><div class="flex flex-wrap items-start justify-between gap-2"><h4 class="font-heading font-bold text-white text-xl uppercase">Informal de (Divisão)</h4><span class="tag tag-blue"><i class="fa-solid fa-comments"></i> Interação livre</span></div><p class="text-gray-300 text-sm md:text-base mt-2">Grupo informal exclusivo da divisão. Espaço dedicado para a <strong class="text-gold font-medium">interação entre os integrantes daquela divisão e o comando de divisão</strong>, fortalecendo a união e o convívio do grupo.</p></div></div></article>
+
+            <article class="group-card p-5 md:p-6"><div class="flex gap-4 md:gap-5 items-start"><img src="operacional.jpg" alt="Ícone do grupo Operacional Reg Jaraguá" class="guide-logo avatar-gold" loading="lazy"><div class="flex-1 min-w-0"><div class="flex flex-wrap items-start justify-between gap-2"><h4 class="font-heading font-bold text-white text-xl uppercase">Operacional Reg Jaraguá</h4><span class="tag tag-gold"><i class="fa-solid fa-book-open"></i> Estudo &amp; respostas</span></div><p class="text-gray-300 text-sm md:text-base mt-2">Grupo focado na formação do integrante. Criado para que o irmão <strong class="text-gold font-medium">responda às perguntas enviadas diretamente pelo Comando Brasil</strong>.</p><div class="tip-box mt-4 text-sm text-gray-200"><i class="fa-solid fa-lightbulb text-gold mr-2"></i>Aprofunda o conhecimento sobre a história e regras do <strong class="text-gold font-medium">Insanos MC</strong>. As respostas estão no <strong class="text-white">Manual do Integrante</strong> e na vivência com os irmãos do clube.</div></div></div></article>
+
+            <article class="group-card p-5 md:p-6"><div class="flex gap-4 md:gap-5 items-start"><img src="reginal_jaragua.png" alt="Ícone do grupo Regional Jaraguá Central" class="guide-logo" loading="lazy"><div class="flex-1 min-w-0"><div class="flex flex-wrap items-start justify-between gap-2"><h4 class="font-heading font-bold text-white text-xl uppercase">Regional Jaraguá (Central)</h4><span class="tag tag-blue"><i class="fa-solid fa-people-group"></i> Resenha &amp; eventos</span></div><p class="text-gray-300 text-sm md:text-base mt-2">Grupo principal da regional. Canal de <strong class="text-gold font-medium">interação com todo o Comando Regional e com todos os integrantes da Jaraguá</strong>.</p><ul class="grid sm:grid-cols-2 gap-x-8 gap-y-2 mt-4 text-sm text-gray-300"><li><i class="fa-solid fa-check text-gold mr-2"></i>Resenha livre e dúvidas do clube</li><li><i class="fa-solid fa-check text-gold mr-2"></i>Avisos de eventos e viagens</li><li><i class="fa-solid fa-check text-gold mr-2"></i>Pontos de Encontro (<strong class="text-gold font-medium">P.E.</strong>)</li><li><i class="fa-solid fa-check text-gold mr-2"></i>Suporte rápido no dia a dia</li></ul></div></div></article>
+
+            <article class="sos-panel p-5 md:p-6 relative"><span class="sos-flag"><i class="fa-solid fa-triangle-exclamation mr-1"></i> Emergência</span><div class="flex gap-4 md:gap-5 items-start"><img src="sos.jpg" alt="Ícone do grupo SOS Regional Jaraguá" class="guide-logo avatar-red" loading="lazy"><div class="flex-1 min-w-0"><h4 class="font-heading font-bold text-red-300 text-xl uppercase sos-pulse"><i class="fa-solid fa-triangle-exclamation mr-2"></i>SOS Regional Jaraguá</h4><p class="text-gray-200 text-sm md:text-base mt-2">Canal de <strong class="text-red-300 font-medium">EXTREMA ATENÇÃO E PRIORIDADE ABSOLUTA</strong>. Identificado pelo ícone e cor vermelha.</p><div class="sos-inner mt-4"><h5 class="font-heading text-red-300 text-sm uppercase tracking-widest font-bold mb-2">Protocolo de uso</h5><p class="text-sm text-gray-200 leading-relaxed"><strong class="text-white">NÃO É GRUPO DE RESENHA.</strong> Destinado exclusivamente para situações em que algum irmão estiver em <u class="text-white font-semibold">risco de vida</u> ou tenha sofrido um <u class="text-white font-semibold">acidente grave</u>.</p><div class="tip-box mt-3 text-sm text-goldLight"><i class="fa-solid fa-arrow-right mr-2"></i><strong>Procedimento:</strong> tente primeiro o grupo Regional. Sem resposta imediata, acione o SOS.</div><p class="mt-3 text-xs font-heading uppercase tracking-widest text-red-300"><i class="fa-solid fa-ban mr-2"></i>Jamais acionar para falta de gasolina ou imprevistos simples</p></div></div></div></article>
+          </div>
+        </div>
+
+        <div class="command-section p-5 md:p-8">
+          <div class="portal-section-title flex flex-wrap items-end justify-between gap-3 mb-6"><div><p class="text-xs text-gold font-heading tracking-widest uppercase">Insanos MC XXXV</p><h3 class="font-display text-4xl md:text-5xl tracking-widest text-white">Comando regional</h3><p class="text-sm text-gray-400 mt-1">Liderança e responsáveis oficiais</p></div><span class="patch-badge"><i class="fa-solid fa-location-dot"></i> Jaraguá · SP</span></div>
+          <div id="command-list" class="grid gap-3 sm:grid-cols-2 lg:grid-cols-3"><div class="text-sm text-gray-400">Carregando comando...</div></div>
+          <img src="comando.jpg" alt="Comando Regional Jaraguá" class="w-full rounded-xl border border-[#2a2a32] mt-6" loading="lazy" onerror="this.remove()">
+        </div>
+      </section>
       <section><div class="mb-5"><p class="text-xs text-gold font-heading tracking-widest uppercase">Conteúdo autorizado</p><h3 class="font-display text-3xl tracking-widest">Comunicados e orientações</h3></div><div id="content-list" class="space-y-4"><div class="panel p-5 text-gray-400">Carregando conteúdos...</div></div></section>
       <section class="panel p-5 md:p-6"><div class="flex items-start gap-3"><i class="fa-solid fa-shield-halved text-gold text-xl mt-1"></i><div><h3 class="font-heading text-lg uppercase">Uso responsável</h3><p class="text-sm text-gray-400 mt-1">Este portal é destinado a integrantes autorizados. Não compartilhe credenciais, links privados ou documentos internos com pessoas não autorizadas.</p></div></div></section>
     </section>
     <section id="error-view" class="hidden-view max-w-xl mx-auto panel p-6 text-center"><i class="fa-solid fa-triangle-exclamation text-red-400 text-3xl"></i><h2 class="font-display text-3xl mt-3">Não foi possível carregar o portal</h2><p id="error-message" class="text-sm text-gray-400 mt-2"></p><button id="retry-btn" class="btn btn-secondary mt-5">Tentar novamente</button></section>
   </main>
-  <footer class="border-t border-[#1e1e24] bg-[#0a0a0a] py-7 px-5 text-center"><div class="font-display text-white tracking-widest text-xl">INSANOS MC</div><div class="text-gold text-xs font-heading tracking-widest uppercase mt-1">Regional Jaraguá · XXXV</div><hr class="gold-line my-4 max-w-xs mx-auto"><p class="text-gray-600 text-xs">Portal interno · Acesso sujeito à autorização do administrador</p></footer><div class="mc-topbar"></div>
+  <footer class="border-t border-[#1e1e24] bg-[#0a0a0a] py-7 px-5 text-center"><div class="font-display text-white tracking-widest text-xl">INSANOS MC</div><div class="text-gold text-xs font-heading tracking-widest uppercase mt-1">Regional Jaraguá · XXXV</div><hr class="gold-line my-4 max-w-xs mx-auto"><p class="text-gray-600 text-xs">Guia de Orientação para Novos Integrantes · Todos os direitos reservados</p></footer><div class="mc-topbar"></div>
 <script>
 // CONFIGURE estes dois valores com Project URL e publishable/anon key do Supabase.
 // A publishable/anon key pode estar no navegador SOMENTE porque as tabelas usam RLS.
@@ -62,7 +351,7 @@ async function openPortal(user){showView('loading-view');$('user-email').textCon
   if(user.user_metadata?.must_change_password){showView('change-password-view');return;}
   $('welcome-text').textContent=(profile.display_name||user.email)+' — conteúdo disponível conforme seu perfil.';
   $('role-badge').innerHTML=profile.role==='admin'?'<i class="fa-solid fa-user-gear"></i> Administrador':'<i class="fa-solid fa-user-check"></i> Integrante autorizado';
-  $('admin-panel').classList.toggle('hidden-view',profile.role!=='admin');showView('portal-view');await loadContent();
+  $('admin-panel').classList.toggle('hidden-view',profile.role!=='admin');me={id:user.id};showView('portal-view');loadCommand();await loadContent();if(profile.role==='admin'){setTab('content');loadAdminContent();loadMembers();}
 }
 async function loadContent(){const holder=$('content-list');holder.innerHTML='<div class="panel p-5 text-gray-400">Carregando conteúdos...</div>';
   const {data,error}=await supabaseClient.from('portal_content').select('id,category,title,body,updated_at').eq('is_published',true).order('sort_order',{ascending:true}).order('updated_at',{ascending:false});
@@ -72,11 +361,101 @@ async function loadContent(){const holder=$('content-list');holder.innerHTML='<d
 }
 async function checkSession(){if(!configured||!supabaseClient){showView('login-view');message('login-message','Antes de usar, configure a URL e a chave pública do Supabase no arquivo index.html.','error');return;}showView('loading-view');const {data,error}=await supabaseClient.auth.getSession();if(error){showView('login-view');message('login-message','Não foi possível verificar a sessão. Tente entrar novamente.','error');return;}if(data.session){try{await openPortal(data.session.user)}catch(e){showView('error-view');$('error-message').textContent=e.message||'Erro inesperado.'}}else showView('login-view');}
 $('login-form').addEventListener('submit',async e=>{e.preventDefault();if(!supabaseClient){message('login-message','Configure primeiro o Supabase no código.','error');return;}const btn=$('login-btn');btn.disabled=true;btn.textContent='Verificando...';message('login-message','');const {data,error}=await supabaseClient.auth.signInWithPassword({email:$('email').value.trim(),password:$('password').value});btn.disabled=false;btn.innerHTML='<i class="fa-solid fa-lock-open mr-2"></i>Entrar no portal';if(error){message('login-message','E-mail ou senha inválidos, ou conta ainda não autorizada.','error');return;}try{await openPortal(data.user)}catch(err){showView('error-view');$('error-message').textContent=err.message||'Erro ao validar acesso.'}});
-$('logout-btn').addEventListener('click',async()=>{await supabaseClient?.auth.signOut();$('password').value='';message('login-message','Você saiu do portal.');showView('login-view');});
+$('logout-btn').addEventListener('click',async()=>{await supabaseClient?.auth.signOut();me=null;adminItems=[];$('admin-content-list').innerHTML='';$('members-list').innerHTML='';$('command-list').innerHTML='';$('password').value='';message('login-message','Você saiu do portal.');showView('login-view');});
 $('retry-btn').addEventListener('click',checkSession);
 $('cancel-password-change').addEventListener('click',async()=>{await supabaseClient.auth.signOut();showView('login-view');});
 $('change-password-form').addEventListener('submit',async e=>{e.preventDefault();const next=$('first-new-password').value;const confirm=$('first-confirm-password').value;if(next.length<12){message('password-message','Use uma senha com pelo menos 12 caracteres.','error');return;}if(next!==confirm){message('password-message','As senhas não coincidem.','error');return;}const btn=e.submitter; if(btn)btn.disabled=true;const {data,error}=await supabaseClient.auth.updateUser({password:next,data:{must_change_password:false}});if(btn)btn.disabled=false;if(error){message('password-message','Não foi possível alterar a senha. Tente novamente.','error');return;}message('password-message','Senha atualizada. Abrindo o portal...','success');try{await openPortal(data.user)}catch(err){showView('error-view');$('error-message').textContent=err.message||'Erro ao validar acesso.'}});
-$('create-user-form').addEventListener('submit',async e=>{e.preventDefault();const btn=$('create-user-btn');btn.disabled=true;message('admin-message','Criando usuário...');const {data:{session}}=await supabaseClient.auth.getSession();const {data,error}=await supabaseClient.functions.invoke('admin-create-user',{body:{email:$('new-email').value.trim(),password:$('new-password').value,display_name:$('new-name').value.trim()},headers:{Authorization:`Bearer ${session?.access_token||''}`}});btn.disabled=false;if(error||data?.error){message('admin-message',data?.error||error?.message||'Falha ao criar usuário.','error');return;}message('admin-message','Conta criada. Entregue a senha temporária diretamente ao integrante.','success');$('create-user-form').reset();});
+$('create-user-form').addEventListener('submit',async e=>{e.preventDefault();const btn=$('create-user-btn');btn.disabled=true;message('admin-message','Criando usuário...');const {data:{session}}=await supabaseClient.auth.getSession();const {data,error}=await supabaseClient.functions.invoke('admin-create-user',{body:{email:$('new-email').value.trim(),password:$('new-password').value,display_name:$('new-name').value.trim()},headers:{Authorization:`Bearer ${session?.access_token||''}`}});btn.disabled=false;if(error||data?.error){message('admin-message',data?.error||error?.message||'Falha ao criar usuário.','error');return;}message('admin-message','Conta criada. Entregue a senha temporária diretamente ao integrante.','success');$('create-user-form').reset();loadMembers();});
+/* ───────── Painel do administrador ───────── */
+let me=null, adminItems=[];
+const fmtDate=(v)=>v?new Date(v).toLocaleDateString('pt-BR'):'';
+function setTab(name){document.querySelectorAll('[data-tab]').forEach(b=>b.setAttribute('aria-selected',String(b.dataset.tab===name)));['content','members','access'].forEach(t=>$('tab-'+t).classList.toggle('hidden-view',t!==name));}
+document.querySelectorAll('[data-tab]').forEach(b=>b.addEventListener('click',()=>setTab(b.dataset.tab)));
+
+function resetContentForm(){$('content-form').reset();$('cc-id').value='';$('cc-order').value='100';$('cc-published').checked=true;$('cc-save').innerHTML='<i class="fa-solid fa-floppy-disk mr-2"></i>Publicar comunicado';$('cc-cancel').classList.add('hidden-view');}
+$('cc-cancel').addEventListener('click',()=>{resetContentForm();message('cc-message','');});
+
+async function loadAdminContent(){
+  const holder=$('admin-content-list');holder.innerHTML='<div class="text-sm text-gray-400">Carregando comunicados...</div>';
+  const {data,error}=await supabaseClient.from('portal_content').select('id,category,title,body,sort_order,is_published,updated_at').order('sort_order',{ascending:true}).order('id',{ascending:true});
+  if(error){holder.innerHTML='<div class="text-sm text-red-300">Não foi possível carregar os comunicados. Rode o arquivo admin-panel.sql no Supabase.</div>';return;}
+  adminItems=data||[];
+  if(!adminItems.length){holder.innerHTML='<div class="text-sm text-gray-400">Nenhum comunicado ainda. Use o formulário acima para criar o primeiro.</div>';return;}
+  holder.innerHTML=adminItems.map(i=>`<div class="row-card ${i.is_published?'':'is-off'}"><div class="flex flex-wrap items-center gap-2 justify-between"><div class="flex flex-wrap items-center gap-2"><span class="patch-badge">${safeText(i.category)}</span><span class="status-badge ${i.is_published?'bg-green-900/40 text-green-300':'bg-zinc-800 text-zinc-300'}">${i.is_published?'Publicado':'Rascunho'}</span><span class="text-xs text-gray-500">Ordem ${safeText(i.sort_order)} · ${fmtDate(i.updated_at)}</span></div><div class="flex flex-wrap gap-2"><button class="btn btn-secondary btn-sm" data-action="edit" data-id="${i.id}"><i class="fa-solid fa-pen mr-1"></i>Editar</button><button class="btn btn-secondary btn-sm" data-action="toggle" data-id="${i.id}">${i.is_published?'Ocultar':'Publicar'}</button><button class="btn btn-danger btn-sm" data-action="delete" data-id="${i.id}"><i class="fa-solid fa-trash mr-1"></i>Excluir</button></div></div><h4 class="font-heading text-white text-lg uppercase mt-3">${safeText(i.title)}</h4><p class="text-sm text-gray-300 mt-1 whitespace-pre-line">${safeText(i.body)}</p></div>`).join('');
+}
+
+$('admin-content-list').addEventListener('click',async e=>{
+  const btn=e.target.closest('[data-action]');if(!btn)return;
+  const id=Number(btn.dataset.id);const item=adminItems.find(x=>x.id===id);if(!item)return;
+  if(btn.dataset.action==='edit'){
+    $('cc-id').value=item.id;$('cc-category').value=item.category;$('cc-title').value=item.title;$('cc-body').value=item.body;$('cc-order').value=item.sort_order;$('cc-published').checked=item.is_published;
+    $('cc-save').innerHTML='<i class="fa-solid fa-floppy-disk mr-2"></i>Salvar alterações';$('cc-cancel').classList.remove('hidden-view');message('cc-message','Editando: '+item.title);$('content-form').scrollIntoView({behavior:'smooth',block:'center'});return;
+  }
+  btn.disabled=true;
+  if(btn.dataset.action==='toggle'){
+    const {error}=await supabaseClient.from('portal_content').update({is_published:!item.is_published}).eq('id',id);
+    if(error){message('cc-message','Não foi possível alterar a publicação.','error');btn.disabled=false;return;}
+    message('cc-message',item.is_published?'Comunicado ocultado.':'Comunicado publicado.','success');
+  }
+  if(btn.dataset.action==='delete'){
+    if(!confirm('Excluir "'+item.title+'"? Esta ação não pode ser desfeita.')){btn.disabled=false;return;}
+    const {error}=await supabaseClient.from('portal_content').delete().eq('id',id);
+    if(error){message('cc-message','Não foi possível excluir o comunicado.','error');btn.disabled=false;return;}
+    if($('cc-id').value==String(id))resetContentForm();
+    message('cc-message','Comunicado excluído.','success');
+  }
+  await Promise.all([loadAdminContent(),loadContent()]);
+});
+
+$('content-form').addEventListener('submit',async e=>{
+  e.preventDefault();
+  const id=$('cc-id').value;
+  const payload={category:$('cc-category').value.trim(),title:$('cc-title').value.trim(),body:$('cc-body').value.trim(),sort_order:parseInt($('cc-order').value,10),is_published:$('cc-published').checked};
+  if(!payload.category||payload.title.length<2||!payload.body){message('cc-message','Preencha categoria, título (mín. 2 caracteres) e texto.','error');return;}
+  if(!Number.isInteger(payload.sort_order)||payload.sort_order<0){message('cc-message','A ordem precisa ser um número inteiro igual ou maior que 0.','error');return;}
+  const btn=$('cc-save');btn.disabled=true;message('cc-message','Salvando...');
+  let res;
+  if(id){res=await supabaseClient.from('portal_content').update(payload).eq('id',Number(id));}
+  else{res=await supabaseClient.from('portal_content').insert({...payload,created_by:me.id});}
+  btn.disabled=false;
+  if(res.error){message('cc-message','Não foi possível salvar. Confira se você ainda é administrador ativo.','error');return;}
+  const wasEdit=!!id;resetContentForm();message('cc-message',wasEdit?'Alterações salvas.':'Comunicado criado.','success');
+  await Promise.all([loadAdminContent(),loadContent()]);
+});
+
+async function loadMembers(){
+  const holder=$('members-list');holder.innerHTML='<div class="text-sm text-gray-400">Carregando integrantes...</div>';
+  const {data,error}=await supabaseClient.from('member_profiles').select('id,display_name,email,role,is_active,created_at').order('created_at',{ascending:true});
+  if(error){holder.innerHTML='<div class="text-sm text-red-300">Não foi possível carregar os integrantes. Rode o arquivo admin-panel.sql no Supabase.</div>';return;}
+  if(!data?.length){holder.innerHTML='<div class="text-sm text-gray-400">Nenhum integrante cadastrado.</div>';return;}
+  holder.innerHTML=data.map(m=>{const self=m.id===me.id;return `<div class="row-card ${m.is_active?'':'is-off'}"><div class="flex flex-wrap items-center justify-between gap-3"><div><div class="font-heading text-white uppercase">${safeText(m.display_name||'Sem nome')}${self?' <span class="text-xs text-gold normal-case">(você)</span>':''}</div><div class="text-xs text-gray-400">${safeText(m.email||'e-mail não registrado')} · desde ${fmtDate(m.created_at)}</div></div><div class="flex flex-wrap items-center gap-2"><span class="patch-badge">${m.role==='admin'?'Administrador':'Integrante'}</span><span class="status-badge ${m.is_active?'bg-green-900/40 text-green-300':'bg-red-900/40 text-red-300'}">${m.is_active?'Ativo':'Desativado'}</span><button class="btn ${m.is_active?'btn-danger':'btn-secondary'} btn-sm" data-member="${safeText(m.id)}" data-active="${m.is_active}" data-name="${safeText(m.display_name||m.email||'')}" ${self?'disabled title="Você não pode desativar a própria conta"':''}>${m.is_active?'Desativar':'Reativar'}</button></div></div></div>`;}).join('');
+}
+
+$('members-list').addEventListener('click',async e=>{
+  const btn=e.target.closest('[data-member]');if(!btn||btn.disabled)return;
+  const makeActive=btn.dataset.active!=='true';
+  if(!makeActive&&!confirm('Desativar o acesso de '+(btn.dataset.name||'este integrante')+'?'))return;
+  btn.disabled=true;
+  const {error}=await supabaseClient.from('member_profiles').update({is_active:makeActive}).eq('id',btn.dataset.member);
+  if(error){message('members-message','Não foi possível alterar o acesso.','error');btn.disabled=false;return;}
+  message('members-message',makeActive?'Acesso reativado.':'Acesso desativado.','success');
+  await loadMembers();
+});
+/* ───────── Comando regional (dados vindos do banco, só após login) ───────── */
+async function loadCommand(){
+  const holder=$('command-list');
+  const {data,error}=await supabaseClient.from('command_contacts').select('id,role_title,display_name,icon,whatsapp').eq('is_active',true).order('sort_order',{ascending:true}).order('id',{ascending:true});
+  if(error){holder.innerHTML='<div class="text-sm text-gray-400">Comando indisponível no momento. Rode o arquivo comando.sql no Supabase.</div>';return;}
+  if(!data?.length){holder.innerHTML='<div class="text-sm text-gray-400">Nenhum responsável cadastrado ainda.</div>';return;}
+  const extra=data.length%3===2;
+  holder.innerHTML=data.map((c,i)=>{
+    const icon=/^fa-[a-z0-9-]+$/.test(c.icon||'')?c.icon:'fa-user';
+    const digits=String(c.whatsapp||'').replace(/\D/g,'');
+    const hasWa=digits.length>=10&&digits.length<=15;
+    const wa=hasWa?`<a class="cmd-wa" href="https://wa.me/${digits}" target="_blank" rel="noopener noreferrer" aria-label="Abrir WhatsApp de ${safeText(c.display_name)}"><i class="fa-brands fa-whatsapp"></i></a>`:`<span class="cmd-wa off" aria-hidden="true"><i class="fa-brands fa-whatsapp"></i></span>`;
+    return `<div class="role-card p-4 flex items-center gap-4 ${extra&&i===data.length-1?'lg:col-span-2':''}"><div class="cmd-icon"><i class="fa-solid ${icon}"></i></div><div class="flex-1 min-w-0"><div class="text-[11px] text-gray-500 font-heading tracking-widest uppercase">${safeText(c.role_title)}</div><div class="font-heading font-bold text-white text-xl uppercase truncate">${safeText(c.display_name)}</div></div>${wa}</div>`;
+  }).join('');
+}
 supabaseClient?.auth.onAuthStateChange((event,session)=>{if(event==='SIGNED_OUT'){showView('login-view');} });
 checkSession();
 </script>
