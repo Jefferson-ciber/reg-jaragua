@@ -263,8 +263,24 @@
     </section>
     <section id="change-password-view" class="hidden-view max-w-md mx-auto panel p-6 md:p-8"><div class="text-center mb-6"><div class="mx-auto mb-4 w-14 h-14 rounded-xl flex items-center justify-center bg-[#c9a84c18] text-gold text-2xl"><i class="fa-solid fa-key"></i></div><h2 class="font-display text-3xl tracking-widest">Defina sua senha</h2><p class="text-sm text-gray-400 mt-2">Por segurança, troque a senha temporária antes de acessar o portal.</p></div><form id="change-password-form" class="space-y-4"><div><label for="first-new-password" class="block text-xs text-gray-300 mb-2">Nova senha (mínimo 12 caracteres)</label><input class="field" id="first-new-password" type="password" autocomplete="new-password" minlength="12" required></div><div><label for="first-confirm-password" class="block text-xs text-gray-300 mb-2">Confirme a nova senha</label><input class="field" id="first-confirm-password" type="password" autocomplete="new-password" minlength="12" required></div><button class="btn btn-primary w-full" type="submit">Salvar nova senha</button><p id="password-message" class="text-sm" role="status" aria-live="polite"></p></form><button id="cancel-password-change" class="btn btn-secondary w-full mt-3" type="button">Sair</button></section>
     <section id="loading-view" class="hidden-view text-center py-16"><i class="fa-solid fa-circle-notch fa-spin text-gold text-3xl"></i><p class="mt-4 text-gray-400">Verificando acesso...</p></section>
+    <div id="member-modal" class="hidden-view fixed inset-0 z-50 bg-black/75 overflow-y-auto p-4" role="dialog" aria-modal="true" aria-label="Perfil do integrante"></div>
     <section id="portal-view" class="hidden-view space-y-10">
       <div class="flex flex-wrap items-end justify-between gap-4"><div><p class="text-xs text-gold font-heading tracking-widest uppercase mb-1">Área restrita</p><h2 class="font-display text-4xl tracking-widest">Bem-vindo ao Portal</h2><p id="welcome-text" class="text-sm text-gray-400 mt-2"></p></div><span id="role-badge" class="patch-badge"><i class="fa-solid fa-user-check"></i> Integrante autorizado</span></div>
+      <section id="my-profile" class="panel p-5 md:p-6 space-y-5">
+        <div class="flex flex-wrap items-center gap-4"><div id="mp-avatar" class="w-20 h-20 rounded-full overflow-hidden bg-[#c9a84c22] border border-[#c9a84c55] flex items-center justify-center font-display text-4xl text-gold shrink-0">?</div><div><p class="text-xs text-gold font-heading tracking-widest uppercase">Meu perfil</p><h3 class="font-display text-3xl tracking-widest text-white">Meus dados e participação</h3><div class="flex flex-wrap gap-2 mt-2"><span class="patch-badge"><i class="fa-solid fa-stairs"></i> <span id="mp-grade">—</span></span><span class="patch-badge">Situação: <span id="mp-status">—</span></span><span class="patch-badge">Desde <span id="mp-since">—</span></span></div></div></div>
+        <form id="mp-form" class="grid md:grid-cols-2 gap-3" novalidate>
+          <div><label class="block text-xs text-gray-300 mb-2" for="mp-name">Nome completo</label><input class="field" id="mp-name" maxlength="100" required></div>
+          <div><label class="block text-xs text-gray-300 mb-2" for="mp-email">E-mail (não editável)</label><input class="field" id="mp-email" readonly></div>
+          <div><label class="block text-xs text-gray-300 mb-2" for="mp-wa">WhatsApp pessoal</label><input class="field" id="mp-wa" inputmode="tel" autocomplete="tel-national" placeholder="(11) 91234-5678"></div>
+          <div><label class="block text-xs text-gray-300 mb-2" for="mp-em"><i class="fa-solid fa-triangle-exclamation text-red-300 mr-1"></i>WhatsApp de emergência</label><input class="field" id="mp-em" inputmode="tel" placeholder="(11) 91234-5678"><p class="text-[11px] text-gray-500 mt-1">Contato para situações emergenciais. Visível só para você e para a administração.</p></div>
+          <div class="md:col-span-2"><label class="block text-xs text-gray-300 mb-2" for="mp-photo">Foto de perfil (link https da imagem)</label><input class="field" id="mp-photo" maxlength="500" placeholder="https://..."></div>
+          <div class="md:col-span-2 flex flex-wrap items-center gap-3"><button class="btn btn-primary" type="submit" id="mp-save"><i class="fa-solid fa-floppy-disk mr-2"></i>Salvar meus dados</button><p id="mp-message" class="text-sm" role="status" aria-live="polite"></p></div>
+        </form>
+        <p class="text-xs text-gray-500">Grau, situação, presenças e avaliações são registrados somente pela administração.</p>
+        <hr class="gold-line">
+        <div id="mp-stats"></div>
+        <div><h4 class="font-heading text-lg uppercase text-white mb-3">Histórico</h4><div id="mp-history" class="space-y-2 max-h-96 overflow-y-auto"></div></div>
+      </section>
       <div id="admin-panel" class="hidden-view panel p-5 md:p-6 space-y-5">
         <div class="flex items-center gap-3"><i class="fa-solid fa-user-gear text-gold text-xl"></i><div><h3 class="font-heading text-xl uppercase">Painel do administrador</h3><p class="text-xs text-gray-400">Publique comunicados, gerencie integrantes e crie novos acessos.</p></div></div>
         <div class="flex flex-wrap gap-2" role="tablist" aria-label="Seções do painel">
@@ -290,6 +306,7 @@
 
         <div id="tab-members" class="hidden-view space-y-3" role="tabpanel">
           <p class="text-xs text-gray-400">Desativar bloqueia o acesso aos comunicados na hora. O acesso pode ser reativado a qualquer momento. Você não pode desativar a própria conta.</p>
+          <input class="field" id="members-search" type="search" placeholder="Pesquisar por nome ou e-mail" aria-label="Pesquisar integrantes">
           <p id="members-message" class="text-sm" role="status" aria-live="polite"></p>
           <div id="members-list" class="space-y-2"></div>
         </div>
@@ -351,7 +368,7 @@ async function openPortal(user){showView('loading-view');$('user-email').textCon
   if(user.user_metadata?.must_change_password){showView('change-password-view');return;}
   $('welcome-text').textContent=(profile.display_name||user.email)+' — conteúdo disponível conforme seu perfil.';
   $('role-badge').innerHTML=profile.role==='admin'?'<i class="fa-solid fa-user-gear"></i> Administrador':'<i class="fa-solid fa-user-check"></i> Integrante autorizado';
-  $('admin-panel').classList.toggle('hidden-view',profile.role!=='admin');me={id:user.id};showView('portal-view');loadCommand();await loadContent();if(profile.role==='admin'){setTab('content');loadAdminContent();loadMembers();}
+  $('admin-panel').classList.toggle('hidden-view',profile.role!=='admin');me={id:user.id,email:user.email};showView('portal-view');loadCommand();await loadContent();if(profile.role==='admin'){setTab('content');loadAdminContent();}await loadRefs();loadMyProfile();if(profile.role==='admin')loadMembers();
 }
 async function loadContent(){const holder=$('content-list');holder.innerHTML='<div class="panel p-5 text-gray-400">Carregando conteúdos...</div>';
   const {data,error}=await supabaseClient.from('portal_content').select('id,category,title,body,updated_at').eq('is_published',true).order('sort_order',{ascending:true}).order('updated_at',{ascending:false});
@@ -361,7 +378,7 @@ async function loadContent(){const holder=$('content-list');holder.innerHTML='<d
 }
 async function checkSession(){if(!configured||!supabaseClient){showView('login-view');message('login-message','Antes de usar, configure a URL e a chave pública do Supabase no arquivo index.html.','error');return;}showView('loading-view');const {data,error}=await supabaseClient.auth.getSession();if(error){showView('login-view');message('login-message','Não foi possível verificar a sessão. Tente entrar novamente.','error');return;}if(data.session){try{await openPortal(data.session.user)}catch(e){showView('error-view');$('error-message').textContent=e.message||'Erro inesperado.'}}else showView('login-view');}
 $('login-form').addEventListener('submit',async e=>{e.preventDefault();if(!supabaseClient){message('login-message','Configure primeiro o Supabase no código.','error');return;}const btn=$('login-btn');btn.disabled=true;btn.textContent='Verificando...';message('login-message','');const {data,error}=await supabaseClient.auth.signInWithPassword({email:$('email').value.trim(),password:$('password').value});btn.disabled=false;btn.innerHTML='<i class="fa-solid fa-lock-open mr-2"></i>Entrar no portal';if(error){message('login-message','E-mail ou senha inválidos, ou conta ainda não autorizada.','error');return;}try{await openPortal(data.user)}catch(err){showView('error-view');$('error-message').textContent=err.message||'Erro ao validar acesso.'}});
-$('logout-btn').addEventListener('click',async()=>{await supabaseClient?.auth.signOut();me=null;adminItems=[];$('admin-content-list').innerHTML='';$('members-list').innerHTML='';$('command-list').innerHTML='';$('password').value='';message('login-message','Você saiu do portal.');showView('login-view');});
+$('logout-btn').addEventListener('click',async()=>{await supabaseClient?.auth.signOut();me=null;adminItems=[];$('admin-content-list').innerHTML='';$('members-list').innerHTML='';$('command-list').innerHTML='';closeModal();$('mp-history').innerHTML='';$('mp-stats').innerHTML='';$('password').value='';message('login-message','Você saiu do portal.');showView('login-view');});
 $('retry-btn').addEventListener('click',checkSession);
 $('cancel-password-change').addEventListener('click',async()=>{await supabaseClient.auth.signOut();showView('login-view');});
 $('change-password-form').addEventListener('submit',async e=>{e.preventDefault();const next=$('first-new-password').value;const confirm=$('first-confirm-password').value;if(next.length<12){message('password-message','Use uma senha com pelo menos 12 caracteres.','error');return;}if(next!==confirm){message('password-message','As senhas não coincidem.','error');return;}const btn=e.submitter; if(btn)btn.disabled=true;const {data,error}=await supabaseClient.auth.updateUser({password:next,data:{must_change_password:false}});if(btn)btn.disabled=false;if(error){message('password-message','Não foi possível alterar a senha. Tente novamente.','error');return;}message('password-message','Senha atualizada. Abrindo o portal...','success');try{await openPortal(data.user)}catch(err){showView('error-view');$('error-message').textContent=err.message||'Erro ao validar acesso.'}});
@@ -423,15 +440,89 @@ $('content-form').addEventListener('submit',async e=>{
   await Promise.all([loadAdminContent(),loadContent()]);
 });
 
-async function loadMembers(){
-  const holder=$('members-list');holder.innerHTML='<div class="text-sm text-gray-400">Carregando integrantes...</div>';
-  const {data,error}=await supabaseClient.from('member_profiles').select('id,display_name,email,role,is_active,created_at').order('created_at',{ascending:true});
-  if(error){holder.innerHTML='<div class="text-sm text-red-300">Não foi possível carregar os integrantes. Rode o arquivo admin-panel.sql no Supabase.</div>';return;}
-  if(!data?.length){holder.innerHTML='<div class="text-sm text-gray-400">Nenhum integrante cadastrado.</div>';return;}
-  holder.innerHTML=data.map(m=>{const self=m.id===me.id;return `<div class="row-card ${m.is_active?'':'is-off'}"><div class="flex flex-wrap items-center justify-between gap-3"><div><div class="font-heading text-white uppercase">${safeText(m.display_name||'Sem nome')}${self?' <span class="text-xs text-gold normal-case">(você)</span>':''}</div><div class="text-xs text-gray-400">${safeText(m.email||'e-mail não registrado')} · desde ${fmtDate(m.created_at)}</div></div><div class="flex flex-wrap items-center gap-2"><span class="patch-badge">${m.role==='admin'?'Administrador':'Integrante'}</span><span class="status-badge ${m.is_active?'bg-green-900/40 text-green-300':'bg-red-900/40 text-red-300'}">${m.is_active?'Ativo':'Desativado'}</span><button class="btn ${m.is_active?'btn-danger':'btn-secondary'} btn-sm" data-member="${safeText(m.id)}" data-active="${m.is_active}" data-name="${safeText(m.display_name||m.email||'')}" ${self?'disabled title="Você não pode desativar a própria conta"':''}>${m.is_active?'Desativar':'Reativar'}</button></div></div></div>`;}).join('');
+/* ───────── Perfil, graus e gerenciamento de integrantes ───────── */
+let gradesList=[],minPct=60,membersCache=[],statsMap={};
+const STATUS_LABEL={presente:'Presente',ausencia_justificada:'Ausência justificada',ausencia_injustificada:'Ausência não justificada',pendente:'Pendente'};
+const fmtDay=v=>!v?'':(typeof v==='string'&&v.length===10?v.split('-').reverse().join('/'):new Date(v).toLocaleDateString('pt-BR'));
+const digitsOf=v=>String(v||'').replace(/\D/g,'');
+const fmtPhone=v=>{const d=digitsOf(v).slice(0,11);if(!d)return'';if(d.length<=2)return'('+d;if(d.length<=6)return`(${d.slice(0,2)}) ${d.slice(2)}`;if(d.length<=10)return`(${d.slice(0,2)}) ${d.slice(2,6)}-${d.slice(6)}`;return`(${d.slice(0,2)}) ${d.slice(2,7)}-${d.slice(7)}`;};
+const bindMask=el=>el&&el.addEventListener('input',()=>{el.value=fmtPhone(el.value);});
+const validPhone=d=>!d||/^\d{10,11}$/.test(d);
+const initial=n=>(String(n||'?').trim()[0]||'?').toUpperCase();
+function setAvatar(el,url,name){el.textContent='';if(url&&/^https:\/\//.test(url)){const i=new Image();i.alt='Foto de perfil';i.referrerPolicy='no-referrer';i.className='w-full h-full object-cover';i.onerror=()=>{el.textContent=initial(name);};i.src=url;el.appendChild(i);}else el.textContent=initial(name);}
+const gradeName=id=>gradesList.find(g=>g.id===id)?.name||'—';
+const needPct=gid=>{const g=gradesList.find(x=>x.id===gid);return g&&g.min_participation!=null?Number(g.min_participation):minPct;};
+function eligibility(pct,eleg,gid){if(gid>=11)return{t:'Grau máximo atingido',c:'text-gold'};if(!eleg)return{t:'Sem eventos elegíveis registrados',c:'text-gray-400'};return pct>=needPct(gid)?{t:'Apto para avaliação de progressão',c:'text-green-300'}:{t:'Ainda não atingiu o percentual mínimo',c:'text-red-300'};}
+async function loadRefs(){
+  const [g,s]=await Promise.all([supabaseClient.from('grades').select('id,name,min_participation').order('id'),supabaseClient.from('club_settings').select('value').eq('key','min_participation').maybeSingle()]);
+  gradesList=g.data||[];const v=Number(s.data?.value);if(Number.isFinite(v))minPct=v;
+}
+function statsHtml(st,gid){
+  const pct=st&&st.pct!=null?Number(st.pct):null,need=needPct(gid),e=eligibility(pct??0,st?.elegiveis||0,gid);
+  const boxes=[['Presenças',st?.presentes||0],['Aus. justificadas',st?.aus_justificadas||0],['Aus. não justif.',st?.aus_injustificadas||0],['Pendentes',st?.pendentes||0]];
+  return `<div class="grid grid-cols-2 md:grid-cols-4 gap-2 text-center">${boxes.map(([l,v])=>`<div class="row-card"><div class="font-display text-3xl text-white">${v}</div><div class="text-[11px] text-gray-400 uppercase font-heading tracking-widest">${l}</div></div>`).join('')}</div><div class="mt-4"><div class="flex justify-between text-xs text-gray-300 mb-1"><span>Participação: <strong class="text-white">${pct==null?'—':pct+'%'}</strong></span><span>Mínimo para avaliação: ${need}%</span></div><div class="relative h-3 rounded bg-zinc-800 overflow-hidden"><div class="h-full bg-[#c9a84c]" style="width:${Math.min(100,pct||0)}%"></div><div class="absolute top-0 h-full w-0.5 bg-white" style="left:${Math.min(100,need)}%"></div></div><p class="text-sm mt-2 ${e.c}">${e.t}</p><p class="text-[11px] text-gray-500">Participação e elegibilidade são indicadores diferentes: a promoção é sempre decidida pela administração.</p></div>`;
+}
+async function historyHtml(id,isAdmin){
+  const q=t=>supabaseClient.from(t);
+  const [p,h,ev,n]=await Promise.all([
+    q('event_participation').select('status,note,created_at,events(name,event_date,event_categories(name))').eq('member_id',id),
+    q('grade_history').select('from_grade_id,to_grade_id,note,changed_at').eq('member_id',id),
+    q('evaluations').select('target_grade_id,decision,note,created_at').eq('member_id',id),
+    isAdmin?q('admin_notes').select('note,created_at').eq('member_id',id):Promise.resolve({data:[]})]);
+  const items=[
+    ...(p.data||[]).map(r=>({d:r.events?.event_date||r.created_at,i:'fa-calendar-check',t:`${r.events?.name||'Evento'} — ${STATUS_LABEL[r.status]||r.status}`,s:r.events?.event_categories?.name,n:r.note})),
+    ...(h.data||[]).map(r=>({d:r.changed_at,i:'fa-stairs',t:`Grau alterado: ${gradeName(r.from_grade_id)} → ${gradeName(r.to_grade_id)}`,n:r.note})),
+    ...(ev.data||[]).map(r=>({d:r.created_at,i:'fa-clipboard-check',t:`Avaliação para ${gradeName(r.target_grade_id)}: ${r.decision}`,n:r.note})),
+    ...(n.data||[]).map(r=>({d:r.created_at,i:'fa-note-sticky',t:'Observação administrativa',n:r.note}))
+  ].sort((a,b)=>new Date(b.d)-new Date(a.d));
+  if(!items.length)return'<p class="text-sm text-gray-400">Nenhum registro ainda.</p>';
+  return items.map(i=>`<div class="row-card flex gap-3"><i class="fa-solid ${i.i} text-gold mt-1"></i><div class="flex-1 min-w-0"><div class="text-sm text-white">${safeText(i.t)}</div>${i.s?`<div class="text-xs text-gray-400">${safeText(i.s)}</div>`:''}${i.n?`<div class="text-sm text-gray-300 mt-1 whitespace-pre-line">${safeText(i.n)}</div>`:''}</div><div class="text-xs text-gray-500 whitespace-nowrap">${fmtDay(i.d)}</div></div>`).join('');
 }
 
+/* Meu Perfil */
+bindMask($('mp-wa'));bindMask($('mp-em'));
+async function loadMyProfile(){
+  const {data:p,error}=await supabaseClient.from('member_profiles').select('display_name,email,photo_url,whatsapp,emergency_whatsapp,grade_id,joined_at,status').eq('id',me.id).maybeSingle();
+  if(error||!p){message('mp-message','Não foi possível carregar o perfil. Rode o fase1-banco.sql no Supabase.','error');return;}
+  $('mp-name').value=p.display_name||'';$('mp-email').value=p.email||me.email||'';$('mp-photo').value=p.photo_url||'';$('mp-wa').value=fmtPhone(p.whatsapp);$('mp-em').value=fmtPhone(p.emergency_whatsapp);
+  $('mp-grade').textContent=gradeName(p.grade_id);$('mp-status').textContent=p.status;$('mp-since').textContent=fmtDay(p.joined_at);setAvatar($('mp-avatar'),p.photo_url,p.display_name);
+  const {data:rows}=await supabaseClient.rpc('member_stats');
+  $('mp-stats').innerHTML=statsHtml((rows||[]).find(r=>r.member_id===me.id),p.grade_id);
+  $('mp-history').innerHTML=await historyHtml(me.id,false);
+}
+$('mp-form').addEventListener('submit',async e=>{
+  e.preventDefault();
+  const name=$('mp-name').value.trim(),wa=digitsOf($('mp-wa').value),em=digitsOf($('mp-em').value),photo=$('mp-photo').value.trim();
+  if(name.length<2)return message('mp-message','Informe seu nome completo.','error');
+  if(!validPhone(wa)||!validPhone(em))return message('mp-message','Informe DDD + número (10 ou 11 dígitos).','error');
+  if(photo&&!/^https:\/\/\S+$/.test(photo))return message('mp-message','O link da foto precisa começar com https://','error');
+  const btn=$('mp-save');btn.disabled=true;message('mp-message','Salvando...');
+  const {error}=await supabaseClient.from('member_profiles').update({display_name:name,whatsapp:wa||null,emergency_whatsapp:em||null,photo_url:photo||null}).eq('id',me.id);
+  btn.disabled=false;
+  if(error)return message('mp-message','Não foi possível salvar seus dados.','error');
+  message('mp-message','Dados salvos.','success');setAvatar($('mp-avatar'),photo,name);
+});
+
+/* Gerenciar Integrantes (admin) */
+async function loadMembers(){
+  const holder=$('members-list');holder.innerHTML='<div class="text-sm text-gray-400">Carregando integrantes...</div>';
+  const [m,s]=await Promise.all([supabaseClient.from('member_profiles').select('id,display_name,email,role,is_active,grade_id,photo_url,created_at').order('created_at',{ascending:true}),supabaseClient.rpc('member_stats')]);
+  if(m.error){holder.innerHTML='<div class="text-sm text-red-300">Não foi possível carregar os integrantes. Rode o fase1-banco.sql no Supabase.</div>';return;}
+  membersCache=m.data||[];statsMap=Object.fromEntries((s.data||[]).map(r=>[r.member_id,r]));renderMembers();
+}
+function renderMembers(){
+  const holder=$('members-list'),q=$('members-search').value.trim().toLowerCase();
+  const list=membersCache.filter(m=>!q||`${m.display_name||''} ${m.email||''}`.toLowerCase().includes(q));
+  if(!list.length){holder.innerHTML='<div class="text-sm text-gray-400">Nenhum integrante encontrado.</div>';return;}
+  holder.innerHTML=list.map(m=>{
+    const self=m.id===me.id,st=statsMap[m.id]||{},total=(st.presentes||0)+(st.aus_justificadas||0)+(st.aus_injustificadas||0)+(st.pendentes||0),aus=(st.aus_justificadas||0)+(st.aus_injustificadas||0),el=eligibility(Number(st.pct??0),st.elegiveis||0,m.grade_id);
+    return `<div class="row-card ${m.is_active?'':'is-off'}"><div class="flex flex-wrap items-center gap-3"><div class="w-12 h-12 rounded-full overflow-hidden bg-[#c9a84c22] border border-[#c9a84c55] flex items-center justify-center font-display text-xl text-gold shrink-0" data-avatar="${safeText(m.id)}"></div><div class="flex-1 min-w-[180px]"><div class="font-heading text-white uppercase">${safeText(m.display_name||'Sem nome')}${self?' <span class="text-xs text-gold normal-case">(você)</span>':''}</div><div class="text-xs text-gray-400">${safeText(m.email||'e-mail não registrado')}</div><div class="text-xs text-gray-300 mt-1">${safeText(gradeName(m.grade_id))} · Participação ${st.pct!=null?Number(st.pct)+'%':'—'} · ${total} evento(s) · ${aus} ausência(s)</div><div class="text-xs ${el.c}">${el.t}</div></div><div class="flex flex-wrap items-center gap-2"><span class="status-badge ${m.is_active?'bg-green-900/40 text-green-300':'bg-red-900/40 text-red-300'}">${m.is_active?'Ativo':'Desativado'}</span><button class="btn btn-secondary btn-sm" data-view="${safeText(m.id)}"><i class="fa-solid fa-id-card mr-1"></i>Visualizar Perfil</button><button class="btn ${m.is_active?'btn-danger':'btn-secondary'} btn-sm" data-member="${safeText(m.id)}" data-active="${m.is_active}" data-name="${safeText(m.display_name||m.email||'')}" ${self?'disabled title="Você não pode desativar a própria conta"':''}>${m.is_active?'Desativar':'Reativar'}</button></div></div></div>`;
+  }).join('');
+  holder.querySelectorAll('[data-avatar]').forEach(el=>{const m=membersCache.find(x=>x.id===el.dataset.avatar);setAvatar(el,m?.photo_url,m?.display_name);});
+}
+$('members-search').addEventListener('input',renderMembers);
 $('members-list').addEventListener('click',async e=>{
+  const v=e.target.closest('[data-view]');if(v){openMemberModal(v.dataset.view);return;}
   const btn=e.target.closest('[data-member]');if(!btn||btn.disabled)return;
   const makeActive=btn.dataset.active!=='true';
   if(!makeActive&&!confirm('Desativar o acesso de '+(btn.dataset.name||'este integrante')+'?'))return;
@@ -441,6 +532,61 @@ $('members-list').addEventListener('click',async e=>{
   message('members-message',makeActive?'Acesso reativado.':'Acesso desativado.','success');
   await loadMembers();
 });
+
+/* Perfil completo do integrante (janela do admin) */
+function closeModal(){const m=$('member-modal');m.classList.add('hidden-view');m.innerHTML='';document.body.style.overflow='';}
+async function openMemberModal(id){
+  const modal=$('member-modal');
+  const {data:p,error}=await supabaseClient.from('member_profiles').select('id,display_name,email,photo_url,whatsapp,emergency_whatsapp,grade_id,joined_at,status').eq('id',id).maybeSingle();
+  if(error||!p)return message('members-message','Não foi possível abrir o perfil.','error');
+  const st=statsMap[id];
+  const opts=gradesList.map(g=>`<option value="${g.id}" ${g.id===p.grade_id?'selected':''}>${safeText(g.name)}</option>`).join('');
+  modal.innerHTML=`<div class="panel max-w-3xl mx-auto my-6 p-5 md:p-6 space-y-5" data-id="${safeText(id)}">
+    <div class="flex items-start justify-between gap-3"><div class="flex items-center gap-4"><div id="mm-avatar" class="w-16 h-16 rounded-full overflow-hidden bg-[#c9a84c22] border border-[#c9a84c55] flex items-center justify-center font-display text-3xl text-gold shrink-0"></div><div><h3 class="font-display text-3xl tracking-widest text-white">${safeText(p.display_name||'Sem nome')}</h3><p class="text-xs text-gray-400">${safeText(p.email||'')} · ${safeText(gradeName(p.grade_id))}</p></div></div><button class="btn btn-secondary btn-sm" data-mm="close" aria-label="Fechar"><i class="fa-solid fa-xmark"></i></button></div>
+    <form id="mm-form" class="grid md:grid-cols-2 gap-3" novalidate>
+      <div><label class="block text-xs text-gray-300 mb-2" for="mm-name">Nome</label><input class="field" id="mm-name" maxlength="100" value="${safeText(p.display_name||'')}"></div>
+      <div><label class="block text-xs text-gray-300 mb-2" for="mm-status">Situação</label><select class="field" id="mm-status">${['ativo','afastado','desligado'].map(s=>`<option ${s===p.status?'selected':''}>${s}</option>`).join('')}</select></div>
+      <div><label class="block text-xs text-gray-300 mb-2" for="mm-wa">WhatsApp pessoal</label><input class="field" id="mm-wa" inputmode="tel" value="${safeText(fmtPhone(p.whatsapp))}"></div>
+      <div><label class="block text-xs text-gray-300 mb-2" for="mm-em">WhatsApp de emergência</label><input class="field" id="mm-em" inputmode="tel" value="${safeText(fmtPhone(p.emergency_whatsapp))}"></div>
+      <div><label class="block text-xs text-gray-300 mb-2" for="mm-since">Data de entrada</label><input class="field" id="mm-since" type="date" value="${safeText(p.joined_at||'')}"></div>
+      <div class="flex items-end"><button class="btn btn-primary" type="submit"><i class="fa-solid fa-floppy-disk mr-2"></i>Salvar dados</button></div>
+    </form>
+    <hr class="gold-line"><div>${statsHtml(st,p.grade_id)}</div>
+    <hr class="gold-line">
+    <div class="grid md:grid-cols-2 gap-3"><div><label class="block text-xs text-gray-300 mb-2" for="mm-grade">Grau atual</label><select class="field" id="mm-grade">${opts}</select></div><div><label class="block text-xs text-gray-300 mb-2" for="mm-gnote">Observação da decisão (grau/avaliação)</label><input class="field" id="mm-gnote" maxlength="500"></div></div>
+    <div class="flex flex-wrap gap-2"><button class="btn btn-primary btn-sm" data-mm="grade">Alterar grau</button><button class="btn btn-secondary btn-sm" data-mm="eval-aprovado">Registrar avaliação: aprovado</button><button class="btn btn-danger btn-sm" data-mm="eval-reprovado">Registrar avaliação: reprovado</button></div>
+    <p class="text-[11px] text-gray-500">Aprovar uma avaliação não promove sozinho: altere o grau manualmente.</p>
+    <div><label class="block text-xs text-gray-300 mb-2" for="mm-note">Nova observação administrativa</label><textarea class="field" id="mm-note" rows="2" maxlength="2000"></textarea><button class="btn btn-secondary btn-sm mt-2" data-mm="note">Adicionar observação</button></div>
+    <p id="mm-message" class="text-sm" role="status" aria-live="polite"></p>
+    <div><h4 class="font-heading text-lg uppercase text-white mb-3">Histórico do integrante</h4><div id="mm-history" class="space-y-2 max-h-96 overflow-y-auto">Carregando...</div></div></div>`;
+  modal.classList.remove('hidden-view');document.body.style.overflow='hidden';
+  setAvatar($('mm-avatar'),p.photo_url,p.display_name);bindMask($('mm-wa'));bindMask($('mm-em'));
+  $('mm-history').innerHTML=await historyHtml(id,true);
+}
+$('member-modal').addEventListener('click',async e=>{
+  if(e.target.id==='member-modal'){closeModal();return;}
+  const b=e.target.closest('[data-mm]');if(!b)return;
+  const id=b.closest('[data-id]').dataset.id,act=b.dataset.mm,note=$('mm-gnote')?.value.trim()||null,pct=statsMap[id]?.pct??null;
+  if(act==='close'){closeModal();return;}
+  const cur=membersCache.find(x=>x.id===id)?.grade_id||1;let error;
+  b.disabled=true;
+  if(act==='grade'){const g=Number($('mm-grade').value);if(g===cur){message('mm-message','Esse já é o grau atual.');b.disabled=false;return;}if(!confirm('Alterar o grau para '+gradeName(g)+'?')){b.disabled=false;return;}({error}=await supabaseClient.rpc('change_grade',{p_member:id,p_grade:g,p_note:note}));}
+  if(act.startsWith('eval-')){const d=act.slice(5);if(cur>=11){message('mm-message','Já está no último grau.','error');b.disabled=false;return;}if(!confirm('Registrar avaliação "'+d+'" para '+gradeName(cur+1)+'?')){b.disabled=false;return;}({error}=await supabaseClient.from('evaluations').insert({member_id:id,target_grade_id:cur+1,decision:d,participation_pct:pct,note,evaluated_by:me.id}));}
+  if(act==='note'){const t=$('mm-note').value.trim();if(!t){message('mm-message','Escreva a observação.','error');b.disabled=false;return;}({error}=await supabaseClient.from('admin_notes').insert({member_id:id,note:t,created_by:me.id}));}
+  b.disabled=false;
+  if(error)return message('mm-message','Não foi possível salvar. Confira se você é administrador ativo.','error');
+  await loadMembers();await openMemberModal(id);message('mm-message','Salvo com sucesso.','success');
+});
+$('member-modal').addEventListener('submit',async e=>{
+  if(e.target.id!=='mm-form')return;e.preventDefault();
+  const id=e.target.closest('[data-id]').dataset.id,name=$('mm-name').value.trim(),wa=digitsOf($('mm-wa').value),em=digitsOf($('mm-em').value);
+  if(name.length<2)return message('mm-message','Informe o nome.','error');
+  if(!validPhone(wa)||!validPhone(em))return message('mm-message','WhatsApp: DDD + número (10 ou 11 dígitos).','error');
+  const {error}=await supabaseClient.from('member_profiles').update({display_name:name,status:$('mm-status').value,whatsapp:wa||null,emergency_whatsapp:em||null,joined_at:$('mm-since').value||undefined}).eq('id',id);
+  if(error)return message('mm-message','Não foi possível salvar os dados.','error');
+  await loadMembers();await openMemberModal(id);message('mm-message','Dados salvos.','success');
+});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!$('member-modal').classList.contains('hidden-view'))closeModal();});
 /* ───────── Comando regional (dados vindos do banco, só após login) ───────── */
 async function loadCommand(){
   const holder=$('command-list');
