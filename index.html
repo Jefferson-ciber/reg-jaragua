@@ -279,6 +279,7 @@
         <p class="text-xs text-gray-500">Grau, situação, presenças e avaliações são registrados somente pela administração.</p>
         <hr class="gold-line">
         <div id="mp-stats"></div>
+        <div id="mp-charts" class="space-y-4"></div>
         <div><h4 class="font-heading text-lg uppercase text-white mb-3">Histórico</h4><div id="mp-history" class="space-y-2 max-h-96 overflow-y-auto"></div></div>
       </section>
       <div id="admin-panel" class="hidden-view panel p-5 md:p-6 space-y-5">
@@ -287,6 +288,8 @@
           <button type="button" class="tab-btn" role="tab" data-tab="content" aria-selected="true"><i class="fa-solid fa-bullhorn mr-2"></i>Comunicados</button>
           <button type="button" class="tab-btn" role="tab" data-tab="members" aria-selected="false"><i class="fa-solid fa-users mr-2"></i>Integrantes</button>
           <button type="button" class="tab-btn" role="tab" data-tab="events" aria-selected="false"><i class="fa-solid fa-calendar-check mr-2"></i>Eventos</button>
+          <button type="button" class="tab-btn" role="tab" data-tab="dash" aria-selected="false"><i class="fa-solid fa-chart-column mr-2"></i>Indicadores</button>
+          <button type="button" class="tab-btn" role="tab" data-tab="config" aria-selected="false"><i class="fa-solid fa-sliders mr-2"></i>Configurações</button>
           <button type="button" class="tab-btn" role="tab" data-tab="access" aria-selected="false"><i class="fa-solid fa-user-plus mr-2"></i>Novo acesso</button>
         </div>
 
@@ -324,6 +327,27 @@
           <hr class="gold-line">
           <div id="ev-list" class="space-y-2"></div>
           <div id="ev-reg" class="space-y-3"></div>
+        </div>
+
+        <div id="tab-dash" class="hidden-view space-y-4" role="tabpanel">
+          <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
+            <div><label class="block text-xs text-gray-300 mb-2" for="dash-member">Integrante</label><select class="field" id="dash-member"></select></div>
+            <div><label class="block text-xs text-gray-300 mb-2" for="dash-grade">Grau</label><select class="field" id="dash-grade"></select></div>
+            <div><label class="block text-xs text-gray-300 mb-2" for="dash-cat">Categoria do evento</label><select class="field" id="dash-cat"></select></div>
+            <div><label class="block text-xs text-gray-300 mb-2" for="dash-from">Período: de</label><input class="field" id="dash-from" type="date"></div>
+            <div><label class="block text-xs text-gray-300 mb-2" for="dash-to">até</label><input class="field" id="dash-to" type="date"></div>
+            <div><label class="block text-xs text-gray-300 mb-2" for="dash-elig">Situação de elegibilidade</label><select class="field" id="dash-elig"><option value="">Todas</option><option value="apto">Apto para avaliação</option><option value="nao">Ainda não atingiu</option><option value="sem">Sem dados</option></select></div>
+          </div>
+          <div id="dash-cards" class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-2"></div>
+          <div id="dash-body" class="grid md:grid-cols-2 gap-4"></div>
+          <div id="dash-one" class="space-y-4"></div>
+        </div>
+
+        <div id="tab-config" class="hidden-view space-y-6" role="tabpanel">
+          <div class="space-y-3"><h4 class="font-heading text-lg uppercase text-white">Regras gerais</h4><div class="grid md:grid-cols-3 gap-3"><div><label class="block text-xs text-gray-300 mb-2" for="cfg-min">Percentual mínimo padrão (%)</label><input class="field" id="cfg-min" type="number" min="0" max="100" step="1"></div><div class="flex items-end"><label class="flex items-center gap-2 text-sm text-gray-200 pb-3"><input type="checkbox" id="cfg-just" class="accent-[#c9a84c] w-4 h-4"> Ausência justificada entra no total de eventos</label></div><div class="flex items-end pb-1"><button class="btn btn-primary" id="cfg-save-general" type="button">Salvar regras gerais</button></div></div></div>
+          <div class="space-y-3"><h4 class="font-heading text-lg uppercase text-white">Critérios por grau</h4><p class="text-xs text-gray-400">Deixe o percentual vazio para usar o padrão. Meses no grau: tempo mínimo no grau atual (0 = sem exigência). Os critérios valem para a progressão a partir do grau indicado.</p><div id="cfg-grades" class="space-y-2"></div><button class="btn btn-primary" id="cfg-save-grades" type="button">Salvar critérios</button></div>
+          <div class="space-y-3"><h4 class="font-heading text-lg uppercase text-white">Categorias de eventos</h4><p class="text-xs text-gray-400">"Conta para participação" define se os eventos da categoria entram no percentual.</p><div id="cfg-cats" class="space-y-2"></div><form id="cfg-cat-form" class="flex flex-wrap gap-2"><input class="field flex-1 min-w-[200px]" id="cfg-cat-name" maxlength="80" placeholder="Nova categoria"><button class="btn btn-primary" type="submit">Adicionar</button></form></div>
+          <p id="cfg-message" class="text-sm" role="status" aria-live="polite"></p>
         </div>
 
         <div id="tab-access" class="hidden-view" role="tabpanel">
@@ -393,7 +417,7 @@ async function loadContent(){const holder=$('content-list');holder.innerHTML='<d
 }
 async function checkSession(){if(!configured||!supabaseClient){showView('login-view');message('login-message','Antes de usar, configure a URL e a chave pública do Supabase no arquivo index.html.','error');return;}showView('loading-view');const {data,error}=await supabaseClient.auth.getSession();if(error){showView('login-view');message('login-message','Não foi possível verificar a sessão. Tente entrar novamente.','error');return;}if(data.session){try{await openPortal(data.session.user)}catch(e){showView('error-view');$('error-message').textContent=e.message||'Erro inesperado.'}}else showView('login-view');}
 $('login-form').addEventListener('submit',async e=>{e.preventDefault();if(!supabaseClient){message('login-message','Configure primeiro o Supabase no código.','error');return;}const btn=$('login-btn');btn.disabled=true;btn.textContent='Verificando...';message('login-message','');const {data,error}=await supabaseClient.auth.signInWithPassword({email:$('email').value.trim(),password:$('password').value});btn.disabled=false;btn.innerHTML='<i class="fa-solid fa-lock-open mr-2"></i>Entrar no portal';if(error){message('login-message','E-mail ou senha inválidos, ou conta ainda não autorizada.','error');return;}try{await openPortal(data.user)}catch(err){showView('error-view');$('error-message').textContent=err.message||'Erro ao validar acesso.'}});
-$('logout-btn').addEventListener('click',async()=>{await supabaseClient?.auth.signOut();me=null;adminItems=[];$('admin-content-list').innerHTML='';$('members-list').innerHTML='';$('command-list').innerHTML='';$('ev-list').innerHTML='';$('ev-reg').innerHTML='';closeModal();$('mp-history').innerHTML='';$('mp-stats').innerHTML='';$('password').value='';message('login-message','Você saiu do portal.');showView('login-view');});
+$('logout-btn').addEventListener('click',async()=>{await supabaseClient?.auth.signOut();me=null;adminItems=[];$('admin-content-list').innerHTML='';$('members-list').innerHTML='';$('command-list').innerHTML='';$('dash-body').innerHTML='';$('dash-cards').innerHTML='';$('dash-one').innerHTML='';$('mp-charts').innerHTML='';$('ev-list').innerHTML='';$('ev-reg').innerHTML='';closeModal();$('mp-history').innerHTML='';$('mp-stats').innerHTML='';$('password').value='';message('login-message','Você saiu do portal.');showView('login-view');});
 $('retry-btn').addEventListener('click',checkSession);
 $('cancel-password-change').addEventListener('click',async()=>{await supabaseClient.auth.signOut();showView('login-view');});
 $('change-password-form').addEventListener('submit',async e=>{e.preventDefault();const next=$('first-new-password').value;const confirm=$('first-confirm-password').value;if(next.length<12){message('password-message','Use uma senha com pelo menos 12 caracteres.','error');return;}if(next!==confirm){message('password-message','As senhas não coincidem.','error');return;}const btn=e.submitter; if(btn)btn.disabled=true;const {data,error}=await supabaseClient.auth.updateUser({password:next,data:{must_change_password:false}});if(btn)btn.disabled=false;if(error){message('password-message','Não foi possível alterar a senha. Tente novamente.','error');return;}message('password-message','Senha atualizada. Abrindo o portal...','success');try{await openPortal(data.user)}catch(err){showView('error-view');$('error-message').textContent=err.message||'Erro ao validar acesso.'}});
@@ -401,7 +425,7 @@ $('create-user-form').addEventListener('submit',async e=>{e.preventDefault();con
 /* ───────── Painel do administrador ───────── */
 let me=null, adminItems=[];
 const fmtDate=(v)=>v?new Date(v).toLocaleDateString('pt-BR'):'';
-function setTab(name){document.querySelectorAll('[data-tab]').forEach(b=>b.setAttribute('aria-selected',String(b.dataset.tab===name)));['content','members','events','access'].forEach(t=>$('tab-'+t).classList.toggle('hidden-view',t!==name));}
+function setTab(name){document.querySelectorAll('[data-tab]').forEach(b=>b.setAttribute('aria-selected',String(b.dataset.tab===name)));['content','members','events','dash','config','access'].forEach(t=>$('tab-'+t).classList.toggle('hidden-view',t!==name));if(name==='dash')refreshDash();if(name==='config')loadConfig();}
 document.querySelectorAll('[data-tab]').forEach(b=>b.addEventListener('click',()=>setTab(b.dataset.tab)));
 
 function resetContentForm(){$('content-form').reset();$('cc-id').value='';$('cc-order').value='100';$('cc-published').checked=true;$('cc-save').innerHTML='<i class="fa-solid fa-floppy-disk mr-2"></i>Publicar comunicado';$('cc-cancel').classList.add('hidden-view');}
@@ -456,7 +480,7 @@ $('content-form').addEventListener('submit',async e=>{
 });
 
 /* ───────── Perfil, graus e gerenciamento de integrantes ───────── */
-let gradesList=[],minPct=60,membersCache=[],statsMap={};
+let justIn=true,sinceMap={},gradesList=[],minPct=60,membersCache=[],statsMap={};
 const STATUS_LABEL={presente:'Presente',ausencia_justificada:'Ausência justificada',ausencia_injustificada:'Ausência não justificada',pendente:'Pendente'};
 const fmtDay=v=>!v?'':(typeof v==='string'&&v.length===10?v.split('-').reverse().join('/'):new Date(v).toLocaleDateString('pt-BR'));
 const digitsOf=v=>String(v||'').replace(/\D/g,'');
@@ -467,15 +491,30 @@ const initial=n=>(String(n||'?').trim()[0]||'?').toUpperCase();
 function setAvatar(el,url,name){el.textContent='';if(url&&/^https:\/\//.test(url)){const i=new Image();i.alt='Foto de perfil';i.referrerPolicy='no-referrer';i.className='w-full h-full object-cover';i.onerror=()=>{el.textContent=initial(name);};i.src=url;el.appendChild(i);}else el.textContent=initial(name);}
 const gradeName=id=>gradesList.find(g=>g.id===id)?.name||'—';
 const needPct=gid=>{const g=gradesList.find(x=>x.id===gid);return g&&g.min_participation!=null?Number(g.min_participation):minPct;};
-function eligibility(pct,eleg,gid){if(gid>=11)return{t:'Grau máximo atingido',c:'text-gold'};if(!eleg)return{t:'Sem eventos elegíveis registrados',c:'text-gray-400'};return pct>=needPct(gid)?{t:'Apto para avaliação de progressão',c:'text-green-300'}:{t:'Ainda não atingiu o percentual mínimo',c:'text-red-300'};}
-async function loadRefs(){
-  const [g,s]=await Promise.all([supabaseClient.from('grades').select('id,name,min_participation').order('id'),supabaseClient.from('club_settings').select('value').eq('key','min_participation').maybeSingle()]);
-  gradesList=g.data||[];const v=Number(s.data?.value);if(Number.isFinite(v))minPct=v;
+const monthsSince=d=>{if(!d)return 0;const a=new Date(String(d).slice(0,10)+'T00:00:00'),n=new Date();return(n.getFullYear()-a.getFullYear())*12+n.getMonth()-a.getMonth()-(n.getDate()<a.getDate()?1:0);};
+const sinceOf=m=>sinceMap[m.id]||m.joined_at;
+function eligibility(pct,eleg,gid,since){
+  if(gid>=11)return{k:'max',t:'Grau máximo atingido',c:'text-gold',crit:[]};
+  const g=gradesList.find(x=>x.id===gid),need=needPct(gid),minM=g?.min_months||0,crit=[];
+  crit.push({ok:eleg>0&&pct>=need,t:`Participação ${eleg?pct+'%':'sem dados'} (mínimo ${need}%)`});
+  if(minM>0){const mm=monthsSince(since);crit.push({ok:mm>=minM,t:`Tempo no grau: ${mm} de ${minM} mês(es)`});}
+  if(!eleg)return{k:'sem',t:'Sem eventos elegíveis registrados',c:'text-gray-400',crit};
+  return crit.every(x=>x.ok)?{k:'apto',t:'Apto para avaliação de progressão',c:'text-green-300',crit}:{k:'nao',t:'Ainda não atingiu os critérios',c:'text-red-300',crit};
 }
-function statsHtml(st,gid){
-  const pct=st&&st.pct!=null?Number(st.pct):null,need=needPct(gid),e=eligibility(pct??0,st?.elegiveis||0,gid);
+async function loadRefs(){
+  const T=t=>supabaseClient.from(t);
+  const [g,s,j,c]=await Promise.all([T('grades').select('id,name,min_participation,min_months').order('id'),T('club_settings').select('value').eq('key','min_participation').maybeSingle(),T('club_settings').select('value').eq('key','justified_in_denominator').maybeSingle(),T('event_categories').select('id,name,is_active,counts_for_progress').order('name')]);
+  gradesList=g.data||[];const v=Number(s.data?.value);if(Number.isFinite(v))minPct=v;justIn=j.data?j.data.value!==false:true;if(!c.error)catsCache=c.data||[];
+}
+/* cálculos (mesma regra do banco: pendente não conta; só categorias válidas; só após a entrada) */
+function countable(ev,joined){const c=catsCache.find(x=>x.id===ev.category_id);return !!c?.counts_for_progress&&(!joined||ev.event_date>=joined);}
+function tally(list){const t={presente:0,ausencia_justificada:0,ausencia_injustificada:0,pendente:0};list.forEach(r=>{t[r.status]++;});const eleg=t.presente+t.ausencia_injustificada+(justIn?t.ausencia_justificada:0);return{...t,eleg,pct:eleg?Math.round(1000*t.presente/eleg)/10:null};}
+function monthlyCumulative(list){const ms=[...new Set(list.map(r=>r.date.slice(0,7)))].sort();return ms.map(mo=>({label:mo.slice(5)+'/'+mo.slice(2,4),value:tally(list.filter(r=>r.date.slice(0,7)<=mo)).pct}));}
+function statsHtml(st,gid,since){
+  const pct=st&&st.pct!=null?Number(st.pct):null,need=needPct(gid),e=eligibility(pct??0,st?.elegiveis||0,gid,since);
   const boxes=[['Presenças',st?.presentes||0],['Aus. justificadas',st?.aus_justificadas||0],['Aus. não justif.',st?.aus_injustificadas||0],['Pendentes',st?.pendentes||0]];
-  return `<div class="grid grid-cols-2 md:grid-cols-4 gap-2 text-center">${boxes.map(([l,v])=>`<div class="row-card"><div class="font-display text-3xl text-white">${v}</div><div class="text-[11px] text-gray-400 uppercase font-heading tracking-widest">${l}</div></div>`).join('')}</div><div class="mt-4"><div class="flex justify-between text-xs text-gray-300 mb-1"><span>Participação: <strong class="text-white">${pct==null?'—':pct+'%'}</strong></span><span>Mínimo para avaliação: ${need}%</span></div><div class="relative h-3 rounded bg-zinc-800 overflow-hidden"><div class="h-full bg-[#c9a84c]" style="width:${Math.min(100,pct||0)}%"></div><div class="absolute top-0 h-full w-0.5 bg-white" style="left:${Math.min(100,need)}%"></div></div><p class="text-sm mt-2 ${e.c}">${e.t}</p><p class="text-[11px] text-gray-500">Participação e elegibilidade são indicadores diferentes: a promoção é sempre decidida pela administração.</p></div>`;
+  const crit=e.crit.map(c=>`<li class="${c.ok?'text-green-300':'text-red-300'}"><i class="fa-solid ${c.ok?'fa-circle-check':'fa-circle-xmark'} mr-2"></i>${c.t}</li>`).join('');
+  return `<div class="grid grid-cols-2 md:grid-cols-4 gap-2 text-center">${boxes.map(([l,v])=>`<div class="row-card"><div class="font-display text-3xl text-white">${v}</div><div class="text-[11px] text-gray-400 uppercase font-heading tracking-widest">${l}</div></div>`).join('')}</div><div class="mt-4"><div class="flex justify-between text-xs text-gray-300 mb-1"><span>Participação: <strong class="text-white">${pct==null?'—':pct+'%'}</strong></span><span>Mínimo para avaliação: ${need}%</span></div><div class="relative h-3 rounded bg-zinc-800 overflow-hidden"><div class="h-full bg-[#c9a84c]" style="width:${Math.min(100,pct||0)}%"></div><div class="absolute top-0 h-full w-0.5 bg-white" style="left:${Math.min(100,need)}%"></div></div><p class="text-sm mt-2 ${e.c}">${e.t}</p>${crit?`<ul class="text-xs mt-2 space-y-1">${crit}</ul>`:''}<p class="text-[11px] text-gray-500 mt-2">Participação e elegibilidade são indicadores diferentes: a promoção é sempre decidida pela administração.</p></div>`;
 }
 async function historyHtml(id,isAdmin){
   const q=t=>supabaseClient.from(t);
@@ -502,7 +541,10 @@ async function loadMyProfile(){
   $('mp-name').value=p.display_name||'';$('mp-email').value=p.email||me.email||'';$('mp-photo').value=p.photo_url||'';$('mp-wa').value=fmtPhone(p.whatsapp);$('mp-em').value=fmtPhone(p.emergency_whatsapp);
   $('mp-grade').textContent=gradeName(p.grade_id);$('mp-status').textContent=p.status;$('mp-since').textContent=fmtDay(p.joined_at);setAvatar($('mp-avatar'),p.photo_url,p.display_name);
   const {data:rows}=await supabaseClient.rpc('member_stats');
-  $('mp-stats').innerHTML=statsHtml((rows||[]).find(r=>r.member_id===me.id),p.grade_id);
+  const {data:gh}=await supabaseClient.from('grade_history').select('changed_at').eq('member_id',me.id).order('changed_at',{ascending:false}).limit(1);
+  const since=gh?.[0]?.changed_at?.slice(0,10)||p.joined_at;
+  $('mp-stats').innerHTML=statsHtml((rows||[]).find(r=>r.member_id===me.id),p.grade_id,since);
+  $('mp-charts').innerHTML=await chartsHtml(me.id,p.joined_at,p.grade_id);
   $('mp-history').innerHTML=await historyHtml(me.id,false);
 }
 $('mp-form').addEventListener('submit',async e=>{
@@ -521,16 +563,16 @@ $('mp-form').addEventListener('submit',async e=>{
 /* Gerenciar Integrantes (admin) */
 async function loadMembers(){
   const holder=$('members-list');holder.innerHTML='<div class="text-sm text-gray-400">Carregando integrantes...</div>';
-  const [m,s]=await Promise.all([supabaseClient.from('member_profiles').select('id,display_name,email,role,is_active,grade_id,photo_url,created_at').order('created_at',{ascending:true}),supabaseClient.rpc('member_stats')]);
+  const [m,s,gh]=await Promise.all([supabaseClient.from('member_profiles').select('id,display_name,email,role,is_active,grade_id,photo_url,joined_at,created_at').order('created_at',{ascending:true}),supabaseClient.rpc('member_stats'),supabaseClient.from('grade_history').select('member_id,changed_at')]);
   if(m.error){holder.innerHTML='<div class="text-sm text-red-300">Não foi possível carregar os integrantes. Rode o fase1-banco.sql no Supabase.</div>';return;}
-  membersCache=m.data||[];statsMap=Object.fromEntries((s.data||[]).map(r=>[r.member_id,r]));renderMembers();
+  sinceMap={};(gh.data||[]).forEach(h=>{const d=h.changed_at.slice(0,10);if(!sinceMap[h.member_id]||d>sinceMap[h.member_id])sinceMap[h.member_id]=d;});membersCache=m.data||[];statsMap=Object.fromEntries((s.data||[]).map(r=>[r.member_id,r]));renderMembers();
 }
 function renderMembers(){
   const holder=$('members-list'),q=$('members-search').value.trim().toLowerCase();
   const list=membersCache.filter(m=>!q||`${m.display_name||''} ${m.email||''}`.toLowerCase().includes(q));
   if(!list.length){holder.innerHTML='<div class="text-sm text-gray-400">Nenhum integrante encontrado.</div>';return;}
   holder.innerHTML=list.map(m=>{
-    const self=m.id===me.id,st=statsMap[m.id]||{},total=(st.presentes||0)+(st.aus_justificadas||0)+(st.aus_injustificadas||0)+(st.pendentes||0),aus=(st.aus_justificadas||0)+(st.aus_injustificadas||0),el=eligibility(Number(st.pct??0),st.elegiveis||0,m.grade_id);
+    const self=m.id===me.id,st=statsMap[m.id]||{},total=(st.presentes||0)+(st.aus_justificadas||0)+(st.aus_injustificadas||0)+(st.pendentes||0),aus=(st.aus_justificadas||0)+(st.aus_injustificadas||0),el=eligibility(Number(st.pct??0),st.elegiveis||0,m.grade_id,sinceOf(m));
     return `<div class="row-card ${m.is_active?'':'is-off'}"><div class="flex flex-wrap items-center gap-3"><div class="w-12 h-12 rounded-full overflow-hidden bg-[#c9a84c22] border border-[#c9a84c55] flex items-center justify-center font-display text-xl text-gold shrink-0" data-avatar="${safeText(m.id)}"></div><div class="flex-1 min-w-[180px]"><div class="font-heading text-white uppercase">${safeText(m.display_name||'Sem nome')}${self?' <span class="text-xs text-gold normal-case">(você)</span>':''}</div><div class="text-xs text-gray-400">${safeText(m.email||'e-mail não registrado')}</div><div class="text-xs text-gray-300 mt-1">${safeText(gradeName(m.grade_id))} · Participação ${st.pct!=null?Number(st.pct)+'%':'—'} · ${total} evento(s) · ${aus} ausência(s)</div><div class="text-xs ${el.c}">${el.t}</div></div><div class="flex flex-wrap items-center gap-2"><span class="status-badge ${m.is_active?'bg-green-900/40 text-green-300':'bg-red-900/40 text-red-300'}">${m.is_active?'Ativo':'Desativado'}</span><button class="btn btn-secondary btn-sm" data-view="${safeText(m.id)}"><i class="fa-solid fa-id-card mr-1"></i>Visualizar Perfil</button><button class="btn ${m.is_active?'btn-danger':'btn-secondary'} btn-sm" data-member="${safeText(m.id)}" data-active="${m.is_active}" data-name="${safeText(m.display_name||m.email||'')}" ${self?'disabled title="Você não pode desativar a própria conta"':''}>${m.is_active?'Desativar':'Reativar'}</button></div></div></div>`;
   }).join('');
   holder.querySelectorAll('[data-avatar]').forEach(el=>{const m=membersCache.find(x=>x.id===el.dataset.avatar);setAvatar(el,m?.photo_url,m?.display_name);});
@@ -566,7 +608,7 @@ async function openMemberModal(id){
       <div><label class="block text-xs text-gray-300 mb-2" for="mm-since">Data de entrada</label><input class="field" id="mm-since" type="date" value="${safeText(p.joined_at||'')}"></div>
       <div class="flex items-end"><button class="btn btn-primary" type="submit"><i class="fa-solid fa-floppy-disk mr-2"></i>Salvar dados</button></div>
     </form>
-    <hr class="gold-line"><div>${statsHtml(st,p.grade_id)}</div>
+    <hr class="gold-line"><div>${statsHtml(st,p.grade_id,sinceOf({id,joined_at:p.joined_at}))}</div><div id="mm-charts" class="space-y-4"></div>
     <hr class="gold-line">
     <div class="grid md:grid-cols-2 gap-3"><div><label class="block text-xs text-gray-300 mb-2" for="mm-grade">Grau atual</label><select class="field" id="mm-grade">${opts}</select></div><div><label class="block text-xs text-gray-300 mb-2" for="mm-gnote">Observação da decisão (grau/avaliação)</label><input class="field" id="mm-gnote" maxlength="500"></div></div>
     <div class="flex flex-wrap gap-2"><button class="btn btn-primary btn-sm" data-mm="grade">Alterar grau</button><button class="btn btn-secondary btn-sm" data-mm="eval-aprovado">Registrar avaliação: aprovado</button><button class="btn btn-danger btn-sm" data-mm="eval-reprovado">Registrar avaliação: reprovado</button></div>
@@ -578,6 +620,7 @@ async function openMemberModal(id){
   modal.classList.remove('hidden-view');document.body.style.overflow='hidden';
   setAvatar($('mm-avatar'),p.photo_url,p.display_name);bindMask($('mm-wa'));bindMask($('mm-em'));
   $('mm-history').innerHTML=await historyHtml(id,true);
+  $('mm-charts').innerHTML=await chartsHtml(id,p.joined_at,p.grade_id);
 }
 $('member-modal').addEventListener('click',async e=>{
   if(e.target.id==='member-modal'){closeModal();return;}
@@ -613,7 +656,7 @@ $('ev-cancel').addEventListener('click',()=>{resetEventForm();message('ev-messag
 async function loadEvents(){
   const holder=$('ev-list');
   const [c,e,p]=await Promise.all([
-    supabaseClient.from('event_categories').select('id,name,is_active').order('name'),
+    supabaseClient.from('event_categories').select('id,name,is_active,counts_for_progress').order('name'),
     supabaseClient.from('events').select('id,name,event_date,description,category_id,event_categories(name)').order('event_date',{ascending:false}),
     supabaseClient.from('event_participation').select('event_id,member_id,status,note')]);
   if(e.error||c.error){holder.innerHTML='<div class="text-sm text-red-300">Não foi possível carregar os eventos. Rode o fase1-banco.sql no Supabase.</div>';return;}
@@ -672,6 +715,91 @@ $('ev-reg').addEventListener('click',async e=>{
   b.disabled=false;
   if(error)return message('reg-message','Não foi possível salvar os registros.','error');
   await Promise.all([loadEvents(),loadMembers()]);openRegistration(id);message('reg-message','Registros salvos.','success');
+});
+/* ───────── Gráficos, indicadores e configurações ───────── */
+const ST_COLOR={presente:'#22c55e',ausencia_justificada:'#eab308',ausencia_injustificada:'#ef4444',pendente:'#71717a'};
+function lineSvg(pts,need){
+  pts=pts.filter(p=>p.value!=null);if(!pts.length)return'<p class="text-sm text-gray-400">Sem dados suficientes.</p>';
+  const W=600,H=170,L=36,R=12,T=10,B=26,n=pts.length,x=i=>n===1?(L+W-R)/2:L+i*(W-L-R)/(n-1),y=v=>T+(100-v)*(H-T-B)/100;
+  const path=pts.map((p,i)=>`${i?'L':'M'}${x(i).toFixed(1)} ${y(p.value).toFixed(1)}`).join(' ');
+  return `<svg viewBox="0 0 ${W} ${H}" class="w-full h-auto" role="img" aria-label="Evolução da participação ao longo dos meses">${[0,50,100].map(g=>`<line x1="${L}" x2="${W-R}" y1="${y(g)}" y2="${y(g)}" stroke="#2a2a32"/><text x="${L-6}" y="${y(g)+4}" fill="#9ca3af" font-size="10" text-anchor="end">${g}%</text>`).join('')}${need!=null?`<line x1="${L}" x2="${W-R}" y1="${y(need)}" y2="${y(need)}" stroke="#fff" stroke-dasharray="4 4" opacity=".55"/>`:''}<path d="${path}" fill="none" stroke="#c9a84c" stroke-width="2.5"/>${pts.map((p,i)=>`<circle cx="${x(i)}" cy="${y(p.value)}" r="3.5" fill="#c9a84c"><title>${p.label}: ${p.value}%</title></circle><text x="${x(i)}" y="${H-8}" fill="#9ca3af" font-size="10" text-anchor="middle">${p.label}</text>`).join('')}</svg><p class="text-[11px] text-gray-500">Linha tracejada: percentual mínimo. Percentual acumulado até cada mês.</p>`;
+}
+function distBar(t){
+  const total=t.presente+t.ausencia_justificada+t.ausencia_injustificada+t.pendente;if(!total)return'<p class="text-sm text-gray-400">Nenhum registro no período.</p>';
+  const keys=Object.keys(ST_COLOR);
+  return `<div class="flex h-4 rounded overflow-hidden bg-zinc-800" role="img" aria-label="Distribuição da participação">${keys.map(k=>t[k]?`<div style="width:${100*t[k]/total}%;background:${ST_COLOR[k]}" title="${STATUS_LABEL[k]}: ${t[k]}"></div>`:'').join('')}</div><div class="flex flex-wrap gap-x-4 gap-y-1 mt-3 text-xs text-gray-300">${keys.map(k=>`<span><span class="inline-block w-2.5 h-2.5 rounded-sm mr-1" style="background:${ST_COLOR[k]}"></span>${STATUS_LABEL[k]}: <strong class="text-white">${t[k]}</strong></span>`).join('')}</div>`;
+}
+function gradeStrip(gid,hist,joined){
+  const when={1:joined};(hist||[]).slice().sort((a,b)=>a.changed_at<b.changed_at?-1:1).forEach(h=>{when[h.to_grade_id]=h.changed_at.slice(0,10);});
+  return `<div class="flex flex-wrap gap-2">${gradesList.map(g=>{const on=g.id<=gid,cur=g.id===gid;return `<div class="text-center px-2 py-1.5 rounded border ${cur?'border-[#c9a84c] bg-[#c9a84c] text-black':on?'border-[#c9a84c88] text-gold':'border-zinc-700 text-zinc-500'}" style="min-width:64px"><div class="font-heading text-xs tracking-wider">${safeText(g.name.replace('GRAU ',''))}</div><div class="text-[10px] ${cur?'text-black/70':'text-gray-500'}">${when[g.id]&&on?fmtDay(when[g.id]):'—'}</div></div>`;}).join('')}</div>`;
+}
+async function chartsHtml(id,joined,gid){
+  const [p,h]=await Promise.all([supabaseClient.from('event_participation').select('status,events(event_date,category_id)').eq('member_id',id),supabaseClient.from('grade_history').select('to_grade_id,changed_at').eq('member_id',id)]);
+  const rows=(p.data||[]).filter(r=>r.events&&countable(r.events,joined)).map(r=>({date:r.events.event_date,status:r.status}));
+  const H=t=>`<h5 class="font-heading text-sm uppercase tracking-widest text-gold mb-3">${t}</h5>`;
+  return `<div class="grid md:grid-cols-2 gap-4"><div class="row-card">${H('Participação individual')}${distBar(tally(rows))}</div><div class="row-card">${H('Evolução da participação')}${lineSvg(monthlyCumulative(rows),needPct(gid))}</div></div><div class="row-card">${H('Progressão de graus')}${gradeStrip(gid,h.data,joined)}</div>`;
+}
+
+/* Indicadores gerais (admin) */
+const readF=()=>({mid:$('dash-member').value,gid:Number($('dash-grade').value)||0,cat:Number($('dash-cat').value)||0,from:$('dash-from').value,to:$('dash-to').value,elig:$('dash-elig').value});
+function calcStats(m,f){const list=[];for(const ev of eventsCache){if(!countable(ev,m.joined_at)||(f.cat&&ev.category_id!==f.cat)||(f.from&&ev.event_date<f.from)||(f.to&&ev.event_date>f.to))continue;const r=(partByEvent[ev.id]||[]).find(x=>x.member_id===m.id);if(r)list.push({date:ev.event_date,status:r.status});}return{...tally(list),list};}
+function refreshDash(){
+  const keep=['dash-member','dash-grade','dash-cat'].map(i=>$(i).value);
+  $('dash-member').innerHTML='<option value="">Todos</option>'+membersCache.filter(m=>m.is_active).map(m=>`<option value="${safeText(m.id)}">${safeText(m.display_name||m.email)}</option>`).join('');
+  $('dash-grade').innerHTML='<option value="">Todos</option>'+gradesList.map(g=>`<option value="${g.id}">${safeText(g.name)}</option>`).join('');
+  $('dash-cat').innerHTML='<option value="">Todas</option>'+catsCache.map(c=>`<option value="${c.id}">${safeText(c.name)}</option>`).join('');
+  ['dash-member','dash-grade','dash-cat'].forEach((i,k)=>{$(i).value=keep[k];});renderDash();
+}
+async function renderDash(){
+  const f=readF();
+  let rows=membersCache.filter(m=>m.is_active&&(!f.mid||m.id===f.mid)&&(!f.gid||m.grade_id===f.gid)).map(m=>{const s=calcStats(m,f);return{m,s,e:eligibility(s.pct??0,s.eleg,m.grade_id,sinceOf(m))};});
+  if(f.elig)rows=rows.filter(r=>r.e.k===f.elig);
+  const all=rows.flatMap(r=>r.s.list),T=tally(all),pcts=rows.map(r=>r.s.pct).filter(x=>x!=null);
+  const avg=pcts.length?Math.round(10*pcts.reduce((a,b)=>a+b,0)/pcts.length)/10:null;
+  const evN=eventsCache.filter(ev=>(!f.cat||ev.category_id===f.cat)&&(!f.from||ev.event_date>=f.from)&&(!f.to||ev.event_date<=f.to)).length;
+  const cards=[['Integrantes',rows.length],['Média de participação',avg==null?'—':avg+'%'],['Aptos p/ avaliação',rows.filter(r=>r.e.k==='apto').length],['Ainda não atingiram',rows.filter(r=>r.e.k==='nao').length],['Presenças',T.presente],['Ausências',T.ausencia_justificada+T.ausencia_injustificada],['Eventos no período',evN]];
+  $('dash-cards').innerHTML=cards.map(([l,v])=>`<div class="row-card text-center"><div class="font-display text-3xl text-white">${v}</div><div class="text-[11px] text-gray-400 uppercase font-heading tracking-widest">${l}</div></div>`).join('');
+  const maxG=Math.max(1,...gradesList.map(g=>rows.filter(r=>r.m.grade_id===g.id).length));
+  const H=t=>`<h5 class="font-heading text-sm uppercase tracking-widest text-gold mb-3">${t}</h5>`;
+  const byGrade=gradesList.map(g=>{const n=rows.filter(r=>r.m.grade_id===g.id).length;return `<div class="flex items-center gap-2 text-xs mb-1.5"><span class="w-20 text-gray-300">${safeText(g.name)}</span><div class="flex-1 h-3 rounded bg-zinc-800 overflow-hidden"><div class="h-full bg-[#c9a84c]" style="width:${100*n/maxG}%"></div></div><span class="w-6 text-right text-white">${n}</span></div>`;}).join('');
+  const rank=rows.slice().sort((a,b)=>(b.s.pct??-1)-(a.s.pct??-1)).map(r=>`<div class="row-card"><div class="flex flex-wrap justify-between gap-2 text-sm"><span class="text-white">${safeText(r.m.display_name||r.m.email)} <span class="text-xs text-gray-500">${safeText(gradeName(r.m.grade_id))}</span></span><span class="text-xs ${r.e.c}">${r.e.t}</span></div><div class="relative h-2.5 rounded bg-zinc-800 overflow-hidden mt-2"><div class="h-full bg-[#c9a84c]" style="width:${Math.min(100,r.s.pct||0)}%"></div><div class="absolute top-0 h-full w-0.5 bg-white" style="left:${Math.min(100,needPct(r.m.grade_id))}%"></div></div><div class="text-[11px] text-gray-400 mt-1">${r.s.pct==null?'sem dados':r.s.pct+'%'} · ${r.s.presente} presença(s) · ${r.s.ausencia_justificada+r.s.ausencia_injustificada} ausência(s) · ${r.s.pendente} pendente(s)</div></div>`).join('')||'<p class="text-sm text-gray-400">Nenhum integrante com esses filtros.</p>';
+  $('dash-body').innerHTML=`<div class="row-card">${H('Integrantes por grau')}${byGrade}</div><div class="row-card">${H('Presenças e ausências')}${distBar(T)}</div><div class="row-card md:col-span-2">${H('Evolução da participação do grupo')}${lineSvg(monthlyCumulative(all),minPct)}</div><div class="md:col-span-2 space-y-2">${H('Participação por integrante')}${rank}</div>`;
+  const one=f.mid&&membersCache.find(m=>m.id===f.mid);
+  $('dash-one').innerHTML=one?`<h4 class="font-heading text-lg uppercase text-white">${safeText(one.display_name||one.email)}</h4>`+await chartsHtml(one.id,one.joined_at,one.grade_id):'';
+}
+['dash-member','dash-grade','dash-cat','dash-from','dash-to','dash-elig'].forEach(i=>$(i).addEventListener('change',renderDash));
+
+/* Configurações do motoclube (admin) */
+async function loadConfig(){
+  await loadRefs();$('cfg-min').value=minPct;$('cfg-just').checked=justIn;
+  $('cfg-grades').innerHTML='<div class="grid grid-cols-[1fr_110px_110px] gap-2 text-[11px] text-gray-400 uppercase font-heading tracking-widest"><span>Grau</span><span>% mínimo</span><span>Meses no grau</span></div>'+gradesList.map(g=>`<div class="row-card grid grid-cols-[1fr_110px_110px] gap-2 items-center"><div class="font-heading text-white">${safeText(g.name)}</div><input class="field" type="number" min="0" max="100" step="1" placeholder="padrão" data-gp="${g.id}" value="${g.min_participation??''}" aria-label="Percentual mínimo ${safeText(g.name)}"><input class="field" type="number" min="0" max="240" step="1" data-gm="${g.id}" value="${g.min_months||0}" aria-label="Meses mínimos ${safeText(g.name)}"></div>`).join('');
+  $('cfg-cats').innerHTML=catsCache.map(c=>`<div class="row-card flex flex-wrap items-center gap-3" data-cid="${c.id}"><input class="field flex-1 min-w-[180px]" data-cn value="${safeText(c.name)}" maxlength="80" aria-label="Nome da categoria"><label class="text-xs text-gray-300 flex items-center gap-2"><input type="checkbox" data-cc ${c.counts_for_progress?'checked':''} class="accent-[#c9a84c] w-4 h-4">Conta para participação</label><label class="text-xs text-gray-300 flex items-center gap-2"><input type="checkbox" data-ca ${c.is_active?'checked':''} class="accent-[#c9a84c] w-4 h-4">Ativa</label><button class="btn btn-secondary btn-sm" data-csave>Salvar</button></div>`).join('');
+}
+async function afterConfig(txt){await loadConfig();await Promise.all([loadEvents(),loadMembers()]);message('cfg-message',txt,'success');}
+$('cfg-save-general').addEventListener('click',async()=>{
+  const v=Number($('cfg-min').value);if(!Number.isFinite(v)||v<0||v>100)return message('cfg-message','O percentual precisa estar entre 0 e 100.','error');
+  if(!confirm('Alterar as regras gerais? Os indicadores serão recalculados; os registros originais não mudam.'))return;
+  const {error}=await supabaseClient.from('club_settings').upsert([{key:'min_participation',value:v},{key:'justified_in_denominator',value:$('cfg-just').checked}],{onConflict:'key'});
+  if(error)return message('cfg-message','Não foi possível salvar as regras.','error');afterConfig('Regras gerais salvas.');
+});
+$('cfg-save-grades').addEventListener('click',async()=>{
+  const ups=[];
+  for(const g of gradesList){const p=document.querySelector(`[data-gp="${g.id}"]`).value.trim(),m=Number(document.querySelector(`[data-gm="${g.id}"]`).value||0);
+    if((p!==''&&(Number(p)<0||Number(p)>100))||!Number.isInteger(m)||m<0||m>240)return message('cfg-message',`Valores inválidos em ${g.name}.`,'error');
+    ups.push(supabaseClient.from('grades').update({min_participation:p===''?null:Number(p),min_months:m}).eq('id',g.id));}
+  if(!confirm('Salvar os critérios de todos os graus?'))return;
+  const res=await Promise.all(ups);if(res.some(r=>r.error))return message('cfg-message','Não foi possível salvar todos os critérios.','error');afterConfig('Critérios por grau salvos.');
+});
+$('cfg-cats').addEventListener('click',async e=>{
+  const b=e.target.closest('[data-csave]');if(!b)return;const row=b.closest('[data-cid]'),name=row.querySelector('[data-cn]').value.trim();
+  if(name.length<2)return message('cfg-message','Informe o nome da categoria.','error');
+  const {error}=await supabaseClient.from('event_categories').update({name,counts_for_progress:row.querySelector('[data-cc]').checked,is_active:row.querySelector('[data-ca]').checked}).eq('id',Number(row.dataset.cid));
+  if(error)return message('cfg-message','Não foi possível salvar a categoria (nome repetido?).','error');afterConfig('Categoria salva.');
+});
+$('cfg-cat-form').addEventListener('submit',async e=>{
+  e.preventDefault();const name=$('cfg-cat-name').value.trim();if(name.length<2)return message('cfg-message','Informe o nome da categoria.','error');
+  const {error}=await supabaseClient.from('event_categories').insert({name});
+  if(error)return message('cfg-message','Não foi possível criar a categoria (nome repetido?).','error');$('cfg-cat-name').value='';afterConfig('Categoria criada.');
 });
 /* ───────── Comando regional (dados vindos do banco, só após login) ───────── */
 async function loadCommand(){
