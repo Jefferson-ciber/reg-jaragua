@@ -345,7 +345,7 @@
 
         <div id="tab-config" class="hidden-view space-y-6" role="tabpanel">
           <div class="space-y-3"><h4 class="font-heading text-lg uppercase text-white">Regras gerais</h4><div class="grid md:grid-cols-3 gap-3"><div><label class="block text-xs text-gray-300 mb-2" for="cfg-min">Percentual mínimo padrão (%)</label><input class="field" id="cfg-min" type="number" min="0" max="100" step="1"></div><div class="flex items-end"><label class="flex items-center gap-2 text-sm text-gray-200 pb-3"><input type="checkbox" id="cfg-just" class="accent-[#c9a84c] w-4 h-4"> Ausência justificada entra no total de eventos</label></div><div class="flex items-end pb-1"><button class="btn btn-primary" id="cfg-save-general" type="button">Salvar regras gerais</button></div></div></div>
-          <div class="space-y-3"><h4 class="font-heading text-lg uppercase text-white">Critérios por grau</h4><p class="text-xs text-gray-400">Deixe o percentual vazio para usar o padrão. Meses no grau: tempo mínimo no grau atual (0 = sem exigência). Os critérios valem para a progressão a partir do grau indicado.</p><div id="cfg-grades" class="space-y-2"></div><button class="btn btn-primary" id="cfg-save-grades" type="button">Salvar critérios</button></div>
+          <div class="space-y-3"><h4 class="font-heading text-lg uppercase text-white">Critérios por grau</h4><p class="text-xs text-gray-400">Deixe o percentual vazio para usar o padrão. Meses no grau: tempo mínimo no grau atual (0 = sem exigência). Os critérios valem para sair do grau indicado rumo ao próximo (a progressão vai de CAMISETA até o GRAU I, o nível mais alto).</p><div id="cfg-grades" class="space-y-2"></div><button class="btn btn-primary" id="cfg-save-grades" type="button">Salvar critérios</button></div>
           <div class="space-y-3"><h4 class="font-heading text-lg uppercase text-white">Categorias de eventos</h4><p class="text-xs text-gray-400">"Conta para participação" define se os eventos da categoria entram no percentual.</p><div id="cfg-cats" class="space-y-2"></div><form id="cfg-cat-form" class="flex flex-wrap gap-2"><input class="field flex-1 min-w-[200px]" id="cfg-cat-name" maxlength="80" placeholder="Nova categoria"><button class="btn btn-primary" type="submit">Adicionar</button></form></div>
           <p id="cfg-message" class="text-sm" role="status" aria-live="polite"></p>
         </div>
@@ -489,12 +489,13 @@ const bindMask=el=>el&&el.addEventListener('input',()=>{el.value=fmtPhone(el.val
 const validPhone=d=>!d||/^\d{10,11}$/.test(d);
 const initial=n=>(String(n||'?').trim()[0]||'?').toUpperCase();
 function setAvatar(el,url,name){el.textContent='';if(url&&/^https:\/\//.test(url)){const i=new Image();i.alt='Foto de perfil';i.referrerPolicy='no-referrer';i.className='w-full h-full object-cover';i.onerror=()=>{el.textContent=initial(name);};i.src=url;el.appendChild(i);}else el.textContent=initial(name);}
+const gradesAsc=()=>gradesList.slice().reverse(); // CAMISETA → GRAU I (ordem de progressão)
 const gradeName=id=>gradesList.find(g=>g.id===id)?.name||'—';
 const needPct=gid=>{const g=gradesList.find(x=>x.id===gid);return g&&g.min_participation!=null?Number(g.min_participation):minPct;};
 const monthsSince=d=>{if(!d)return 0;const a=new Date(String(d).slice(0,10)+'T00:00:00'),n=new Date();return(n.getFullYear()-a.getFullYear())*12+n.getMonth()-a.getMonth()-(n.getDate()<a.getDate()?1:0);};
 const sinceOf=m=>sinceMap[m.id]||m.joined_at;
 function eligibility(pct,eleg,gid,since){
-  if(gid>=11)return{k:'max',t:'Grau máximo atingido',c:'text-gold',crit:[]};
+  if(gid<=1)return{k:'max',t:'Grau máximo atingido',c:'text-gold',crit:[]};
   const g=gradesList.find(x=>x.id===gid),need=needPct(gid),minM=g?.min_months||0,crit=[];
   crit.push({ok:eleg>0&&pct>=need,t:`Participação ${eleg?pct+'%':'sem dados'} (mínimo ${need}%)`});
   if(minM>0){const mm=monthsSince(since);crit.push({ok:mm>=minM,t:`Tempo no grau: ${mm} de ${minM} mês(es)`});}
@@ -597,7 +598,7 @@ async function openMemberModal(id){
   const {data:p,error}=await supabaseClient.from('member_profiles').select('id,display_name,email,photo_url,whatsapp,emergency_whatsapp,grade_id,joined_at,status').eq('id',id).maybeSingle();
   if(error||!p)return message('members-message','Não foi possível abrir o perfil.','error');
   const st=statsMap[id];const evOpts=eventsCache.map(x=>`<option value="${x.id}">${safeText(x.name)} · ${fmtDay(x.event_date)}</option>`).join('');
-  const opts=gradesList.map(g=>`<option value="${g.id}" ${g.id===p.grade_id?'selected':''}>${safeText(g.name)}</option>`).join('');
+  const opts=gradesAsc().map(g=>`<option value="${g.id}" ${g.id===p.grade_id?'selected':''}>${safeText(g.name)}</option>`).join('');
   modal.innerHTML=`<div class="panel max-w-3xl mx-auto my-6 p-5 md:p-6 space-y-5" data-id="${safeText(id)}">
     <div class="flex items-start justify-between gap-3"><div class="flex items-center gap-4"><div id="mm-avatar" class="w-16 h-16 rounded-full overflow-hidden bg-[#c9a84c22] border border-[#c9a84c55] flex items-center justify-center font-display text-3xl text-gold shrink-0"></div><div><h3 class="font-display text-3xl tracking-widest text-white">${safeText(p.display_name||'Sem nome')}</h3><p class="text-xs text-gray-400">${safeText(p.email||'')} · ${safeText(gradeName(p.grade_id))}</p></div></div><button class="btn btn-secondary btn-sm" data-mm="close" aria-label="Fechar"><i class="fa-solid fa-xmark"></i></button></div>
     <form id="mm-form" class="grid md:grid-cols-2 gap-3" novalidate>
@@ -630,7 +631,7 @@ $('member-modal').addEventListener('click',async e=>{
   const cur=membersCache.find(x=>x.id===id)?.grade_id||1;let error;
   b.disabled=true;
   if(act==='grade'){const g=Number($('mm-grade').value);if(g===cur){message('mm-message','Esse já é o grau atual.');b.disabled=false;return;}if(!confirm('Alterar o grau para '+gradeName(g)+'?')){b.disabled=false;return;}({error}=await supabaseClient.rpc('change_grade',{p_member:id,p_grade:g,p_note:note}));}
-  if(act.startsWith('eval-')){const d=act.slice(5);if(cur>=11){message('mm-message','Já está no último grau.','error');b.disabled=false;return;}if(!confirm('Registrar avaliação "'+d+'" para '+gradeName(cur+1)+'?')){b.disabled=false;return;}({error}=await supabaseClient.from('evaluations').insert({member_id:id,target_grade_id:cur+1,decision:d,participation_pct:pct,note,evaluated_by:me.id}));}
+  if(act.startsWith('eval-')){const d=act.slice(5);if(cur<=1){message('mm-message','Já está no último grau.','error');b.disabled=false;return;}if(!confirm('Registrar avaliação "'+d+'" para '+gradeName(cur-1)+'?')){b.disabled=false;return;}({error}=await supabaseClient.from('evaluations').insert({member_id:id,target_grade_id:cur-1,decision:d,participation_pct:pct,note,evaluated_by:me.id}));}
   if(act==='part'){const evId=Number($('mm-ev').value);({error}=await supabaseClient.from('event_participation').upsert({event_id:evId,member_id:id,status:$('mm-st').value,note:$('mm-pnote').value.trim()||null,recorded_by:me.id},{onConflict:'event_id,member_id'}));}
   if(act==='note'){const t=$('mm-note').value.trim();if(!t){message('mm-message','Escreva a observação.','error');b.disabled=false;return;}({error}=await supabaseClient.from('admin_notes').insert({member_id:id,note:t,created_by:me.id}));}
   b.disabled=false;
@@ -730,8 +731,8 @@ function distBar(t){
   return `<div class="flex h-4 rounded overflow-hidden bg-zinc-800" role="img" aria-label="Distribuição da participação">${keys.map(k=>t[k]?`<div style="width:${100*t[k]/total}%;background:${ST_COLOR[k]}" title="${STATUS_LABEL[k]}: ${t[k]}"></div>`:'').join('')}</div><div class="flex flex-wrap gap-x-4 gap-y-1 mt-3 text-xs text-gray-300">${keys.map(k=>`<span><span class="inline-block w-2.5 h-2.5 rounded-sm mr-1" style="background:${ST_COLOR[k]}"></span>${STATUS_LABEL[k]}: <strong class="text-white">${t[k]}</strong></span>`).join('')}</div>`;
 }
 function gradeStrip(gid,hist,joined){
-  const when={1:joined};(hist||[]).slice().sort((a,b)=>a.changed_at<b.changed_at?-1:1).forEach(h=>{when[h.to_grade_id]=h.changed_at.slice(0,10);});
-  return `<div class="flex flex-wrap gap-2">${gradesList.map(g=>{const on=g.id<=gid,cur=g.id===gid;return `<div class="text-center px-2 py-1.5 rounded border ${cur?'border-[#c9a84c] bg-[#c9a84c] text-black':on?'border-[#c9a84c88] text-gold':'border-zinc-700 text-zinc-500'}" style="min-width:64px"><div class="font-heading text-xs tracking-wider">${safeText(g.name.replace('GRAU ',''))}</div><div class="text-[10px] ${cur?'text-black/70':'text-gray-500'}">${when[g.id]&&on?fmtDay(when[g.id]):'—'}</div></div>`;}).join('')}</div>`;
+  const when={11:joined};(hist||[]).slice().sort((a,b)=>a.changed_at<b.changed_at?-1:1).forEach(h=>{when[h.to_grade_id]=h.changed_at.slice(0,10);});
+  return `<div class="flex flex-wrap gap-2">${gradesAsc().map(g=>{const on=g.id>=gid,cur=g.id===gid;return `<div class="text-center px-2 py-1.5 rounded border ${cur?'border-[#c9a84c] bg-[#c9a84c] text-black':on?'border-[#c9a84c88] text-gold':'border-zinc-700 text-zinc-500'}" style="min-width:64px"><div class="font-heading text-xs tracking-wider">${safeText(g.name.replace('GRAU ',''))}</div><div class="text-[10px] ${cur?'text-black/70':'text-gray-500'}">${when[g.id]&&on?fmtDay(when[g.id]):'—'}</div></div>`;}).join('')}</div>`;
 }
 async function chartsHtml(id,joined,gid){
   const [p,h]=await Promise.all([supabaseClient.from('event_participation').select('status,events(event_date,category_id)').eq('member_id',id),supabaseClient.from('grade_history').select('to_grade_id,changed_at').eq('member_id',id)]);
@@ -746,7 +747,7 @@ function calcStats(m,f){const list=[];for(const ev of eventsCache){if(!countable
 function refreshDash(){
   const keep=['dash-member','dash-grade','dash-cat'].map(i=>$(i).value);
   $('dash-member').innerHTML='<option value="">Todos</option>'+membersCache.filter(m=>m.is_active).map(m=>`<option value="${safeText(m.id)}">${safeText(m.display_name||m.email)}</option>`).join('');
-  $('dash-grade').innerHTML='<option value="">Todos</option>'+gradesList.map(g=>`<option value="${g.id}">${safeText(g.name)}</option>`).join('');
+  $('dash-grade').innerHTML='<option value="">Todos</option>'+gradesAsc().map(g=>`<option value="${g.id}">${safeText(g.name)}</option>`).join('');
   $('dash-cat').innerHTML='<option value="">Todas</option>'+catsCache.map(c=>`<option value="${c.id}">${safeText(c.name)}</option>`).join('');
   ['dash-member','dash-grade','dash-cat'].forEach((i,k)=>{$(i).value=keep[k];});renderDash();
 }
@@ -761,7 +762,7 @@ async function renderDash(){
   $('dash-cards').innerHTML=cards.map(([l,v])=>`<div class="row-card text-center"><div class="font-display text-3xl text-white">${v}</div><div class="text-[11px] text-gray-400 uppercase font-heading tracking-widest">${l}</div></div>`).join('');
   const maxG=Math.max(1,...gradesList.map(g=>rows.filter(r=>r.m.grade_id===g.id).length));
   const H=t=>`<h5 class="font-heading text-sm uppercase tracking-widest text-gold mb-3">${t}</h5>`;
-  const byGrade=gradesList.map(g=>{const n=rows.filter(r=>r.m.grade_id===g.id).length;return `<div class="flex items-center gap-2 text-xs mb-1.5"><span class="w-20 text-gray-300">${safeText(g.name)}</span><div class="flex-1 h-3 rounded bg-zinc-800 overflow-hidden"><div class="h-full bg-[#c9a84c]" style="width:${100*n/maxG}%"></div></div><span class="w-6 text-right text-white">${n}</span></div>`;}).join('');
+  const byGrade=gradesAsc().map(g=>{const n=rows.filter(r=>r.m.grade_id===g.id).length;return `<div class="flex items-center gap-2 text-xs mb-1.5"><span class="w-20 text-gray-300">${safeText(g.name)}</span><div class="flex-1 h-3 rounded bg-zinc-800 overflow-hidden"><div class="h-full bg-[#c9a84c]" style="width:${100*n/maxG}%"></div></div><span class="w-6 text-right text-white">${n}</span></div>`;}).join('');
   const rank=rows.slice().sort((a,b)=>(b.s.pct??-1)-(a.s.pct??-1)).map(r=>`<div class="row-card"><div class="flex flex-wrap justify-between gap-2 text-sm"><span class="text-white">${safeText(r.m.display_name||r.m.email)} <span class="text-xs text-gray-500">${safeText(gradeName(r.m.grade_id))}</span></span><span class="text-xs ${r.e.c}">${r.e.t}</span></div><div class="relative h-2.5 rounded bg-zinc-800 overflow-hidden mt-2"><div class="h-full bg-[#c9a84c]" style="width:${Math.min(100,r.s.pct||0)}%"></div><div class="absolute top-0 h-full w-0.5 bg-white" style="left:${Math.min(100,needPct(r.m.grade_id))}%"></div></div><div class="text-[11px] text-gray-400 mt-1">${r.s.pct==null?'sem dados':r.s.pct+'%'} · ${r.s.presente} presença(s) · ${r.s.ausencia_justificada+r.s.ausencia_injustificada} ausência(s) · ${r.s.pendente} pendente(s)</div></div>`).join('')||'<p class="text-sm text-gray-400">Nenhum integrante com esses filtros.</p>';
   $('dash-body').innerHTML=`<div class="row-card">${H('Integrantes por grau')}${byGrade}</div><div class="row-card">${H('Presenças e ausências')}${distBar(T)}</div><div class="row-card md:col-span-2">${H('Evolução da participação do grupo')}${lineSvg(monthlyCumulative(all),minPct)}</div><div class="md:col-span-2 space-y-2">${H('Participação por integrante')}${rank}</div>`;
   const one=f.mid&&membersCache.find(m=>m.id===f.mid);
@@ -772,7 +773,7 @@ async function renderDash(){
 /* Configurações do motoclube (admin) */
 async function loadConfig(){
   await loadRefs();$('cfg-min').value=minPct;$('cfg-just').checked=justIn;
-  $('cfg-grades').innerHTML='<div class="grid grid-cols-[1fr_110px_110px] gap-2 text-[11px] text-gray-400 uppercase font-heading tracking-widest"><span>Grau</span><span>% mínimo</span><span>Meses no grau</span></div>'+gradesList.map(g=>`<div class="row-card grid grid-cols-[1fr_110px_110px] gap-2 items-center"><div class="font-heading text-white">${safeText(g.name)}</div><input class="field" type="number" min="0" max="100" step="1" placeholder="padrão" data-gp="${g.id}" value="${g.min_participation??''}" aria-label="Percentual mínimo ${safeText(g.name)}"><input class="field" type="number" min="0" max="240" step="1" data-gm="${g.id}" value="${g.min_months||0}" aria-label="Meses mínimos ${safeText(g.name)}"></div>`).join('');
+  $('cfg-grades').innerHTML='<div class="grid grid-cols-[1fr_110px_110px] gap-2 text-[11px] text-gray-400 uppercase font-heading tracking-widest"><span>Grau</span><span>% mínimo</span><span>Meses no grau</span></div>'+gradesAsc().map(g=>`<div class="row-card grid grid-cols-[1fr_110px_110px] gap-2 items-center"><div class="font-heading text-white">${safeText(g.name)}</div><input class="field" type="number" min="0" max="100" step="1" placeholder="padrão" data-gp="${g.id}" value="${g.min_participation??''}" aria-label="Percentual mínimo ${safeText(g.name)}"><input class="field" type="number" min="0" max="240" step="1" data-gm="${g.id}" value="${g.min_months||0}" aria-label="Meses mínimos ${safeText(g.name)}"></div>`).join('');
   $('cfg-cats').innerHTML=catsCache.map(c=>`<div class="row-card flex flex-wrap items-center gap-3" data-cid="${c.id}"><input class="field flex-1 min-w-[180px]" data-cn value="${safeText(c.name)}" maxlength="80" aria-label="Nome da categoria"><label class="text-xs text-gray-300 flex items-center gap-2"><input type="checkbox" data-cc ${c.counts_for_progress?'checked':''} class="accent-[#c9a84c] w-4 h-4">Conta para participação</label><label class="text-xs text-gray-300 flex items-center gap-2"><input type="checkbox" data-ca ${c.is_active?'checked':''} class="accent-[#c9a84c] w-4 h-4">Ativa</label><button class="btn btn-secondary btn-sm" data-csave>Salvar</button></div>`).join('');
 }
 async function afterConfig(txt){await loadConfig();await Promise.all([loadEvents(),loadMembers()]);message('cfg-message',txt,'success');}
