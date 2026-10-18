@@ -305,6 +305,7 @@
           <button type="button" class="tab-btn" role="tab" data-tab="content" aria-selected="true"><i class="fa-solid fa-bullhorn mr-2"></i>Comunicados</button>
           <button type="button" class="tab-btn" role="tab" data-tab="members" aria-selected="false"><i class="fa-solid fa-users mr-2"></i>Integrantes</button>
           <button type="button" class="tab-btn" role="tab" data-tab="events" aria-selected="false"><i class="fa-solid fa-calendar-check mr-2"></i>Eventos</button>
+          <button type="button" class="tab-btn" role="tab" data-tab="org" aria-selected="false"><i class="fa-solid fa-sitemap mr-2"></i>Organização Regional</button>
           <button type="button" class="tab-btn" role="tab" data-tab="cargos" aria-selected="false"><i class="fa-solid fa-user-tie mr-2"></i>Cargos</button>
           <button type="button" class="tab-btn" role="tab" data-tab="divisions" aria-selected="false"><i class="fa-solid fa-location-dot mr-2"></i>Divisões</button>
           <button type="button" class="tab-btn" role="tab" data-tab="honors" aria-selected="false"><i class="fa-solid fa-medal mr-2"></i>Honrarias</button>
@@ -347,6 +348,17 @@
           <hr class="gold-line">
           <div id="ev-list" class="space-y-2"></div>
           <div id="ev-reg" class="space-y-3"></div>
+        </div>
+
+        <div id="tab-org" class="hidden-view space-y-4" role="tabpanel">
+          <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-3">
+            <div><label class="block text-xs text-gray-300 mb-2" for="org-division">Divisão</label><select class="field" id="org-division"></select></div>
+            <div><label class="block text-xs text-gray-300 mb-2" for="org-grade">Grau</label><select class="field" id="org-grade"></select></div>
+            <div><label class="block text-xs text-gray-300 mb-2" for="org-cargo">Cargo</label><select class="field" id="org-cargo"></select></div>
+            <div><label class="block text-xs text-gray-300 mb-2" for="org-search">Nome</label><input class="field" id="org-search" type="search" placeholder="Pesquisar por nome"></div>
+          </div>
+          <p class="text-xs text-gray-500">Sem filtros, cada divisão mostra os cargos de liderança no topo e os demais integrantes por grau, do maior (GRAU I) ao menor (CAMISETA). Com filtros, aparece a lista dos integrantes encontrados.</p>
+          <div id="org-list" class="space-y-6"></div>
         </div>
 
         <div id="tab-cargos" class="hidden-view space-y-5" role="tabpanel">
@@ -484,7 +496,7 @@ async function loadContent(){const holder=$('content-list');holder.innerHTML='<d
 }
 async function checkSession(){if(!configured||!supabaseClient){showView('login-view');message('login-message','Antes de usar, configure a URL e a chave pública do Supabase no arquivo index.html.','error');return;}showView('loading-view');const {data,error}=await supabaseClient.auth.getSession();if(error){showView('login-view');message('login-message','Não foi possível verificar a sessão. Tente entrar novamente.','error');return;}if(data.session){try{await openPortal(data.session.user)}catch(e){showView('error-view');$('error-message').textContent=e.message||'Erro inesperado.'}}else showView('login-view');}
 $('login-form').addEventListener('submit',async e=>{e.preventDefault();if(!supabaseClient){message('login-message','Configure primeiro o Supabase no código.','error');return;}const btn=$('login-btn');btn.disabled=true;btn.textContent='Verificando...';message('login-message','');const {data,error}=await supabaseClient.auth.signInWithPassword({email:$('email').value.trim(),password:$('password').value});btn.disabled=false;btn.innerHTML='<i class="fa-solid fa-lock-open mr-2"></i>Entrar no portal';if(error){message('login-message','E-mail ou senha inválidos, ou conta ainda não autorizada.','error');return;}try{await openPortal(data.user)}catch(err){showView('error-view');$('error-message').textContent=err.message||'Erro ao validar acesso.'}});
-$('logout-btn').addEventListener('click',async()=>{await supabaseClient?.auth.signOut();me=null;adminItems=[];$('admin-content-list').innerHTML='';$('members-list').innerHTML='';$('command-list').innerHTML='';$('dash-body').innerHTML='';$('dash-cards').innerHTML='';$('dash-one').innerHTML='';$('mp-charts').innerHTML='';$('ev-list').innerHTML='';$('ev-reg').innerHTML='';$('mp-rank').innerHTML='';$('mp-honors').innerHTML='';closeModal();Object.keys(ENT).forEach(k=>{const b=$('ent-'+k);if(b)b.innerHTML='';entRows[k]=[];});$('mp-history').innerHTML='';$('mp-stats').innerHTML='';$('password').value='';message('login-message','Você saiu do portal.');showView('login-view');});
+$('logout-btn').addEventListener('click',async()=>{await supabaseClient?.auth.signOut();me=null;adminItems=[];$('admin-content-list').innerHTML='';$('members-list').innerHTML='';$('command-list').innerHTML='';$('dash-body').innerHTML='';$('dash-cards').innerHTML='';$('dash-one').innerHTML='';$('mp-charts').innerHTML='';$('ev-list').innerHTML='';$('ev-reg').innerHTML='';$('org-list').innerHTML='';$('mp-rank').innerHTML='';$('mp-honors').innerHTML='';closeModal();Object.keys(ENT).forEach(k=>{const b=$('ent-'+k);if(b)b.innerHTML='';entRows[k]=[];});$('mp-history').innerHTML='';$('mp-stats').innerHTML='';$('password').value='';message('login-message','Você saiu do portal.');showView('login-view');});
 $('retry-btn').addEventListener('click',checkSession);
 $('cancel-password-change').addEventListener('click',async()=>{await supabaseClient.auth.signOut();showView('login-view');});
 $('change-password-form').addEventListener('submit',async e=>{e.preventDefault();const next=$('first-new-password').value;const confirm=$('first-confirm-password').value;if(next.length<12){message('password-message','Use uma senha com pelo menos 12 caracteres.','error');return;}if(next!==confirm){message('password-message','As senhas não coincidem.','error');return;}const btn=e.submitter; if(btn)btn.disabled=true;const {data,error}=await supabaseClient.auth.updateUser({password:next,data:{must_change_password:false}});if(btn)btn.disabled=false;if(error){message('password-message','Não foi possível alterar a senha. Tente novamente.','error');return;}message('password-message','Senha atualizada. Abrindo o portal...','success');try{await openPortal(data.user)}catch(err){showView('error-view');$('error-message').textContent=err.message||'Erro ao validar acesso.'}});
@@ -492,7 +504,7 @@ $('create-user-form').addEventListener('submit',async e=>{e.preventDefault();con
 /* ───────── Painel do administrador ───────── */
 let me=null, adminItems=[];
 const fmtDate=(v)=>v?new Date(v).toLocaleDateString('pt-BR'):'';
-function setTab(name){document.querySelectorAll('[data-tab]').forEach(b=>b.setAttribute('aria-selected',String(b.dataset.tab===name)));['content','members','events','cargos','divisions','honors','dash','config','access'].forEach(t=>$('tab-'+t).classList.toggle('hidden-view',t!==name));if(name==='dash')refreshDash();if(name==='cargos')loadCargosTab();if(name==='divisions')loadDivisionsTab();if(name==='honors')loadHonorsTab();if(name==='config')loadConfig();}
+function setTab(name){document.querySelectorAll('[data-tab]').forEach(b=>b.setAttribute('aria-selected',String(b.dataset.tab===name)));['content','members','events','org','cargos','divisions','honors','dash','config','access'].forEach(t=>$('tab-'+t).classList.toggle('hidden-view',t!==name));if(name==='dash')refreshDash();if(name==='org')loadOrgTab();if(name==='cargos')loadCargosTab();if(name==='divisions')loadDivisionsTab();if(name==='honors')loadHonorsTab();if(name==='config')loadConfig();}
 document.querySelectorAll('[data-tab]').forEach(b=>b.addEventListener('click',()=>setTab(b.dataset.tab)));
 
 function resetContentForm(){$('content-form').reset();$('cc-id').value='';$('cc-order').value='100';$('cc-published').checked=true;$('cc-save').innerHTML='<i class="fa-solid fa-floppy-disk mr-2"></i>Publicar comunicado';$('cc-cancel').classList.add('hidden-view');}
@@ -638,7 +650,7 @@ $('mp-form').addEventListener('submit',async e=>{
 /* Gerenciar Integrantes (admin) */
 async function loadMembers(){
   const holder=$('members-list');holder.innerHTML='<div class="text-sm text-gray-400">Carregando integrantes...</div>';
-  const [m,s,gh]=await Promise.all([supabaseClient.from('member_profiles').select('id,display_name,email,role,is_active,grade_id,division_id,cargo_id,photo_url,joined_at,created_at').order('created_at',{ascending:true}),supabaseClient.rpc('member_stats'),supabaseClient.from('grade_history').select('member_id,changed_at')]);
+  const [m,s,gh]=await Promise.all([supabaseClient.from('member_profiles').select('id,display_name,email,role,is_active,status,grade_id,division_id,cargo_id,photo_url,joined_at,created_at').order('created_at',{ascending:true}),supabaseClient.rpc('member_stats'),supabaseClient.from('grade_history').select('member_id,changed_at')]);
   if(m.error){holder.innerHTML='<div class="text-sm text-red-300">Não foi possível carregar os integrantes. Rode o fase1-banco.sql no Supabase.</div>';return;}
   sinceMap={};(gh.data||[]).forEach(h=>{const d=h.changed_at.slice(0,10);if(!sinceMap[h.member_id]||d>sinceMap[h.member_id])sinceMap[h.member_id]=d;});membersCache=m.data||[];statsMap=Object.fromEntries((s.data||[]).map(r=>[r.member_id,r]));renderMembers();
 }
@@ -1082,6 +1094,48 @@ $('hn-list').addEventListener('click',async e=>{const b=e.target.closest('[data-
   if(b.dataset.haact==='edit'){$('hn-id').value=id;$('hn-member').value=a.member_id;$('hn-type').value=a.honor_type_id;$('hn-date').value=a.awarded_on;$('hn-reason').value=a.reason||'';$('hn-save').innerHTML='<i class="fa-solid fa-floppy-disk mr-2"></i>Salvar alterações';$('hn-cancel').classList.remove('hidden-view');$('hn-form').scrollIntoView({behavior:'smooth',block:'center'});return;}
   if(!confirm('Excluir esta concessão? A alteração fica no registro de auditoria.'))return;const {error}=await supabaseClient.from('member_honors').delete().eq('id',id);
   if(error)return message('hn-message','Não foi possível excluir.','error');await loadHonorsTab();message('hn-message','Concessão excluída.','success');});
+/* ───────── Etapa 4: Organização Regional ───────── */
+let orgHonors={},orgSince={};
+async function loadOrgTab(){
+  await loadMembers();await loadRefs();
+  const [h,d]=await Promise.all([supabaseClient.from('member_honors').select('member_id,honor_types(name)'),supabaseClient.from('division_history').select('member_id,effective_date,changed_at').order('changed_at',{ascending:true})]);
+  orgHonors={};(h.data||[]).forEach(r=>{(orgHonors[r.member_id]=orgHonors[r.member_id]||[]).push(r.honor_types?.name||'Honraria');});
+  orgSince={};(d.data||[]).forEach(r=>{orgSince[r.member_id]=r.effective_date;});
+  const k=['org-division','org-grade','org-cargo'].map(i=>$(i).value);
+  $('org-division').innerHTML=optsHtml(divisionsList.map(x=>[x.id,x.name]),k[0],'Todas as divisões');
+  $('org-grade').innerHTML=optsHtml(gradesList.map(x=>[x.id,x.name]),k[1],'Todos os graus');
+  $('org-cargo').innerHTML=optsHtml([...cargosList.map(x=>[x.id,x.name]),['none','Sem cargo']],k[2],'Todos os cargos');
+  renderOrg();
+}
+function orgPerson(m,label){
+  const hon=orgHonors[m.id]||[],st=!m.is_active?'acesso desativado':(m.status||'ativo');
+  return `<div class="row-card flex items-center gap-3 ${m.is_active?'':'is-off'}"><div class="w-11 h-11 rounded-full overflow-hidden bg-[#c9a84c22] border border-[#c9a84c55] flex items-center justify-center font-display text-lg text-gold shrink-0" data-oavatar="${safeText(m.id)}"></div><div class="min-w-0 flex-1"><div class="text-[11px] text-gold font-heading tracking-widest uppercase">${safeText(label)}</div><div class="text-white font-medium truncate">${safeText(m.display_name||m.email)}</div><div class="text-xs text-gray-400">Situação: ${safeText(st)}${orgSince[m.id]?' · na divisão desde '+fmtDay(orgSince[m.id]):''}</div></div>${hon.length?`<span class="patch-badge" title="${safeText(hon.join(', '))}"><i class="fa-solid fa-medal"></i> ${hon.length}</span>`:''}</div>`;
+}
+function renderOrg(){
+  const fd=Number($('org-division').value)||0,fg=Number($('org-grade').value)||0,fc=$('org-cargo').value,q=$('org-search').value.trim().toLowerCase();
+  const filtering=!!(fg||fc||q);
+  const match=m=>(!fg||m.grade_id===fg)&&(!fc||(fc==='none'?!m.cargo_id:m.cargo_id===Number(fc)))&&(!q||`${m.display_name||''} ${m.email||''}`.toLowerCase().includes(q));
+  const byRank=(a,b)=>a.grade_id-b.grade_id||(a.display_name||'').localeCompare(b.display_name||'','pt-BR');
+  const leadCargos=cargosList.filter(c=>c.is_leadership&&c.is_active);
+  const lab=m=>`${gradeName(m.grade_id)}${m.cargo_id?' — '+cargoName(m.cargo_id):''}`;
+  const groups=[...divisionsList.filter(d=>!fd||d.id===fd).map(d=>[d.id,d.name]),...(!fd?[[null,'SEM DIVISÃO']]:[])];
+  const html=groups.map(([id,name])=>{
+    const ms=membersCache.filter(m=>(m.division_id||null)===id);let body='';
+    if(id===null&&!ms.length)return '';
+    if(!filtering&&id!==null){
+      const leaders=new Set();
+      body=leadCargos.map(c=>{const m=ms.find(x=>x.cargo_id===c.id);if(m)leaders.add(m.id);return m?orgPerson(m,`${gradeName(m.grade_id)} — ${c.name}`):`<div class="row-card flex items-center justify-between gap-2"><span class="text-xs text-gold font-heading tracking-widest uppercase">${safeText(c.name)}</span><span class="text-sm text-gray-500">Cargo não atribuído</span></div>`;}).join('')+ms.filter(m=>!leaders.has(m.id)).sort(byRank).map(m=>orgPerson(m,lab(m))).join('');
+    }else{
+      const list=ms.filter(match).sort(byRank);
+      if(filtering&&!list.length)return '';
+      body=list.map(m=>orgPerson(m,lab(m))).join('')||'<p class="text-xs text-gray-500">Nenhum integrante nesta divisão.</p>';
+    }
+    return `<div><h4 class="font-heading text-lg uppercase tracking-widest text-white border-b border-[#c9a84c55] pb-1 mb-3">Divisão: ${safeText(name)} <span class="text-sm text-gray-500">(${ms.length})</span></h4><div class="grid md:grid-cols-2 gap-2">${body}</div></div>`;
+  }).join('');
+  $('org-list').innerHTML=html||'<p class="text-sm text-gray-400">Nenhum integrante encontrado.</p>';
+  document.querySelectorAll('[data-oavatar]').forEach(el=>{const m=membersCache.find(x=>x.id===el.dataset.oavatar);setAvatar(el,m?.photo_url,m?.display_name);});
+}
+['org-division','org-grade','org-cargo'].forEach(i=>$(i).addEventListener('change',renderOrg));$('org-search').addEventListener('input',renderOrg);
 /* ───────── Comando regional (dados vindos do banco, só após login) ───────── */
 async function loadCommand(){
   const holder=$('command-list');
