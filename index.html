@@ -267,20 +267,27 @@
     <section id="portal-view" class="hidden-view space-y-10">
       <div class="flex flex-wrap items-end justify-between gap-4"><div><p class="text-xs text-gold font-heading tracking-widest uppercase mb-1">Área restrita</p><h2 class="font-display text-4xl tracking-widest">Bem-vindo ao Portal</h2><p id="welcome-text" class="text-sm text-gray-400 mt-2"></p></div><span id="role-badge" class="patch-badge"><i class="fa-solid fa-user-check"></i> Integrante autorizado</span></div>
       <section id="my-profile" class="panel p-5 md:p-6 space-y-5">
-        <div class="flex flex-wrap items-center gap-4"><div id="mp-avatar" class="w-20 h-20 rounded-full overflow-hidden bg-[#c9a84c22] border border-[#c9a84c55] flex items-center justify-center font-display text-4xl text-gold shrink-0">?</div><div><p class="text-xs text-gold font-heading tracking-widest uppercase">Meu perfil</p><h3 class="font-display text-3xl tracking-widest text-white">Meus dados e participação</h3><div class="flex flex-wrap gap-2 mt-2"><span class="patch-badge"><i class="fa-solid fa-stairs"></i> <span id="mp-grade">—</span></span><span class="patch-badge">Situação: <span id="mp-status">—</span></span><span class="patch-badge">Desde <span id="mp-since">—</span></span></div></div></div>
-        <form id="mp-form" class="grid md:grid-cols-2 gap-3" novalidate>
-          <div><label class="block text-xs text-gray-300 mb-2" for="mp-name">Nome completo</label><input class="field" id="mp-name" maxlength="100" required></div>
-          <div><label class="block text-xs text-gray-300 mb-2" for="mp-email">E-mail (não editável)</label><input class="field" id="mp-email" readonly></div>
-          <div><label class="block text-xs text-gray-300 mb-2" for="mp-wa">WhatsApp pessoal</label><input class="field" id="mp-wa" inputmode="tel" autocomplete="tel-national" placeholder="(11) 91234-5678"></div>
-          <div><label class="block text-xs text-gray-300 mb-2" for="mp-em"><i class="fa-solid fa-triangle-exclamation text-red-300 mr-1"></i>WhatsApp de emergência</label><input class="field" id="mp-em" inputmode="tel" placeholder="(11) 91234-5678"><p class="text-[11px] text-gray-500 mt-1">Contato para situações emergenciais. Visível só para você e para a administração.</p></div>
-          <div class="md:col-span-2"><label class="block text-xs text-gray-300 mb-2" for="mp-photo">Foto de perfil (link https da imagem)</label><input class="field" id="mp-photo" maxlength="500" placeholder="https://..."></div>
-          <div class="md:col-span-2 flex flex-wrap items-center gap-3"><button class="btn btn-primary" type="submit" id="mp-save"><i class="fa-solid fa-floppy-disk mr-2"></i>Salvar meus dados</button><p id="mp-message" class="text-sm" role="status" aria-live="polite"></p></div>
-        </form>
-        <p class="text-xs text-gray-500">Grau, situação, presenças e avaliações são registrados somente pela administração.</p>
-        <hr class="gold-line">
-        <div id="mp-stats"></div>
-        <div id="mp-charts" class="space-y-4"></div>
-        <div><h4 class="font-heading text-lg uppercase text-white mb-3">Histórico</h4><div id="mp-history" class="space-y-2 max-h-96 overflow-y-auto"></div></div>
+        <div class="flex flex-wrap items-center gap-4"><div id="mp-avatar" class="w-20 h-20 rounded-full overflow-hidden bg-[#c9a84c22] border border-[#c9a84c55] flex items-center justify-center font-display text-4xl text-gold shrink-0">?</div><div><p class="text-xs text-gold font-heading tracking-widest uppercase">Meu perfil</p><h3 id="mp-title" class="font-display text-3xl tracking-widest text-white">Meus dados</h3><div class="flex flex-wrap gap-2 mt-2"><span class="patch-badge"><i class="fa-solid fa-stairs"></i> <span id="mp-grade">—</span></span><span class="patch-badge">Situação: <span id="mp-status">—</span></span><span class="patch-badge">Desde <span id="mp-since">—</span></span></div></div></div>
+        <div class="flex flex-wrap gap-2" role="tablist" aria-label="Seções do perfil">
+          <button type="button" class="tab-btn" role="tab" data-ptab="info" aria-selected="true"><i class="fa-solid fa-user mr-2"></i>Informações pessoais</button>
+          <button type="button" class="tab-btn" role="tab" data-ptab="grade" aria-selected="false"><i class="fa-solid fa-stairs mr-2"></i>Grau e participação</button>
+          <button type="button" class="tab-btn" role="tab" data-ptab="history" aria-selected="false"><i class="fa-solid fa-clock-rotate-left mr-2"></i>Histórico</button>
+        </div>
+        <div id="ptab-info" role="tabpanel">
+          <form id="mp-form" class="grid md:grid-cols-2 gap-3" novalidate>
+            <div><label class="block text-xs text-gray-300 mb-2" for="mp-name">Nome completo</label><input class="field" id="mp-name" maxlength="100" required></div>
+            <div><label class="block text-xs text-gray-300 mb-2" for="mp-email">E-mail (não editável)</label><input class="field" id="mp-email" readonly></div>
+            <div><label class="block text-xs text-gray-300 mb-2" for="mp-birth">Data de aniversário</label><input class="field" id="mp-birth" type="date" min="1900-01-01"><p class="text-[11px] text-gray-400 mt-1">Idade: <strong id="mp-age" class="text-white">—</strong> (calculada automaticamente)</p></div>
+            <div><label class="block text-xs text-gray-300 mb-2" for="mp-phone">Telefone</label><input class="field" id="mp-phone" inputmode="tel" autocomplete="tel-national" placeholder="(11) 91234-5678"></div>
+            <div><label class="block text-xs text-gray-300 mb-2" for="mp-wa">WhatsApp pessoal</label><input class="field" id="mp-wa" inputmode="tel" placeholder="(11) 91234-5678"></div>
+            <div><label class="block text-xs text-gray-300 mb-2" for="mp-em"><i class="fa-solid fa-triangle-exclamation text-red-300 mr-1"></i>WhatsApp de emergência</label><input class="field" id="mp-em" inputmode="tel" placeholder="(11) 91234-5678"><p class="text-[11px] text-gray-500 mt-1">Contato para situações emergenciais. Visível só para você e para a administração.</p></div>
+            <div class="md:col-span-2"><label class="block text-xs text-gray-300 mb-2" for="mp-photo">Foto de perfil (link https da imagem)</label><input class="field" id="mp-photo" maxlength="500" placeholder="https://..."></div>
+            <div class="md:col-span-2 flex flex-wrap items-center gap-3"><button class="btn btn-primary" type="submit" id="mp-save"><i class="fa-solid fa-floppy-disk mr-2"></i>Salvar meus dados</button><p id="mp-message" class="text-sm" role="status" aria-live="polite"></p></div>
+          </form>
+          <p class="text-xs text-gray-500 mt-3">Seus dados pessoais só são vistos por você e pela administração. Grau, cargo, divisão, situação, presenças e honrarias são registrados somente pela administração.</p>
+        </div>
+        <div id="ptab-grade" class="hidden-view space-y-4" role="tabpanel"><div id="mp-stats"></div><div id="mp-charts" class="space-y-4"></div></div>
+        <div id="ptab-history" class="hidden-view" role="tabpanel"><div id="mp-history" class="space-y-2 max-h-[32rem] overflow-y-auto"></div></div>
       </section>
       <div id="admin-panel" class="hidden-view panel p-5 md:p-6 space-y-5">
         <div class="flex items-center gap-3"><i class="fa-solid fa-user-gear text-gold text-xl"></i><div><h3 class="font-heading text-xl uppercase">Painel do administrador</h3><p class="text-xs text-gray-400">Publique comunicados, gerencie integrantes e crie novos acessos.</p></div></div>
@@ -535,11 +542,16 @@ async function historyHtml(id,isAdmin){
 }
 
 /* Meu Perfil */
-bindMask($('mp-wa'));bindMask($('mp-em'));
+bindMask($('mp-wa'));bindMask($('mp-em'));bindMask($('mp-phone'));
+const ageOf=d=>{if(!d)return null;const b=new Date(d+'T00:00:00'),n=new Date();let a=n.getFullYear()-b.getFullYear();if(n.getMonth()<b.getMonth()||(n.getMonth()===b.getMonth()&&n.getDate()<b.getDate()))a--;return a;};
+const ageText=d=>{const a=ageOf(d);return a==null||a<0||a>120?'—':a+' anos';};
+function setPTab(n){document.querySelectorAll('[data-ptab]').forEach(b=>b.setAttribute('aria-selected',String(b.dataset.ptab===n)));['info','grade','history'].forEach(t=>$('ptab-'+t).classList.toggle('hidden-view',t!==n));}
+document.querySelectorAll('[data-ptab]').forEach(b=>b.addEventListener('click',()=>setPTab(b.dataset.ptab)));
+$('mp-birth').addEventListener('change',()=>{$('mp-age').textContent=ageText($('mp-birth').value);});
 async function loadMyProfile(){
-  const {data:p,error}=await supabaseClient.from('member_profiles').select('display_name,email,photo_url,whatsapp,emergency_whatsapp,grade_id,joined_at,status').eq('id',me.id).maybeSingle();
+  const {data:p,error}=await supabaseClient.from('member_profiles').select('display_name,email,photo_url,whatsapp,emergency_whatsapp,grade_id,joined_at,status,birth_date,phone').eq('id',me.id).maybeSingle();
   if(error||!p){message('mp-message','Não foi possível carregar o perfil. Rode o fase1-banco.sql no Supabase.','error');return;}
-  $('mp-name').value=p.display_name||'';$('mp-email').value=p.email||me.email||'';$('mp-photo').value=p.photo_url||'';$('mp-wa').value=fmtPhone(p.whatsapp);$('mp-em').value=fmtPhone(p.emergency_whatsapp);
+  $('mp-name').value=p.display_name||'';$('mp-email').value=p.email||me.email||'';$('mp-photo').value=p.photo_url||'';$('mp-wa').value=fmtPhone(p.whatsapp);$('mp-phone').value=fmtPhone(p.phone);$('mp-birth').value=p.birth_date||'';$('mp-age').textContent=ageText(p.birth_date);$('mp-em').value=fmtPhone(p.emergency_whatsapp);
   $('mp-grade').textContent=gradeName(p.grade_id);$('mp-status').textContent=p.status;$('mp-since').textContent=fmtDay(p.joined_at);setAvatar($('mp-avatar'),p.photo_url,p.display_name);
   const {data:rows}=await supabaseClient.rpc('member_stats');
   const {data:gh}=await supabaseClient.from('grade_history').select('changed_at').eq('member_id',me.id).order('changed_at',{ascending:false}).limit(1);
@@ -550,12 +562,13 @@ async function loadMyProfile(){
 }
 $('mp-form').addEventListener('submit',async e=>{
   e.preventDefault();
-  const name=$('mp-name').value.trim(),wa=digitsOf($('mp-wa').value),em=digitsOf($('mp-em').value),photo=$('mp-photo').value.trim();
+  const name=$('mp-name').value.trim(),wa=digitsOf($('mp-wa').value),em=digitsOf($('mp-em').value),ph=digitsOf($('mp-phone').value),birth=$('mp-birth').value,photo=$('mp-photo').value.trim();
   if(name.length<2)return message('mp-message','Informe seu nome completo.','error');
-  if(!validPhone(wa)||!validPhone(em))return message('mp-message','Informe DDD + número (10 ou 11 dígitos).','error');
+  if(!validPhone(wa)||!validPhone(em)||!validPhone(ph))return message('mp-message','Informe DDD + número (10 ou 11 dígitos).','error');
+  if(birth&&(ageOf(birth)<0||ageOf(birth)>120))return message('mp-message','Data de aniversário inválida.','error');
   if(photo&&!/^https:\/\/\S+$/.test(photo))return message('mp-message','O link da foto precisa começar com https://','error');
   const btn=$('mp-save');btn.disabled=true;message('mp-message','Salvando...');
-  const {error}=await supabaseClient.from('member_profiles').update({display_name:name,whatsapp:wa||null,emergency_whatsapp:em||null,photo_url:photo||null}).eq('id',me.id);
+  const {error}=await supabaseClient.from('member_profiles').update({display_name:name,whatsapp:wa||null,emergency_whatsapp:em||null,phone:ph||null,birth_date:birth||null,photo_url:photo||null}).eq('id',me.id);
   btn.disabled=false;
   if(error)return message('mp-message','Não foi possível salvar seus dados.','error');
   message('mp-message','Dados salvos.','success');setAvatar($('mp-avatar'),photo,name);
