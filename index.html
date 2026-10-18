@@ -267,11 +267,12 @@
     <section id="portal-view" class="hidden-view space-y-10">
       <div class="flex flex-wrap items-end justify-between gap-4"><div><p class="text-xs text-gold font-heading tracking-widest uppercase mb-1">Área restrita</p><h2 class="font-display text-4xl tracking-widest">Bem-vindo ao Portal</h2><p id="welcome-text" class="text-sm text-gray-400 mt-2"></p></div><span id="role-badge" class="patch-badge"><i class="fa-solid fa-user-check"></i> Integrante autorizado</span></div>
       <section id="my-profile" class="panel p-5 md:p-6 space-y-5">
-        <div class="flex flex-wrap items-center gap-4"><div id="mp-avatar" class="w-20 h-20 rounded-full overflow-hidden bg-[#c9a84c22] border border-[#c9a84c55] flex items-center justify-center font-display text-4xl text-gold shrink-0">?</div><div><p class="text-xs text-gold font-heading tracking-widest uppercase">Meu perfil</p><h3 id="mp-title" class="font-display text-3xl tracking-widest text-white">Meus dados</h3><div class="flex flex-wrap gap-2 mt-2"><span class="patch-badge"><i class="fa-solid fa-stairs"></i> <span id="mp-grade">—</span></span><span class="patch-badge">Situação: <span id="mp-status">—</span></span><span class="patch-badge">Desde <span id="mp-since">—</span></span></div></div></div>
+        <div class="flex flex-wrap items-center gap-4"><div id="mp-avatar" class="w-20 h-20 rounded-full overflow-hidden bg-[#c9a84c22] border border-[#c9a84c55] flex items-center justify-center font-display text-4xl text-gold shrink-0">?</div><div><p class="text-xs text-gold font-heading tracking-widest uppercase">Meu perfil</p><h3 id="mp-title" class="font-display text-3xl tracking-widest text-white">Meus dados</h3><div class="flex flex-wrap gap-2 mt-2"><span class="patch-badge"><i class="fa-solid fa-stairs"></i> <span id="mp-grade">—</span></span><span class="patch-badge"><i class="fa-solid fa-star"></i> <span id="mp-cargo">—</span></span><span class="patch-badge"><i class="fa-solid fa-location-dot"></i> <span id="mp-div">—</span></span><span class="patch-badge">Situação: <span id="mp-status">—</span></span><span class="patch-badge">Desde <span id="mp-since">—</span></span></div></div></div>
         <div class="flex flex-wrap gap-2" role="tablist" aria-label="Seções do perfil">
           <button type="button" class="tab-btn" role="tab" data-ptab="info" aria-selected="true"><i class="fa-solid fa-user mr-2"></i>Informações pessoais</button>
-          <button type="button" class="tab-btn" role="tab" data-ptab="grade" aria-selected="false"><i class="fa-solid fa-stairs mr-2"></i>Grau e participação</button>
+          <button type="button" class="tab-btn" role="tab" data-ptab="grade" aria-selected="false"><i class="fa-solid fa-stairs mr-2"></i>Grau, cargo e divisão</button>
           <button type="button" class="tab-btn" role="tab" data-ptab="history" aria-selected="false"><i class="fa-solid fa-clock-rotate-left mr-2"></i>Histórico</button>
+          <button type="button" class="tab-btn" role="tab" data-ptab="honors" aria-selected="false"><i class="fa-solid fa-medal mr-2"></i>Honrarias</button>
           <button type="button" class="tab-btn" role="tab" data-ptab="dependents" aria-selected="false"><i class="fa-solid fa-children mr-2"></i>Dependentes</button>
           <button type="button" class="tab-btn" role="tab" data-ptab="vehicles" aria-selected="false"><i class="fa-solid fa-motorcycle mr-2"></i>Veículos</button>
           <button type="button" class="tab-btn" role="tab" data-ptab="addresses" aria-selected="false"><i class="fa-solid fa-house mr-2"></i>Endereços</button>
@@ -290,8 +291,9 @@
           </form>
           <p class="text-xs text-gray-500 mt-3">Seus dados pessoais só são vistos por você e pela administração. Grau, cargo, divisão, situação, presenças e honrarias são registrados somente pela administração.</p>
         </div>
-        <div id="ptab-grade" class="hidden-view space-y-4" role="tabpanel"><div id="mp-stats"></div><div id="mp-charts" class="space-y-4"></div></div>
+        <div id="ptab-grade" class="hidden-view space-y-4" role="tabpanel"><div id="mp-rank"></div><div id="mp-stats"></div><div id="mp-charts" class="space-y-4"></div></div>
         <div id="ptab-history" class="hidden-view" role="tabpanel"><div id="mp-history" class="space-y-2 max-h-[32rem] overflow-y-auto"></div></div>
+        <div id="ptab-honors" class="hidden-view" role="tabpanel"><div id="mp-honors"></div></div>
         <div id="ptab-dependents" class="hidden-view" role="tabpanel"><div id="ent-dependents"></div></div>
         <div id="ptab-vehicles" class="hidden-view" role="tabpanel"><div id="ent-vehicles"></div></div>
         <div id="ptab-addresses" class="hidden-view" role="tabpanel"><div id="ent-addresses"></div></div>
@@ -303,6 +305,9 @@
           <button type="button" class="tab-btn" role="tab" data-tab="content" aria-selected="true"><i class="fa-solid fa-bullhorn mr-2"></i>Comunicados</button>
           <button type="button" class="tab-btn" role="tab" data-tab="members" aria-selected="false"><i class="fa-solid fa-users mr-2"></i>Integrantes</button>
           <button type="button" class="tab-btn" role="tab" data-tab="events" aria-selected="false"><i class="fa-solid fa-calendar-check mr-2"></i>Eventos</button>
+          <button type="button" class="tab-btn" role="tab" data-tab="cargos" aria-selected="false"><i class="fa-solid fa-user-tie mr-2"></i>Cargos</button>
+          <button type="button" class="tab-btn" role="tab" data-tab="divisions" aria-selected="false"><i class="fa-solid fa-location-dot mr-2"></i>Divisões</button>
+          <button type="button" class="tab-btn" role="tab" data-tab="honors" aria-selected="false"><i class="fa-solid fa-medal mr-2"></i>Honrarias</button>
           <button type="button" class="tab-btn" role="tab" data-tab="dash" aria-selected="false"><i class="fa-solid fa-chart-column mr-2"></i>Indicadores</button>
           <button type="button" class="tab-btn" role="tab" data-tab="config" aria-selected="false"><i class="fa-solid fa-sliders mr-2"></i>Configurações</button>
           <button type="button" class="tab-btn" role="tab" data-tab="access" aria-selected="false"><i class="fa-solid fa-user-plus mr-2"></i>Novo acesso</button>
@@ -342,6 +347,53 @@
           <hr class="gold-line">
           <div id="ev-list" class="space-y-2"></div>
           <div id="ev-reg" class="space-y-3"></div>
+        </div>
+
+        <div id="tab-cargos" class="hidden-view space-y-5" role="tabpanel">
+          <form id="cg-form" class="grid md:grid-cols-4 gap-3" novalidate>
+            <div><label class="block text-xs text-gray-300 mb-2" for="cg-member">Integrante</label><select class="field" id="cg-member"></select></div>
+            <div><label class="block text-xs text-gray-300 mb-2" for="cg-cargo">Cargo</label><select class="field" id="cg-cargo"></select></div>
+            <div><label class="block text-xs text-gray-300 mb-2" for="cg-date">Data da alteração</label><input class="field" id="cg-date" type="date"></div>
+            <div><label class="block text-xs text-gray-300 mb-2" for="cg-note">Observação</label><input class="field" id="cg-note" maxlength="500"></div>
+            <div class="md:col-span-4 flex flex-wrap items-center gap-3"><button class="btn btn-primary" type="submit"><i class="fa-solid fa-user-tie mr-2"></i>Definir cargo</button><p id="cg-message" class="text-sm" role="status" aria-live="polite"></p></div>
+          </form>
+          <hr class="gold-line">
+          <div class="space-y-2"><h4 class="font-heading text-lg uppercase text-white">Cargos cadastrados</h4><div id="cg-list" class="space-y-2"></div>
+            <form id="cg-new" class="flex flex-wrap items-center gap-3 pt-2"><input class="field flex-1 min-w-[180px]" id="cg-new-name" maxlength="60" placeholder="Novo cargo (ex.: OPERACIONAL)"><label class="text-xs text-gray-300 flex items-center gap-2"><input type="checkbox" id="cg-new-lead" class="accent-[#c9a84c] w-4 h-4">Liderança regional (um ocupante por divisão)</label><button class="btn btn-secondary" type="submit">Adicionar cargo</button></form></div>
+          <div class="space-y-2"><h4 class="font-heading text-lg uppercase text-white">Histórico de cargos</h4><div id="cg-history" class="space-y-2 max-h-96 overflow-y-auto"></div></div>
+        </div>
+
+        <div id="tab-divisions" class="hidden-view space-y-5" role="tabpanel">
+          <form id="dv-form" class="grid md:grid-cols-4 gap-3" novalidate>
+            <div><label class="block text-xs text-gray-300 mb-2" for="dv-member">Integrante</label><select class="field" id="dv-member"></select></div>
+            <div><label class="block text-xs text-gray-300 mb-2" for="dv-division">Divisão</label><select class="field" id="dv-division"></select></div>
+            <div><label class="block text-xs text-gray-300 mb-2" for="dv-date">Data da alteração</label><input class="field" id="dv-date" type="date"></div>
+            <div><label class="block text-xs text-gray-300 mb-2" for="dv-note">Observação</label><input class="field" id="dv-note" maxlength="500"></div>
+            <div class="md:col-span-4 flex flex-wrap items-center gap-3"><button class="btn btn-primary" type="submit"><i class="fa-solid fa-location-dot mr-2"></i>Definir divisão</button><p id="dv-message" class="text-sm" role="status" aria-live="polite"></p></div>
+          </form>
+          <hr class="gold-line">
+          <div class="grid sm:grid-cols-2 gap-3"><input class="field" id="dv-search" type="search" placeholder="Pesquisar por nome, grau ou cargo" aria-label="Pesquisar integrantes"><select class="field" id="dv-filter" aria-label="Filtrar por divisão"></select></div>
+          <div id="dv-list" class="space-y-4"></div>
+          <div class="space-y-2"><h4 class="font-heading text-lg uppercase text-white">Histórico de mudanças de divisão</h4><div id="dv-history" class="space-y-2 max-h-96 overflow-y-auto"></div></div>
+        </div>
+
+        <div id="tab-honors" class="hidden-view space-y-6" role="tabpanel">
+          <div class="space-y-3"><h4 class="font-heading text-lg uppercase text-white">Honrarias cadastradas</h4>
+            <form id="hn-type-form" class="grid md:grid-cols-3 gap-3" novalidate><input type="hidden" id="hn-type-id">
+              <div><label class="block text-xs text-gray-300 mb-2" for="hn-name">Nome da honraria</label><input class="field" id="hn-name" maxlength="100"></div>
+              <div><label class="block text-xs text-gray-300 mb-2" for="hn-emblem">Emblema (link https da imagem)</label><input class="field" id="hn-emblem" maxlength="500" placeholder="https://..."></div>
+              <div><label class="block text-xs text-gray-300 mb-2" for="hn-desc">Descrição</label><input class="field" id="hn-desc" maxlength="1000"></div>
+              <div class="md:col-span-3 flex flex-wrap items-center gap-3"><button class="btn btn-primary" type="submit" id="hn-type-save">Cadastrar honraria</button><button class="btn btn-secondary hidden-view" type="button" id="hn-type-cancel">Cancelar edição</button><p id="hn-type-message" class="text-sm" role="status" aria-live="polite"></p></div>
+            </form><div id="hn-types" class="space-y-2"></div></div>
+          <hr class="gold-line">
+          <div class="space-y-3"><h4 class="font-heading text-lg uppercase text-white">Conceder honraria</h4>
+            <form id="hn-form" class="grid md:grid-cols-4 gap-3" novalidate><input type="hidden" id="hn-id">
+              <div><label class="block text-xs text-gray-300 mb-2" for="hn-member">Integrante</label><select class="field" id="hn-member"></select></div>
+              <div><label class="block text-xs text-gray-300 mb-2" for="hn-type">Honraria</label><select class="field" id="hn-type"></select></div>
+              <div><label class="block text-xs text-gray-300 mb-2" for="hn-date">Data da concessão</label><input class="field" id="hn-date" type="date"></div>
+              <div><label class="block text-xs text-gray-300 mb-2" for="hn-reason">Motivo</label><input class="field" id="hn-reason" maxlength="1000"></div>
+              <div class="md:col-span-4 flex flex-wrap items-center gap-3"><button class="btn btn-primary" type="submit" id="hn-save"><i class="fa-solid fa-medal mr-2"></i>Conceder</button><button class="btn btn-secondary hidden-view" type="button" id="hn-cancel">Cancelar edição</button><p id="hn-message" class="text-sm" role="status" aria-live="polite"></p></div>
+            </form><div id="hn-list" class="space-y-2"></div></div>
         </div>
 
         <div id="tab-dash" class="hidden-view space-y-4" role="tabpanel">
@@ -432,7 +484,7 @@ async function loadContent(){const holder=$('content-list');holder.innerHTML='<d
 }
 async function checkSession(){if(!configured||!supabaseClient){showView('login-view');message('login-message','Antes de usar, configure a URL e a chave pública do Supabase no arquivo index.html.','error');return;}showView('loading-view');const {data,error}=await supabaseClient.auth.getSession();if(error){showView('login-view');message('login-message','Não foi possível verificar a sessão. Tente entrar novamente.','error');return;}if(data.session){try{await openPortal(data.session.user)}catch(e){showView('error-view');$('error-message').textContent=e.message||'Erro inesperado.'}}else showView('login-view');}
 $('login-form').addEventListener('submit',async e=>{e.preventDefault();if(!supabaseClient){message('login-message','Configure primeiro o Supabase no código.','error');return;}const btn=$('login-btn');btn.disabled=true;btn.textContent='Verificando...';message('login-message','');const {data,error}=await supabaseClient.auth.signInWithPassword({email:$('email').value.trim(),password:$('password').value});btn.disabled=false;btn.innerHTML='<i class="fa-solid fa-lock-open mr-2"></i>Entrar no portal';if(error){message('login-message','E-mail ou senha inválidos, ou conta ainda não autorizada.','error');return;}try{await openPortal(data.user)}catch(err){showView('error-view');$('error-message').textContent=err.message||'Erro ao validar acesso.'}});
-$('logout-btn').addEventListener('click',async()=>{await supabaseClient?.auth.signOut();me=null;adminItems=[];$('admin-content-list').innerHTML='';$('members-list').innerHTML='';$('command-list').innerHTML='';$('dash-body').innerHTML='';$('dash-cards').innerHTML='';$('dash-one').innerHTML='';$('mp-charts').innerHTML='';$('ev-list').innerHTML='';$('ev-reg').innerHTML='';closeModal();Object.keys(ENT).forEach(k=>{const b=$('ent-'+k);if(b)b.innerHTML='';entRows[k]=[];});$('mp-history').innerHTML='';$('mp-stats').innerHTML='';$('password').value='';message('login-message','Você saiu do portal.');showView('login-view');});
+$('logout-btn').addEventListener('click',async()=>{await supabaseClient?.auth.signOut();me=null;adminItems=[];$('admin-content-list').innerHTML='';$('members-list').innerHTML='';$('command-list').innerHTML='';$('dash-body').innerHTML='';$('dash-cards').innerHTML='';$('dash-one').innerHTML='';$('mp-charts').innerHTML='';$('ev-list').innerHTML='';$('ev-reg').innerHTML='';$('mp-rank').innerHTML='';$('mp-honors').innerHTML='';closeModal();Object.keys(ENT).forEach(k=>{const b=$('ent-'+k);if(b)b.innerHTML='';entRows[k]=[];});$('mp-history').innerHTML='';$('mp-stats').innerHTML='';$('password').value='';message('login-message','Você saiu do portal.');showView('login-view');});
 $('retry-btn').addEventListener('click',checkSession);
 $('cancel-password-change').addEventListener('click',async()=>{await supabaseClient.auth.signOut();showView('login-view');});
 $('change-password-form').addEventListener('submit',async e=>{e.preventDefault();const next=$('first-new-password').value;const confirm=$('first-confirm-password').value;if(next.length<12){message('password-message','Use uma senha com pelo menos 12 caracteres.','error');return;}if(next!==confirm){message('password-message','As senhas não coincidem.','error');return;}const btn=e.submitter; if(btn)btn.disabled=true;const {data,error}=await supabaseClient.auth.updateUser({password:next,data:{must_change_password:false}});if(btn)btn.disabled=false;if(error){message('password-message','Não foi possível alterar a senha. Tente novamente.','error');return;}message('password-message','Senha atualizada. Abrindo o portal...','success');try{await openPortal(data.user)}catch(err){showView('error-view');$('error-message').textContent=err.message||'Erro ao validar acesso.'}});
@@ -440,7 +492,7 @@ $('create-user-form').addEventListener('submit',async e=>{e.preventDefault();con
 /* ───────── Painel do administrador ───────── */
 let me=null, adminItems=[];
 const fmtDate=(v)=>v?new Date(v).toLocaleDateString('pt-BR'):'';
-function setTab(name){document.querySelectorAll('[data-tab]').forEach(b=>b.setAttribute('aria-selected',String(b.dataset.tab===name)));['content','members','events','dash','config','access'].forEach(t=>$('tab-'+t).classList.toggle('hidden-view',t!==name));if(name==='dash')refreshDash();if(name==='config')loadConfig();}
+function setTab(name){document.querySelectorAll('[data-tab]').forEach(b=>b.setAttribute('aria-selected',String(b.dataset.tab===name)));['content','members','events','cargos','divisions','honors','dash','config','access'].forEach(t=>$('tab-'+t).classList.toggle('hidden-view',t!==name));if(name==='dash')refreshDash();if(name==='cargos')loadCargosTab();if(name==='divisions')loadDivisionsTab();if(name==='honors')loadHonorsTab();if(name==='config')loadConfig();}
 document.querySelectorAll('[data-tab]').forEach(b=>b.addEventListener('click',()=>setTab(b.dataset.tab)));
 
 function resetContentForm(){$('content-form').reset();$('cc-id').value='';$('cc-order').value='100';$('cc-published').checked=true;$('cc-save').innerHTML='<i class="fa-solid fa-floppy-disk mr-2"></i>Publicar comunicado';$('cc-cancel').classList.add('hidden-view');}
@@ -495,7 +547,7 @@ $('content-form').addEventListener('submit',async e=>{
 });
 
 /* ───────── Perfil, graus e gerenciamento de integrantes ───────── */
-let justIn=true,sinceMap={},gradesList=[],minPct=60,membersCache=[],statsMap={};
+let divisionsList=[],cargosList=[],justIn=true,sinceMap={},gradesList=[],minPct=60,membersCache=[],statsMap={};
 const STATUS_LABEL={presente:'Presente',ausencia_justificada:'Ausência justificada',ausencia_injustificada:'Ausência não justificada',pendente:'Pendente'};
 const fmtDay=v=>!v?'':(typeof v==='string'&&v.length===10?v.split('-').reverse().join('/'):new Date(v).toLocaleDateString('pt-BR'));
 const digitsOf=v=>String(v||'').replace(/\D/g,'');
@@ -519,8 +571,8 @@ function eligibility(pct,eleg,gid,since){
 }
 async function loadRefs(){
   const T=t=>supabaseClient.from(t);
-  const [g,s,j,c]=await Promise.all([T('grades').select('id,name,min_participation,min_months').order('id'),T('club_settings').select('value').eq('key','min_participation').maybeSingle(),T('club_settings').select('value').eq('key','justified_in_denominator').maybeSingle(),T('event_categories').select('id,name,is_active,counts_for_progress').order('name')]);
-  gradesList=g.data||[];const v=Number(s.data?.value);if(Number.isFinite(v))minPct=v;justIn=j.data?j.data.value!==false:true;if(!c.error)catsCache=c.data||[];
+  const [g,s,j,c,dv,cg]=await Promise.all([T('grades').select('id,name,min_participation,min_months').order('id'),T('club_settings').select('value').eq('key','min_participation').maybeSingle(),T('club_settings').select('value').eq('key','justified_in_denominator').maybeSingle(),T('event_categories').select('id,name,is_active,counts_for_progress').order('name'),T('divisions').select('id,name,sort_order').order('sort_order'),T('cargos').select('id,name,is_leadership,sort_order,is_active').order('sort_order')]);
+  gradesList=g.data||[];const v=Number(s.data?.value);if(Number.isFinite(v))minPct=v;justIn=j.data?j.data.value!==false:true;if(!c.error)catsCache=c.data||[];divisionsList=dv.data||[];cargosList=cg.data||[];
 }
 /* cálculos (mesma regra do banco: pendente não conta; só categorias válidas; só após a entrada) */
 function countable(ev,joined){const c=catsCache.find(x=>x.id===ev.category_id);return !!c?.counts_for_progress&&(!joined||ev.event_date>=joined);}
@@ -553,21 +605,21 @@ async function historyHtml(id,isAdmin){
 bindMask($('mp-wa'));bindMask($('mp-em'));bindMask($('mp-phone'));
 const ageOf=d=>{if(!d)return null;const b=new Date(d+'T00:00:00'),n=new Date();let a=n.getFullYear()-b.getFullYear();if(n.getMonth()<b.getMonth()||(n.getMonth()===b.getMonth()&&n.getDate()<b.getDate()))a--;return a;};
 const ageText=d=>{const a=ageOf(d);return a==null||a<0||a>120?'—':a+' anos';};
-function setPTab(n){document.querySelectorAll('[data-ptab]').forEach(b=>b.setAttribute('aria-selected',String(b.dataset.ptab===n)));['info','grade','history','dependents','vehicles','addresses','qual'].forEach(t=>$('ptab-'+t).classList.toggle('hidden-view',t!==n));}
+function setPTab(n){document.querySelectorAll('[data-ptab]').forEach(b=>b.setAttribute('aria-selected',String(b.dataset.ptab===n)));['info','grade','history','honors','dependents','vehicles','addresses','qual'].forEach(t=>$('ptab-'+t).classList.toggle('hidden-view',t!==n));}
 document.querySelectorAll('[data-ptab]').forEach(b=>b.addEventListener('click',()=>setPTab(b.dataset.ptab)));
 $('mp-birth').addEventListener('change',()=>{$('mp-age').textContent=ageText($('mp-birth').value);});
 async function loadMyProfile(){
-  const {data:p,error}=await supabaseClient.from('member_profiles').select('display_name,email,photo_url,whatsapp,emergency_whatsapp,grade_id,joined_at,status,birth_date,phone').eq('id',me.id).maybeSingle();
+  const {data:p,error}=await supabaseClient.from('member_profiles').select('display_name,email,photo_url,whatsapp,emergency_whatsapp,grade_id,joined_at,status,birth_date,phone,division_id,cargo_id').eq('id',me.id).maybeSingle();
   if(error||!p){message('mp-message','Não foi possível carregar o perfil. Rode o fase1-banco.sql no Supabase.','error');return;}
   $('mp-name').value=p.display_name||'';$('mp-email').value=p.email||me.email||'';$('mp-photo').value=p.photo_url||'';$('mp-wa').value=fmtPhone(p.whatsapp);$('mp-phone').value=fmtPhone(p.phone);$('mp-birth').value=p.birth_date||'';$('mp-age').textContent=ageText(p.birth_date);$('mp-em').value=fmtPhone(p.emergency_whatsapp);
-  $('mp-grade').textContent=gradeName(p.grade_id);$('mp-status').textContent=p.status;$('mp-since').textContent=fmtDay(p.joined_at);setAvatar($('mp-avatar'),p.photo_url,p.display_name);
+  $('mp-grade').textContent=gradeName(p.grade_id);$('mp-cargo').textContent=p.cargo_id?cargoName(p.cargo_id):'Sem cargo';$('mp-div').textContent=p.division_id?divName(p.division_id):'Sem divisão';$('mp-status').textContent=p.status;$('mp-since').textContent=fmtDay(p.joined_at);setAvatar($('mp-avatar'),p.photo_url,p.display_name);
   const {data:rows}=await supabaseClient.rpc('member_stats');
   const {data:gh}=await supabaseClient.from('grade_history').select('changed_at').eq('member_id',me.id).order('changed_at',{ascending:false}).limit(1);
   const since=gh?.[0]?.changed_at?.slice(0,10)||p.joined_at;
   $('mp-stats').innerHTML=statsHtml((rows||[]).find(r=>r.member_id===me.id),p.grade_id,since);
   $('mp-charts').innerHTML=await chartsHtml(me.id,p.joined_at,p.grade_id);
   $('mp-history').innerHTML=await historyHtml(me.id,false);
-  loadMyEntities();
+  loadMyEntities();loadMyRank(p);loadMyHonors();
 }
 $('mp-form').addEventListener('submit',async e=>{
   e.preventDefault();
@@ -586,7 +638,7 @@ $('mp-form').addEventListener('submit',async e=>{
 /* Gerenciar Integrantes (admin) */
 async function loadMembers(){
   const holder=$('members-list');holder.innerHTML='<div class="text-sm text-gray-400">Carregando integrantes...</div>';
-  const [m,s,gh]=await Promise.all([supabaseClient.from('member_profiles').select('id,display_name,email,role,is_active,grade_id,photo_url,joined_at,created_at').order('created_at',{ascending:true}),supabaseClient.rpc('member_stats'),supabaseClient.from('grade_history').select('member_id,changed_at')]);
+  const [m,s,gh]=await Promise.all([supabaseClient.from('member_profiles').select('id,display_name,email,role,is_active,grade_id,division_id,cargo_id,photo_url,joined_at,created_at').order('created_at',{ascending:true}),supabaseClient.rpc('member_stats'),supabaseClient.from('grade_history').select('member_id,changed_at')]);
   if(m.error){holder.innerHTML='<div class="text-sm text-red-300">Não foi possível carregar os integrantes. Rode o fase1-banco.sql no Supabase.</div>';return;}
   sinceMap={};(gh.data||[]).forEach(h=>{const d=h.changed_at.slice(0,10);if(!sinceMap[h.member_id]||d>sinceMap[h.member_id])sinceMap[h.member_id]=d;});membersCache=m.data||[];statsMap=Object.fromEntries((s.data||[]).map(r=>[r.member_id,r]));renderMembers();
 }
@@ -596,7 +648,7 @@ function renderMembers(){
   if(!list.length){holder.innerHTML='<div class="text-sm text-gray-400">Nenhum integrante encontrado.</div>';return;}
   holder.innerHTML=list.map(m=>{
     const self=m.id===me.id,st=statsMap[m.id]||{},total=(st.presentes||0)+(st.aus_justificadas||0)+(st.aus_injustificadas||0)+(st.pendentes||0),aus=(st.aus_justificadas||0)+(st.aus_injustificadas||0),el=eligibility(Number(st.pct??0),st.elegiveis||0,m.grade_id,sinceOf(m));
-    return `<div class="row-card ${m.is_active?'':'is-off'}"><div class="flex flex-wrap items-center gap-3"><div class="w-12 h-12 rounded-full overflow-hidden bg-[#c9a84c22] border border-[#c9a84c55] flex items-center justify-center font-display text-xl text-gold shrink-0" data-avatar="${safeText(m.id)}"></div><div class="flex-1 min-w-[180px]"><div class="font-heading text-white uppercase">${safeText(m.display_name||'Sem nome')}${self?' <span class="text-xs text-gold normal-case">(você)</span>':''}</div><div class="text-xs text-gray-400">${safeText(m.email||'e-mail não registrado')}</div><div class="text-xs text-gray-300 mt-1">${safeText(gradeName(m.grade_id))} · Participação ${st.pct!=null?Number(st.pct)+'%':'—'} · ${total} evento(s) · ${aus} ausência(s)</div><div class="text-xs ${el.c}">${el.t}</div></div><div class="flex flex-wrap items-center gap-2"><span class="status-badge ${m.is_active?'bg-green-900/40 text-green-300':'bg-red-900/40 text-red-300'}">${m.is_active?'Ativo':'Desativado'}</span><button class="btn btn-secondary btn-sm" data-view="${safeText(m.id)}"><i class="fa-solid fa-id-card mr-1"></i>Visualizar Perfil</button><button class="btn ${m.is_active?'btn-danger':'btn-secondary'} btn-sm" data-member="${safeText(m.id)}" data-active="${m.is_active}" data-name="${safeText(m.display_name||m.email||'')}" ${self?'disabled title="Você não pode desativar a própria conta"':''}>${m.is_active?'Desativar':'Reativar'}</button></div></div></div>`;
+    return `<div class="row-card ${m.is_active?'':'is-off'}"><div class="flex flex-wrap items-center gap-3"><div class="w-12 h-12 rounded-full overflow-hidden bg-[#c9a84c22] border border-[#c9a84c55] flex items-center justify-center font-display text-xl text-gold shrink-0" data-avatar="${safeText(m.id)}"></div><div class="flex-1 min-w-[180px]"><div class="font-heading text-white uppercase">${safeText(m.display_name||'Sem nome')}${self?' <span class="text-xs text-gold normal-case">(você)</span>':''}</div><div class="text-xs text-gray-400">${safeText(m.email||'e-mail não registrado')}</div><div class="text-xs text-gray-300 mt-1">${safeText(gradeName(m.grade_id))} · ${safeText(m.cargo_id?cargoName(m.cargo_id):'Sem cargo')} · ${safeText(m.division_id?divName(m.division_id):'Sem divisão')} · Participação ${st.pct!=null?Number(st.pct)+'%':'—'} · ${total} evento(s) · ${aus} ausência(s)</div><div class="text-xs ${el.c}">${el.t}</div></div><div class="flex flex-wrap items-center gap-2"><span class="status-badge ${m.is_active?'bg-green-900/40 text-green-300':'bg-red-900/40 text-red-300'}">${m.is_active?'Ativo':'Desativado'}</span><button class="btn btn-secondary btn-sm" data-view="${safeText(m.id)}"><i class="fa-solid fa-id-card mr-1"></i>Visualizar Perfil</button><button class="btn ${m.is_active?'btn-danger':'btn-secondary'} btn-sm" data-member="${safeText(m.id)}" data-active="${m.is_active}" data-name="${safeText(m.display_name||m.email||'')}" ${self?'disabled title="Você não pode desativar a própria conta"':''}>${m.is_active?'Desativar':'Reativar'}</button></div></div></div>`;
   }).join('');
   holder.querySelectorAll('[data-avatar]').forEach(el=>{const m=membersCache.find(x=>x.id===el.dataset.avatar);setAvatar(el,m?.photo_url,m?.display_name);});
 }
@@ -617,12 +669,12 @@ $('members-list').addEventListener('click',async e=>{
 function closeModal(){const m=$('member-modal');m.classList.add('hidden-view');m.innerHTML='';document.body.style.overflow='';}
 async function openMemberModal(id){
   const modal=$('member-modal');
-  const {data:p,error}=await supabaseClient.from('member_profiles').select('id,display_name,email,photo_url,whatsapp,emergency_whatsapp,grade_id,joined_at,status').eq('id',id).maybeSingle();
+  const {data:p,error}=await supabaseClient.from('member_profiles').select('id,display_name,email,photo_url,whatsapp,emergency_whatsapp,grade_id,division_id,cargo_id,joined_at,status').eq('id',id).maybeSingle();
   if(error||!p)return message('members-message','Não foi possível abrir o perfil.','error');
   const st=statsMap[id];const evOpts=eventsCache.map(x=>`<option value="${x.id}">${safeText(x.name)} · ${fmtDay(x.event_date)}</option>`).join('');
   const opts=gradesAsc().map(g=>`<option value="${g.id}" ${g.id===p.grade_id?'selected':''}>${safeText(g.name)}</option>`).join('');
   modal.innerHTML=`<div class="panel max-w-3xl mx-auto my-6 p-5 md:p-6 space-y-5" data-id="${safeText(id)}">
-    <div class="flex items-start justify-between gap-3"><div class="flex items-center gap-4"><div id="mm-avatar" class="w-16 h-16 rounded-full overflow-hidden bg-[#c9a84c22] border border-[#c9a84c55] flex items-center justify-center font-display text-3xl text-gold shrink-0"></div><div><h3 class="font-display text-3xl tracking-widest text-white">${safeText(p.display_name||'Sem nome')}</h3><p class="text-xs text-gray-400">${safeText(p.email||'')} · ${safeText(gradeName(p.grade_id))}</p></div></div><button class="btn btn-secondary btn-sm" data-mm="close" aria-label="Fechar"><i class="fa-solid fa-xmark"></i></button></div>
+    <div class="flex items-start justify-between gap-3"><div class="flex items-center gap-4"><div id="mm-avatar" class="w-16 h-16 rounded-full overflow-hidden bg-[#c9a84c22] border border-[#c9a84c55] flex items-center justify-center font-display text-3xl text-gold shrink-0"></div><div><h3 class="font-display text-3xl tracking-widest text-white">${safeText(p.display_name||'Sem nome')}</h3><p class="text-xs text-gray-400">${safeText(p.email||'')} · ${safeText(gradeName(p.grade_id))} · ${safeText(p.cargo_id?cargoName(p.cargo_id):'Sem cargo')} · ${safeText(p.division_id?divName(p.division_id):'Sem divisão')}</p></div></div><button class="btn btn-secondary btn-sm" data-mm="close" aria-label="Fechar"><i class="fa-solid fa-xmark"></i></button></div>
     <form id="mm-form" class="grid md:grid-cols-2 gap-3" novalidate>
       <div><label class="block text-xs text-gray-300 mb-2" for="mm-name">Nome</label><input class="field" id="mm-name" maxlength="100" value="${safeText(p.display_name||'')}"></div>
       <div><label class="block text-xs text-gray-300 mb-2" for="mm-status">Situação</label><select class="field" id="mm-status">${['ativo','afastado','desligado'].map(s=>`<option ${s===p.status?'selected':''}>${s}</option>`).join('')}</select></div>
@@ -916,6 +968,120 @@ document.addEventListener('submit',async e=>{
   if(res.error)return msg('Não foi possível salvar. Confira os dados.');
   await loadEnt(key);message('ent-msg-'+key,'Salvo com sucesso.','success');
 });
+/* ───────── Etapa 3: cargos, divisões e honrarias ───────── */
+const divName=id=>divisionsList.find(d=>d.id===id)?.name||'Sem divisão';
+const cargoName=id=>cargosList.find(c=>c.id===id)?.name||'Sem cargo';
+const mName=id=>{const m=membersCache.find(x=>x.id===id);return m?(m.display_name||m.email):'—';};
+const optsHtml=(arr,val,blank)=>(blank!=null?`<option value="">${blank}</option>`:'')+arr.map(([v,l])=>`<option value="${safeText(v)}" ${String(v)===String(val??'')?'selected':''}>${safeText(l)}</option>`).join('');
+const memberPairs=()=>membersCache.filter(m=>m.is_active).map(m=>[m.id,m.display_name||m.email]);
+async function ensureMembers(){if(!membersCache.length)await loadMembers();}
+const rowHtml=(a,b,c)=>`<div class="row-card flex flex-wrap justify-between gap-2"><div class="min-w-0 flex-1"><div class="text-sm text-white">${a}</div>${b?`<div class="text-xs text-gray-400">${b}</div>`:''}${c?`<div class="text-xs text-gray-400 mt-1 whitespace-pre-line">${c}</div>`:''}</div></div>`;
+function emblemHtml(url,size){size=size||'w-14 h-14';return url&&/^https:\/\//.test(url)?`<img src="${safeText(url)}" alt="Emblema" referrerpolicy="no-referrer" class="${size} object-contain rounded shrink-0">`:`<div class="${size} rounded bg-[#c9a84c22] flex items-center justify-center text-gold text-2xl shrink-0"><i class="fa-solid fa-medal"></i></div>`;}
+
+/* Meu Perfil: cargo, divisão e honrarias */
+async function loadMyRank(p){
+  const q=t=>supabaseClient.from(t).select('effective_date').eq('member_id',me.id).order('changed_at',{ascending:false}).limit(1);
+  const [ch,dh]=await Promise.all([q('cargo_history'),q('division_history')]);
+  const card=(l,v,sub,hl)=>`<div class="row-card" ${hl?'style="box-shadow:0 0 0 1px #c9a84c88"':''}><div class="text-[11px] text-gray-400 uppercase font-heading tracking-widest">${l}</div><div class="font-display text-3xl ${hl?'text-gold':'text-white'}">${safeText(v)}</div>${sub?`<div class="text-xs text-gray-500">${sub}</div>`:''}</div>`;
+  $('mp-rank').innerHTML=`<div class="grid md:grid-cols-3 gap-3">${card('Grau atual',gradeName(p.grade_id))}${card('Cargo ostentado',p.cargo_id?cargoName(p.cargo_id):'Sem cargo',ch.data?.[0]?'desde '+fmtDay(ch.data[0].effective_date):'',true)}${card('Divisão regional',p.division_id?divName(p.division_id):'Sem divisão',dh.data?.[0]?'desde '+fmtDay(dh.data[0].effective_date):'')}</div><p class="text-[11px] text-gray-500">Grau, cargo e divisão são definidos somente pela administração. O grau é a posição na hierarquia; o cargo é a função que o integrante ocupa.</p>`;
+}
+async function loadMyHonors(){
+  const {data,error}=await supabaseClient.from('member_honors').select('awarded_on,reason,honor_types(name,description,emblem_url)').eq('member_id',me.id).order('awarded_on',{ascending:false});
+  const box=$('mp-honors');if(error){box.innerHTML='<p class="text-sm text-red-300">Não foi possível carregar. Rode o fase8 no Supabase.</p>';return;}
+  box.innerHTML=(data||[]).length?`<div class="grid sm:grid-cols-2 gap-3">${data.map(h=>`<div class="row-card flex gap-3">${emblemHtml(h.honor_types?.emblem_url)}<div class="min-w-0"><div class="font-heading text-white uppercase">${safeText(h.honor_types?.name||'Honraria')}</div><div class="text-xs text-gold">${fmtDay(h.awarded_on)}</div>${h.honor_types?.description?`<div class="text-xs text-gray-400 mt-1">${safeText(h.honor_types.description)}</div>`:''}${h.reason?`<div class="text-xs text-gray-300 mt-1">Motivo: ${safeText(h.reason)}</div>`:''}</div></div>`).join('')}</div>`:'<p class="text-sm text-gray-400">Nenhuma honraria registrada até o momento.</p>';
+}
+
+/* Gerenciar Cargos */
+async function loadCargosTab(){
+  await ensureMembers();await loadRefs();
+  const keep=$('cg-member').value;
+  $('cg-member').innerHTML=optsHtml(memberPairs(),keep);
+  syncCargoSel();
+  $('cg-list').innerHTML=cargosList.map(c=>{const n=membersCache.filter(m=>m.cargo_id===c.id).length;return `<div class="row-card flex flex-wrap items-center justify-between gap-2 ${c.is_active?'':'is-off'}"><div class="text-sm text-white">${safeText(c.name)} ${c.is_leadership?'<span class="patch-badge ml-1">Liderança regional</span>':''} <span class="text-xs text-gray-400">· ${n} ocupante(s)</span></div><button class="btn btn-secondary btn-sm" data-cgtoggle="${c.id}">${c.is_active?'Desativar':'Reativar'}</button></div>`;}).join('');
+  const {data}=await supabaseClient.from('cargo_history').select('member_id,from_cargo_id,to_cargo_id,effective_date,note,changed_at').order('changed_at',{ascending:false}).limit(60);
+  $('cg-history').innerHTML=(data||[]).map(h=>rowHtml(`${safeText(mName(h.member_id))}: ${safeText(cargoName(h.from_cargo_id))} → ${safeText(cargoName(h.to_cargo_id))}`,fmtDay(h.effective_date),safeText(h.note||''))).join('')||'<p class="text-sm text-gray-400">Nenhuma alteração registrada.</p>';
+}
+function syncCargoSel(){const m=membersCache.find(x=>x.id===$('cg-member').value);$('cg-cargo').innerHTML=optsHtml(cargosList.filter(c=>c.is_active||c.id===m?.cargo_id).map(c=>[c.id,c.name]),m?.cargo_id,'— Sem cargo —');}
+$('cg-member').addEventListener('change',syncCargoSel);
+$('cg-form').addEventListener('submit',async e=>{
+  e.preventDefault();const mid=$('cg-member').value,cg=$('cg-cargo').value;if(!mid)return message('cg-message','Selecione o integrante.','error');
+  if(!confirm(`Definir o cargo de ${mName(mid)} como "${cg?cargoName(Number(cg)):'Sem cargo'}"?`))return;
+  const {error}=await supabaseClient.rpc('set_member_cargo',{p_member:mid,p_cargo:cg?Number(cg):null,p_date:$('cg-date').value||null,p_note:$('cg-note').value.trim()||null});
+  if(error)return message('cg-message',error.message,'error');
+  $('cg-note').value='';await loadMembers();await loadCargosTab();message('cg-message','Cargo atualizado.','success');
+});
+$('cg-list').addEventListener('click',async e=>{const b=e.target.closest('[data-cgtoggle]');if(!b)return;const c=cargosList.find(x=>x.id===Number(b.dataset.cgtoggle));
+  const {error}=await supabaseClient.from('cargos').update({is_active:!c.is_active}).eq('id',c.id);if(error)return message('cg-message','Não foi possível alterar o cargo.','error');await loadCargosTab();});
+$('cg-new').addEventListener('submit',async e=>{e.preventDefault();const name=$('cg-new-name').value.trim().toUpperCase();if(name.length<2)return message('cg-message','Informe o nome do cargo.','error');
+  const {error}=await supabaseClient.from('cargos').insert({name,is_leadership:$('cg-new-lead').checked,sort_order:100});
+  if(error)return message('cg-message','Não foi possível criar o cargo (nome repetido?).','error');$('cg-new-name').value='';await loadCargosTab();message('cg-message','Cargo criado.','success');});
+
+/* Gerenciar Divisões */
+async function loadDivisionsTab(){
+  await ensureMembers();await loadRefs();
+  $('dv-member').innerHTML=optsHtml(memberPairs(),$('dv-member').value);
+  $('dv-division').innerHTML=optsHtml(divisionsList.map(d=>[d.id,d.name]),'','— Sem divisão —');
+  const f=$('dv-filter').value;$('dv-filter').innerHTML=optsHtml(divisionsList.map(d=>[d.id,d.name]),f,'Todas as divisões');
+  syncDivSel();renderDivisions();
+  const {data}=await supabaseClient.from('division_history').select('member_id,from_division_id,to_division_id,effective_date,note,changed_at').order('changed_at',{ascending:false}).limit(60);
+  $('dv-history').innerHTML=(data||[]).map(h=>rowHtml(`${safeText(mName(h.member_id))}: ${safeText(divName(h.from_division_id))} → ${safeText(divName(h.to_division_id))}`,fmtDay(h.effective_date),safeText(h.note||''))).join('')||'<p class="text-sm text-gray-400">Nenhuma mudança registrada.</p>';
+}
+function syncDivSel(){const m=membersCache.find(x=>x.id===$('dv-member').value);$('dv-division').value=m?.division_id||'';}
+function renderDivisions(){
+  const q=$('dv-search').value.trim().toLowerCase(),f=Number($('dv-filter').value)||0;
+  const groups=[...divisionsList.filter(d=>!f||d.id===f).map(d=>[d.id,d.name]),...(!f?[[null,'SEM DIVISÃO']]:[])];
+  $('dv-list').innerHTML=groups.map(([id,name])=>{
+    const ms=membersCache.filter(m=>m.is_active&&(m.division_id||null)===id&&(!q||`${m.display_name||''} ${m.email||''} ${gradeName(m.grade_id)} ${cargoName(m.cargo_id)}`.toLowerCase().includes(q))).sort((a,b)=>a.grade_id-b.grade_id);
+    return `<div class="row-card"><h5 class="font-heading text-gold uppercase tracking-widest text-sm mb-2">${safeText(name)} <span class="text-gray-500">(${ms.length})</span></h5>${ms.map(m=>`<div class="flex flex-wrap justify-between gap-2 text-sm py-1 border-t border-zinc-800"><span class="text-white">${safeText(m.display_name||m.email)}</span><span class="text-xs text-gray-300">${safeText(gradeName(m.grade_id))} · ${safeText(m.cargo_id?cargoName(m.cargo_id):'Sem cargo')}</span></div>`).join('')||'<p class="text-xs text-gray-500">Nenhum integrante.</p>'}</div>`;}).join('');
+}
+$('dv-member').addEventListener('change',syncDivSel);$('dv-search').addEventListener('input',renderDivisions);$('dv-filter').addEventListener('change',renderDivisions);
+$('dv-form').addEventListener('submit',async e=>{
+  e.preventDefault();const mid=$('dv-member').value,dv=$('dv-division').value;if(!mid)return message('dv-message','Selecione o integrante.','error');
+  if(!confirm(`Definir a divisão de ${mName(mid)} como "${dv?divName(Number(dv)):'Sem divisão'}"?`))return;
+  const {error}=await supabaseClient.rpc('set_member_division',{p_member:mid,p_division:dv?Number(dv):null,p_date:$('dv-date').value||null,p_note:$('dv-note').value.trim()||null});
+  if(error)return message('dv-message',error.message,'error');
+  $('dv-note').value='';await loadMembers();await loadDivisionsTab();message('dv-message','Divisão atualizada.','success');
+});
+
+/* Gerenciar Honrarias */
+let honorTypes=[],honorAwards=[];
+async function loadHonorsTab(){
+  await ensureMembers();
+  const [t,a]=await Promise.all([supabaseClient.from('honor_types').select('*').order('name'),supabaseClient.from('member_honors').select('*').order('awarded_on',{ascending:false})]);
+  if(t.error||a.error){$('hn-types').innerHTML='<p class="text-sm text-red-300">Não foi possível carregar. Rode o fase8 no Supabase.</p>';return;}
+  honorTypes=t.data||[];honorAwards=a.data||[];
+  $('hn-member').innerHTML=optsHtml(memberPairs(),$('hn-member').value);
+  $('hn-type').innerHTML=optsHtml(honorTypes.map(h=>[h.id,h.name]),$('hn-type').value);
+  $('hn-types').innerHTML=honorTypes.map(h=>`<div class="row-card flex flex-wrap items-center gap-3">${emblemHtml(h.emblem_url)}<div class="flex-1 min-w-[160px]"><div class="text-white font-medium">${safeText(h.name)}</div><div class="text-xs text-gray-400">${safeText(h.description||'')}</div></div><div class="flex gap-2"><button class="btn btn-secondary btn-sm" data-htact="edit" data-id="${h.id}">Editar</button><button class="btn btn-danger btn-sm" data-htact="del" data-id="${h.id}"><i class="fa-solid fa-trash"></i></button></div></div>`).join('')||'<p class="text-sm text-gray-400">Nenhuma honraria cadastrada.</p>';
+  $('hn-list').innerHTML=honorAwards.map(a=>{const h=honorTypes.find(x=>x.id===a.honor_type_id);return `<div class="row-card flex flex-wrap items-center gap-3">${emblemHtml(h?.emblem_url,'w-10 h-10')}<div class="flex-1 min-w-[160px]"><div class="text-sm text-white">${safeText(mName(a.member_id))} — ${safeText(h?.name||'')}</div><div class="text-xs text-gray-400">${fmtDay(a.awarded_on)}${a.reason?' · '+safeText(a.reason):''}</div></div><div class="flex gap-2"><button class="btn btn-secondary btn-sm" data-haact="edit" data-id="${a.id}">Editar</button><button class="btn btn-danger btn-sm" data-haact="del" data-id="${a.id}"><i class="fa-solid fa-trash"></i></button></div></div>`;}).join('')||'<p class="text-sm text-gray-400">Nenhuma concessão registrada.</p>';
+}
+function resetHonorType(){$('hn-type-form').reset();$('hn-type-id').value='';$('hn-type-save').textContent='Cadastrar honraria';$('hn-type-cancel').classList.add('hidden-view');}
+function resetHonorAward(){$('hn-form').reset();$('hn-id').value='';$('hn-save').innerHTML='<i class="fa-solid fa-medal mr-2"></i>Conceder';$('hn-cancel').classList.add('hidden-view');}
+$('hn-type-cancel').addEventListener('click',resetHonorType);$('hn-cancel').addEventListener('click',resetHonorAward);
+$('hn-type-form').addEventListener('submit',async e=>{
+  e.preventDefault();const id=$('hn-type-id').value,f={name:$('hn-name').value.trim(),emblem_url:$('hn-emblem').value.trim()||null,description:$('hn-desc').value.trim()||null};
+  if(f.name.length<2)return message('hn-type-message','Informe o nome da honraria.','error');
+  if(f.emblem_url&&!/^https:\/\/\S+$/.test(f.emblem_url))return message('hn-type-message','O link do emblema precisa começar com https://','error');
+  const {error}=id?await supabaseClient.from('honor_types').update(f).eq('id',Number(id)):await supabaseClient.from('honor_types').insert(f);
+  if(error)return message('hn-type-message','Não foi possível salvar (nome repetido?).','error');
+  resetHonorType();await loadHonorsTab();message('hn-type-message','Honraria salva.','success');
+});
+$('hn-types').addEventListener('click',async e=>{const b=e.target.closest('[data-htact]');if(!b)return;const id=Number(b.dataset.id),h=honorTypes.find(x=>x.id===id);
+  if(b.dataset.htact==='edit'){$('hn-type-id').value=id;$('hn-name').value=h.name;$('hn-emblem').value=h.emblem_url||'';$('hn-desc').value=h.description||'';$('hn-type-save').textContent='Salvar alterações';$('hn-type-cancel').classList.remove('hidden-view');$('hn-type-form').scrollIntoView({behavior:'smooth',block:'center'});return;}
+  if(!confirm(`Excluir a honraria "${h.name}"?`))return;const {error}=await supabaseClient.from('honor_types').delete().eq('id',id);
+  if(error)return message('hn-type-message','Esta honraria já foi concedida e não pode ser excluída.','error');await loadHonorsTab();message('hn-type-message','Honraria excluída.','success');});
+$('hn-form').addEventListener('submit',async e=>{
+  e.preventDefault();const id=$('hn-id').value,f={member_id:$('hn-member').value,honor_type_id:Number($('hn-type').value),awarded_on:$('hn-date').value,reason:$('hn-reason').value.trim()||null};
+  if(!f.member_id||!f.honor_type_id||!f.awarded_on)return message('hn-message','Informe integrante, honraria e data.','error');
+  if(f.awarded_on>todayStr())return message('hn-message','A data da concessão não pode ser futura.','error');
+  const {error}=id?await supabaseClient.from('member_honors').update(f).eq('id',Number(id)):await supabaseClient.from('member_honors').insert({...f,registered_by:me.id});
+  if(error)return message('hn-message','Não foi possível salvar a concessão.','error');
+  resetHonorAward();await loadHonorsTab();message('hn-message','Concessão registrada.','success');
+});
+$('hn-list').addEventListener('click',async e=>{const b=e.target.closest('[data-haact]');if(!b)return;const id=Number(b.dataset.id),a=honorAwards.find(x=>x.id===id);
+  if(b.dataset.haact==='edit'){$('hn-id').value=id;$('hn-member').value=a.member_id;$('hn-type').value=a.honor_type_id;$('hn-date').value=a.awarded_on;$('hn-reason').value=a.reason||'';$('hn-save').innerHTML='<i class="fa-solid fa-floppy-disk mr-2"></i>Salvar alterações';$('hn-cancel').classList.remove('hidden-view');$('hn-form').scrollIntoView({behavior:'smooth',block:'center'});return;}
+  if(!confirm('Excluir esta concessão? A alteração fica no registro de auditoria.'))return;const {error}=await supabaseClient.from('member_honors').delete().eq('id',id);
+  if(error)return message('hn-message','Não foi possível excluir.','error');await loadHonorsTab();message('hn-message','Concessão excluída.','success');});
 /* ───────── Comando regional (dados vindos do banco, só após login) ───────── */
 async function loadCommand(){
   const holder=$('command-list');
