@@ -272,6 +272,10 @@
           <button type="button" class="tab-btn" role="tab" data-ptab="info" aria-selected="true"><i class="fa-solid fa-user mr-2"></i>Informações pessoais</button>
           <button type="button" class="tab-btn" role="tab" data-ptab="grade" aria-selected="false"><i class="fa-solid fa-stairs mr-2"></i>Grau e participação</button>
           <button type="button" class="tab-btn" role="tab" data-ptab="history" aria-selected="false"><i class="fa-solid fa-clock-rotate-left mr-2"></i>Histórico</button>
+          <button type="button" class="tab-btn" role="tab" data-ptab="dependents" aria-selected="false"><i class="fa-solid fa-children mr-2"></i>Dependentes</button>
+          <button type="button" class="tab-btn" role="tab" data-ptab="vehicles" aria-selected="false"><i class="fa-solid fa-motorcycle mr-2"></i>Veículos</button>
+          <button type="button" class="tab-btn" role="tab" data-ptab="addresses" aria-selected="false"><i class="fa-solid fa-house mr-2"></i>Endereços</button>
+          <button type="button" class="tab-btn" role="tab" data-ptab="qual" aria-selected="false"><i class="fa-solid fa-graduation-cap mr-2"></i>Profissão e qualificações</button>
         </div>
         <div id="ptab-info" role="tabpanel">
           <form id="mp-form" class="grid md:grid-cols-2 gap-3" novalidate>
@@ -288,6 +292,10 @@
         </div>
         <div id="ptab-grade" class="hidden-view space-y-4" role="tabpanel"><div id="mp-stats"></div><div id="mp-charts" class="space-y-4"></div></div>
         <div id="ptab-history" class="hidden-view" role="tabpanel"><div id="mp-history" class="space-y-2 max-h-[32rem] overflow-y-auto"></div></div>
+        <div id="ptab-dependents" class="hidden-view" role="tabpanel"><div id="ent-dependents"></div></div>
+        <div id="ptab-vehicles" class="hidden-view" role="tabpanel"><div id="ent-vehicles"></div></div>
+        <div id="ptab-addresses" class="hidden-view" role="tabpanel"><div id="ent-addresses"></div></div>
+        <div id="ptab-qual" class="hidden-view space-y-6" role="tabpanel"><div id="ent-profession"></div><hr class="gold-line"><div id="ent-courses"></div><hr class="gold-line"><div id="ent-skills"></div></div>
       </section>
       <div id="admin-panel" class="hidden-view panel p-5 md:p-6 space-y-5">
         <div class="flex items-center gap-3"><i class="fa-solid fa-user-gear text-gold text-xl"></i><div><h3 class="font-heading text-xl uppercase">Painel do administrador</h3><p class="text-xs text-gray-400">Publique comunicados, gerencie integrantes e crie novos acessos.</p></div></div>
@@ -424,7 +432,7 @@ async function loadContent(){const holder=$('content-list');holder.innerHTML='<d
 }
 async function checkSession(){if(!configured||!supabaseClient){showView('login-view');message('login-message','Antes de usar, configure a URL e a chave pública do Supabase no arquivo index.html.','error');return;}showView('loading-view');const {data,error}=await supabaseClient.auth.getSession();if(error){showView('login-view');message('login-message','Não foi possível verificar a sessão. Tente entrar novamente.','error');return;}if(data.session){try{await openPortal(data.session.user)}catch(e){showView('error-view');$('error-message').textContent=e.message||'Erro inesperado.'}}else showView('login-view');}
 $('login-form').addEventListener('submit',async e=>{e.preventDefault();if(!supabaseClient){message('login-message','Configure primeiro o Supabase no código.','error');return;}const btn=$('login-btn');btn.disabled=true;btn.textContent='Verificando...';message('login-message','');const {data,error}=await supabaseClient.auth.signInWithPassword({email:$('email').value.trim(),password:$('password').value});btn.disabled=false;btn.innerHTML='<i class="fa-solid fa-lock-open mr-2"></i>Entrar no portal';if(error){message('login-message','E-mail ou senha inválidos, ou conta ainda não autorizada.','error');return;}try{await openPortal(data.user)}catch(err){showView('error-view');$('error-message').textContent=err.message||'Erro ao validar acesso.'}});
-$('logout-btn').addEventListener('click',async()=>{await supabaseClient?.auth.signOut();me=null;adminItems=[];$('admin-content-list').innerHTML='';$('members-list').innerHTML='';$('command-list').innerHTML='';$('dash-body').innerHTML='';$('dash-cards').innerHTML='';$('dash-one').innerHTML='';$('mp-charts').innerHTML='';$('ev-list').innerHTML='';$('ev-reg').innerHTML='';closeModal();$('mp-history').innerHTML='';$('mp-stats').innerHTML='';$('password').value='';message('login-message','Você saiu do portal.');showView('login-view');});
+$('logout-btn').addEventListener('click',async()=>{await supabaseClient?.auth.signOut();me=null;adminItems=[];$('admin-content-list').innerHTML='';$('members-list').innerHTML='';$('command-list').innerHTML='';$('dash-body').innerHTML='';$('dash-cards').innerHTML='';$('dash-one').innerHTML='';$('mp-charts').innerHTML='';$('ev-list').innerHTML='';$('ev-reg').innerHTML='';closeModal();Object.keys(ENT).forEach(k=>{const b=$('ent-'+k);if(b)b.innerHTML='';entRows[k]=[];});$('mp-history').innerHTML='';$('mp-stats').innerHTML='';$('password').value='';message('login-message','Você saiu do portal.');showView('login-view');});
 $('retry-btn').addEventListener('click',checkSession);
 $('cancel-password-change').addEventListener('click',async()=>{await supabaseClient.auth.signOut();showView('login-view');});
 $('change-password-form').addEventListener('submit',async e=>{e.preventDefault();const next=$('first-new-password').value;const confirm=$('first-confirm-password').value;if(next.length<12){message('password-message','Use uma senha com pelo menos 12 caracteres.','error');return;}if(next!==confirm){message('password-message','As senhas não coincidem.','error');return;}const btn=e.submitter; if(btn)btn.disabled=true;const {data,error}=await supabaseClient.auth.updateUser({password:next,data:{must_change_password:false}});if(btn)btn.disabled=false;if(error){message('password-message','Não foi possível alterar a senha. Tente novamente.','error');return;}message('password-message','Senha atualizada. Abrindo o portal...','success');try{await openPortal(data.user)}catch(err){showView('error-view');$('error-message').textContent=err.message||'Erro ao validar acesso.'}});
@@ -545,7 +553,7 @@ async function historyHtml(id,isAdmin){
 bindMask($('mp-wa'));bindMask($('mp-em'));bindMask($('mp-phone'));
 const ageOf=d=>{if(!d)return null;const b=new Date(d+'T00:00:00'),n=new Date();let a=n.getFullYear()-b.getFullYear();if(n.getMonth()<b.getMonth()||(n.getMonth()===b.getMonth()&&n.getDate()<b.getDate()))a--;return a;};
 const ageText=d=>{const a=ageOf(d);return a==null||a<0||a>120?'—':a+' anos';};
-function setPTab(n){document.querySelectorAll('[data-ptab]').forEach(b=>b.setAttribute('aria-selected',String(b.dataset.ptab===n)));['info','grade','history'].forEach(t=>$('ptab-'+t).classList.toggle('hidden-view',t!==n));}
+function setPTab(n){document.querySelectorAll('[data-ptab]').forEach(b=>b.setAttribute('aria-selected',String(b.dataset.ptab===n)));['info','grade','history','dependents','vehicles','addresses','qual'].forEach(t=>$('ptab-'+t).classList.toggle('hidden-view',t!==n));}
 document.querySelectorAll('[data-ptab]').forEach(b=>b.addEventListener('click',()=>setPTab(b.dataset.ptab)));
 $('mp-birth').addEventListener('change',()=>{$('mp-age').textContent=ageText($('mp-birth').value);});
 async function loadMyProfile(){
@@ -559,6 +567,7 @@ async function loadMyProfile(){
   $('mp-stats').innerHTML=statsHtml((rows||[]).find(r=>r.member_id===me.id),p.grade_id,since);
   $('mp-charts').innerHTML=await chartsHtml(me.id,p.joined_at,p.grade_id);
   $('mp-history').innerHTML=await historyHtml(me.id,false);
+  loadMyEntities();
 }
 $('mp-form').addEventListener('submit',async e=>{
   e.preventDefault();
@@ -630,11 +639,13 @@ async function openMemberModal(id){
     <div class="space-y-2"><h4 class="font-heading text-white uppercase">Registrar participação</h4>${eventsCache.length?`<div class="grid md:grid-cols-3 gap-3"><div><label class="block text-xs text-gray-300 mb-2" for="mm-ev">Evento</label><select class="field" id="mm-ev">${evOpts}</select></div><div><label class="block text-xs text-gray-300 mb-2" for="mm-st">Situação</label><select class="field" id="mm-st">${PART_OPTS.map(([v,l])=>`<option value="${v}">${l}</option>`).join('')}</select></div><div><label class="block text-xs text-gray-300 mb-2" for="mm-pnote">Observação</label><input class="field" id="mm-pnote" maxlength="1000"></div></div><button class="btn btn-primary btn-sm" data-mm="part">Registrar participação</button>`:'<p class="text-sm text-gray-400">Crie um evento na aba Eventos para registrar presenças.</p>'}</div>
     <div><label class="block text-xs text-gray-300 mb-2" for="mm-note">Nova observação administrativa</label><textarea class="field" id="mm-note" rows="2" maxlength="2000"></textarea><button class="btn btn-secondary btn-sm mt-2" data-mm="note">Adicionar observação</button></div>
     <p id="mm-message" class="text-sm" role="status" aria-live="polite"></p>
+    <div><h4 class="font-heading text-lg uppercase text-white mb-3">Dados privados (somente leitura)</h4><div id="mm-private" class="space-y-4"></div></div>
     <div><h4 class="font-heading text-lg uppercase text-white mb-3">Histórico do integrante</h4><div id="mm-history" class="space-y-2 max-h-96 overflow-y-auto">Carregando...</div></div></div>`;
   modal.classList.remove('hidden-view');document.body.style.overflow='hidden';
   setAvatar($('mm-avatar'),p.photo_url,p.display_name);bindMask($('mm-wa'));bindMask($('mm-em'));
   $('mm-history').innerHTML=await historyHtml(id,true);
   $('mm-charts').innerHTML=await chartsHtml(id,p.joined_at,p.grade_id);
+  loadPrivate(id);
 }
 $('member-modal').addEventListener('click',async e=>{
   if(e.target.id==='member-modal'){closeModal();return;}
@@ -814,6 +825,96 @@ $('cfg-cat-form').addEventListener('submit',async e=>{
   e.preventDefault();const name=$('cfg-cat-name').value.trim();if(name.length<2)return message('cfg-message','Informe o nome da categoria.','error');
   const {error}=await supabaseClient.from('event_categories').insert({name});
   if(error)return message('cfg-message','Não foi possível criar a categoria (nome repetido?).','error');$('cfg-cat-name').value='';afterConfig('Categoria criada.');
+});
+/* ───────── Etapa 2: dependentes, veículos, endereços, profissão, cursos, conhecimentos ───────── */
+const UFS='AC AL AP AM BA CE DF ES GO MA MT MS MG PA PB PR PE PI RJ RN RS RO RR SC SP SE TO'.split(' ');
+const todayStr=()=>{const d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');};
+const maskPlate=p=>p?p.slice(0,3)+'•'.repeat(Math.max(0,p.length-3)):'';
+const fmtCep=v=>{const d=digitsOf(v).slice(0,8);return d.length>5?d.slice(0,5)+'-'+d.slice(5):d;};
+const ENT={
+  dependents:{table:'member_dependents',title:'Dependentes',noun:'dependente',fields:[
+    {k:'full_name',l:'Nome completo',req:1,max:100},{k:'relationship',l:'Grau de parentesco',req:1,max:50},
+    {k:'birth_date',l:'Data de nascimento',t:'date',req:1,noFuture:1},{k:'notes',l:'Observações (opcional)',t:'textarea',max:500}],
+    line:r=>({t:r.full_name,s:`${r.relationship} · ${ageText(r.birth_date)} · nasc. ${fmtDay(r.birth_date)}`,n:r.notes})},
+  vehicles:{table:'member_vehicles',title:'Meus veículos',noun:'veículo',fields:[
+    {k:'vehicle_type',l:'Tipo',t:'select',opts:['Moto','Carro','Outro'],req:1},{k:'brand',l:'Marca',max:50},{k:'model',l:'Modelo',max:50},
+    {k:'year',l:'Ano',t:'number',min:1900,maxv:2100},{k:'color',l:'Cor',max:30},{k:'plate',l:'Placa',max:8,mask:'plate'},{k:'notes',l:'Observações',t:'textarea',max:500}],
+    line:(r,ro)=>({t:`${r.vehicle_type} ${r.brand||''} ${r.model||''}${r.year?' '+r.year:''}`.replace(/\s+/g,' ').trim(),s:`${r.color||''}${r.plate?` · Placa: <span ${ro?`data-full="${safeText(r.plate)}" data-mask="${safeText(maskPlate(r.plate))}"`:''}>${safeText(ro?maskPlate(r.plate):r.plate)}</span>${ro?' <button type="button" class="text-gold underline text-xs" data-reveal>mostrar</button>':''}`:''}`,raw:1,n:r.notes})},
+  addresses:{table:'member_addresses',title:'Endereços residenciais',noun:'endereço',max:5,fields:[
+    {k:'label',l:'Identificação (ex.: Residência Principal)',req:1,max:50},{k:'cep',l:'CEP',mask:'cep',max:9},{k:'state',l:'Estado',t:'select',opts:UFS,req:1},
+    {k:'city',l:'Cidade',req:1,max:80},{k:'neighborhood',l:'Bairro',max:80},{k:'street',l:'Rua ou avenida',req:1,max:120},
+    {k:'number',l:'Número',max:15},{k:'complement',l:'Complemento',max:60},{k:'reference',l:'Referência (opcional)',max:120},{k:'is_primary',l:'Endereço principal',t:'checkbox'}],
+    line:r=>({t:r.label,badge:r.is_primary?'Principal':'',s:`${r.street||''}${r.number?', '+r.number:''}${r.complement?' - '+r.complement:''}<br>${r.neighborhood?r.neighborhood+' · ':''}${r.city}/${r.state}${r.cep?' · CEP '+fmtCep(r.cep):''}`,raw:1,n:r.reference?'Ref.: '+r.reference:''})},
+  profession:{table:'member_profession',title:'Profissão atual',single:1,fields:[
+    {k:'profession',l:'Profissão',req:1,max:100},{k:'company',l:'Empresa (opcional)',max:100},{k:'area',l:'Área de atuação',max:100},{k:'description',l:'Descrição profissional (opcional)',t:'textarea',max:1000}],
+    line:r=>({t:r.profession,s:[r.company,r.area].filter(Boolean).join(' · '),n:r.description})},
+  courses:{table:'member_courses',title:'Cursos',noun:'curso',fields:[
+    {k:'name',l:'Nome do curso',req:1,max:150},{k:'institution',l:'Instituição',max:120},{k:'completed_on',l:'Data de conclusão',t:'date'},
+    {k:'hours',l:'Carga horária (h)',t:'number',min:0,maxv:5000},{k:'description',l:'Descrição',t:'textarea',max:1000}],
+    line:r=>({t:r.name,s:[r.institution,r.completed_on?fmtDay(r.completed_on):'',r.hours?r.hours+' h':''].filter(Boolean).join(' · '),n:r.description})},
+  skills:{table:'member_skills',title:'Conhecimentos e habilidades',noun:'conhecimento',fields:[
+    {k:'name',l:'Conhecimento ou habilidade',req:1,max:100},{k:'level',l:'Nível de domínio (opcional)',t:'select',opts:['Básico','Intermediário','Avançado','Especialista']},{k:'description',l:'Descrição',t:'textarea',max:1000}],
+    line:r=>({t:r.name,badge:r.level||'',s:'',n:r.description})}
+};
+const entRows={};
+function entFieldHtml(key,f,v){
+  const id=`f-${key}-${f.k}`,val=v??'',lab=`<label class="block text-xs text-gray-300 mb-2" for="${id}">${f.l}${f.req?' *':''}</label>`;
+  if(f.t==='textarea')return `<div class="md:col-span-2">${lab}<textarea class="field" id="${id}" rows="2" maxlength="${f.max||500}">${safeText(val)}</textarea></div>`;
+  if(f.t==='select')return `<div>${lab}<select class="field" id="${id}"><option value="">—</option>${f.opts.map(o=>`<option ${o===val?'selected':''}>${safeText(o)}</option>`).join('')}</select></div>`;
+  if(f.t==='checkbox')return `<div class="flex items-end"><label class="flex items-center gap-2 text-sm text-gray-200 pb-3"><input type="checkbox" id="${id}" ${v?'checked':''} class="accent-[#c9a84c] w-4 h-4"> ${f.l}</label></div>`;
+  const shown=f.mask==='cep'?fmtCep(val):val;
+  return `<div>${lab}<input class="field" id="${id}" type="${f.t||'text'}" ${f.max?`maxlength="${f.max}"`:''} ${f.min!=null?`min="${f.min}" max="${f.maxv}"`:''} ${f.mask?`data-mask="${f.mask}"`:''} value="${safeText(shown)}"></div>`;
+}
+function entFormHtml(key,row){
+  const cfg=ENT[key];
+  return `<form class="panel p-4 grid md:grid-cols-2 gap-3 mb-3" data-key="${key}" data-id="${row?.id||''}" novalidate>${cfg.fields.map(f=>entFieldHtml(key,f,row?row[f.k]:(f.k==='is_primary'&&key==='addresses'&&!(entRows[key]||[]).length)?true:'')).join('')}<div class="md:col-span-2 flex flex-wrap gap-2"><button class="btn btn-primary btn-sm" type="submit"><i class="fa-solid fa-floppy-disk mr-1"></i>Salvar</button>${cfg.single?'':`<button class="btn btn-secondary btn-sm" type="button" data-entact="cancel" data-key="${key}">Cancelar</button>`}</div></form>`;
+}
+function renderEnt(key,rows,o={}){
+  const cfg=ENT[key],ro=!!o.ro,box=$(o.box||'ent-'+key);if(!box)return;
+  if(!ro)entRows[key]=rows;
+  const list=rows.map(r=>{const L=cfg.line(r,ro);return `<div class="row-card flex flex-wrap justify-between gap-3"><div class="min-w-0 flex-1"><div class="text-sm text-white font-medium">${safeText(L.t)}${L.badge?` <span class="patch-badge ml-1">${safeText(L.badge)}</span>`:''}</div>${L.s?`<div class="text-xs text-gray-300">${L.raw?L.s:safeText(L.s)}</div>`:''}${L.n?`<div class="text-xs text-gray-400 mt-1 whitespace-pre-line">${safeText(L.n)}</div>`:''}</div>${ro||cfg.single?'':`<div class="flex flex-wrap gap-2 items-start">${key==='addresses'&&!r.is_primary?`<button class="btn btn-secondary btn-sm" data-entact="primary" data-key="${key}" data-id="${r.id}">Tornar principal</button>`:''}<button class="btn btn-secondary btn-sm" data-entact="edit" data-key="${key}" data-id="${r.id}">Editar</button><button class="btn btn-danger btn-sm" data-entact="del" data-key="${key}" data-id="${r.id}"><i class="fa-solid fa-trash"></i></button></div>`}</div>`;}).join('');
+  if(ro){box.innerHTML=`<div><h5 class="font-heading text-sm uppercase tracking-widest text-gold mb-2">${cfg.title}</h5>${list||'<p class="text-xs text-gray-500">Nenhum registro.</p>'}</div>`;return;}
+  box.innerHTML=`<div class="space-y-3"><div class="flex flex-wrap items-center justify-between gap-2"><h4 class="font-heading text-lg uppercase text-white">${cfg.title}${cfg.max?` <span class="text-xs text-gray-400 normal-case">(${rows.length}/${cfg.max})</span>`:''}</h4>${cfg.single?'':`<button class="btn btn-primary btn-sm" data-entact="add" data-key="${key}"><i class="fa-solid fa-plus mr-1"></i>Adicionar</button>`}</div><p id="ent-msg-${key}" class="text-sm" role="status" aria-live="polite"></p><div id="ent-form-${key}">${cfg.single?entFormHtml(key,rows[0]):''}</div><div class="space-y-2">${cfg.single?'':(list||`<p class="text-sm text-gray-400">Nenhum ${cfg.noun} cadastrado.</p>`)}</div></div>`;
+}
+async function loadEnt(key){const {data,error}=await supabaseClient.from(ENT[key].table).select('*').eq('member_id',me.id).order('created_at',{ascending:true});if(error){const b=$('ent-'+key);if(b)b.innerHTML='<p class="text-sm text-red-300">Não foi possível carregar. Rode o fase7-qualificacoes.sql no Supabase.</p>';return;}renderEnt(key,data||[]);}
+function loadMyEntities(){Object.keys(ENT).forEach(loadEnt);}
+async function loadPrivate(id){
+  const keys=Object.keys(ENT);$('mm-private').innerHTML=keys.map(k=>`<div id="mm-ent-${k}"></div>`).join('');
+  const res=await Promise.all(keys.map(k=>supabaseClient.from(ENT[k].table).select('*').eq('member_id',id).order('created_at',{ascending:true})));
+  keys.forEach((k,i)=>renderEnt(k,res[i].data||[],{ro:true,box:'mm-ent-'+k}));
+}
+document.addEventListener('input',e=>{const m=e.target.dataset?.mask;if(m==='cep')e.target.value=fmtCep(e.target.value);if(m==='plate')e.target.value=e.target.value.toUpperCase().replace(/[^A-Za-z0-9]/g,'').slice(0,7);});
+document.addEventListener('click',async e=>{
+  const rv=e.target.closest('[data-reveal]');if(rv){const sp=rv.previousElementSibling,show=sp.textContent===sp.dataset.mask;sp.textContent=show?sp.dataset.full:sp.dataset.mask;rv.textContent=show?'ocultar':'mostrar';return;}
+  const b=e.target.closest('[data-entact]');if(!b)return;
+  const key=b.dataset.key,cfg=ENT[key],id=Number(b.dataset.id),act=b.dataset.entact,msg=t=>message('ent-msg-'+key,t,'error');
+  if(act==='cancel'){$('ent-form-'+key).innerHTML='';return;}
+  if(act==='add'){if(cfg.max&&(entRows[key]||[]).length>=cfg.max)return msg(`Limite de ${cfg.max} ${cfg.noun}s atingido.`);$('ent-form-'+key).innerHTML=entFormHtml(key,null);$('ent-form-'+key).scrollIntoView({behavior:'smooth',block:'center'});return;}
+  if(act==='edit'){$('ent-form-'+key).innerHTML=entFormHtml(key,entRows[key].find(r=>r.id===id));$('ent-form-'+key).scrollIntoView({behavior:'smooth',block:'center'});return;}
+  if(act==='del'){if(!confirm('Excluir este registro? Esta ação não pode ser desfeita.'))return;const {error}=await supabaseClient.from(cfg.table).delete().eq('id',id);if(error)return msg('Não foi possível excluir.');await loadEnt(key);message('ent-msg-'+key,'Registro excluído.','success');return;}
+  if(act==='primary'){const {error}=await supabaseClient.from(cfg.table).update({is_primary:true}).eq('id',id);if(error)return msg('Não foi possível alterar o endereço principal.');await loadEnt(key);message('ent-msg-'+key,'Endereço principal atualizado.','success');}
+});
+document.addEventListener('submit',async e=>{
+  const f=e.target.closest('form[data-key]');if(!f)return;e.preventDefault();
+  const key=f.dataset.key,cfg=ENT[key],id=f.dataset.id,pl={},msg=t=>message('ent-msg-'+key,t,'error');
+  for(const fl of cfg.fields){
+    const el=f.querySelector(`#f-${key}-${fl.k}`);let v=fl.t==='checkbox'?el.checked:el.value.trim();
+    if(fl.mask==='cep')v=digitsOf(v);if(fl.mask==='plate')v=v.toUpperCase().replace(/[^A-Z0-9]/g,'');
+    if(fl.req&&(v===''||v==null))return msg(`Preencha: ${fl.l.replace(/ \(.*/,'')}.`);
+    if(v==='')v=null;
+    if(fl.t==='number'&&v!=null){v=Number(v);if(!Number.isInteger(v)||v<fl.min||v>fl.maxv)return msg(`${fl.l} inválido.`);}
+    if(fl.noFuture&&v&&v>todayStr())return msg('A data não pode ser futura.');
+    if(fl.mask==='cep'&&v&&v.length!==8)return msg('CEP precisa ter 8 dígitos.');
+    if(fl.mask==='plate'&&v&&!/^[A-Z]{3}[0-9][A-Z0-9][0-9]{2}$/.test(v))return msg('Placa inválida (ex.: ABC1D23 ou ABC1234).');
+    pl[fl.k]=v;
+  }
+  if(key==='addresses'&&!id&&!(entRows[key]||[]).length)pl.is_primary=true;
+  let res;
+  if(cfg.single)res=await supabaseClient.from(cfg.table).upsert({member_id:me.id,...pl},{onConflict:'member_id'});
+  else if(id)res=await supabaseClient.from(cfg.table).update(pl).eq('id',Number(id));
+  else{if(cfg.max&&(entRows[key]||[]).length>=cfg.max)return msg(`Limite de ${cfg.max} ${cfg.noun}s atingido.`);res=await supabaseClient.from(cfg.table).insert({member_id:me.id,...pl});}
+  if(res.error)return msg('Não foi possível salvar. Confira os dados.');
+  await loadEnt(key);message('ent-msg-'+key,'Salvo com sucesso.','success');
 });
 /* ───────── Comando regional (dados vindos do banco, só após login) ───────── */
 async function loadCommand(){
