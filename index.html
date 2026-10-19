@@ -220,8 +220,8 @@
         .tab-btn:hover { border-color:#c9a84c; color:#c9a84c; }
         .tab-btn[aria-selected="true"] { background:#c9a84c; border-color:#c9a84c; color:#111; }
 
-        #admin-panel{background:#0a0a0b;padding:0!important;overflow:hidden;width:min(1400px,98vw);position:relative;left:50%;transform:translateX(-50%);border-color:#2b2b2f}
-        .adm-shell{display:flex;min-height:80vh}.adm-side{width:210px;flex:none;background:#0d0d0f;border-right:1px solid #2b2b2f;padding:14px 10px}
+        #admin-panel{background:#0a0a0b;padding:0!important;width:100%!important;border-color:#2b2b2f}
+        .adm-shell{display:flex;min-height:100vh}.adm-side{flex:none;background:#0d0d0f;border-right:1px solid #2b2b2f;padding:14px 10px}
         .adm-brand img{display:block;width:90px;margin:0 auto 10px}.adm-side h6{font:600 12px 'Oswald',sans-serif;letter-spacing:.06em;color:#c9a84c;margin:16px 6px 6px}
         .adm-side .tab-btn{display:flex;align-items:center;gap:9px;width:100%;border:0;border-radius:4px;padding:7px 9px;font:400 12px 'Inter',Arial,sans-serif;letter-spacing:0;text-align:left;color:#ccc}
         .adm-side .tab-btn i{width:14px;text-align:center;color:#999}.adm-side .tab-btn:hover{background:#1c1c1f;color:#fff}
@@ -233,7 +233,6 @@
         .adm-user{margin-left:auto;display:flex;align-items:center;gap:10px;font-size:13px}.adm-user i{font-size:22px;color:#c9a84c}
         .adm-foot{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;padding:14px 18px;border-top:1px solid #2b2b2f;color:#bbb;font-size:11px;letter-spacing:1px}
         #admin-panel .row-card{background:#111113;border-color:#2b2b2f;border-radius:2px}
-        @media(max-width:900px){.adm-shell{flex-direction:column}.adm-side{width:100%;border-right:0;border-bottom:1px solid #2b2b2f}.adm-side [role=tablist]{display:flex;flex-wrap:wrap;gap:4px}.adm-side h6{display:none}.adm-side .tab-btn{width:auto}.adm-brand{display:none}}
 
         #portal-view.mm-on>*{margin-top:0!important}
         #member-main.adm-only>:not(#admin-panel){display:none!important}
@@ -257,18 +256,24 @@
 
         body:has(#portal-view:not(.hidden-view) #member-main.adm-only) .skull-bg,body:has(#portal-view:not(.hidden-view) #member-main.adm-only) .logo-bg{display:none!important}
         body:has(#portal-view:not(.hidden-view) #member-main.adm-only){background:#0a0a0b!important}
-        body:has(#portal-view:not(.hidden-view) #member-main.adm-only) main{max-width:none!important;padding:0!important}
-        body:has(#portal-view:not(.hidden-view) #member-main.adm-only) #admin-panel{width:100%!important;left:0!important;transform:none!important;border-radius:0!important;border-width:0!important}
-        body:has(#portal-view:not(.hidden-view) #member-main.adm-only) .adm-shell{min-height:calc(100vh - 62px)}
+        body:has(#portal-view:not(.hidden-view) #member-main.adm-only) main{max-width:none!important;padding:0!important;margin:0!important;flex-grow:1}
+        body:has(#portal-view:not(.hidden-view) #member-main.adm-only) #admin-panel{width:100%!important;border-radius:0!important;border-width:0!important}
 
         body:has(#portal-view:not(.hidden-view) #member-main.adm-only) nav.navbar{display:none!important}body:has(#portal-view:not(.hidden-view) #member-main.adm-only) .adm-top{display:none!important}
-        body:has(#portal-view:not(.hidden-view) #member-main.adm-only) .adm-shell{min-height:100vh}
-        #admin-panel .adm-side{position:sticky;top:0;height:100vh;overflow-y:auto;display:flex;flex-direction:column;width:240px}
+        /* Admin sidebar — fixo, full-height, mesmo sistema do sidebar do integrante */
+        #admin-panel .adm-side{position:fixed;top:0;left:0;bottom:0;height:100vh;overflow-y:auto;display:flex;flex-direction:column;width:260px;z-index:60;transition:transform .25s}
+        #admin-panel .adm-shell{margin-left:260px;min-height:100vh;transition:margin-left .25s}
+        .sb-min #admin-panel .adm-side{transform:translateX(-260px)}
+        .sb-min #admin-panel .adm-shell{margin-left:0}
         #admin-panel .adm-id{text-align:center;margin-bottom:6px}#admin-panel .adm-id b{display:block;font:900 22px Impact,'Arial Black',sans-serif;letter-spacing:1px;color:#eee}#admin-panel .adm-id small{color:#c9a84c;font-size:10px;letter-spacing:.12em;text-transform:uppercase}
         #admin-panel .adm-bottom{margin-top:auto;padding-top:14px;border-top:1px solid #2b2b2f}#adm-email{display:block;font-size:11px;color:#9a9aa0;word-break:break-all;margin-bottom:8px;text-align:center}
-        @media(max-width:900px){#admin-panel .adm-side{position:static;height:auto;width:100%}}
+        @media(max-width:900px){
+          #admin-panel .adm-side{box-shadow:8px 0 30px rgba(0,0,0,.65)}
+          #admin-panel .adm-shell{margin-left:0!important}
+          body.sb-min #admin-panel .adm-side{transform:translateX(-260px)}
+          body:not(.sb-min) #admin-panel .adm-side{transform:translateX(0)}
+        }
         body:has(#portal-view:not(.hidden-view) #member-main.adm-only) > footer,body:has(#portal-view:not(.hidden-view) #member-main.adm-only) .adm-foot{display:none!important}
-        body:has(#portal-view:not(.hidden-view) #member-main.adm-only) main{padding:0!important;margin:0!important;flex-grow:1}
 
         #member-side{background:linear-gradient(180deg,#131318 0%,#0b0b0d 100%);border-right:1px solid rgba(201,168,76,.2);box-shadow:8px 0 30px rgba(0,0,0,.45);scrollbar-width:thin;scrollbar-color:#2b2b2f transparent}
         #member-side .adm-brand img{filter:drop-shadow(0 4px 14px rgba(201,168,76,.28))}
@@ -310,7 +315,7 @@
         #admin-panel .adm-side .tab-btn.sub{margin-left:14px;width:calc(100% - 14px);padding:6px 10px;font-size:12.5px;border-radius:0 12px 12px 0;border-left:2px solid #2b2b34}
         #admin-panel .adm-side .tab-btn.sub i{width:24px;height:24px;line-height:24px;font-size:11px;border-radius:7px}
         #admin-panel .adm-side .tab-btn.sub[aria-selected="true"]{border-left-color:#d6b65a}
-        #admin-panel .adm-side{width:260px;padding:18px 12px}#admin-panel .adm-side .adm-bottom{border-top-color:#23232a}
+        #admin-panel .adm-side{padding:18px 12px}#admin-panel .adm-side .adm-bottom{border-top-color:#23232a}
 
         .kpi-card{cursor:pointer;transition:transform .2s,box-shadow .2s,background .2s}.kpi-card:hover{transform:translateY(-3px);background:#17171b;box-shadow:0 10px 24px rgba(0,0,0,.45)}
         #kpi-modal{position:fixed;inset:0;z-index:300;background:rgba(0,0,0,.72);align-items:center;justify-content:center;padding:18px}#kpi-modal:not(.hidden-view){display:flex}
@@ -325,10 +330,9 @@
         #admin-panel .adm-side .chev{margin-left:auto;width:8px;height:8px;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(45deg);transition:transform .25s;flex:none;margin-right:4px}
         #admin-panel .adm-side .grp[aria-expanded="true"] .chev{transform:rotate(-135deg)}
         #admin-panel .adm-side .sub-wrap{overflow:hidden;max-height:0;transition:max-height .3s ease}#admin-panel .adm-side .sub-wrap.open{max-height:560px}
-        #admin-panel .adm-side{transition:margin-left .25s}
-        #portal-view:has(#member-main.adm-only) #sb-toggle{display:block;top:24px}
-        @media(min-width:901px){.sb-min #admin-panel .adm-side{margin-left:-260px}}
-        @media(max-width:900px){#portal-view:has(#member-main.adm-only) #sb-toggle{display:none}}
+        #portal-view:has(#member-main.adm-only) #sb-toggle{display:block;top:24px;left:calc(260px - 1px);transition:left .25s}
+        body.sb-min #portal-view:has(#member-main.adm-only) #sb-toggle{left:0}
+        @media(max-width:900px){#portal-view:has(#member-main.adm-only) #sb-toggle{display:block;top:24px}}
 
         #member-main>#travel-panel{display:none}#member-main.view-travel>#travel-panel{display:block}#member-main.view-travel>:not(#travel-panel){display:none!important}
         .tv-form{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}.tv-form label{display:block;font-size:12px;color:#cfcfd6;margin-bottom:6px}
@@ -382,7 +386,25 @@
     <section id="change-password-view" class="hidden-view max-w-md mx-auto panel p-6 md:p-8"><div class="text-center mb-6"><div class="mx-auto mb-4 w-14 h-14 rounded-xl flex items-center justify-center bg-[#c9a84c18] text-gold text-2xl"><i class="fa-solid fa-key"></i></div><h2 class="font-display text-3xl tracking-widest">Defina sua senha</h2><p class="text-sm text-gray-400 mt-2">Por segurança, troque a senha temporária antes de acessar o portal.</p></div><form id="change-password-form" class="space-y-4"><div><label for="first-new-password" class="block text-xs text-gray-300 mb-2">Nova senha (mínimo 12 caracteres)</label><input class="field" id="first-new-password" type="password" autocomplete="new-password" minlength="12" required></div><div><label for="first-confirm-password" class="block text-xs text-gray-300 mb-2">Confirme a nova senha</label><input class="field" id="first-confirm-password" type="password" autocomplete="new-password" minlength="12" required></div><button class="btn btn-primary w-full" type="submit">Salvar nova senha</button><p id="password-message" class="text-sm" role="status" aria-live="polite"></p></form><button id="cancel-password-change" class="btn btn-secondary w-full mt-3" type="button">Sair</button></section>
     <section id="loading-view" class="hidden-view text-center py-16"><i class="fa-solid fa-circle-notch fa-spin text-gold text-3xl"></i><p class="mt-4 text-gray-400">Verificando acesso...</p></section>
     <div id="member-modal" class="hidden-view fixed inset-0 z-50 bg-black/75 overflow-y-auto p-4" role="dialog" aria-modal="true" aria-label="Perfil do integrante"></div>
-    <section id="portal-view" class="hidden-view space-y-10"><button type="button" id="sb-toggle" aria-label="Mostrar ou ocultar menu" title="Mostrar/ocultar menu"><i class="fa-solid fa-chevron-left"></i></button><aside id="member-side" class="hidden-view adm-side"><div class="adm-brand"><img src="escudo.png" alt="Insanos MC" onerror="this.style.display='none'"></div><div class="adm-id"><b>INSANOS MC</b><small>Regional Jaraguá - SP · XXXV</small></div><div role="tablist" aria-label="Menu do integrante"><h6>Portal</h6><button type="button" class="tab-btn" role="tab" data-mside="home" aria-selected="true"><i class="fa-solid fa-house-chimney"></i>Início</button><button type="button" class="tab-btn" id="info-open"><i class="fa-solid fa-circle-info"></i>Informativo</button><button type="button" class="tab-btn" role="tab" data-mside="divisao" aria-selected="false"><i class="fa-solid fa-people-group"></i>Divisão</button><button type="button" class="tab-btn" role="tab" data-mside="travel" aria-selected="false"><i class="fa-solid fa-route"></i>Protocolo de Viagem</button><button type="button" class="tab-btn" id="perfil-main" role="tab" data-mside="perfil" data-pgo="info" aria-selected="false" aria-expanded="false" aria-controls="perfil-subs"><i class="fa-solid fa-id-card"></i>Meu Perfil<span class="chev"></span></button><div id="perfil-subs" class="sub-wrap"><button type="button" class="tab-btn sub" role="tab" data-mside="perfil" data-pgo="info" aria-selected="false"><i class="fa-solid fa-user"></i>Informações pessoais</button><button type="button" class="tab-btn sub" role="tab" data-mside="perfil" data-pgo="grade" aria-selected="false"><i class="fa-solid fa-stairs"></i>Grau, cargo e divisão</button><button type="button" class="tab-btn sub" role="tab" data-mside="perfil" data-pgo="history" aria-selected="false"><i class="fa-solid fa-clock-rotate-left"></i>Histórico</button><button type="button" class="tab-btn sub" role="tab" data-mside="perfil" data-pgo="honors" aria-selected="false"><i class="fa-solid fa-medal"></i>Honrarias</button><button type="button" class="tab-btn sub" role="tab" data-mside="perfil" data-pgo="dependents" aria-selected="false"><i class="fa-solid fa-children"></i>Dependentes</button><button type="button" class="tab-btn sub" role="tab" data-mside="perfil" data-pgo="vehicles" aria-selected="false"><i class="fa-solid fa-motorcycle"></i>Veículos</button><button type="button" class="tab-btn sub" role="tab" data-mside="perfil" data-pgo="addresses" aria-selected="false"><i class="fa-solid fa-house"></i>Endereços</button><button type="button" class="tab-btn sub" role="tab" data-mside="perfil" data-pgo="qual" aria-selected="false"><i class="fa-solid fa-graduation-cap"></i>Profissão e qualificações</button></div></div></aside><div id="member-main" class="space-y-10">
+    <section id="portal-view" class="hidden-view space-y-10"><button type="button" id="sb-toggle" aria-label="Mostrar ou ocultar menu" title="Mostrar/ocultar menu"><i class="fa-solid fa-chevron-left"></i></button><aside id="member-side" class="hidden-view adm-side"><div class="adm-brand"><img src="escudo.png" alt="Insanos MC" onerror="this.style.display='none'"></div><div class="adm-id"><b>INSANOS MC</b><small>Regional Jaraguá - SP · XXXV</small></div><div role="tablist" aria-label="Menu do integrante">
+<h6>Portal</h6>
+<button type="button" class="tab-btn" role="tab" data-mside="home" aria-selected="true"><i class="fa-solid fa-house-chimney"></i>Início</button>
+<button type="button" class="tab-btn" id="info-open"><i class="fa-solid fa-circle-info"></i>Informativo</button>
+<h6>Minha Área</h6>
+<button type="button" class="tab-btn" id="perfil-main" role="tab" data-mside="perfil" data-pgo="info" aria-selected="false" aria-expanded="false" aria-controls="perfil-subs"><i class="fa-solid fa-id-card"></i>Meu Perfil<span class="chev"></span></button>
+<div id="perfil-subs" class="sub-wrap">
+  <button type="button" class="tab-btn sub" role="tab" data-mside="perfil" data-pgo="info" aria-selected="false"><i class="fa-solid fa-user"></i>Informações pessoais</button>
+  <button type="button" class="tab-btn sub" role="tab" data-mside="perfil" data-pgo="grade" aria-selected="false"><i class="fa-solid fa-stairs"></i>Grau, cargo e divisão</button>
+  <button type="button" class="tab-btn sub" role="tab" data-mside="perfil" data-pgo="history" aria-selected="false"><i class="fa-solid fa-clock-rotate-left"></i>Histórico</button>
+  <button type="button" class="tab-btn sub" role="tab" data-mside="perfil" data-pgo="honors" aria-selected="false"><i class="fa-solid fa-medal"></i>Honrarias</button>
+  <button type="button" class="tab-btn sub" role="tab" data-mside="perfil" data-pgo="dependents" aria-selected="false"><i class="fa-solid fa-children"></i>Dependentes</button>
+  <button type="button" class="tab-btn sub" role="tab" data-mside="perfil" data-pgo="vehicles" aria-selected="false"><i class="fa-solid fa-motorcycle"></i>Veículos</button>
+  <button type="button" class="tab-btn sub" role="tab" data-mside="perfil" data-pgo="addresses" aria-selected="false"><i class="fa-solid fa-house"></i>Endereços</button>
+  <button type="button" class="tab-btn sub" role="tab" data-mside="perfil" data-pgo="qual" aria-selected="false"><i class="fa-solid fa-graduation-cap"></i>Profissão e qualificações</button>
+</div>
+<button type="button" class="tab-btn" role="tab" data-mside="divisao" aria-selected="false"><i class="fa-solid fa-people-group"></i>Divisão</button>
+<button type="button" class="tab-btn" role="tab" data-mside="travel" aria-selected="false"><i class="fa-solid fa-route"></i>Protocolo de Viagem</button>
+</div></aside><div id="member-main" class="space-y-10">
       <div class="flex flex-wrap items-end justify-between gap-4"><div><p class="text-xs text-gold font-heading tracking-widest uppercase mb-1">Área restrita</p><h2 class="font-display text-4xl tracking-widest">Bem-vindo ao Portal</h2><p id="welcome-text" class="text-sm text-gray-400 mt-2"></p></div><span id="role-badge" class="patch-badge"><i class="fa-solid fa-user-check"></i> Integrante autorizado</span></div>
       <section id="travel-panel" aria-live="polite"><div id="travel-body"></div></section>
       <section id="division-panel" aria-live="polite"><div id="division-body"></div></section>
@@ -420,14 +442,15 @@
         <div id="ptab-addresses" class="hidden-view" role="tabpanel"><div id="ent-addresses"></div></div>
         <div id="ptab-qual" class="hidden-view space-y-6" role="tabpanel"><div id="ent-profession"></div><hr class="gold-line"><div id="ent-courses"></div><hr class="gold-line"><div id="ent-skills"></div></div>
       </section>
-      <div id="admin-panel" class="hidden-view panel p-5 md:p-6 space-y-5">
+      <div id="admin-panel" class="hidden-view">
 <div class="adm-shell"><aside class="adm-side"><div class="adm-brand"><img src="escudo.png" alt="Insanos MC" onerror="this.style.display='none'"></div>
 <div class="adm-id"><b>INSANOS MC</b><small>Regional Jaraguá - SP · XXXV</small></div>
 <div role="tablist" aria-label="Seções do painel">
 <button type="button" class="tab-btn grp" aria-expanded="true"><i class="fa-solid fa-chart-pie"></i>Visão Geral<span class="chev"></span></button><div class="sub-wrap open"><button type="button" class="tab-btn sub" role="tab" data-tab="dashadm" aria-selected="false"><i class="fa-solid fa-gauge-high"></i>Dashboard</button><button type="button" class="tab-btn sub" role="tab" data-tab="perfil" aria-selected="false"><i class="fa-solid fa-id-card"></i>Meu Perfil</button><button type="button" class="tab-btn sub" role="tab" data-tab="content" aria-selected="true"><i class="fa-solid fa-bullhorn"></i>Comunicados</button><button type="button" class="tab-btn sub" role="tab" data-tab="dash" aria-selected="false"><i class="fa-solid fa-chart-column"></i>Indicadores</button></div>
 <button type="button" class="tab-btn grp" aria-expanded="false"><i class="fa-solid fa-users"></i>Integrantes<span class="chev"></span></button><div class="sub-wrap"><button type="button" class="tab-btn sub" role="tab" data-tab="members" aria-selected="false"><i class="fa-solid fa-users"></i>Todos os Integrantes</button><button type="button" class="tab-btn sub" role="tab" data-tab="access" aria-selected="false"><i class="fa-solid fa-user-plus"></i>Cadastrar Acesso</button><button type="button" class="tab-btn sub" role="tab" data-tab="cargos" aria-selected="false"><i class="fa-solid fa-user-tie"></i>Cargos e Funções</button><button type="button" class="tab-btn sub" role="tab" data-tab="honors" aria-selected="false"><i class="fa-solid fa-medal"></i>Honrarias</button></div>
-<button type="button" class="tab-btn grp" aria-expanded="false"><i class="fa-solid fa-sitemap"></i>Organização Regional<span class="chev"></span></button><div class="sub-wrap"><button type="button" class="tab-btn sub" role="tab" data-tab="org" aria-selected="false"><i class="fa-solid fa-sitemap"></i>Organização Regional</button><button type="button" class="tab-btn sub" role="tab" data-tab="divisions" aria-selected="false"><i class="fa-solid fa-location-dot"></i>Divisões</button></div>
+<button type="button" class="tab-btn grp" aria-expanded="false"><i class="fa-solid fa-sitemap"></i>Organização Regional<span class="chev"></span></button><div class="sub-wrap"><button type="button" class="tab-btn sub" role="tab" data-tab="org" aria-selected="false"><i class="fa-solid fa-sitemap"></i>Organização Regional</button><button type="button" class="tab-btn sub" role="tab" data-tab="comando" aria-selected="false"><i class="fa-solid fa-crown"></i>Comando Regional</button><button type="button" class="tab-btn sub" role="tab" data-tab="divisions" aria-selected="false"><i class="fa-solid fa-location-dot"></i>Divisões</button></div>
 <button type="button" class="tab-btn grp" aria-expanded="false"><i class="fa-solid fa-calendar-check"></i>Eventos e Participação<span class="chev"></span></button><div class="sub-wrap"><button type="button" class="tab-btn sub" role="tab" data-tab="events" aria-selected="false"><i class="fa-solid fa-calendar-check"></i>Eventos</button></div>
+<button type="button" class="tab-btn grp" aria-expanded="false"><i class="fa-solid fa-route"></i>Viagens<span class="chev"></span></button><div class="sub-wrap"><button type="button" class="tab-btn sub" role="tab" data-tab="adm-travel" aria-selected="false"><i class="fa-solid fa-route"></i>Protocolos de Viagem</button></div>
 <button type="button" class="tab-btn grp" aria-expanded="false"><i class="fa-solid fa-gear"></i>Sistema<span class="chev"></span></button><div class="sub-wrap"><button type="button" class="tab-btn sub" role="tab" data-tab="config" aria-selected="false"><i class="fa-solid fa-sliders"></i>Configurações</button></div>
 </div><div class="adm-bottom"><span id="adm-email"></span><button type="button" id="adm-logout" class="btn btn-secondary text-sm" style="width:100%"><i class="fa-solid fa-right-from-bracket mr-2"></i>Sair</button></div></aside><div class="adm-main">
 <div class="adm-top"><div class="adm-logo">INSANOS MC</div><div class="adm-reg"><b>REGIONAL JARAGUÁ - SP</b><small>DISCIPLINA · LEALDADE · IRMANDADE</small></div><div class="adm-user"><i class="fa-solid fa-user-gear"></i><div><b>Administrador</b><small>Admin Principal</small></div></div></div>
@@ -495,6 +518,18 @@
           <div class="space-y-2"><h4 class="font-heading text-lg uppercase text-white">Histórico de cargos</h4><div id="cg-history" class="space-y-2 max-h-96 overflow-y-auto"></div></div>
         </div>
 
+        <div id="tab-comando" class="hidden-view space-y-5" role="tabpanel">
+          <div><h4 class="font-heading text-lg uppercase text-white">Comando Regional</h4><p class="text-xs text-gray-400 mt-1">O Comando Regional não é uma divisão: é a liderança (Grau V) que comanda todas as divisões da regional. Cada cargo abaixo mostra o integrante escolhido, que precisa ser Grau V. Para trocar a pessoa de um cargo, basta escolher outro integrante e salvar; o site é atualizado na hora (nome e WhatsApp vêm do cadastro do integrante).</p></div>
+          <div id="cr-list" class="space-y-3"></div>
+          <hr class="gold-line">
+          <form id="cr-new" class="grid md:grid-cols-4 gap-3" novalidate>
+            <div class="md:col-span-2"><label class="block text-xs text-gray-300 mb-2" for="cr-new-title">Novo cargo do comando</label><input class="field" id="cr-new-title" maxlength="60" placeholder="Ex.: Diretor Regional"></div>
+            <div><label class="block text-xs text-gray-300 mb-2" for="cr-new-icon">Ícone</label><select class="field" id="cr-new-icon"></select></div>
+            <div><label class="block text-xs text-gray-300 mb-2" for="cr-new-member">Integrante (Grau V)</label><select class="field" id="cr-new-member"></select></div>
+            <div class="md:col-span-4 flex flex-wrap items-center gap-3"><button class="btn btn-primary" type="submit"><i class="fa-solid fa-plus mr-2"></i>Adicionar cargo</button><p id="cr-message" class="text-sm" role="status" aria-live="polite"></p></div>
+          </form>
+        </div>
+
         <div id="tab-divisions" class="hidden-view space-y-5" role="tabpanel">
           <form id="dv-form" class="grid md:grid-cols-4 gap-3" novalidate>
             <div><label class="block text-xs text-gray-300 mb-2" for="dv-member">Integrante</label><select class="field" id="dv-member"></select></div>
@@ -543,6 +578,8 @@
           <div id="dash-body" class="grid md:grid-cols-2 gap-4"></div>
           <div id="dash-one" class="space-y-4"></div>
         </div>
+
+        <div id="tab-adm-travel" class="hidden-view space-y-4" role="tabpanel"><div id="adm-travel-body"><p class="text-sm text-gray-400">Carregando protocolos de viagem...</p></div></div>
 
         <div id="tab-config" class="hidden-view space-y-6" role="tabpanel">
           <div class="space-y-3"><h4 class="font-heading text-lg uppercase text-white">Regras gerais</h4><div class="grid md:grid-cols-3 gap-3"><div><label class="block text-xs text-gray-300 mb-2" for="cfg-min">Percentual mínimo padrão (%)</label><input class="field" id="cfg-min" type="number" min="0" max="100" step="1"></div><div class="flex items-end"><label class="flex items-center gap-2 text-sm text-gray-200 pb-3"><input type="checkbox" id="cfg-just" class="accent-[#c9a84c] w-4 h-4"> Ausência justificada entra no total de eventos</label></div><div class="flex items-end pb-1"><button class="btn btn-primary" id="cfg-save-general" type="button">Salvar regras gerais</button></div></div></div>
@@ -629,7 +666,7 @@ $('create-user-form').addEventListener('submit',async e=>{e.preventDefault();con
 /* ───────── Painel do administrador ───────── */
 let me=null, adminItems=[];
 const fmtDate=(v)=>v?new Date(v).toLocaleDateString('pt-BR'):'';
-function setTab(name){document.querySelectorAll('[data-tab]').forEach(b=>b.setAttribute('aria-selected',String(b.dataset.tab===name)));['content','members','events','org','cargos','divisions','honors','perfil','dashadm','dash','config','access'].forEach(t=>$('tab-'+t).classList.toggle('hidden-view',t!==name));if(name==='dashadm')renderDashAdm();if(name==='dash')refreshDash();if(name==='org')loadOrgTab();if(name==='cargos')loadCargosTab();if(name==='divisions')loadDivisionsTab();if(name==='honors')loadHonorsTab();if(name==='config')loadConfig();}
+function setTab(name){document.querySelectorAll('[data-tab]').forEach(b=>b.setAttribute('aria-selected',String(b.dataset.tab===name)));['content','members','events','org','cargos','divisions','comando','honors','perfil','dashadm','dash','config','access','adm-travel'].forEach(t=>$('tab-'+t).classList.toggle('hidden-view',t!==name));if(name==='dashadm')renderDashAdm();if(name==='dash')refreshDash();if(name==='org')loadOrgTab();if(name==='cargos')loadCargosTab();if(name==='divisions')loadDivisionsTab();if(name==='comando')loadComandoTab();if(name==='honors')loadHonorsTab();if(name==='config')loadConfig();if(name==='adm-travel')loadAdmTravelPanel();}
 document.querySelectorAll('[data-tab]').forEach(b=>b.addEventListener('click',()=>setTab(b.dataset.tab)));
 
 function resetContentForm(){$('content-form').reset();$('cc-id').value='';$('cc-order').value='100';$('cc-published').checked=true;$('cc-save').innerHTML='<i class="fa-solid fa-floppy-disk mr-2"></i>Publicar comunicado';$('cc-cancel').classList.add('hidden-view');}
@@ -1280,7 +1317,13 @@ function renderOrg(){
 /* ───────── Comando regional (dados vindos do banco, só após login) ───────── */
 async function loadCommand(){
   const holder=$('command-list');
-  const {data,error}=await supabaseClient.from('command_contacts').select('id,role_title,display_name,icon,whatsapp').eq('is_active',true).order('sort_order',{ascending:true}).order('id',{ascending:true});
+  let data=null,error=null;
+  const r=await supabaseClient.rpc('command_regional');
+  if(!r.error&&Array.isArray(r.data))data=r.data;
+  else{
+    const q=await supabaseClient.from('command_contacts').select('id,role_title,display_name,icon,whatsapp').eq('is_active',true).order('sort_order',{ascending:true}).order('id',{ascending:true});
+    data=q.data;error=q.error;
+  }
   if(error){holder.innerHTML='<div class="text-sm text-gray-400">Comando indisponível no momento. Rode o arquivo comando.sql no Supabase.</div>';return;}
   if(!data?.length){holder.innerHTML='<div class="text-sm text-gray-400">Nenhum responsável cadastrado ainda.</div>';return;}
   const extra=data.length%3===2;
@@ -1288,10 +1331,63 @@ async function loadCommand(){
     const icon=/^fa-[a-z0-9-]+$/.test(c.icon||'')?c.icon:'fa-user';
     const digits=String(c.whatsapp||'').replace(/\D/g,'');
     const hasWa=digits.length>=10&&digits.length<=15;
-    const wa=hasWa?`<a class="cmd-wa" href="https://wa.me/${digits}" target="_blank" rel="noopener noreferrer" aria-label="Abrir WhatsApp de ${safeText(c.display_name)}"><i class="fa-brands fa-whatsapp"></i></a>`:`<span class="cmd-wa off" aria-hidden="true"><i class="fa-brands fa-whatsapp"></i></span>`;
-    return `<div class="role-card p-4 flex items-center gap-4 ${extra&&i===data.length-1?'lg:col-span-2':''}"><div class="cmd-icon"><i class="fa-solid ${icon}"></i></div><div class="flex-1 min-w-0"><div class="text-[11px] text-gray-500 font-heading tracking-widest uppercase">${safeText(c.role_title)}</div><div class="font-heading font-bold text-white text-xl uppercase truncate">${safeText(c.display_name)}</div></div>${wa}</div>`;
+    const nm=c.display_name||'Vago';
+    const wa=hasWa?`<a class="cmd-wa" href="https://wa.me/${digits}" target="_blank" rel="noopener noreferrer" aria-label="Abrir WhatsApp de ${safeText(nm)}"><i class="fa-brands fa-whatsapp"></i></a>`:`<span class="cmd-wa off" aria-hidden="true"><i class="fa-brands fa-whatsapp"></i></span>`;
+    return `<div class="role-card p-4 flex items-center gap-4 ${extra&&i===data.length-1?'lg:col-span-2':''}"><div class="cmd-icon"><i class="fa-solid ${icon}"></i></div><div class="flex-1 min-w-0"><div class="text-[11px] text-gray-500 font-heading tracking-widest uppercase">${safeText(c.role_title)}</div><div class="font-heading font-bold text-white text-xl uppercase truncate">${safeText(nm)}</div></div>${wa}</div>`;
   }).join('');
 }
+
+/* Admin: Comando Regional (cargos do comando preenchidos por integrantes de Grau V) */
+const CR_ICONS=[['fa-crown','Coroa (Diretor)'],['fa-shield-halved','Escudo (Operacional)'],['fa-handshake','Aperto de mão (Social)'],['fa-file-signature','Documento (ADM)'],['fa-bullhorn','Megafone (Comunicação)'],['fa-star','Estrela'],['fa-gavel','Martelo'],['fa-scale-balanced','Balança'],['fa-motorcycle','Moto'],['fa-user-shield','Escudo com pessoa']];
+let crRows=[];
+const crMembers=()=>membersCache.filter(m=>m.is_active&&m.grade_id===G5());
+async function loadComandoTab(){
+  await ensureMembers();await loadRefs();
+  const {data,error}=await supabaseClient.from('command_contacts').select('id,role_title,display_name,icon,whatsapp,member_id,sort_order,is_active').order('sort_order',{ascending:true}).order('id',{ascending:true});
+  if(error){$('cr-list').innerHTML='<p class="text-sm text-red-300">Não foi possível carregar. Rode o arquivo comando_regional.sql no Supabase.</p>';return;}
+  crRows=data||[];
+  const g5=crMembers().map(m=>[m.id,m.display_name||m.email]);
+  $('cr-new-icon').innerHTML=optsHtml(CR_ICONS,'fa-user');
+  $('cr-new-member').innerHTML=optsHtml(g5,'','— Vago —');
+  if(!g5.length)message('cr-message','Nenhum integrante ativo de Grau V cadastrado ainda. Defina o grau em Todos os Integrantes.','error');
+  $('cr-list').innerHTML=crRows.map((c,i)=>{
+    const legacy=!c.member_id&&c.display_name?`<p class="text-xs text-yellow-300 mt-2">Cadastro antigo: "${safeText(c.display_name)}". Escolha um integrante de Grau V para substituir.</p>`:'';
+    const ics=CR_ICONS.some(x=>x[0]===c.icon)?CR_ICONS:[...CR_ICONS,[c.icon||'fa-user',c.icon||'fa-user']];
+    return `<div class="row-card ${c.is_active?'':'is-off'}" data-cr="${c.id}"><div class="grid md:grid-cols-4 gap-3 items-end">
+      <div class="flex items-center gap-3"><div class="cmd-icon"><i class="fa-solid ${safeText(c.icon||'fa-user')}"></i></div><div class="flex-1"><label class="block text-xs text-gray-300 mb-1">Cargo</label><input class="field" data-crf="title" maxlength="60" value="${safeText(c.role_title)}"></div></div>
+      <div><label class="block text-xs text-gray-300 mb-1">Integrante (Grau V)</label><select class="field" data-crf="member">${optsHtml(g5,c.member_id,'— Vago —')}</select></div>
+      <div><label class="block text-xs text-gray-300 mb-1">Ícone</label><select class="field" data-crf="icon">${optsHtml(ics,c.icon||'fa-user')}</select></div>
+      <div class="flex flex-wrap gap-2"><button class="btn btn-primary btn-sm" data-cract="save" type="button">Salvar</button><button class="btn btn-secondary btn-sm" data-cract="up" type="button" ${i===0?'disabled':''} aria-label="Subir"><i class="fa-solid fa-arrow-up"></i></button><button class="btn btn-secondary btn-sm" data-cract="down" type="button" ${i===crRows.length-1?'disabled':''} aria-label="Descer"><i class="fa-solid fa-arrow-down"></i></button><button class="btn btn-secondary btn-sm" data-cract="toggle" type="button">${c.is_active?'Ocultar':'Mostrar'}</button><button class="btn btn-danger btn-sm" data-cract="del" type="button" aria-label="Excluir"><i class="fa-solid fa-trash"></i></button></div>
+    </div>${legacy}</div>`;}).join('')||'<p class="text-sm text-gray-400">Nenhum cargo no comando. Adicione abaixo.</p>';
+}
+$('cr-list').addEventListener('click',async e=>{
+  const b=e.target.closest('[data-cract]');if(!b)return;
+  const card=b.closest('[data-cr]'),id=Number(card.dataset.cr),c=crRows.find(x=>x.id===id),act=b.dataset.cract;if(!c)return;
+  const T=()=>supabaseClient.from('command_contacts');let error=null;
+  if(act==='save'){
+    const title=card.querySelector('[data-crf="title"]').value.trim(),mem=card.querySelector('[data-crf="member"]').value,icon=card.querySelector('[data-crf="icon"]').value;
+    if(title.length<2)return message('cr-message','Informe o nome do cargo.','error');
+    if(mem){const m=membersCache.find(x=>x.id===mem);if(!m||m.grade_id!==G5())return message('cr-message','Só integrantes de Grau V podem ocupar o Comando Regional.','error');}
+    ({error}=await T().update({role_title:title,icon,member_id:mem||null,display_name:null,whatsapp:null}).eq('id',id));
+  }else if(act==='toggle'){({error}=await T().update({is_active:!c.is_active}).eq('id',id));}
+  else if(act==='del'){if(!confirm(`Excluir o cargo "${c.role_title}" do Comando Regional?`))return;({error}=await T().delete().eq('id',id));}
+  else{
+    const i=crRows.findIndex(x=>x.id===id),j=act==='up'?i-1:i+1;if(!crRows[j])return;
+    const arr=crRows.slice();[arr[i],arr[j]]=[arr[j],arr[i]];
+    const rs=await Promise.all(arr.map((r,k)=>T().update({sort_order:k+1}).eq('id',r.id)));error=rs.find(x=>x.error)?.error||null;
+  }
+  if(error)return message('cr-message','Não foi possível salvar. Rode o arquivo comando_regional.sql no Supabase.','error');
+  await loadComandoTab();loadCommand();message('cr-message','Comando Regional atualizado.','success');
+});
+$('cr-new').addEventListener('submit',async e=>{
+  e.preventDefault();const title=$('cr-new-title').value.trim(),mem=$('cr-new-member').value;
+  if(title.length<2)return message('cr-message','Informe o nome do cargo.','error');
+  if(mem){const m=membersCache.find(x=>x.id===mem);if(!m||m.grade_id!==G5())return message('cr-message','Só integrantes de Grau V podem ocupar o Comando Regional.','error');}
+  const next=(crRows.reduce((a,r)=>Math.max(a,r.sort_order||0),0))+1;
+  const {error}=await supabaseClient.from('command_contacts').insert({role_title:title,icon:$('cr-new-icon').value,member_id:mem||null,sort_order:next,is_active:true});
+  if(error)return message('cr-message','Não foi possível adicionar. Rode o arquivo comando_regional.sql no Supabase.','error');
+  $('cr-new-title').value='';await loadComandoTab();loadCommand();message('cr-message','Cargo adicionado.','success');
+});
 
 /* ───────── Painel Administrativo (visão geral) ───────── */
 function renderDashAdm(){
@@ -1355,8 +1451,26 @@ function renderDashAdm(){
   loadExtra();window._daExtra=loadExtra;
 }
 
-function setMemberView(v){const mm=$('member-main');mm.classList.remove('view-home','view-perfil');mm.classList.add('view-'+v);}
-document.querySelectorAll('[data-mside]').forEach(b=>b.addEventListener('click',()=>{setMemberView(b.dataset.mside);document.querySelectorAll('[data-mside]').forEach(x=>x.setAttribute('aria-selected',String(x===b)));if(b.dataset.pgo){const t=document.querySelector('[data-ptab="'+b.dataset.pgo+'"]');if(t)t.click();}window.scrollTo({top:0,behavior:'smooth'});}));
+function setMemberView(v){
+  const mm=$('member-main');
+  // Remove todas as classes de view
+  mm.classList.remove('view-home','view-perfil','view-divisao','view-travel');
+  // Adiciona apenas a necessária
+  if(v==='perfil') mm.classList.add('view-perfil');
+  else if(v==='divisao') mm.classList.add('view-divisao');
+  else if(v==='travel') mm.classList.add('view-travel');
+  else mm.classList.add('view-home'); // início: o CSS esconde #my-profile (só aparece em Meu Perfil)
+  // Garante que my-profile esteja visível nas views onde deve aparecer
+  if(v!=='divisao'&&v!=='travel') $('my-profile').classList.remove('hidden-view');
+}
+document.querySelectorAll('[data-mside]').forEach(b=>b.addEventListener('click',()=>{
+  const v=b.dataset.mside;
+  setMemberView(v);
+  // Atualiza aria-selected em todos os botões de navegação do integrante
+  document.querySelectorAll('[data-mside]').forEach(x=>x.setAttribute('aria-selected',String(x===b)));
+  if(b.dataset.pgo){const t=document.querySelector('[data-ptab="'+b.dataset.pgo+'"]');if(t)t.click();}
+  window.scrollTo({top:0,behavior:'smooth'});
+}));
 let infoSeen=false;
 function showInfo(force){if(infoSeen&&!force)return;infoSeen=true;$('info-modal').classList.remove('hidden-view');document.body.style.overflow='hidden';}
 function hideInfo(){$('info-modal').classList.add('hidden-view');document.body.style.overflow='';}
@@ -1442,6 +1556,32 @@ async function tvAction(ev){
   await loadTravelPanel();
 }
 document.querySelectorAll('[data-mside="travel"]').forEach(b=>b.addEventListener('click',()=>{tvEdit=null;loadTravelPanel();}));
+
+/* ───────── Painel Administrativo: Protocolos de Viagem ───────── */
+async function loadAdmTravelPanel(){
+  const body=$('adm-travel-body');
+  body.innerHTML='<p class="text-sm text-gray-400">Carregando protocolos de viagem...</p>';
+  const TPF='id,member_id,origin,destination,departure_date,departure_time,return_date,return_time,route_notes,status';
+  const {data,error}=await supabaseClient.from('travel_protocols').select(TPF).order('departure_date',{ascending:false}).limit(200);
+  if(error){body.innerHTML='<div class="row-card"><p class="text-sm text-red-300">Não foi possível carregar os protocolos. Rode o arquivo viagem.sql no Supabase.</p></div>';return;}
+  if(!data||!data.length){body.innerHTML='<p class="text-sm text-gray-400">Nenhum protocolo de viagem registrado ainda.</p>';return;}
+  const ST={planned:['Planejada','#3b82f6'],in_progress:['Em andamento','#22c55e'],completed:['Concluída','#9ca3af'],cancelled:['Cancelada','#ef4444']};
+  const rows=data.map(t=>{
+    const st=ST[t.status]||[t.status,'#999'];
+    const name=safeText(mName(t.member_id));
+    return `<div class="row-card"><div class="flex flex-wrap items-center justify-between gap-2 mb-2">
+      <div class="text-white font-medium">${name}</div>
+      <span class="tv-badge" style="color:${st[1]};border-color:${st[1]}">${st[0]}</span>
+    </div>
+    <div class="text-sm text-gray-200">${t.origin?safeText(t.origin)+' → ':''}${safeText(t.destination)}</div>
+    <div class="text-xs text-gray-400 mt-1">Ida: ${tvWhen(t.departure_date,t.departure_time)} · Volta: ${tvWhen(t.return_date,t.return_time)}</div>
+    ${t.route_notes?`<div class="text-xs text-gray-500 mt-1">${safeText(t.route_notes)}</div>`:''}</div>`;
+  }).join('');
+  const counts=Object.entries(ST).map(([k,[l,c]])=>{const n=data.filter(x=>x.status===k).length;return n?`<div class="row-card text-center" style="border-left:3px solid ${c}"><div class="font-display text-2xl text-white">${n}</div><div class="text-[11px] text-gray-400 uppercase font-heading tracking-widest">${l}</div></div>`:'';}).join('');
+  body.innerHTML=`<div class="mb-4"><h3 class="font-display text-white text-3xl tracking-widest uppercase">Protocolos de Viagem</h3><p class="text-sm text-gray-400 mt-1">Visualize e acompanhe as viagens registradas pelos integrantes.</p></div>
+  <div class="grid grid-cols-2 md:grid-cols-4 gap-2 mb-5">${counts}</div>
+  <div class="space-y-2">${rows}</div>`;
+}
 setInterval(()=>{if(window._daExtra&&$('tab-dashadm')&&!$('tab-dashadm').classList.contains('hidden-view')&&!$('admin-panel').classList.contains('hidden-view'))window._daExtra();},20000);
 supabaseClient?.auth.onAuthStateChange((event,session)=>{if(event==='SIGNED_OUT'){showView('login-view');} });
 checkSession();
