@@ -690,6 +690,7 @@ const initial=n=>(String(n||'?').trim()[0]||'?').toUpperCase();
 function setAvatar(el,url,name){el.textContent='';if(url&&/^https:\/\//.test(url)){const i=new Image();i.alt='Foto de perfil';i.referrerPolicy='no-referrer';i.className='w-full h-full object-cover';i.onerror=()=>{el.textContent=initial(name);};i.src=url;el.appendChild(i);}else el.textContent=initial(name);}
 const gradesAsc=()=>gradesList.slice().reverse(); // CAMISETA → GRAU I (ordem de progressão)
 const gradeName=id=>gradesList.find(g=>g.id===id)?.name||'—';
+const gradeIdOf=rx=>gradesList.find(g=>rx.test(String(g.name).trim()))?.id??-1,G5=()=>gradeIdOf(/(^|\s)v$/i),G6=()=>gradeIdOf(/(^|\s)vi$/i),topGrade=()=>Math.min(1e9,...gradesList.map(x=>x.id));
 const needPct=gid=>{const g=gradesList.find(x=>x.id===gid);return g&&g.min_participation!=null?Number(g.min_participation):minPct;};
 const monthsSince=d=>{if(!d)return 0;const a=new Date(String(d).slice(0,10)+'T00:00:00'),n=new Date();return(n.getFullYear()-a.getFullYear())*12+n.getMonth()-a.getMonth()-(n.getDate()<a.getDate()?1:0);};
 const sinceOf=m=>sinceMap[m.id]||m.joined_at;
@@ -838,8 +839,8 @@ $('member-modal').addEventListener('click',async e=>{
   if(act==='close'){closeModal();return;}
   const cur=membersCache.find(x=>x.id===id)?.grade_id||1;let error;
   b.disabled=true;
-  if(act==='grade'){const g=Number($('mm-grade').value);if(g===cur){message('mm-message','Esse já é o grau atual.');b.disabled=false;return;}if(!confirm('Alterar o grau para '+gradeName(g)+'?')){b.disabled=false;return;}({error}=await supabaseClient.rpc('change_grade',{p_member:id,p_grade:g,p_note:note}));}
-  if(act.startsWith('eval-')){const d=act.slice(5);if(cur<=1){message('mm-message','Já está no último grau.','error');b.disabled=false;return;}if(!confirm('Registrar avaliação "'+d+'" para '+gradeName(cur-1)+'?')){b.disabled=false;return;}({error}=await supabaseClient.from('evaluations').insert({member_id:id,target_grade_id:cur-1,decision:d,participation_pct:pct,note,evaluated_by:me.id}));}
+  if(act==='grade'){const g=Number($('mm-grade').value);if(g===cur){message('mm-message','Esse já é o grau atual.');b.disabled=false;return;}const m0=membersCache.find(x=>x.id===id);if(g===G6()&&!m0?.division_id){message('mm-message','Para ser Grau VI (Liderança de Divisão) o integrante precisa ter uma divisão.','error');b.disabled=false;return;}if(!confirm('Alterar o grau para '+gradeName(g)+'?')){b.disabled=false;return;}({error}=await supabaseClient.rpc('change_grade',{p_member:id,p_grade:g,p_note:note}));}
+  if(act.startsWith('eval-')){const d=act.slice(5);if(cur<=topGrade()){message('mm-message','Já está no último grau.','error');b.disabled=false;return;}if(!confirm('Registrar avaliação "'+d+'" para '+gradeName(cur-1)+'?')){b.disabled=false;return;}({error}=await supabaseClient.from('evaluations').insert({member_id:id,target_grade_id:cur-1,decision:d,participation_pct:pct,note,evaluated_by:me.id}));}
   if(act==='part'){const evId=Number($('mm-ev').value);({error}=await supabaseClient.from('event_participation').upsert({event_id:evId,member_id:id,status:$('mm-st').value,note:$('mm-pnote').value.trim()||null,recorded_by:me.id},{onConflict:'event_id,member_id'}));}
   if(act==='note'){const t=$('mm-note').value.trim();if(!t){message('mm-message','Escreva a observação.','error');b.disabled=false;return;}({error}=await supabaseClient.from('admin_notes').insert({member_id:id,note:t,created_by:me.id}));}
   b.disabled=false;
@@ -1137,8 +1138,17 @@ function syncCargoSel(){const m=membersCache.find(x=>x.id===$('cg-member').value
 $('cg-member').addEventListener('change',syncCargoSel);
 $('cg-form').addEventListener('submit',async e=>{
   e.preventDefault();const mid=$('cg-member').value,cg=$('cg-cargo').value;if(!mid)return message('cg-message','Selecione o integrante.','error');
+  const mem=membersCache.find(x=>x.id===mid),car=cg?cargosList.find(x=>x.id===Number(cg)):null;
+  if(car&&car.is_leadership&&mem){
+    if(mem.grade_id===G6()&&!mem.division_id)return message('cg-message','Liderança de Divisão (Grau VI) precisa ter uma divisão. Defina a divisão primeiro.','error');
+    if(mem.grade_id!==G5()&&mem.grade_id!==G6())return message('cg-message','Cargo de liderança: Liderança Regional exige Grau V e Liderança de Divisão exige Grau VI.','error');
+  }
   if(!confirm(`Definir o cargo de ${mName(mid)} como "${cg?cargoName(Number(cg)):'Sem cargo'}"?`))return;
-  const {error}=await supabaseClient.rpc('set_member_cargo',{p_member:mid,p_cargo:cg?Number(cg):null,p_date:$('cg-date').value||null,p_note:$('cg-note').value.trim()||null});
+  let {error}=await supabaseClient.rpc('set_member_cargo',{p_member:mid,p_cargo:cg?Number(cg):null,p_date:$('cg-date').value||null,p_note:$('cg-note').value.trim()||null});
+  if(error&&/divis/i.test(error.message)&&mem&&mem.grade_id===G5()){/* Liderança Regional (Grau V) não exige divisão */
+    const up=await supabaseClient.from('member_profiles').update({cargo_id:cg?Number(cg):null}).eq('id',mid);
+    if(!up.error){await supabaseClient.from('cargo_history').insert({member_id:mid,from_cargo_id:mem.cargo_id||null,to_cargo_id:cg?Number(cg):null,effective_date:$('cg-date').value||new Date().toISOString().slice(0,10),note:$('cg-note').value.trim()||null});error=null;}
+  }
   if(error)return message('cg-message',error.message,'error');
   $('cg-note').value='';await loadMembers();await loadCargosTab();message('cg-message','Cargo atualizado.','success');
 });
