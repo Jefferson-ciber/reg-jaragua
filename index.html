@@ -311,6 +311,16 @@
         #admin-panel .adm-side .tab-btn.sub i{width:24px;height:24px;line-height:24px;font-size:11px;border-radius:7px}
         #admin-panel .adm-side .tab-btn.sub[aria-selected="true"]{border-left-color:#d6b65a}
         #admin-panel .adm-side{width:260px;padding:18px 12px}#admin-panel .adm-side .adm-bottom{border-top-color:#23232a}
+
+        .kpi-card{cursor:pointer;transition:transform .2s,box-shadow .2s,background .2s}.kpi-card:hover{transform:translateY(-3px);background:#17171b;box-shadow:0 10px 24px rgba(0,0,0,.45)}
+        #kpi-modal{position:fixed;inset:0;z-index:300;background:rgba(0,0,0,.72);align-items:center;justify-content:center;padding:18px}#kpi-modal:not(.hidden-view){display:flex}
+        .kpi-box{width:100%;max-width:760px;max-height:85vh;display:flex;flex-direction:column;background:linear-gradient(180deg,#141418,#0c0c0e);border:1px solid #2b2b2f;border-top:3px solid var(--kc,#c9a84c);border-radius:14px;box-shadow:0 20px 60px rgba(0,0,0,.7);animation:kpiIn .22s ease}
+        @keyframes kpiIn{from{opacity:0;transform:translateY(14px) scale(.98)}to{opacity:1;transform:none}}
+        .kpi-head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px 20px;border-bottom:1px solid #23232a}.kpi-head h3{font:600 18px 'Oswald',sans-serif;letter-spacing:.1em;text-transform:uppercase;color:var(--kc,#c9a84c)}
+        #kpi-x{background:none;border:0;color:#aaa;font-size:20px;cursor:pointer}#kpi-x:hover{color:#fff}#kpi-body{padding:16px 20px 20px;overflow-y:auto;color:#ddd}
+        .kp-sum{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:14px}.kp-sum div{background:#111113;border:1px solid #2b2b2f;border-radius:10px;padding:8px 14px;font-size:12px;color:#9a9aa0}.kp-sum b{display:block;font-size:22px;color:#fff;line-height:1.1}
+        .kp-t{width:100%;border-collapse:collapse;font-size:13px}.kp-t th{text-align:left;color:#8b8b95;font-weight:500;padding:6px 8px;font-size:11px;text-transform:uppercase;letter-spacing:.1em}.kp-t td{padding:9px 8px;border-top:1px solid #23232a;vertical-align:top}
+        .kp-bar{height:6px;border-radius:4px;background:#23232a;overflow:hidden;margin-top:6px}.kp-bar i{display:block;height:100%}
         textarea.field { resize:vertical; min-height:96px; }
         .row-card { background:#0f0f12; border:1px solid #2a2a32; border-radius:10px; padding:14px 16px; }
         .row-card.is-off { opacity:.62; }
@@ -346,6 +356,7 @@
     <div class="flex items-center gap-3"><img src="escudo.png" alt="Insanos MC" style="height:44px;width:auto;display:block" onerror="this.style.display='none'"><div class="leading-tight"><div class="font-display text-white text-xl tracking-widest">INSANOS MC</div><div class="text-[10px] text-gold font-heading tracking-widest uppercase">Regional Jaraguá · XXXV</div></div></div>
     <div id="nav-user" class="hidden-view flex items-center gap-3"><span id="user-email" class="hidden sm:inline text-xs text-gray-400"></span><button id="logout-btn" class="btn btn-secondary text-sm"><i class="fa-solid fa-right-from-bracket mr-2"></i>Sair</button></div>
   </div></nav>
+  <div id="kpi-modal" class="hidden-view" role="dialog" aria-modal="true"><div class="kpi-box"><div class="kpi-head"><h3 id="kpi-title"></h3><button type="button" id="kpi-x" aria-label="Fechar"><i class="fa-solid fa-xmark"></i></button></div><div id="kpi-body"></div></div></div>
   <div id="info-modal" class="hidden-view" role="dialog" aria-modal="true" aria-labelledby="info-title">
     <div class="info-card hero"><button type="button" id="info-x" class="info-x" aria-label="Fechar"><i class="fa-solid fa-xmark"></i></button>
     <div class="max-w-4xl mx-auto text-center space-y-5"><div class="patch-badge"><i class="fa-solid fa-lock"></i> Portal interno · Acesso restrito</div><h2 id="info-title" class="font-display text-white tracking-widest uppercase leading-none" style="font-size:clamp(2rem,6vw,3.6rem)">Guia Oficial de <span class="text-gold">Comunicação</span></h2><p class="text-gray-400 text-sm md:text-base max-w-2xl mx-auto leading-relaxed">Regional Jaraguá (XXXV). Orientações, comunicados e materiais disponíveis apenas para integrantes autorizados.</p><div class="hero-divider"></div><div class="font-heading text-gold text-sm tracking-widest uppercase">“O mundo é diferente da ponte pra cá”</div><button type="button" id="info-ok" class="tab-btn" style="padding:10px 28px">ENTENDI</button></div></div>
@@ -1274,7 +1285,7 @@ function renderDashAdm(){
   const pcts=rows.map(r=>r.st.pct).filter(x=>x!=null),avg=pcts.length?Math.round(pcts.reduce((a,b)=>a+b,0)/pcts.length):null;
   const prox=eventsCache.filter(e=>e.event_date>=today&&e.event_date<=in30).length;
   const aptos=rows.filter(r=>r.e.k==='apto').length,coms=adminItems.filter(i=>i.is_published).length;
-  const card=(ic,l,v,sub,c)=>`<div class="row-card flex items-center gap-3" style="border-left:3px solid ${c}"><i class="fa-solid ${ic} text-2xl" style="color:${c}"></i><div><div class="text-[11px] text-gray-400">${l}</div><div class="font-display text-3xl text-white leading-none">${v}</div><div class="text-[11px] text-gray-500">${sub}</div></div></div>`;
+  const card=(ic,l,v,sub,c)=>`<div class="row-card flex items-center gap-3 kpi-card" data-kpi="${l}" data-color="${c}" role="button" tabindex="0" title="Clique para ver os detalhes" style="border-left:3px solid ${c}"><i class="fa-solid ${ic} text-2xl" style="color:${c}"></i><div><div class="text-[11px] text-gray-400">${l}</div><div class="font-display text-3xl text-white leading-none">${v}</div><div class="text-[11px] text-gray-500">${sub}</div></div></div>`;
   const group=(items)=>{const m={};items.forEach(n=>m[n]=(m[n]||0)+1);let a=Object.entries(m).sort((x,y)=>y[1]-x[1]);if(a.length>5){const r=a.slice(4).reduce((t,x)=>t+x[1],0);a=a.slice(0,4).concat([['Demais',r]]);}return a;};
   const donut=(a,total)=>{let acc=0;const g=a.map((x,i)=>{const p=acc/Math.max(1,total)*100;acc+=x[1];return G[i]+' '+p+'% '+acc/Math.max(1,total)*100+'%';}).join(',')||'#333 0 100%';
     return `<div class="flex flex-wrap items-center gap-4"><div style="width:120px;height:120px;border-radius:50%;background:conic-gradient(${g});display:flex;align-items:center;justify-content:center;flex:none"><div style="width:76px;height:76px;border-radius:50%;background:#0f0f12;text-align:center;padding-top:20px"><b class="text-white text-xl">${total}</b><br><span class="text-[10px] text-gray-400">Total</span></div></div><div class="flex-1 min-w-[140px] text-xs">${a.map((x,i)=>`<div class="flex justify-between py-1 border-b border-zinc-800"><span><i style="display:inline-block;width:10px;height:10px;background:${G[i]};margin-right:6px"></i>${safeText(x[0])}</span><span class="text-gray-300">${x[1]} (${Math.round(100*x[1]/Math.max(1,total))}%)</span></div>`).join('')||'<span class="text-gray-500">Sem dados</span>'}</div></div>`;};
@@ -1290,6 +1301,19 @@ function renderDashAdm(){
   <div class="grid md:grid-cols-3 gap-3"><div class="row-card">${H('Integrantes por divisão')}${donut(byDiv,N)}</div><div class="row-card">${H('Distribuição por grau')}${bars}</div><div class="row-card">${H('Distribuição por cargo')}${donut(byCargo,N)}</div></div>
   <div class="grid md:grid-cols-2 gap-3"><div class="row-card">${H('Participação mensal nos eventos')}${all.length?lineSvg(monthlyCumulative(all),minPct):'<p class="text-sm text-gray-400">Sem dados de presença.</p>'}</div><div class="row-card overflow-x-auto">${H('Eventos recentes')}${evTable}</div></div>
   <p class="text-[11px] text-gray-500">Viagens, solicitações de ajuda e mapa em tempo real ainda não têm tabelas no banco e por isso não aparecem aqui.</p>`;
+
+  const T=(h,r)=>r.length?`<div style="overflow-x:auto"><table class="kp-t"><tr>${h.map(x=>`<th>${x}</th>`).join('')}</tr>${r.map(c=>`<tr>${c.map(x=>`<td>${x}</td>`).join('')}</tr>`).join('')}</table></div>`:'<p class="text-sm text-gray-400">Nada para mostrar.</p>';
+  const SUM=a=>`<div class="kp-sum">${a.map(x=>`<div><b>${x[1]}</b>${x[0]}</div>`).join('')}</div>`;
+  const nm=m=>safeText(m.display_name||'—'),byName=(a,b)=>(a.display_name||'').localeCompare(b.display_name||'','pt-BR');
+  const D={
+   'Total de Integrantes':()=>SUM([['Ativos',N],['Inativos',membersCache.length-N]])+T(['Nome','Grau','Divisão','Cargo'],act.slice().sort(byName).map(m=>[nm(m),safeText(gradeName(m.grade_id)),safeText(divName(m.division_id)),safeText(cargoName(m.cargo_id))])),
+   'Por Divisão':()=>{const rs=divisionsList.map(d=>{const ms=act.filter(m=>m.division_id===d.id).sort(byName);return [safeText(d.name),`<b>${ms.length}</b>`,ms.length?ms.map(nm).join(', '):'<span class="text-gray-500">Sem integrantes</span>'];});const sem=act.filter(m=>!m.division_id);if(sem.length)rs.push(['Sem divisão',`<b>${sem.length}</b>`,sem.map(nm).join(', ')]);return SUM([['Divisões',divisionsList.length],['Integrantes ativos',N]])+T(['Divisão','Qtd.','Integrantes'],rs);},
+   'Eventos Próximos':()=>{const ev=eventsCache.filter(e=>e.event_date>=today&&e.event_date<=in30).sort((a,b)=>a.event_date.localeCompare(b.event_date));return SUM([['Nos próximos 30 dias',ev.length]])+(ev.length?T(['Data','Evento','Categoria'],ev.map(e=>[fmtDate(e.event_date+'T12:00:00'),safeText(e.name),safeText(catsCache.find(c=>c.id===e.category_id)?.name||'—')])):'<p class="text-sm text-gray-400">Nenhum evento nos próximos 30 dias.</p>');},
+   'Média de Participação':()=>{const rs=rows.slice().sort((a,b)=>(b.st.pct??-1)-(a.st.pct??-1)).map(r=>{const p=r.st.pct;return [nm(r.m),p==null?'<span class="text-gray-500">sem dados</span>':`<b>${p}%</b><div class="kp-bar"><i style="width:${Math.min(100,p)}%;background:${p>=minPct?'#22c55e':'#b91c1c'}"></i></div>`,`${r.st.presente??0} de ${r.st.eleg||0}`];});return SUM([['Média geral',avg==null?'—':avg+'%'],['Mínimo exigido',minPct+'%']])+T(['Integrante','Participação','Presenças'],rs);},
+   'Aptos p/ Progressão':()=>{const ap=rows.filter(r=>r.e.k==='apto').sort((a,b)=>byName(a.m,b.m));return SUM([['Aptos',ap.length]])+(ap.length?T(['Integrante','Grau atual','Próximo grau','Participação'],ap.map(r=>[nm(r.m),safeText(gradeName(r.m.grade_id)),safeText(gradeName(r.m.grade_id-1)),`${r.st.pct}%`])):'<p class="text-sm text-gray-400">Ninguém apto no momento.</p>');},
+   'Comunicados':()=>{const cs=adminItems.filter(i=>i.is_published);return SUM([['Publicados',cs.length]])+(cs.length?T(['Categoria','Título','Atualizado'],cs.map(i=>[safeText(i.category),safeText(i.title),fmtDate(i.updated_at)])):'<p class="text-sm text-gray-400">Nenhum comunicado publicado.</p>');}
+  };
+  document.querySelectorAll('#da-body .kpi-card').forEach(c=>{const open=()=>{const f=D[c.dataset.kpi];if(!f)return;$('kpi-title').textContent=c.dataset.kpi;$('kpi-modal').style.setProperty('--kc',c.dataset.color);$('kpi-body').innerHTML=f();$('kpi-modal').classList.remove('hidden-view');};c.addEventListener('click',open);c.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();open();}});});
 }
 
 function setMemberView(v){const mm=$('member-main');mm.classList.remove('view-home','view-perfil');mm.classList.add('view-'+v);}
@@ -1326,6 +1350,7 @@ async function loadDivisionPanel(){
   <h4 class="font-heading text-gold text-sm uppercase tracking-widest mb-3">Integrantes da divisão</h4><div class="dv-grid">${memHtml||'<p class="text-sm text-gray-400">Nenhum integrante encontrado.</p>'}</div>${hint}`;
 }
 document.querySelectorAll('[data-mside="divisao"]').forEach(b=>b.addEventListener('click',loadDivisionPanel));
+const closeKpi=()=>$('kpi-modal').classList.add('hidden-view');$('kpi-x').addEventListener('click',closeKpi);$('kpi-modal').addEventListener('click',e=>{if(e.target.id==='kpi-modal')closeKpi();});document.addEventListener('keydown',e=>{if(e.key==='Escape')closeKpi();});
 supabaseClient?.auth.onAuthStateChange((event,session)=>{if(event==='SIGNED_OUT'){showView('login-view');} });
 checkSession();
 </script>
