@@ -472,7 +472,7 @@
             <div><label class="block text-xs text-gray-300 mb-2" for="org-cargo">Cargo</label><select class="field" id="org-cargo"></select></div>
             <div><label class="block text-xs text-gray-300 mb-2" for="org-search">Nome</label><input class="field" id="org-search" type="search" placeholder="Pesquisar por nome"></div>
           </div>
-          <p class="text-xs text-gray-500">Sem filtros, cada divisão mostra os cargos de liderança no topo e os demais integrantes por grau, do maior grau ao menor (CAMISETA). Com filtros, aparece a lista dos integrantes encontrados.</p>
+          <p class="text-xs text-gray-500">Sem filtros, o COMANDO REGIONAL (Grau V, sem divisão) aparece no topo; cada divisão mostra a Liderança de Divisão (Grau VI) primeiro e depois os demais integrantes por grau, do maior ao menor (CAMISETA). Com filtros, aparece a lista dos integrantes encontrados.</p>
           <div id="org-list" class="space-y-6"></div>
         </div>
 
@@ -1234,23 +1234,29 @@ function orgPerson(m,label){
 function renderOrg(){
   const fd=Number($('org-division').value)||0,fg=Number($('org-grade').value)||0,fc=$('org-cargo').value,q=$('org-search').value.trim().toLowerCase();
   const filtering=!!(fg||fc||q);
+  const g5=gradesList.find(g=>/(^|\s)v$/i.test(String(g.name).trim()))?.id??-1,g6=gradesList.find(g=>/(^|\s)vi$/i.test(String(g.name).trim()))?.id??-1;
   const match=m=>(!fg||m.grade_id===fg)&&(!fc||(fc==='none'?!m.cargo_id:m.cargo_id===Number(fc)))&&(!q||`${m.display_name||''} ${m.email||''}`.toLowerCase().includes(q));
   const byRank=(a,b)=>a.grade_id-b.grade_id||(a.display_name||'').localeCompare(b.display_name||'','pt-BR');
-  const leadCargos=cargosList.filter(c=>c.is_leadership&&c.is_active);
   const lab=m=>`${gradeName(m.grade_id)}${m.cargo_id?' — '+cargoName(m.cargo_id):''}`;
+  const wrap=(title,n,body)=>`<div><h4 class="font-heading text-lg uppercase tracking-widest text-white border-b border-[#c9a84c55] pb-1 mb-3">${title} <span class="text-sm text-gray-500">(${n})</span></h4><div class="grid md:grid-cols-2 gap-2">${body}</div></div>`;
+  let html='';
+  if(!fd){
+    const cmd=membersCache.filter(m=>m.grade_id===g5&&match(m)).sort(byRank);
+    if(cmd.length||!filtering)html+=wrap('COMANDO REGIONAL',cmd.length,cmd.map(m=>orgPerson(m,`Liderança Regional — ${lab(m)}`)).join('')||'<p class="text-xs text-gray-500">Nenhum integrante do Grau V cadastrado.</p>');
+  }
   const groups=[...divisionsList.filter(d=>!fd||d.id===fd).map(d=>[d.id,d.name]),...(!fd?[[null,'SEM DIVISÃO']]:[])];
-  const html=groups.map(([id,name])=>{
-    const ms=membersCache.filter(m=>(m.division_id||null)===id);let body='';
+  html+=groups.map(([id,name])=>{
+    const ms=membersCache.filter(m=>(m.division_id||null)===id&&m.grade_id!==g5);let body='';
     if(id===null&&!ms.length)return '';
     if(!filtering&&id!==null){
-      const leaders=new Set();
-      body=leadCargos.map(c=>{const m=ms.find(x=>x.cargo_id===c.id);if(m)leaders.add(m.id);return m?orgPerson(m,`${gradeName(m.grade_id)} — ${c.name}`):`<div class="row-card flex items-center justify-between gap-2"><span class="text-xs text-gold font-heading tracking-widest uppercase">${safeText(c.name)}</span><span class="text-sm text-gray-500">Cargo não atribuído</span></div>`;}).join('')+ms.filter(m=>!leaders.has(m.id)).sort(byRank).map(m=>orgPerson(m,lab(m))).join('');
+      const lead=ms.filter(m=>m.grade_id===g6).sort(byRank);
+      body=(lead.length?lead.map(m=>orgPerson(m,`Liderança de Divisão — ${lab(m)}`)).join(''):'<div class="row-card flex items-center justify-between gap-2"><span class="text-xs text-gold font-heading tracking-widest uppercase">Liderança de Divisão</span><span class="text-sm text-gray-500">Grau VI não atribuído</span></div>')+ms.filter(m=>m.grade_id!==g6).sort(byRank).map(m=>orgPerson(m,lab(m))).join('');
     }else{
       const list=ms.filter(match).sort(byRank);
       if(filtering&&!list.length)return '';
       body=list.map(m=>orgPerson(m,lab(m))).join('')||'<p class="text-xs text-gray-500">Nenhum integrante nesta divisão.</p>';
     }
-    return `<div><h4 class="font-heading text-lg uppercase tracking-widest text-white border-b border-[#c9a84c55] pb-1 mb-3">Divisão: ${safeText(name)} <span class="text-sm text-gray-500">(${ms.length})</span></h4><div class="grid md:grid-cols-2 gap-2">${body}</div></div>`;
+    return wrap('Divisão: '+safeText(name),ms.length,body);
   }).join('');
   $('org-list').innerHTML=html||'<p class="text-sm text-gray-400">Nenhum integrante encontrado.</p>';
   document.querySelectorAll('[data-oavatar]').forEach(el=>{const m=membersCache.find(x=>x.id===el.dataset.oavatar);setAvatar(el,m?.photo_url,m?.display_name);});
