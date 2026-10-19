@@ -1312,7 +1312,7 @@ function renderDashAdm(){
   $('da-body').innerHTML=`<div class="flex flex-wrap items-end justify-between gap-3 mb-4"><div><h3 class="text-3xl font-semibold text-white" style="font-family:'Inter',Arial,sans-serif">Dashboard Administrativo</h3><p class="text-sm text-gray-300">Visão geral da gestão do motoclube - Regional Jaraguá - SP</p></div><button type="button" class="btn btn-secondary btn-sm" onclick="renderDashAdm()"><i class="fa-solid fa-rotate mr-2"></i>Atualizar</button></div><div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-2">${card('fa-users','Total de Integrantes',N,'Ativos','#c9a84c')}${card('fa-location-dot','Por Divisão',divisionsList.length,'Divisões cadastradas','#3b82f6')}${card('fa-calendar-days','Eventos Próximos',prox,'Nos próximos 30 dias','#a855f7')}${card('fa-stopwatch','Média de Participação',avg==null?'—':avg+'%','Nos eventos','#22c55e')}${card('fa-star','Aptos p/ Progressão',aptos,'Requer atenção','#f59e0b')}${card('fa-bullhorn','Comunicados',coms,'Publicados','#b91c1c')}</div>
   <div class="grid md:grid-cols-3 gap-3"><div class="row-card">${H('Integrantes por divisão')}${donut(byDiv,N)}</div><div class="row-card">${H('Distribuição por grau')}${bars}</div><div class="row-card">${H('Distribuição por cargo')}${donut(byCargo,N)}</div></div>
   <div class="grid md:grid-cols-2 gap-3"><div class="row-card">${H('Participação mensal nos eventos')}${all.length?lineSvg(monthlyCumulative(all),minPct):'<p class="text-sm text-gray-400">Sem dados de presença.</p>'}</div><div class="row-card overflow-x-auto">${H('Eventos recentes')}${evTable}</div></div>
-  <p class="text-[11px] text-gray-500">Viagens, solicitações de ajuda e mapa em tempo real ainda não têm tabelas no banco e por isso não aparecem aqui.</p>`;
+  <div id="da-extra" class="space-y-3"><p class="text-sm text-gray-500">Carregando viagens e atividades...</p></div>`;
 
   const T=(h,r)=>r.length?`<div style="overflow-x:auto"><table class="kp-t"><tr>${h.map(x=>`<th>${x}</th>`).join('')}</tr>${r.map(c=>`<tr>${c.map(x=>`<td>${x}</td>`).join('')}</tr>`).join('')}</table></div>`:'<p class="text-sm text-gray-400">Nada para mostrar.</p>';
   const SUM=a=>`<div class="kp-sum">${a.map(x=>`<div><b>${x[1]}</b>${x[0]}</div>`).join('')}</div>`;
@@ -1326,6 +1326,25 @@ function renderDashAdm(){
    'Comunicados':()=>{const cs=adminItems.filter(i=>i.is_published);return SUM([['Publicados',cs.length]])+(cs.length?T(['Categoria','Título','Atualizado'],cs.map(i=>[safeText(i.category),safeText(i.title),fmtDate(i.updated_at)])):'<p class="text-sm text-gray-400">Nenhum comunicado publicado.</p>');}
   };
   document.querySelectorAll('#da-body .kpi-card').forEach(c=>{const open=()=>{const f=D[c.dataset.kpi];if(!f)return;$('kpi-title').textContent=c.dataset.kpi;$('kpi-modal').style.setProperty('--kc',c.dataset.color);$('kpi-body').innerHTML=f();$('kpi-modal').classList.remove('hidden-view');};c.addEventListener('click',open);c.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();open();}});});
+  (async()=>{
+    const [a,b,c]=await Promise.all([
+      supabaseClient.from('travel_protocols').select('id,member_id,destination,departure_date,return_date,status').order('departure_date',{ascending:false}).limit(500),
+      supabaseClient.from('travel_emergencies').select('id,member_id,location_text,description,severity,status,created_at').order('created_at',{ascending:false}).limit(500),
+      supabaseClient.from('activity_log').select('id,actor_id,action_type,description,created_at').order('created_at',{ascending:false}).limit(8)]);
+    const box=$('da-extra');if(!box)return;
+    if(a.error&&b.error&&c.error){box.innerHTML='<p class="text-sm text-gray-500">Viagens e atividades indisponíveis no momento.</p>';return;}
+    const tr=a.data||[],em=b.data||[],ac=c.data||[];
+    const cnt=(arr,map)=>Object.entries(map).map(([k,l])=>[l,arr.filter(x=>x.status===k).length]).filter(x=>x[1]>0);
+    const vT=cnt(tr,{in_progress:'Em andamento',completed:'Concluídas',planned:'Planejadas',cancelled:'Canceladas'});
+    const eT=cnt(em,{active:'Ativas',acknowledged:'Em atendimento',resolved:'Resolvidas'});
+    const sev={low:'baixa',medium:'média',high:'alta',critical:'crítica'};
+    const live=[...tr.filter(x=>x.status==='in_progress').map(x=>[safeText(mName(x.member_id)),safeText(x.destination),'<span style="color:#22c55e">● Em viagem</span>']),
+      ...em.filter(x=>x.status!=='resolved').map(x=>[safeText(mName(x.member_id)),safeText(x.location_text||x.description||'—'),`<span style="color:#ef4444">● Ajuda ${x.status==='active'?'solicitada':'em atendimento'} · ${sev[x.severity]||''}</span>`])];
+    const lbl={member_created:'Novo integrante',grade_changed:'Mudança de grau',cargo_changed:'Mudança de cargo',division_changed:'Mudança de divisão',honor_awarded:'Honraria',event_created:'Evento criado',participation_recorded:'Presença registrada',travel_started:'Início de viagem',travel_ended:'Fim de viagem',help_requested:'Pedido de ajuda',comunicado_created:'Comunicado criado',comunicado_updated:'Comunicado atualizado'};
+    const acts=ac.length?T(['Data/Hora','Atividade','Responsável'],ac.map(x=>[new Date(x.created_at).toLocaleString('pt-BR',{dateStyle:'short',timeStyle:'short'}),safeText(x.description||lbl[x.action_type]||x.action_type),x.actor_id?safeText(mName(x.actor_id)):'Sistema'])):'<p class="text-sm text-gray-400">Nenhuma atividade registrada ainda.</p>';
+    box.innerHTML=`<div class="grid md:grid-cols-2 gap-3"><div class="row-card">${H('Viagens')}${donut(vT,tr.length)}</div><div class="row-card">${H('Solicitações de ajuda')}${donut(eT,em.length)}</div></div>
+    <div class="grid md:grid-cols-2 gap-3"><div class="row-card overflow-x-auto">${H('Em andamento agora')}${live.length?T(['Integrante','Destino / Local','Situação'],live):'<p class="text-sm text-gray-400">Nenhuma viagem em andamento nem pedido de ajuda ativo.</p>'}</div><div class="row-card overflow-x-auto">${H('Atividades recentes')}${acts}</div></div>`;
+  })();
 }
 
 function setMemberView(v){const mm=$('member-main');mm.classList.remove('view-home','view-perfil');mm.classList.add('view-'+v);}
