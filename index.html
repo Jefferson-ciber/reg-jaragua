@@ -300,6 +300,9 @@
         .dv-card{display:flex;align-items:center;gap:12px;background:#111113;border:1px solid #2b2b2f;border-radius:12px;padding:12px}
         .dv-card.cmd{border-left:3px solid #c9a84c}.dv-av{width:46px;height:46px;border-radius:50%;background:#1d1d22;color:#c9a84c;display:flex;align-items:center;justify-content:center;font-weight:700;overflow:hidden;flex:none}.dv-av img{width:100%;height:100%;object-fit:cover}
         .dv-role{font:600 11px 'Oswald',sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#c9a84c}.dv-name{color:#fff;font-size:14px}.dv-sub{color:#8b8b95;font-size:11.5px}
+        .dv-click{cursor:pointer;transition:border-color .2s,transform .2s}.dv-click:hover,.dv-click:focus-visible{border-color:#c9a84c;transform:translateY(-2px);outline:none}
+        .dvp-head{display:flex;align-items:center;gap:14px;margin-bottom:14px}.dvp-av{width:72px;height:72px;border-radius:50%;background:#1d1d22;border:2px solid #c9a84c;color:#c9a84c;display:flex;align-items:center;justify-content:center;font:700 28px 'Oswald',sans-serif;overflow:hidden;flex:none}.dvp-av img{width:100%;height:100%;object-fit:cover}
+        .dvp-row{display:flex;justify-content:space-between;gap:12px;padding:9px 0;border-top:1px solid #2b2b2f;font-size:14px}.dvp-row span:first-child{color:#8b8b95}.dvp-row span:last-child{color:#fff;text-align:right}
         .dv-tag{margin-left:auto;font-size:10px;border:1px solid #c9a84c66;color:#c9a84c;border-radius:20px;padding:1px 8px}
         #admin-panel .adm-side{background:linear-gradient(180deg,#131318 0%,#0b0b0d 100%);border-right:1px solid rgba(201,168,76,.2);box-shadow:8px 0 30px rgba(0,0,0,.45);scrollbar-width:thin;scrollbar-color:#2b2b2f transparent}
         #admin-panel .adm-side .adm-brand img{filter:drop-shadow(0 4px 14px rgba(201,168,76,.28))}
@@ -1494,15 +1497,44 @@ async function loadDivisionPanel(){
   else{const q=await supabaseClient.from('member_profiles').select('id,display_name,photo_url,cargo_id,grade_id').eq('division_id',p.division_id).eq('is_active',true).order('display_name');list=q.data||[];}
   const order=['dir','sub','soc','adm'],labels={dir:'Diretor',sub:'Subdiretor',soc:'Social',adm:'ADM'};
   const cmd={};list.forEach(m=>{const k=m.cargo_id?key(cargoName(m.cargo_id)):null;if(k)(cmd[k]=cmd[k]||[]).push(m);});
-  const cmdHtml=order.map(k=>{const ms=cmd[k]||[];return ms.length?ms.map(m=>`<div class="dv-card cmd">${av(m.display_name,m.photo_url)}<div><div class="dv-role">${labels[k]}</div><div class="dv-name">${safeText(m.display_name||'—')}</div><div class="dv-sub">${safeText(gradeName(m.grade_id))}</div></div></div>`).join(''):`<div class="dv-card cmd" style="opacity:.55"><div class="dv-av">—</div><div><div class="dv-role">${labels[k]}</div><div class="dv-sub">Vago</div></div></div>`;}).join('');
+  const cmdHtml=order.map(k=>{const ms=cmd[k]||[];return ms.length?ms.map(m=>`<div class="dv-card cmd dv-click" data-mid="${safeText(m.id)}" role="button" tabindex="0" title="Ver perfil">${av(m.display_name,m.photo_url)}<div><div class="dv-role">${labels[k]}</div><div class="dv-name">${safeText(m.display_name||'—')}</div><div class="dv-sub">${safeText(gradeName(m.grade_id))}</div></div></div>`).join(''):`<div class="dv-card cmd" style="opacity:.55"><div class="dv-av">—</div><div><div class="dv-role">${labels[k]}</div><div class="dv-sub">Vago</div></div></div>`;}).join('');
+  const lead=list.filter(m=>m.grade_id===G6()).sort((a,b)=>(a.display_name||'').localeCompare(b.display_name||'','pt-BR'));
+  const leadHtml=lead.length?lead.map(m=>`<div class="dv-card cmd dv-click" data-mid="${safeText(m.id)}" role="button" tabindex="0" title="Ver perfil">${av(m.display_name,m.photo_url)}<div style="min-width:0"><div class="dv-role">Liderança de Divisão</div><div class="dv-name">${safeText(m.display_name||'—')}</div><div class="dv-sub">${safeText(gradeName(m.grade_id))}${m.cargo_id?' · '+safeText(cargoName(m.cargo_id)):''}</div></div></div>`).join(''):`<div class="dv-card cmd" style="opacity:.55"><div class="dv-av">—</div><div><div class="dv-role">Liderança de Divisão</div><div class="dv-sub">Grau VI não atribuído</div></div></div>`;
   const sorted=list.slice().sort((a,b)=>(a.display_name||'').localeCompare(b.display_name||'','pt-BR'));
-  const memHtml=sorted.map(m=>{const k=m.cargo_id?key(cargoName(m.cargo_id)):null;return `<div class="dv-card">${av(m.display_name,m.photo_url)}<div style="min-width:0"><div class="dv-name">${safeText(m.display_name||'—')}</div><div class="dv-sub">${safeText(gradeName(m.grade_id))}</div></div>${k?`<span class="dv-tag">${labels[k]}</span>`:''}</div>`;}).join('');
+  const memHtml=sorted.map(m=>{const k=m.cargo_id?key(cargoName(m.cargo_id)):null;return `<div class="dv-card dv-click" data-mid="${safeText(m.id)}" role="button" tabindex="0" title="Ver perfil">${av(m.display_name,m.photo_url)}<div style="min-width:0"><div class="dv-name">${safeText(m.display_name||'—')}</div><div class="dv-sub">${safeText(gradeName(m.grade_id))}</div></div>${k?`<span class="dv-tag">${labels[k]}</span>`:(m.grade_id===G6()?'<span class="dv-tag">Liderança</span>':'')}</div>`;}).join('');
   const hint=(!viaRpc&&list.length<=1)?'<p class="text-xs text-gray-500 mt-3">Se faltarem integrantes, rode o arquivo divisao.sql no Supabase para liberar a lista da sua divisão.</p>':'';
   body.innerHTML=`<div class="mb-5"><h3 class="font-display text-white text-3xl tracking-widest uppercase">${safeText(divName(p.division_id))}</h3><p class="text-sm text-gray-400">Sua divisão · ${list.length} integrante${list.length===1?'':'s'}</p></div>
-  <h4 class="font-heading text-gold text-sm uppercase tracking-widest mb-3">Comando da divisão</h4><div class="dv-grid mb-7">${cmdHtml}</div>
+  <h4 class="font-heading text-gold text-sm uppercase tracking-widest mb-3">Liderança de Divisão</h4><div class="dv-grid mb-7">${leadHtml}</div>
+  <h4 class="font-heading text-gold text-sm uppercase tracking-widest mb-3">Comando de Divisão</h4><div class="dv-grid mb-7">${cmdHtml}</div>
   <h4 class="font-heading text-gold text-sm uppercase tracking-widest mb-3">Integrantes da divisão</h4><div class="dv-grid">${memHtml||'<p class="text-sm text-gray-400">Nenhum integrante encontrado.</p>'}</div>${hint}`;
 }
 document.querySelectorAll('[data-mside="divisao"]').forEach(b=>b.addEventListener('click',loadDivisionPanel));
+function tenureText(d){
+  if(!d)return '—';const a=new Date(String(d).slice(0,10)+'T00:00:00'),n=new Date();if(isNaN(a)||a>n)return '—';
+  let y=n.getFullYear()-a.getFullYear(),m=n.getMonth()-a.getMonth();if(n.getDate()<a.getDate())m--;if(m<0){y--;m+=12;}
+  const p=[];if(y)p.push(y+(y===1?' ano':' anos'));if(m)p.push(m+(m===1?' mês':' meses'));return p.length?p.join(' e '):'menos de 1 mês';
+}
+async function openDivisionMember(id){
+  const box=$('kpi-modal');$('kpi-title').textContent='Perfil do integrante';$('kpi-body').innerHTML='<p class="text-sm text-gray-400">Carregando perfil...</p>';box.classList.remove('hidden-view');
+  const {data,error}=await supabaseClient.rpc('division_member_profile',{p_member:id});
+  const p=Array.isArray(data)?data[0]:data;
+  if(error||!p){$('kpi-body').innerHTML='<p class="text-sm text-gray-300">Não foi possível carregar este perfil. O arquivo divisao_perfil.sql precisa ser rodado no Supabase.</p>';return;}
+  const name=p.display_name||'—',digits=String(p.whatsapp||'').replace(/\D/g,'');
+  const wa=digits.length>=10&&digits.length<=15?`<a href="https://wa.me/${digits}" target="_blank" rel="noopener noreferrer" class="text-gold">${safeText(fmtPhone(p.whatsapp))} <i class="fa-brands fa-whatsapp"></i></a>`:'<span class="text-gray-500">Não informado</span>';
+  const bd=p.birth_date?String(p.birth_date).slice(0,10).split('-').reverse().slice(0,2).join('/'):'';
+  const hon=(p.honors||[]).map(h=>`<div class="flex items-center gap-2 py-1">${emblemHtml(h.emblem_url,'w-8 h-8')}<span class="text-sm text-white">${safeText(h.name||'Honraria')}</span>${h.awarded_on?`<span class="text-xs text-gray-500 ml-auto">${fmtDay(h.awarded_on)}</span>`:''}</div>`).join('');
+  $('kpi-title').textContent=name;
+  $('kpi-body').innerHTML=`<div class="dvp-head"><div class="dvp-av">${p.photo_url&&/^https:\/\//.test(p.photo_url)?`<img src="${safeText(p.photo_url)}" alt="" referrerpolicy="no-referrer" onerror="this.remove()">`:safeText(name.trim().charAt(0).toUpperCase())}</div><div><div class="font-display text-2xl text-white tracking-widest uppercase">${safeText(name)}</div><div class="text-xs text-gold font-heading tracking-widest uppercase">${safeText(gradeName(p.grade_id))}${p.cargo_id?' · '+safeText(cargoName(p.cargo_id)):''}</div></div></div>
+  <div class="dvp-row"><span>WhatsApp</span><span>${wa}</span></div>
+  <div class="dvp-row"><span>Data de aniversário</span><span>${bd?safeText(bd):'Não informada'}</span></div>
+  <div class="dvp-row"><span>Grau</span><span>${safeText(gradeName(p.grade_id))}</span></div>
+  <div class="dvp-row"><span>Cargo ocupado</span><span>${safeText(p.cargo_id?cargoName(p.cargo_id):'Sem cargo')}</span></div>
+  <div class="dvp-row"><span>Tempo de moto clube</span><span>${p.joined_at?`${safeText(tenureText(p.joined_at))} <span class="text-xs text-gray-500">(desde ${fmtDay(String(p.joined_at).slice(0,10))})</span>`:'—'}</span></div>
+  <div class="mt-3"><div class="text-[11px] text-gold font-heading tracking-widest uppercase mb-1">Honrarias</div>${hon||'<p class="text-sm text-gray-500">Nenhuma honraria registrada.</p>'}</div>`;
+}
+$('division-body').addEventListener('click',e=>{const c=e.target.closest('[data-mid]');if(c)openDivisionMember(c.dataset.mid);});
+$('division-body').addEventListener('keydown',e=>{if(e.key!=='Enter'&&e.key!==' ')return;const c=e.target.closest('[data-mid]');if(c){e.preventDefault();openDivisionMember(c.dataset.mid);}});
+
 const closeKpi=()=>$('kpi-modal').classList.add('hidden-view');$('kpi-x').addEventListener('click',closeKpi);$('kpi-modal').addEventListener('click',e=>{if(e.target.id==='kpi-modal')closeKpi();});document.addEventListener('keydown',e=>{if(e.key==='Escape')closeKpi();});
 document.querySelectorAll('#admin-panel .grp').forEach(b=>b.addEventListener('click',()=>{const w=b.nextElementSibling,o=!w.classList.contains('open');w.classList.toggle('open',o);b.setAttribute('aria-expanded',String(o));}));
 let tvEdit=null;
