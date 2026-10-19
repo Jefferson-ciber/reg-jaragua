@@ -300,6 +300,7 @@
         .dv-card{display:flex;align-items:center;gap:12px;background:#111113;border:1px solid #2b2b2f;border-radius:12px;padding:12px}
         .dv-card.cmd{border-left:3px solid #c9a84c}.dv-av{width:46px;height:46px;border-radius:50%;background:#1d1d22;color:#c9a84c;display:flex;align-items:center;justify-content:center;font-weight:700;overflow:hidden;flex:none}.dv-av img{width:100%;height:100%;object-fit:cover}
         .dv-role{font:600 11px 'Oswald',sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#c9a84c}.dv-name{color:#fff;font-size:14px}.dv-sub{color:#8b8b95;font-size:11.5px}
+        .org-grp{margin-bottom:10px}.org-tog{display:flex;width:100%;align-items:center;justify-content:space-between;gap:12px;padding:12px 16px;background:#141418;border:1px solid #c9a84c55;border-radius:10px;cursor:pointer;text-align:left;transition:border-color .2s,background .2s}.org-tog:hover,.org-tog:focus-visible{border-color:#c9a84c;background:#1a1a20;outline:none}.org-chev{color:#c9a84c;transition:transform .2s}.org-tog[aria-expanded=true] .org-chev{transform:rotate(180deg)}.org-body{margin-top:10px}
         .dv-click{cursor:pointer;transition:border-color .2s,transform .2s}.dv-click:hover,.dv-click:focus-visible{border-color:#c9a84c;transform:translateY(-2px);outline:none}
         .dvp-head{display:flex;align-items:center;gap:14px;margin-bottom:14px}.dvp-av{width:72px;height:72px;border-radius:50%;background:#1d1d22;border:2px solid #c9a84c;color:#c9a84c;display:flex;align-items:center;justify-content:center;font:700 28px 'Oswald',sans-serif;overflow:hidden;flex:none}.dvp-av img{width:100%;height:100%;object-fit:cover}
         .dvp-row{display:flex;justify-content:space-between;gap:12px;padding:9px 0;border-top:1px solid #2b2b2f;font-size:14px}.dvp-row span:first-child{color:#8b8b95}.dvp-row span:last-child{color:#fff;text-align:right}
@@ -413,7 +414,7 @@
       <section id="division-panel" aria-live="polite"><div id="division-body"></div></section>
       <div id="perfil-home"></div>
       <section id="my-profile" class="panel p-5 md:p-6 space-y-5">
-        <div class="flex flex-wrap items-center gap-4"><div id="mp-avatar" class="w-20 h-20 rounded-full overflow-hidden bg-[#c9a84c22] border border-[#c9a84c55] flex items-center justify-center font-display text-4xl text-gold shrink-0">?</div><div><p class="text-xs text-gold font-heading tracking-widest uppercase">Meu perfil</p><h3 id="mp-title" class="font-display text-3xl tracking-widest text-white">Meus dados</h3><div class="flex flex-wrap gap-2 mt-2"><span class="patch-badge"><i class="fa-solid fa-stairs"></i> <span id="mp-grade">—</span></span><span class="patch-badge"><i class="fa-solid fa-star"></i> <span id="mp-cargo">—</span></span><span class="patch-badge"><i class="fa-solid fa-location-dot"></i> <span id="mp-div">—</span></span><span class="patch-badge">Situação: <span id="mp-status">—</span></span><span class="patch-badge">Desde <span id="mp-since">—</span></span></div></div></div>
+        <div class="flex flex-wrap items-center gap-4"><div id="mp-avatar" class="w-20 h-20 rounded-full overflow-hidden bg-[#c9a84c22] border border-[#c9a84c55] flex items-center justify-center font-display text-4xl text-gold shrink-0">?</div><div><p class="text-xs text-gold font-heading tracking-widest uppercase">Meu perfil</p><h3 id="mp-title" class="font-display text-3xl tracking-widest text-white">Meus dados</h3><div class="flex flex-wrap gap-2 mt-2"><span class="patch-badge"><i class="fa-solid fa-stairs"></i> <span id="mp-grade">—</span></span><span class="patch-badge"><i class="fa-solid fa-star"></i> <span id="mp-cargo">—</span></span><span class="patch-badge"><i class="fa-solid fa-location-dot"></i> <span id="mp-div">—</span></span><span class="patch-badge hidden-view" id="mp-dcmd-wrap"><i class="fa-solid fa-user-shield"></i> Comando de Divisão: <span id="mp-dcmd"></span></span><span class="patch-badge">Situação: <span id="mp-status">—</span></span><span class="patch-badge">Desde <span id="mp-since">—</span></span></div></div></div>
         <div class="flex flex-wrap gap-2" role="tablist" aria-label="Seções do perfil">
           <button type="button" class="tab-btn" role="tab" data-ptab="info" aria-selected="true"><i class="fa-solid fa-user mr-2"></i>Informações pessoais</button>
           <button type="button" class="tab-btn" role="tab" data-ptab="grade" aria-selected="false"><i class="fa-solid fa-stairs mr-2"></i>Grau, cargo e divisão</button>
@@ -451,7 +452,7 @@
 <div role="tablist" aria-label="Seções do painel">
 <button type="button" class="tab-btn grp" aria-expanded="true"><i class="fa-solid fa-chart-pie"></i>Visão Geral<span class="chev"></span></button><div class="sub-wrap open"><button type="button" class="tab-btn sub" role="tab" data-tab="dashadm" aria-selected="false"><i class="fa-solid fa-gauge-high"></i>Dashboard</button><button type="button" class="tab-btn sub" role="tab" data-tab="perfil" aria-selected="false"><i class="fa-solid fa-id-card"></i>Meu Perfil</button><button type="button" class="tab-btn sub" role="tab" data-tab="content" aria-selected="true"><i class="fa-solid fa-bullhorn"></i>Comunicados</button><button type="button" class="tab-btn sub" role="tab" data-tab="dash" aria-selected="false"><i class="fa-solid fa-chart-column"></i>Indicadores</button></div>
 <button type="button" class="tab-btn grp" aria-expanded="false"><i class="fa-solid fa-users"></i>Integrantes<span class="chev"></span></button><div class="sub-wrap"><button type="button" class="tab-btn sub" role="tab" data-tab="members" aria-selected="false"><i class="fa-solid fa-users"></i>Todos os Integrantes</button><button type="button" class="tab-btn sub" role="tab" data-tab="access" aria-selected="false"><i class="fa-solid fa-user-plus"></i>Cadastrar Acesso</button><button type="button" class="tab-btn sub" role="tab" data-tab="cargos" aria-selected="false"><i class="fa-solid fa-user-tie"></i>Cargos e Funções</button><button type="button" class="tab-btn sub" role="tab" data-tab="honors" aria-selected="false"><i class="fa-solid fa-medal"></i>Honrarias</button></div>
-<button type="button" class="tab-btn grp" aria-expanded="false"><i class="fa-solid fa-sitemap"></i>Organização Regional<span class="chev"></span></button><div class="sub-wrap"><button type="button" class="tab-btn sub" role="tab" data-tab="org" aria-selected="false"><i class="fa-solid fa-sitemap"></i>Organização Regional</button><button type="button" class="tab-btn sub" role="tab" data-tab="comando" aria-selected="false"><i class="fa-solid fa-crown"></i>Comando Regional</button><button type="button" class="tab-btn sub" role="tab" data-tab="divisions" aria-selected="false"><i class="fa-solid fa-location-dot"></i>Divisões</button></div>
+<button type="button" class="tab-btn grp" aria-expanded="false"><i class="fa-solid fa-sitemap"></i>Organização Regional<span class="chev"></span></button><div class="sub-wrap"><button type="button" class="tab-btn sub" role="tab" data-tab="org" aria-selected="false"><i class="fa-solid fa-sitemap"></i>Organização Regional</button><button type="button" class="tab-btn sub" role="tab" data-tab="comando" aria-selected="false"><i class="fa-solid fa-crown"></i>Comando Regional</button><button type="button" class="tab-btn sub" role="tab" data-tab="dcomando" aria-selected="false"><i class="fa-solid fa-user-shield"></i>Comando de Divisão</button><button type="button" class="tab-btn sub" role="tab" data-tab="divisions" aria-selected="false"><i class="fa-solid fa-location-dot"></i>Divisões</button></div>
 <button type="button" class="tab-btn grp" aria-expanded="false"><i class="fa-solid fa-calendar-check"></i>Eventos e Participação<span class="chev"></span></button><div class="sub-wrap"><button type="button" class="tab-btn sub" role="tab" data-tab="events" aria-selected="false"><i class="fa-solid fa-calendar-check"></i>Eventos</button></div>
 <button type="button" class="tab-btn grp" aria-expanded="false"><i class="fa-solid fa-route"></i>Viagens<span class="chev"></span></button><div class="sub-wrap"><button type="button" class="tab-btn sub" role="tab" data-tab="adm-travel" aria-selected="false"><i class="fa-solid fa-route"></i>Protocolos de Viagem</button></div>
 <button type="button" class="tab-btn grp" aria-expanded="false"><i class="fa-solid fa-gear"></i>Sistema<span class="chev"></span></button><div class="sub-wrap"><button type="button" class="tab-btn sub" role="tab" data-tab="config" aria-selected="false"><i class="fa-solid fa-sliders"></i>Configurações</button></div>
@@ -503,7 +504,7 @@
             <div><label class="block text-xs text-gray-300 mb-2" for="org-cargo">Cargo</label><select class="field" id="org-cargo"></select></div>
             <div><label class="block text-xs text-gray-300 mb-2" for="org-search">Nome</label><input class="field" id="org-search" type="search" placeholder="Pesquisar por nome"></div>
           </div>
-          <p class="text-xs text-gray-500">Sem filtros, o COMANDO REGIONAL (Grau V, sem divisão) aparece no topo; cada divisão mostra a Liderança de Divisão (Grau VI) primeiro e depois os demais integrantes por grau, do maior ao menor (CAMISETA). Com filtros, aparece a lista dos integrantes encontrados.</p>
+          <p class="text-xs text-gray-500">Sem filtros, o COMANDO REGIONAL (Grau V, sem divisão) aparece no topo; clique em cada título para abrir ou fechar. Cada divisão mostra o Comando de Divisão (Grau VI, definido em Comando de Divisão) primeiro e depois os demais integrantes por grau. Com filtros, os grupos abrem sozinhos com os integrantes encontrados.</p>
           <div id="org-list" class="space-y-6"></div>
         </div>
 
@@ -530,6 +531,19 @@
             <div><label class="block text-xs text-gray-300 mb-2" for="cr-new-icon">Ícone</label><select class="field" id="cr-new-icon"></select></div>
             <div><label class="block text-xs text-gray-300 mb-2" for="cr-new-member">Integrante (Grau V)</label><select class="field" id="cr-new-member"></select></div>
             <div class="md:col-span-4 flex flex-wrap items-center gap-3"><button class="btn btn-primary" type="submit"><i class="fa-solid fa-plus mr-2"></i>Adicionar cargo</button><p id="cr-message" class="text-sm" role="status" aria-live="polite"></p></div>
+          </form>
+        </div>
+
+        <div id="tab-dcomando" class="hidden-view space-y-5" role="tabpanel">
+          <div><h4 class="font-heading text-lg uppercase text-white">Comando de Divisão</h4><p class="text-xs text-gray-400 mt-1">Cada divisão tem o seu comando. Os cargos só podem ser ocupados por integrantes de <strong>Grau VI</strong> que pertençam à divisão escolhida. O comando aparece no perfil do integrante, na aba Divisão do painel do integrante e na Organização Regional. Para trocar a pessoa de um cargo, escolha outro integrante e salve.</p></div>
+          <div class="max-w-sm"><label class="block text-xs text-gray-300 mb-2" for="dc-division">Divisão</label><select class="field" id="dc-division"></select></div>
+          <div id="dc-list" class="space-y-3"></div>
+          <hr class="gold-line">
+          <form id="dc-new" class="grid md:grid-cols-4 gap-3" novalidate>
+            <div class="md:col-span-2"><label class="block text-xs text-gray-300 mb-2" for="dc-new-title">Novo cargo do comando</label><input class="field" id="dc-new-title" maxlength="60" placeholder="Ex.: Diretor"></div>
+            <div><label class="block text-xs text-gray-300 mb-2" for="dc-new-icon">Ícone</label><select class="field" id="dc-new-icon"></select></div>
+            <div><label class="block text-xs text-gray-300 mb-2" for="dc-new-member">Integrante (Grau VI)</label><select class="field" id="dc-new-member"></select></div>
+            <div class="md:col-span-4 flex flex-wrap items-center gap-3"><button class="btn btn-primary" type="submit"><i class="fa-solid fa-plus mr-2"></i>Adicionar cargo</button><button class="btn btn-secondary" type="button" id="dc-defaults"><i class="fa-solid fa-wand-magic-sparkles mr-2"></i>Criar cargos padrão (Diretor, Subdiretor, Social, ADM)</button><p id="dc-message" class="text-sm" role="status" aria-live="polite"></p></div>
           </form>
         </div>
 
@@ -669,7 +683,7 @@ $('create-user-form').addEventListener('submit',async e=>{e.preventDefault();con
 /* ───────── Painel do administrador ───────── */
 let me=null, adminItems=[];
 const fmtDate=(v)=>v?new Date(v).toLocaleDateString('pt-BR'):'';
-function setTab(name){document.querySelectorAll('[data-tab]').forEach(b=>b.setAttribute('aria-selected',String(b.dataset.tab===name)));['content','members','events','org','cargos','divisions','comando','honors','perfil','dashadm','dash','config','access','adm-travel'].forEach(t=>$('tab-'+t).classList.toggle('hidden-view',t!==name));if(name==='dashadm')renderDashAdm();if(name==='dash')refreshDash();if(name==='org')loadOrgTab();if(name==='cargos')loadCargosTab();if(name==='divisions')loadDivisionsTab();if(name==='comando')loadComandoTab();if(name==='honors')loadHonorsTab();if(name==='config')loadConfig();if(name==='adm-travel')loadAdmTravelPanel();}
+function setTab(name){document.querySelectorAll('[data-tab]').forEach(b=>b.setAttribute('aria-selected',String(b.dataset.tab===name)));['content','members','events','org','cargos','divisions','comando','dcomando','honors','perfil','dashadm','dash','config','access','adm-travel'].forEach(t=>$('tab-'+t).classList.toggle('hidden-view',t!==name));if(name==='dashadm')renderDashAdm();if(name==='dash')refreshDash();if(name==='org')loadOrgTab();if(name==='cargos')loadCargosTab();if(name==='divisions')loadDivisionsTab();if(name==='comando')loadComandoTab();if(name==='dcomando')loadDcomandoTab();if(name==='honors')loadHonorsTab();if(name==='config')loadConfig();if(name==='adm-travel')loadAdmTravelPanel();}
 document.querySelectorAll('[data-tab]').forEach(b=>b.addEventListener('click',()=>setTab(b.dataset.tab)));
 
 function resetContentForm(){$('content-form').reset();$('cc-id').value='';$('cc-order').value='100';$('cc-published').checked=true;$('cc-save').innerHTML='<i class="fa-solid fa-floppy-disk mr-2"></i>Publicar comunicado';$('cc-cancel').classList.add('hidden-view');}
@@ -791,6 +805,8 @@ async function loadMyProfile(){
   if(error||!p){message('mp-message','Não foi possível carregar o perfil. Rode o fase1-banco.sql no Supabase.','error');return;}
   $('mp-name').value=p.display_name||'';$('mp-email').value=p.email||me.email||'';$('mp-photo').value=p.photo_url||'';$('mp-wa').value=fmtPhone(p.whatsapp);$('mp-phone').value=fmtPhone(p.phone);$('mp-birth').value=p.birth_date||'';$('mp-age').textContent=ageText(p.birth_date);$('mp-em').value=fmtPhone(p.emergency_whatsapp);
   $('mp-grade').textContent=gradeName(p.grade_id);$('mp-cargo').textContent=p.cargo_id?cargoName(p.cargo_id):'Sem cargo';$('mp-div').textContent=p.division_id?divName(p.division_id):'Sem divisão';$('mp-status').textContent=p.status;$('mp-since').textContent=fmtDay(p.joined_at);setAvatar($('mp-avatar'),p.photo_url,p.display_name);
+  $('mp-dcmd-wrap').classList.add('hidden-view');
+  if(p.division_id){const dcr=await supabaseClient.rpc('division_command',{p_division:p.division_id});const mine=(Array.isArray(dcr.data)?dcr.data:[]).filter(c=>c.member_id===me.id).map(c=>c.role_title);if(mine.length){$('mp-dcmd').textContent=mine.join(' / ');$('mp-dcmd-wrap').classList.remove('hidden-view');}}
   const {data:rows}=await supabaseClient.rpc('member_stats');
   const {data:gh}=await supabaseClient.from('grade_history').select('changed_at').eq('member_id',me.id).order('changed_at',{ascending:false}).limit(1);
   const since=gh?.[0]?.changed_at?.slice(0,10)||p.joined_at;
@@ -1270,12 +1286,13 @@ $('hn-list').addEventListener('click',async e=>{const b=e.target.closest('[data-
   if(!confirm('Excluir esta concessão? A alteração fica no registro de auditoria.'))return;const {error}=await supabaseClient.from('member_honors').delete().eq('id',id);
   if(error)return message('hn-message','Não foi possível excluir.','error');await loadHonorsTab();message('hn-message','Concessão excluída.','success');});
 /* ───────── Etapa 4: Organização Regional ───────── */
-let orgHonors={},orgSince={};
+let orgHonors={},orgSince={},orgCmd=[];const orgOpen=new Set();
 async function loadOrgTab(){
   await loadMembers();await loadRefs();
   const [h,d]=await Promise.all([supabaseClient.from('member_honors').select('member_id,honor_types(name)'),supabaseClient.from('division_history').select('member_id,effective_date,changed_at').order('changed_at',{ascending:true})]);
   orgHonors={};(h.data||[]).forEach(r=>{(orgHonors[r.member_id]=orgHonors[r.member_id]||[]).push(r.honor_types?.name||'Honraria');});
   orgSince={};(d.data||[]).forEach(r=>{orgSince[r.member_id]=r.effective_date;});
+  const dcq=await supabaseClient.from('division_command').select('id,division_id,role_title,icon,member_id,sort_order,is_active').eq('is_active',true).order('sort_order',{ascending:true}).order('id',{ascending:true});orgCmd=dcq.error?[]:(dcq.data||[]);
   const k=['org-division','org-grade','org-cargo'].map(i=>$(i).value);
   $('org-division').innerHTML=optsHtml(divisionsList.map(x=>[x.id,x.name]),k[0],'Todas as divisões');
   $('org-grade').innerHTML=optsHtml(gradesList.map(x=>[x.id,x.name]),k[1],'Todos os graus');
@@ -1293,30 +1310,32 @@ function renderOrg(){
   const match=m=>(!fg||m.grade_id===fg)&&(!fc||(fc==='none'?!m.cargo_id:m.cargo_id===Number(fc)))&&(!q||`${m.display_name||''} ${m.email||''}`.toLowerCase().includes(q));
   const byRank=(a,b)=>a.grade_id-b.grade_id||(a.display_name||'').localeCompare(b.display_name||'','pt-BR');
   const lab=m=>`${gradeName(m.grade_id)}${m.cargo_id?' — '+cargoName(m.cargo_id):''}`;
-  const wrap=(title,n,body)=>`<div><h4 class="font-heading text-lg uppercase tracking-widest text-white border-b border-[#c9a84c55] pb-1 mb-3">${title} <span class="text-sm text-gray-500">(${n})</span></h4><div class="grid md:grid-cols-2 gap-2">${body}</div></div>`;
+  const wrap=(key,title,n,body)=>{const open=filtering||orgOpen.has(key);return `<div class="org-grp"><button type="button" class="org-tog" data-orgtog="${safeText(key)}" aria-expanded="${open}"><span class="font-heading text-lg uppercase tracking-widest text-white">${title} <span class="text-sm text-gray-500">(${n})</span></span><i class="fa-solid fa-chevron-down org-chev"></i></button><div class="org-body grid md:grid-cols-2 gap-2 ${open?'':'hidden-view'}">${body}</div></div>`;};
   let html='';
   if(!fd){
     const cmd=membersCache.filter(m=>m.grade_id===g5&&match(m)).sort(byRank);
-    if(cmd.length||!filtering)html+=wrap('COMANDO REGIONAL',cmd.length,cmd.map(m=>orgPerson(m,`Liderança Regional — ${lab(m)}`)).join('')||'<p class="text-xs text-gray-500">Nenhum integrante do Grau V cadastrado.</p>');
+    if(cmd.length||!filtering)html+=wrap('cmd','COMANDO REGIONAL',cmd.length,cmd.map(m=>orgPerson(m,`Liderança Regional — ${lab(m)}`)).join('')||'<p class="text-xs text-gray-500">Nenhum integrante do Grau V cadastrado.</p>');
   }
   const groups=[...divisionsList.filter(d=>!fd||d.id===fd).map(d=>[d.id,d.name]),...(!fd?[[null,'SEM DIVISÃO']]:[])];
   html+=groups.map(([id,name])=>{
     const ms=membersCache.filter(m=>(m.division_id||null)===id&&m.grade_id!==g5);let body='';
     if(id===null&&!ms.length)return '';
     if(!filtering&&id!==null){
-      const lead=ms.filter(m=>m.grade_id===g6).sort(byRank);
-      body=(lead.length?lead.map(m=>orgPerson(m,`Liderança de Divisão — ${lab(m)}`)).join(''):'<div class="row-card flex items-center justify-between gap-2"><span class="text-xs text-gold font-heading tracking-widest uppercase">Liderança de Divisão</span><span class="text-sm text-gray-500">Grau VI não atribuído</span></div>')+ms.filter(m=>m.grade_id!==g6).sort(byRank).map(m=>orgPerson(m,lab(m))).join('');
+      const rows=orgCmd.filter(c=>c.division_id===id),inCmd=new Set(rows.map(c=>c.member_id).filter(Boolean));
+      const cmdCards=rows.length?rows.map(c=>{const mm=c.member_id?membersCache.find(x=>x.id===c.member_id):null;return mm?orgPerson(mm,`Comando de Divisão — ${c.role_title}`):`<div class="row-card flex items-center justify-between gap-2"><span class="text-xs text-gold font-heading tracking-widest uppercase">Comando de Divisão — ${safeText(c.role_title)}</span><span class="text-sm text-gray-500">Vago</span></div>`;}).join(''):'<div class="row-card flex items-center justify-between gap-2"><span class="text-xs text-gold font-heading tracking-widest uppercase">Comando de Divisão</span><span class="text-sm text-gray-500">Não definido (Organização Regional → Comando de Divisão)</span></div>';
+      body=cmdCards+ms.filter(m=>!inCmd.has(m.id)).sort(byRank).map(m=>orgPerson(m,lab(m))).join('');
     }else{
       const list=ms.filter(match).sort(byRank);
       if(filtering&&!list.length)return '';
       body=list.map(m=>orgPerson(m,lab(m))).join('')||'<p class="text-xs text-gray-500">Nenhum integrante nesta divisão.</p>';
     }
-    return wrap('Divisão: '+safeText(name),ms.length,body);
+    return wrap('div-'+id,'Divisão: '+safeText(name),ms.length,body);
   }).join('');
   $('org-list').innerHTML=html||'<p class="text-sm text-gray-400">Nenhum integrante encontrado.</p>';
   document.querySelectorAll('[data-oavatar]').forEach(el=>{const m=membersCache.find(x=>x.id===el.dataset.oavatar);setAvatar(el,m?.photo_url,m?.display_name);});
 }
-['org-division','org-grade','org-cargo'].forEach(i=>$(i).addEventListener('change',renderOrg));$('org-search').addEventListener('input',renderOrg);
+['org-division','org-grade','org-cargo'].forEach(i=>$(i).addEventListener('change',renderOrg));
+$('org-list').addEventListener('click',e=>{const b=e.target.closest('[data-orgtog]');if(!b)return;const open=b.getAttribute('aria-expanded')!=='true';b.setAttribute('aria-expanded',String(open));b.nextElementSibling.classList.toggle('hidden-view',!open);open?orgOpen.add(b.dataset.orgtog):orgOpen.delete(b.dataset.orgtog);});$('org-search').addEventListener('input',renderOrg);
 /* ───────── Comando regional (dados vindos do banco, só após login) ───────── */
 async function loadCommand(){
   const holder=$('command-list');
@@ -1390,6 +1409,74 @@ $('cr-new').addEventListener('submit',async e=>{
   const {error}=await supabaseClient.from('command_contacts').insert({role_title:title,icon:$('cr-new-icon').value,member_id:mem||null,sort_order:next,is_active:true});
   if(error)return message('cr-message','Não foi possível adicionar. Rode o arquivo comando_regional.sql no Supabase.','error');
   $('cr-new-title').value='';await loadComandoTab();loadCommand();message('cr-message','Cargo adicionado.','success');
+});
+
+/* Admin: Comando de Divisão (cargos por divisão, só Grau VI da própria divisão) */
+let dcRows=[];
+const dcDiv=()=>Number($('dc-division').value)||0;
+const dcCandidates=div=>membersCache.filter(m=>m.is_active&&m.grade_id===G6()&&m.division_id===div).map(m=>[m.id,m.display_name||m.email]);
+async function loadDcomandoTab(){
+  await ensureMembers();await loadRefs();
+  const keep=$('dc-division').value||divisionsList[0]?.id;
+  $('dc-division').innerHTML=optsHtml(divisionsList.map(d=>[d.id,d.name]),keep);
+  await renderDcomando();
+}
+async function renderDcomando(){
+  const div=dcDiv();if(!div){$('dc-list').innerHTML='<p class="text-sm text-gray-400">Nenhuma divisão cadastrada.</p>';return;}
+  const {data,error}=await supabaseClient.from('division_command').select('id,division_id,role_title,icon,member_id,sort_order,is_active').eq('division_id',div).order('sort_order',{ascending:true}).order('id',{ascending:true});
+  if(error){$('dc-list').innerHTML='<p class="text-sm text-red-300">Não foi possível carregar. Rode o arquivo comando_divisao.sql no Supabase.</p>';return;}
+  dcRows=data||[];
+  const g6=dcCandidates(div);
+  $('dc-new-icon').innerHTML=optsHtml(CR_ICONS,'fa-user');
+  $('dc-new-member').innerHTML=optsHtml(g6,'','— Vago —');
+  $('dc-defaults').classList.toggle('hidden-view',dcRows.length>0);
+  if(!g6.length)message('dc-message','Nenhum integrante ativo de Grau VI nesta divisão. Defina o grau e a divisão em Todos os Integrantes / Divisões.','error');else message('dc-message','');
+  $('dc-list').innerHTML=dcRows.map((c,i)=>{
+    const ics=CR_ICONS.some(x=>x[0]===c.icon)?CR_ICONS:[...CR_ICONS,[c.icon||'fa-user',c.icon||'fa-user']];
+    const opts=g6.some(x=>x[0]===c.member_id)||!c.member_id?g6:[...g6,[c.member_id,mName(c.member_id)+' (fora do Grau VI/divisão)']];
+    return `<div class="row-card ${c.is_active?'':'is-off'}" data-dc="${c.id}"><div class="grid md:grid-cols-4 gap-3 items-end">
+      <div class="flex items-center gap-3"><div class="cmd-icon"><i class="fa-solid ${safeText(c.icon||'fa-user')}"></i></div><div class="flex-1"><label class="block text-xs text-gray-300 mb-1">Cargo</label><input class="field" data-dcf="title" maxlength="60" value="${safeText(c.role_title)}"></div></div>
+      <div><label class="block text-xs text-gray-300 mb-1">Integrante (Grau VI)</label><select class="field" data-dcf="member">${optsHtml(opts,c.member_id,'— Vago —')}</select></div>
+      <div><label class="block text-xs text-gray-300 mb-1">Ícone</label><select class="field" data-dcf="icon">${optsHtml(ics,c.icon||'fa-user')}</select></div>
+      <div class="flex flex-wrap gap-2"><button class="btn btn-primary btn-sm" data-dcact="save" type="button">Salvar</button><button class="btn btn-secondary btn-sm" data-dcact="up" type="button" ${i===0?'disabled':''} aria-label="Subir"><i class="fa-solid fa-arrow-up"></i></button><button class="btn btn-secondary btn-sm" data-dcact="down" type="button" ${i===dcRows.length-1?'disabled':''} aria-label="Descer"><i class="fa-solid fa-arrow-down"></i></button><button class="btn btn-secondary btn-sm" data-dcact="toggle" type="button">${c.is_active?'Ocultar':'Mostrar'}</button><button class="btn btn-danger btn-sm" data-dcact="del" type="button" aria-label="Excluir"><i class="fa-solid fa-trash"></i></button></div>
+    </div></div>`;}).join('')||'<p class="text-sm text-gray-400">Nenhum cargo no comando desta divisão. Adicione abaixo ou use os cargos padrão.</p>';
+}
+$('dc-division').addEventListener('change',renderDcomando);
+function dcCheck(mem,div){if(!mem)return null;const m=membersCache.find(x=>x.id===mem);if(!m||m.grade_id!==G6())return 'O Comando de Divisão só pode ser ocupado por integrante de Grau VI.';if(m.division_id!==div)return 'O integrante precisa pertencer a esta divisão.';return null;}
+$('dc-list').addEventListener('click',async e=>{
+  const b=e.target.closest('[data-dcact]');if(!b)return;
+  const card=b.closest('[data-dc]'),id=Number(card.dataset.dc),c=dcRows.find(x=>x.id===id),act=b.dataset.dcact;if(!c)return;
+  const T=()=>supabaseClient.from('division_command');let error=null;
+  if(act==='save'){
+    const title=card.querySelector('[data-dcf="title"]').value.trim(),mem=card.querySelector('[data-dcf="member"]').value,icon=card.querySelector('[data-dcf="icon"]').value;
+    if(title.length<2)return message('dc-message','Informe o nome do cargo.','error');
+    const bad=dcCheck(mem,c.division_id);if(bad)return message('dc-message',bad,'error');
+    ({error}=await T().update({role_title:title,icon,member_id:mem||null}).eq('id',id));
+  }else if(act==='toggle'){({error}=await T().update({is_active:!c.is_active}).eq('id',id));}
+  else if(act==='del'){if(!confirm(`Excluir o cargo "${c.role_title}" do Comando de Divisão?`))return;({error}=await T().delete().eq('id',id));}
+  else{
+    const i=dcRows.findIndex(x=>x.id===id),j=act==='up'?i-1:i+1;if(!dcRows[j])return;
+    const arr=dcRows.slice();[arr[i],arr[j]]=[arr[j],arr[i]];
+    const rs=await Promise.all(arr.map((r,k)=>T().update({sort_order:k+1}).eq('id',r.id)));error=rs.find(x=>x.error)?.error||null;
+  }
+  if(error)return message('dc-message',error.message||'Não foi possível salvar. Rode o arquivo comando_divisao.sql no Supabase.','error');
+  await renderDcomando();message('dc-message','Comando de Divisão atualizado.','success');
+});
+$('dc-new').addEventListener('submit',async e=>{
+  e.preventDefault();const div=dcDiv(),title=$('dc-new-title').value.trim(),mem=$('dc-new-member').value;
+  if(title.length<2)return message('dc-message','Informe o nome do cargo.','error');
+  const bad=dcCheck(mem,div);if(bad)return message('dc-message',bad,'error');
+  const next=dcRows.reduce((a,r)=>Math.max(a,r.sort_order||0),0)+1;
+  const {error}=await supabaseClient.from('division_command').insert({division_id:div,role_title:title,icon:$('dc-new-icon').value,member_id:mem||null,sort_order:next,is_active:true});
+  if(error)return message('dc-message',error.message||'Não foi possível adicionar. Rode o arquivo comando_divisao.sql no Supabase.','error');
+  $('dc-new-title').value='';await renderDcomando();message('dc-message','Cargo adicionado.','success');
+});
+$('dc-defaults').addEventListener('click',async()=>{
+  const div=dcDiv();if(!div)return;
+  const rows=[['Diretor','fa-crown'],['Subdiretor','fa-shield-halved'],['Social','fa-handshake'],['ADM','fa-file-signature']].map(([t,i],k)=>({division_id:div,role_title:t,icon:i,sort_order:k+1,is_active:true}));
+  const {error}=await supabaseClient.from('division_command').insert(rows);
+  if(error)return message('dc-message',error.message||'Não foi possível criar. Rode o arquivo comando_divisao.sql no Supabase.','error');
+  await renderDcomando();message('dc-message','Cargos padrão criados. Agora escolha o integrante de Grau VI de cada cargo.','success');
 });
 
 /* ───────── Painel Administrativo (visão geral) ───────── */
@@ -1495,16 +1582,15 @@ async function loadDivisionPanel(){
   const r=await supabaseClient.rpc('division_roster');
   if(!r.error&&Array.isArray(r.data)){list=r.data;viaRpc=true;}
   else{const q=await supabaseClient.from('member_profiles').select('id,display_name,photo_url,cargo_id,grade_id').eq('division_id',p.division_id).eq('is_active',true).order('display_name');list=q.data||[];}
-  const order=['dir','sub','soc','adm'],labels={dir:'Diretor',sub:'Subdiretor',soc:'Social',adm:'ADM'};
-  const cmd={};list.forEach(m=>{const k=m.cargo_id?key(cargoName(m.cargo_id)):null;if(k)(cmd[k]=cmd[k]||[]).push(m);});
-  const cmdHtml=order.map(k=>{const ms=cmd[k]||[];return ms.length?ms.map(m=>`<div class="dv-card cmd dv-click" data-mid="${safeText(m.id)}" role="button" tabindex="0" title="Ver perfil">${av(m.display_name,m.photo_url)}<div><div class="dv-role">${labels[k]}</div><div class="dv-name">${safeText(m.display_name||'—')}</div><div class="dv-sub">${safeText(gradeName(m.grade_id))}</div></div></div>`).join(''):`<div class="dv-card cmd" style="opacity:.55"><div class="dv-av">—</div><div><div class="dv-role">${labels[k]}</div><div class="dv-sub">Vago</div></div></div>`;}).join('');
-  const lead=list.filter(m=>m.grade_id===G6()).sort((a,b)=>(a.display_name||'').localeCompare(b.display_name||'','pt-BR'));
-  const leadHtml=lead.length?lead.map(m=>`<div class="dv-card cmd dv-click" data-mid="${safeText(m.id)}" role="button" tabindex="0" title="Ver perfil">${av(m.display_name,m.photo_url)}<div style="min-width:0"><div class="dv-role">Liderança de Divisão</div><div class="dv-name">${safeText(m.display_name||'—')}</div><div class="dv-sub">${safeText(gradeName(m.grade_id))}${m.cargo_id?' · '+safeText(cargoName(m.cargo_id)):''}</div></div></div>`).join(''):`<div class="dv-card cmd" style="opacity:.55"><div class="dv-av">—</div><div><div class="dv-role">Liderança de Divisão</div><div class="dv-sub">Grau VI não atribuído</div></div></div>`;
+  const labels={dir:'Diretor',sub:'Subdiretor',soc:'Social',adm:'ADM'};
+  const dc=await supabaseClient.rpc('division_command',{p_division:p.division_id});
+  const cmdRows=(!dc.error&&Array.isArray(dc.data))?dc.data:null;
+  const cmdBy={};(cmdRows||[]).forEach(c=>{if(c.member_id)(cmdBy[c.member_id]=cmdBy[c.member_id]||[]).push(c.role_title);});
+  const cmdHtml=cmdRows===null?'<p class="text-sm text-gray-400">O arquivo comando_divisao.sql precisa ser rodado no Supabase para mostrar o comando.</p>':(cmdRows.length?cmdRows.map(c=>{const ic=/^fa-[a-z0-9-]+$/.test(c.icon||'')?c.icon:'fa-user';return c.member_id&&c.display_name?`<div class="dv-card cmd dv-click" data-mid="${safeText(c.member_id)}" role="button" tabindex="0" title="Ver perfil">${av(c.display_name,c.photo_url)}<div style="min-width:0"><div class="dv-role"><i class="fa-solid ${ic}" style="margin-right:4px"></i>${safeText(c.role_title)}</div><div class="dv-name">${safeText(c.display_name)}</div><div class="dv-sub">${safeText(gradeName(c.grade_id))}</div></div></div>`:`<div class="dv-card cmd" style="opacity:.55"><div class="dv-av"><i class="fa-solid ${ic}"></i></div><div><div class="dv-role">${safeText(c.role_title)}</div><div class="dv-sub">Vago</div></div></div>`;}).join(''):'<p class="text-sm text-gray-400">O comando desta divisão ainda não foi definido pela administração.</p>');
   const sorted=list.slice().sort((a,b)=>(a.display_name||'').localeCompare(b.display_name||'','pt-BR'));
-  const memHtml=sorted.map(m=>{const k=m.cargo_id?key(cargoName(m.cargo_id)):null;return `<div class="dv-card dv-click" data-mid="${safeText(m.id)}" role="button" tabindex="0" title="Ver perfil">${av(m.display_name,m.photo_url)}<div style="min-width:0"><div class="dv-name">${safeText(m.display_name||'—')}</div><div class="dv-sub">${safeText(gradeName(m.grade_id))}</div></div>${k?`<span class="dv-tag">${labels[k]}</span>`:(m.grade_id===G6()?'<span class="dv-tag">Liderança</span>':'')}</div>`;}).join('');
+  const memHtml=sorted.map(m=>`<div class="dv-card dv-click" data-mid="${safeText(m.id)}" role="button" tabindex="0" title="Ver perfil">${av(m.display_name,m.photo_url)}<div style="min-width:0"><div class="dv-name">${safeText(m.display_name||'—')}</div><div class="dv-sub">${safeText(gradeName(m.grade_id))}</div></div>${cmdBy[m.id]?`<span class="dv-tag">${safeText(cmdBy[m.id].join(' / '))}</span>`:''}</div>`).join('');
   const hint=(!viaRpc&&list.length<=1)?'<p class="text-xs text-gray-500 mt-3">Se faltarem integrantes, rode o arquivo divisao.sql no Supabase para liberar a lista da sua divisão.</p>':'';
   body.innerHTML=`<div class="mb-5"><h3 class="font-display text-white text-3xl tracking-widest uppercase">${safeText(divName(p.division_id))}</h3><p class="text-sm text-gray-400">Sua divisão · ${list.length} integrante${list.length===1?'':'s'}</p></div>
-  <h4 class="font-heading text-gold text-sm uppercase tracking-widest mb-3">Liderança de Divisão</h4><div class="dv-grid mb-7">${leadHtml}</div>
   <h4 class="font-heading text-gold text-sm uppercase tracking-widest mb-3">Comando de Divisão</h4><div class="dv-grid mb-7">${cmdHtml}</div>
   <h4 class="font-heading text-gold text-sm uppercase tracking-widest mb-3">Integrantes da divisão</h4><div class="dv-grid">${memHtml||'<p class="text-sm text-gray-400">Nenhum integrante encontrado.</p>'}</div>${hint}`;
 }
@@ -1528,6 +1614,7 @@ async function openDivisionMember(id){
   <div class="dvp-row"><span>WhatsApp</span><span>${wa}</span></div>
   <div class="dvp-row"><span>Data de aniversário</span><span>${bd?safeText(bd):'Não informada'}</span></div>
   <div class="dvp-row"><span>Grau</span><span>${safeText(gradeName(p.grade_id))}</span></div>
+  ${(p.command_roles||[]).length?`<div class="dvp-row"><span>Comando de Divisão</span><span>${safeText(p.command_roles.join(' / '))}</span></div>`:''}
   <div class="dvp-row"><span>Cargo ocupado</span><span>${safeText(p.cargo_id?cargoName(p.cargo_id):'Sem cargo')}</span></div>
   <div class="dvp-row"><span>Tempo de moto clube</span><span>${p.joined_at?`${safeText(tenureText(p.joined_at))} <span class="text-xs text-gray-500">(desde ${fmtDay(String(p.joined_at).slice(0,10))})</span>`:'—'}</span></div>
   <div class="mt-3"><div class="text-[11px] text-gold font-heading tracking-widest uppercase mb-1">Honrarias</div>${hon||'<p class="text-sm text-gray-500">Nenhuma honraria registrada.</p>'}</div>`;
