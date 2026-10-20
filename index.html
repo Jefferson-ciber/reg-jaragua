@@ -1350,8 +1350,9 @@ async function loadCommand(){
     const hasWa=digits.length>=10&&digits.length<=15;
     const nm=c.display_name||'Vago';
     const wa=hasWa?`<a class="cmd-wa" href="https://wa.me/${digits}" target="_blank" rel="noopener noreferrer" aria-label="Abrir WhatsApp de ${safeText(nm)}"><i class="fa-brands fa-whatsapp"></i></a>`:`<span class="cmd-wa off" aria-hidden="true"><i class="fa-brands fa-whatsapp"></i></span>`;
-    const click=c.member_id?` cmd-click" data-cmid="${safeText(c.member_id)}" role="button" tabindex="0" title="Ver perfil de ${safeText(nm)}`:'';
-    return `<div class="role-card${click} p-4 flex items-center gap-4 ${extra&&i===data.length-1?'lg:col-span-2':''}"><div class="cmd-icon"><i class="fa-solid ${icon}"></i></div><div class="flex-1 min-w-0"><div class="text-[11px] text-gray-500 font-heading tracking-widest uppercase">${safeText(c.role_title)}</div><div class="font-heading font-bold text-white text-xl uppercase truncate">${safeText(nm)}</div></div>${wa}</div>`;
+    const cls=`role-card p-4 flex items-center gap-4 ${c.member_id?'cmd-click ':''}${extra&&i===data.length-1?'lg:col-span-2':''}`;
+    const attrs=c.member_id?` data-cmid="${safeText(c.member_id)}" role="button" tabindex="0" title="Ver perfil de ${safeText(nm)}"`:'';
+    return `<div class="${cls}"${attrs}><div class="cmd-icon"><i class="fa-solid ${icon}"></i></div><div class="flex-1 min-w-0"><div class="text-[11px] text-gray-500 font-heading tracking-widest uppercase">${safeText(c.role_title)}</div><div class="font-heading font-bold text-white text-xl uppercase truncate">${safeText(nm)}</div></div>${wa}</div>`;
   }).join('');
 }
 async function openCommandProfile(memberId){
