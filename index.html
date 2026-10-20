@@ -300,6 +300,14 @@
         .dv-card{display:flex;align-items:center;gap:12px;background:#111113;border:1px solid #2b2b2f;border-radius:12px;padding:12px}
         .dv-card.cmd{border-left:3px solid #c9a84c}.dv-av{width:46px;height:46px;border-radius:50%;background:#1d1d22;color:#c9a84c;display:flex;align-items:center;justify-content:center;font-weight:700;overflow:hidden;flex:none}.dv-av img{width:100%;height:100%;object-fit:cover}
         .dv-role{font:600 11px 'Oswald',sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#c9a84c}.dv-name{color:#fff;font-size:14px}.dv-sub{color:#8b8b95;font-size:11.5px}
+        #ui-dialog{position:fixed;inset:0;z-index:600;background:rgba(0,0,0,.78);backdrop-filter:blur(3px);align-items:center;justify-content:center;padding:18px}#ui-dialog:not(.hidden-view){display:flex}
+        .ui-dlg-box{width:100%;max-width:440px;background:linear-gradient(180deg,#141418,#0c0c0e);border:1px solid #2b2b2f;border-top:3px solid #c9a84c;border-radius:14px;box-shadow:0 20px 60px rgba(0,0,0,.75);animation:kpiIn .2s ease;overflow:hidden}
+        .ui-dlg-box.danger{border-top-color:#dc2626}.ui-dlg-box.danger .ui-dlg-head i{color:#f87171}
+        .ui-dlg-head{display:flex;align-items:center;gap:12px;padding:16px 20px;border-bottom:1px solid #2b2b2f}.ui-dlg-head i{color:#c9a84c;font-size:20px}
+        .ui-dlg-head h3{margin:0;font-family:'Oswald',sans-serif;font-weight:700;font-size:18px;letter-spacing:.12em;text-transform:uppercase;color:#c9a84c}.ui-dlg-box.danger .ui-dlg-head h3{color:#f87171}
+        .ui-dlg-body{padding:18px 20px;color:#ddd;font-size:15px;line-height:1.5}.ui-dlg-body p{margin:0;white-space:pre-line;word-break:break-word}.ui-dlg-body textarea{margin-top:12px;width:100%}
+        .ui-dlg-foot{display:flex;justify-content:flex-end;flex-wrap:wrap;gap:10px;padding:0 20px 18px}
+        .btn-danger-solid{background:#b91c1c;color:#fff}.btn-danger-solid:hover{background:#dc2626}
         .org-grp{margin-bottom:10px}.org-tog{display:flex;width:100%;align-items:center;justify-content:space-between;gap:12px;padding:12px 16px;background:#141418;border:1px solid #c9a84c55;border-radius:10px;cursor:pointer;text-align:left;transition:border-color .2s,background .2s}.org-tog:hover,.org-tog:focus-visible{border-color:#c9a84c;background:#1a1a20;outline:none}.org-chev{color:#c9a84c;transition:transform .2s}.org-tog[aria-expanded=true] .org-chev{transform:rotate(180deg)}.org-body{margin-top:10px}
         .cmd-click{cursor:pointer;transition:border-color .2s,transform .2s}.cmd-click:hover,.cmd-click:focus-visible{border-color:#c9a84c!important;transform:translateY(-2px);outline:none}
         .dv-click{cursor:pointer;transition:border-color .2s,transform .2s}.dv-click:hover,.dv-click:focus-visible{border-color:#c9a84c;transform:translateY(-2px);outline:none}
@@ -377,6 +385,7 @@
     <div class="flex items-center gap-3"><img src="escudo.png" alt="Insanos MC" style="height:44px;width:auto;display:block" onerror="this.style.display='none'"><div class="leading-tight"><div class="font-display text-white text-xl tracking-widest">INSANOS MC</div><div class="text-[10px] text-gold font-heading tracking-widest uppercase">Regional Jaraguá - SP · XXXV</div></div></div>
     <div id="nav-user" class="hidden-view flex items-center gap-3"><span id="user-email" class="hidden sm:inline text-xs text-gray-400"></span><button id="logout-btn" class="btn btn-secondary text-sm"><i class="fa-solid fa-right-from-bracket mr-2"></i>Sair</button></div>
   </div></nav>
+  <div id="ui-dialog" class="hidden-view" role="alertdialog" aria-modal="true" aria-labelledby="ui-dlg-title" aria-describedby="ui-dlg-msg"><div class="ui-dlg-box"><div class="ui-dlg-head"><i id="ui-dlg-icon" class="fa-solid fa-circle-question" aria-hidden="true"></i><h3 id="ui-dlg-title">Confirmação</h3></div><div class="ui-dlg-body"><p id="ui-dlg-msg"></p><textarea id="ui-dlg-input" class="field hidden-view" rows="3" maxlength="500"></textarea></div><div class="ui-dlg-foot"><button type="button" class="btn btn-secondary" id="ui-dlg-cancel">Cancelar</button><button type="button" class="btn btn-primary" id="ui-dlg-ok">Confirmar</button></div></div></div>
   <div id="kpi-modal" class="hidden-view" role="dialog" aria-modal="true"><div class="kpi-box"><div class="kpi-head"><h3 id="kpi-title"></h3><button type="button" id="kpi-x" aria-label="Fechar"><i class="fa-solid fa-xmark"></i></button></div><div id="kpi-body"></div></div></div>
   <div id="info-modal" class="hidden-view" role="dialog" aria-modal="true" aria-labelledby="info-title">
     <div class="info-card hero"><button type="button" id="info-x" class="info-x" aria-label="Fechar"><i class="fa-solid fa-xmark"></i></button>
@@ -707,7 +716,7 @@ $('admin-content-list').addEventListener('click',async e=>{
     message('cc-message',item.is_published?'Comunicado ocultado.':'Comunicado publicado.','success');
   }
   if(btn.dataset.action==='delete'){
-    if(!confirm('Excluir "'+item.title+'"? Esta ação não pode ser desfeita.')){btn.disabled=false;return;}
+    if(!await uiConfirm('Excluir "'+item.title+'"? Esta ação não pode ser desfeita.')){btn.disabled=false;return;}
     const {error}=await supabaseClient.from('portal_content').delete().eq('id',id);
     if(error){message('cc-message','Não foi possível excluir o comunicado.','error');btn.disabled=false;return;}
     if($('cc-id').value==String(id))resetContentForm();
@@ -846,7 +855,7 @@ $('members-list').addEventListener('click',async e=>{
   const v=e.target.closest('[data-view]');if(v){openMemberModal(v.dataset.view);return;}
   const btn=e.target.closest('[data-member]');if(!btn||btn.disabled)return;
   const makeActive=btn.dataset.active!=='true';
-  if(!makeActive&&!confirm('Desativar o acesso de '+(btn.dataset.name||'este integrante')+'?'))return;
+  if(!makeActive&&!await uiConfirm('Desativar o acesso de '+(btn.dataset.name||'este integrante')+'?'))return;
   btn.disabled=true;
   const {error}=await supabaseClient.from('member_profiles').update({is_active:makeActive}).eq('id',btn.dataset.member);
   if(error){message('members-message','Não foi possível alterar o acesso.','error');btn.disabled=false;return;}
@@ -895,8 +904,8 @@ $('member-modal').addEventListener('click',async e=>{
   if(act==='close'){closeModal();return;}
   const cur=membersCache.find(x=>x.id===id)?.grade_id||1;let error;
   b.disabled=true;
-  if(act==='grade'){const g=Number($('mm-grade').value);if(g===cur){message('mm-message','Esse já é o grau atual.');b.disabled=false;return;}const m0=membersCache.find(x=>x.id===id);if(g===G6()&&!m0?.division_id){message('mm-message','Para ser Grau VI (Liderança de Divisão) o integrante precisa ter uma divisão.','error');b.disabled=false;return;}if(!confirm('Alterar o grau para '+gradeName(g)+'?')){b.disabled=false;return;}({error}=await supabaseClient.rpc('change_grade',{p_member:id,p_grade:g,p_note:note}));}
-  if(act.startsWith('eval-')){const d=act.slice(5);if(cur<=topGrade()){message('mm-message','Já está no último grau.','error');b.disabled=false;return;}if(!confirm('Registrar avaliação "'+d+'" para '+gradeName(cur-1)+'?')){b.disabled=false;return;}({error}=await supabaseClient.from('evaluations').insert({member_id:id,target_grade_id:cur-1,decision:d,participation_pct:pct,note,evaluated_by:me.id}));}
+  if(act==='grade'){const g=Number($('mm-grade').value);if(g===cur){message('mm-message','Esse já é o grau atual.');b.disabled=false;return;}const m0=membersCache.find(x=>x.id===id);if(g===G6()&&!m0?.division_id){message('mm-message','Para ser Grau VI (Liderança de Divisão) o integrante precisa ter uma divisão.','error');b.disabled=false;return;}if(!await uiConfirm('Alterar o grau para '+gradeName(g)+'?')){b.disabled=false;return;}({error}=await supabaseClient.rpc('change_grade',{p_member:id,p_grade:g,p_note:note}));}
+  if(act.startsWith('eval-')){const d=act.slice(5);if(cur<=topGrade()){message('mm-message','Já está no último grau.','error');b.disabled=false;return;}if(!await uiConfirm('Registrar avaliação "'+d+'" para '+gradeName(cur-1)+'?')){b.disabled=false;return;}({error}=await supabaseClient.from('evaluations').insert({member_id:id,target_grade_id:cur-1,decision:d,participation_pct:pct,note,evaluated_by:me.id}));}
   if(act==='part'){const evId=Number($('mm-ev').value);({error}=await supabaseClient.from('event_participation').upsert({event_id:evId,member_id:id,status:$('mm-st').value,note:$('mm-pnote').value.trim()||null,recorded_by:me.id},{onConflict:'event_id,member_id'}));}
   if(act==='note'){const t=$('mm-note').value.trim();if(!t){message('mm-message','Escreva a observação.','error');b.disabled=false;return;}({error}=await supabaseClient.from('admin_notes').insert({member_id:id,note:t,created_by:me.id}));}
   b.disabled=false;
@@ -950,7 +959,7 @@ $('ev-list').addEventListener('click',async e=>{
   if(b.dataset.evact==='edit'){$('ev-id').value=id;$('ev-cat').value=ev.category_id;$('ev-name').value=ev.name;$('ev-date').value=ev.event_date;$('ev-desc').value=ev.description||'';$('ev-save').innerHTML='<i class="fa-solid fa-floppy-disk mr-2"></i>Salvar alterações';$('ev-cancel').classList.remove('hidden-view');$('ev-form').scrollIntoView({behavior:'smooth',block:'center'});return;}
   if(b.dataset.evact==='del'){
     const n=(partByEvent[id]||[]).length;
-    if(!confirm(`Excluir "${ev.name}"${n?` e os ${n} registros de participação dele`:''}? A alteração fica no registro de auditoria.`))return;
+    if(!await uiConfirm(`Excluir "${ev.name}"${n?` e os ${n} registros de participação dele`:''}? A alteração fica no registro de auditoria.`))return;
     const {error}=await supabaseClient.from('events').delete().eq('id',id);
     if(error)return message('ev-message','Não foi possível excluir o evento.','error');
     $('ev-reg').innerHTML='';message('ev-message','Evento excluído.','success');await Promise.all([loadEvents(),loadMembers()]);
@@ -974,7 +983,7 @@ $('ev-reg').addEventListener('click',async e=>{
     if(s.value)rows.push({event_id:id,member_id:mid,status:s.value,note,recorded_by:me.id});
     else if((partByEvent[id]||[]).some(r=>r.member_id===mid))del.push(mid);});
   if(!rows.length&&!del.length)return message('reg-message','Nada para salvar.','error');
-  if(del.length&&!confirm(`${del.length} registro(s) existente(s) ficarão "sem registro" e serão removidos (a auditoria guarda o histórico). Continuar?`))return;
+  if(del.length&&!await uiConfirm(`${del.length} registro(s) existente(s) ficarão "sem registro" e serão removidos (a auditoria guarda o histórico). Continuar?`))return;
   b.disabled=true;let error=null;
   if(rows.length)({error}=await supabaseClient.from('event_participation').upsert(rows,{onConflict:'event_id,member_id'}));
   if(!error&&del.length)({error}=await supabaseClient.from('event_participation').delete().eq('event_id',id).in('member_id',del));
@@ -1044,7 +1053,7 @@ async function loadConfig(){
 async function afterConfig(txt){await loadConfig();await Promise.all([loadEvents(),loadMembers()]);message('cfg-message',txt,'success');}
 $('cfg-save-general').addEventListener('click',async()=>{
   const v=Number($('cfg-min').value);if(!Number.isFinite(v)||v<0||v>100)return message('cfg-message','O percentual precisa estar entre 0 e 100.','error');
-  if(!confirm('Alterar as regras gerais? Os indicadores serão recalculados; os registros originais não mudam.'))return;
+  if(!await uiConfirm('Alterar as regras gerais? Os indicadores serão recalculados; os registros originais não mudam.'))return;
   const {error}=await supabaseClient.from('club_settings').upsert([{key:'min_participation',value:v},{key:'justified_in_denominator',value:$('cfg-just').checked}],{onConflict:'key'});
   if(error)return message('cfg-message','Não foi possível salvar as regras.','error');afterConfig('Regras gerais salvas.');
 });
@@ -1053,7 +1062,7 @@ $('cfg-save-grades').addEventListener('click',async()=>{
   for(const g of gradesList){const p=document.querySelector(`[data-gp="${g.id}"]`).value.trim(),m=Number(document.querySelector(`[data-gm="${g.id}"]`).value||0);
     if((p!==''&&(Number(p)<0||Number(p)>100))||!Number.isInteger(m)||m<0||m>240)return message('cfg-message',`Valores inválidos em ${g.name}.`,'error');
     ups.push(supabaseClient.from('grades').update({min_participation:p===''?null:Number(p),min_months:m}).eq('id',g.id));}
-  if(!confirm('Salvar os critérios de todos os graus?'))return;
+  if(!await uiConfirm('Salvar os critérios de todos os graus?'))return;
   const res=await Promise.all(ups);if(res.some(r=>r.error))return message('cfg-message','Não foi possível salvar todos os critérios.','error');afterConfig('Critérios por grau salvos.');
 });
 $('cfg-cats').addEventListener('click',async e=>{
@@ -1132,7 +1141,7 @@ document.addEventListener('click',async e=>{
   if(act==='cancel'){$('ent-form-'+key).innerHTML='';return;}
   if(act==='add'){if(cfg.max&&(entRows[key]||[]).length>=cfg.max)return msg(`Limite de ${cfg.max} ${cfg.noun}s atingido.`);$('ent-form-'+key).innerHTML=entFormHtml(key,null);$('ent-form-'+key).scrollIntoView({behavior:'smooth',block:'center'});return;}
   if(act==='edit'){$('ent-form-'+key).innerHTML=entFormHtml(key,entRows[key].find(r=>r.id===id));$('ent-form-'+key).scrollIntoView({behavior:'smooth',block:'center'});return;}
-  if(act==='del'){if(!confirm('Excluir este registro? Esta ação não pode ser desfeita.'))return;const {error}=await supabaseClient.from(cfg.table).delete().eq('id',id);if(error)return msg('Não foi possível excluir.');await loadEnt(key);message('ent-msg-'+key,'Registro excluído.','success');return;}
+  if(act==='del'){if(!await uiConfirm('Excluir este registro? Esta ação não pode ser desfeita.'))return;const {error}=await supabaseClient.from(cfg.table).delete().eq('id',id);if(error)return msg('Não foi possível excluir.');await loadEnt(key);message('ent-msg-'+key,'Registro excluído.','success');return;}
   if(act==='primary'){const {error}=await supabaseClient.from(cfg.table).update({is_primary:true}).eq('id',id);if(error)return msg('Não foi possível alterar o endereço principal.');await loadEnt(key);message('ent-msg-'+key,'Endereço principal atualizado.','success');}
 });
 document.addEventListener('submit',async e=>{
@@ -1199,7 +1208,7 @@ $('cg-form').addEventListener('submit',async e=>{
     if(mem.grade_id===G6()&&!mem.division_id)return message('cg-message','Liderança de Divisão (Grau VI) precisa ter uma divisão. Defina a divisão primeiro.','error');
     if(mem.grade_id!==G5()&&mem.grade_id!==G6())return message('cg-message','Cargo de liderança: Liderança Regional exige Grau V e Liderança de Divisão exige Grau VI.','error');
   }
-  if(!confirm(`Definir o cargo de ${mName(mid)} como "${cg?cargoName(Number(cg)):'Sem cargo'}"?`))return;
+  if(!await uiConfirm(`Definir o cargo de ${mName(mid)} como "${cg?cargoName(Number(cg)):'Sem cargo'}"?`))return;
   let {error}=await supabaseClient.rpc('set_member_cargo',{p_member:mid,p_cargo:cg?Number(cg):null,p_date:$('cg-date').value||null,p_note:$('cg-note').value.trim()||null});
   if(error&&/divis/i.test(error.message)&&mem&&mem.grade_id===G5()){/* Liderança Regional (Grau V) não exige divisão */
     const up=await supabaseClient.from('member_profiles').update({cargo_id:cg?Number(cg):null}).eq('id',mid);
@@ -1235,7 +1244,7 @@ function renderDivisions(){
 $('dv-member').addEventListener('change',syncDivSel);$('dv-search').addEventListener('input',renderDivisions);$('dv-filter').addEventListener('change',renderDivisions);
 $('dv-form').addEventListener('submit',async e=>{
   e.preventDefault();const mid=$('dv-member').value,dv=$('dv-division').value;if(!mid)return message('dv-message','Selecione o integrante.','error');
-  if(!confirm(`Definir a divisão de ${mName(mid)} como "${dv?divName(Number(dv)):'Sem divisão'}"?`))return;
+  if(!await uiConfirm(`Definir a divisão de ${mName(mid)} como "${dv?divName(Number(dv)):'Sem divisão'}"?`))return;
   const {error}=await supabaseClient.rpc('set_member_division',{p_member:mid,p_division:dv?Number(dv):null,p_date:$('dv-date').value||null,p_note:$('dv-note').value.trim()||null});
   if(error)return message('dv-message',error.message,'error');
   $('dv-note').value='';await loadMembers();await loadDivisionsTab();message('dv-message','Divisão atualizada.','success');
@@ -1266,7 +1275,7 @@ $('hn-type-form').addEventListener('submit',async e=>{
 });
 $('hn-types').addEventListener('click',async e=>{const b=e.target.closest('[data-htact]');if(!b)return;const id=Number(b.dataset.id),h=honorTypes.find(x=>x.id===id);
   if(b.dataset.htact==='edit'){$('hn-type-id').value=id;$('hn-name').value=h.name;$('hn-emblem').value=h.emblem_url||'';$('hn-desc').value=h.description||'';$('hn-type-save').textContent='Salvar alterações';$('hn-type-cancel').classList.remove('hidden-view');$('hn-type-form').scrollIntoView({behavior:'smooth',block:'center'});return;}
-  if(!confirm(`Excluir a honraria "${h.name}"?`))return;const {error}=await supabaseClient.from('honor_types').delete().eq('id',id);
+  if(!await uiConfirm(`Excluir a honraria "${h.name}"?`))return;const {error}=await supabaseClient.from('honor_types').delete().eq('id',id);
   if(error)return message('hn-type-message','Esta honraria já foi concedida e não pode ser excluída.','error');await loadHonorsTab();message('hn-type-message','Honraria excluída.','success');});
 $('hn-form').addEventListener('submit',async e=>{
   e.preventDefault();const id=$('hn-id').value,f={member_id:$('hn-member').value,honor_type_id:Number($('hn-type').value),awarded_on:$('hn-date').value,reason:$('hn-reason').value.trim()||null};
@@ -1278,7 +1287,7 @@ $('hn-form').addEventListener('submit',async e=>{
 });
 $('hn-list').addEventListener('click',async e=>{const b=e.target.closest('[data-haact]');if(!b)return;const id=Number(b.dataset.id),a=honorAwards.find(x=>x.id===id);
   if(b.dataset.haact==='edit'){$('hn-id').value=id;$('hn-member').value=a.member_id;$('hn-type').value=a.honor_type_id;$('hn-date').value=a.awarded_on;$('hn-reason').value=a.reason||'';$('hn-save').innerHTML='<i class="fa-solid fa-floppy-disk mr-2"></i>Salvar alterações';$('hn-cancel').classList.remove('hidden-view');$('hn-form').scrollIntoView({behavior:'smooth',block:'center'});return;}
-  if(!confirm('Excluir esta concessão? A alteração fica no registro de auditoria.'))return;const {error}=await supabaseClient.from('member_honors').delete().eq('id',id);
+  if(!await uiConfirm('Excluir esta concessão? A alteração fica no registro de auditoria.'))return;const {error}=await supabaseClient.from('member_honors').delete().eq('id',id);
   if(error)return message('hn-message','Não foi possível excluir.','error');await loadHonorsTab();message('hn-message','Concessão excluída.','success');});
 /* ───────── Etapa 4: Organização Regional ───────── */
 let orgHonors={},orgSince={},orgCmd=[];const orgOpen=new Set();
@@ -1447,7 +1456,7 @@ $('dc-list').addEventListener('click',async e=>{
     const bad=dcCheck(mem,c.division_id);if(bad)return message('dc-message',bad,'error');
     ({error}=await T().update({role_title:title,icon,member_id:mem||null}).eq('id',id));
   }else if(act==='toggle'){({error}=await T().update({is_active:!c.is_active}).eq('id',id));}
-  else if(act==='del'){if(!confirm(`Excluir o cargo "${c.role_title}" do Comando de Divisão?`))return;({error}=await T().delete().eq('id',id));}
+  else if(act==='del'){if(!await uiConfirm(`Excluir o cargo "${c.role_title}" do Comando de Divisão?`))return;({error}=await T().delete().eq('id',id));}
   else{
     const i=dcRows.findIndex(x=>x.id===id),j=act==='up'?i-1:i+1;if(!dcRows[j])return;
     const arr=dcRows.slice();[arr[i],arr[j]]=[arr[j],arr[i]];
@@ -1616,6 +1625,38 @@ async function openDivisionMember(id){
 $('division-body').addEventListener('click',e=>{const c=e.target.closest('[data-mid]');if(c)openDivisionMember(c.dataset.mid);});
 $('division-body').addEventListener('keydown',e=>{if(e.key!=='Enter'&&e.key!==' ')return;const c=e.target.closest('[data-mid]');if(c){e.preventDefault();openDivisionMember(c.dataset.mid);}});
 
+/* Janelas de confirmação/aviso no padrão do site (substituem confirm/alert/prompt do navegador) */
+function uiDialog(o){
+  return new Promise(resolve=>{
+    const box=$('ui-dialog'),card=box.querySelector('.ui-dlg-box'),ok=$('ui-dlg-ok'),cc=$('ui-dlg-cancel'),inp=$('ui-dlg-input'),prev=document.activeElement;
+    const danger=o.kind==='danger';
+    card.classList.toggle('danger',danger);
+    $('ui-dlg-icon').className='fa-solid '+(danger?'fa-triangle-exclamation':o.kind==='info'?'fa-circle-info':'fa-circle-question');
+    $('ui-dlg-title').textContent=o.title;$('ui-dlg-msg').textContent=o.message;
+    ok.textContent=o.okText;ok.className='btn '+(danger?'btn-danger-solid':'btn-primary');
+    cc.textContent=o.cancelText||'Cancelar';cc.classList.toggle('hidden-view',!o.cancelText);
+    inp.classList.toggle('hidden-view',!o.input);inp.value='';
+    box.classList.remove('hidden-view');
+    const done=v=>{box.classList.add('hidden-view');ok.onclick=cc.onclick=box.onclick=null;document.removeEventListener('keydown',key,true);if(prev&&prev.focus)try{prev.focus();}catch(_){}resolve(v);};
+    const key=e=>{
+      if(e.key==='Escape'){e.preventDefault();e.stopPropagation();done(o.input?null:false);}
+      else if(e.key==='Enter'&&!(o.input&&e.shiftKey)&&e.target!==cc){e.preventDefault();e.stopPropagation();ok.click();}
+      else if(e.key==='Tab'){const f=[o.input?inp:null,o.cancelText?cc:null,ok].filter(Boolean),i=f.indexOf(document.activeElement);e.preventDefault();f[(i+(e.shiftKey?-1:1)+f.length)%f.length].focus();}
+    };
+    document.addEventListener('keydown',key,true);
+    ok.onclick=()=>done(o.input?inp.value:true);
+    cc.onclick=()=>done(o.input?null:false);
+    box.onclick=e=>{if(e.target===box&&o.cancelText)done(o.input?null:false);};
+    (o.input?inp:(danger&&o.cancelText?cc:ok)).focus();
+  });
+}
+function uiConfirm(message){
+  const danger=/^\s*(excluir|cancelar|desativar|remover|apagar)\b/i.test(message);
+  const w=String(message).trim().split(/\s+/)[0].toLowerCase();
+  return uiDialog({title:danger?'Atenção':'Confirmação',message:String(message),kind:danger?'danger':'question',okText:danger?'Sim, '+w:'Confirmar',cancelText:danger?'Voltar':'Cancelar'});
+}
+function uiAlert(message){return uiDialog({title:'Aviso',message:String(message),kind:'info',okText:'OK',cancelText:''});}
+function uiPrompt(message){return uiDialog({title:'Informe',message:String(message),kind:'question',okText:'Enviar',cancelText:'Cancelar',input:true});}
 const closeKpi=()=>$('kpi-modal').classList.add('hidden-view');$('kpi-x').addEventListener('click',closeKpi);$('kpi-modal').addEventListener('click',e=>{if(e.target.id==='kpi-modal')closeKpi();});document.addEventListener('keydown',e=>{if(e.key==='Escape')closeKpi();});
 document.querySelectorAll('#admin-panel .grp').forEach(b=>b.addEventListener('click',()=>{const w=b.nextElementSibling,o=!w.classList.contains('open');w.classList.toggle('open',o);b.setAttribute('aria-expanded',String(o));}));
 let tvEdit=null;
@@ -1661,10 +1702,10 @@ async function tvAction(ev){
   if(act==='edit'){tvEdit=id;await loadTravelPanel();$('tv-form').scrollIntoView({behavior:'smooth'});return;}
   let error;
   if(act==='start'){({error}=await supabaseClient.from('travel_protocols').update({status:'in_progress'}).eq('id',id).eq('member_id',me.id));if(!error)await tvLog('travel_started','Início de viagem: '+trip,{travel_id:id});}
-  if(act==='finish'){if(!confirm('Concluir esta viagem?'))return;({error}=await supabaseClient.from('travel_protocols').update({status:'completed'}).eq('id',id).eq('member_id',me.id));if(!error)await tvLog('travel_ended','Fim de viagem: '+trip,{travel_id:id});}
-  if(act==='cancel'){if(!confirm('Cancelar esta viagem?'))return;({error}=await supabaseClient.from('travel_protocols').update({status:'cancelled'}).eq('id',id).eq('member_id',me.id));if(!error)await tvLog('travel_cancelled','Viagem cancelada: '+trip,{travel_id:id});}
-  if(act==='sos'){const d=prompt('Descreva rapidamente o que aconteceu (ex.: acidente, problema mecânico) e onde você está:');if(d===null)return;if(!d.trim()){alert('Descreva a situação para o comando poder ajudar.');return;}
-    ({error}=await supabaseClient.from('travel_emergencies').insert({member_id:me.id,travel_id:id,location_text:t.destination,description:d.trim(),severity:'high',status:'active'}));if(!error){await tvLog('help_requested','Pedido de ajuda: '+d.trim().slice(0,120),{travel_id:id});alert('Pedido de ajuda enviado ao comando.');}}
+  if(act==='finish'){if(!await uiConfirm('Concluir esta viagem?'))return;({error}=await supabaseClient.from('travel_protocols').update({status:'completed'}).eq('id',id).eq('member_id',me.id));if(!error)await tvLog('travel_ended','Fim de viagem: '+trip,{travel_id:id});}
+  if(act==='cancel'){if(!await uiConfirm('Cancelar esta viagem?'))return;({error}=await supabaseClient.from('travel_protocols').update({status:'cancelled'}).eq('id',id).eq('member_id',me.id));if(!error)await tvLog('travel_cancelled','Viagem cancelada: '+trip,{travel_id:id});}
+  if(act==='sos'){const d=await uiPrompt('Descreva rapidamente o que aconteceu (ex.: acidente, problema mecânico) e onde você está:');if(d===null)return;if(!d.trim()){uiAlert('Descreva a situação para o comando poder ajudar.');return;}
+    ({error}=await supabaseClient.from('travel_emergencies').insert({member_id:me.id,travel_id:id,location_text:t.destination,description:d.trim(),severity:'high',status:'active'}));if(!error){await tvLog('help_requested','Pedido de ajuda: '+d.trim().slice(0,120),{travel_id:id});uiAlert('Pedido de ajuda enviado ao comando.');}}
   if(error)return message('tv-message','Não foi possível atualizar: '+error.message,'error');
   await loadTravelPanel();
 }
