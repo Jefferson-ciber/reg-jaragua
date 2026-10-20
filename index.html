@@ -301,6 +301,7 @@
         .dv-card.cmd{border-left:3px solid #c9a84c}.dv-av{width:46px;height:46px;border-radius:50%;background:#1d1d22;color:#c9a84c;display:flex;align-items:center;justify-content:center;font-weight:700;overflow:hidden;flex:none}.dv-av img{width:100%;height:100%;object-fit:cover}
         .dv-role{font:600 11px 'Oswald',sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#c9a84c}.dv-name{color:#fff;font-size:14px}.dv-sub{color:#8b8b95;font-size:11.5px}
         .org-grp{margin-bottom:10px}.org-tog{display:flex;width:100%;align-items:center;justify-content:space-between;gap:12px;padding:12px 16px;background:#141418;border:1px solid #c9a84c55;border-radius:10px;cursor:pointer;text-align:left;transition:border-color .2s,background .2s}.org-tog:hover,.org-tog:focus-visible{border-color:#c9a84c;background:#1a1a20;outline:none}.org-chev{color:#c9a84c;transition:transform .2s}.org-tog[aria-expanded=true] .org-chev{transform:rotate(180deg)}.org-body{margin-top:10px}
+        .cmd-click{cursor:pointer;transition:border-color .2s,transform .2s}.cmd-click:hover,.cmd-click:focus-visible{border-color:#c9a84c!important;transform:translateY(-2px);outline:none}
         .dv-click{cursor:pointer;transition:border-color .2s,transform .2s}.dv-click:hover,.dv-click:focus-visible{border-color:#c9a84c;transform:translateY(-2px);outline:none}
         .dvp-head{display:flex;align-items:center;gap:14px;margin-bottom:14px}.dvp-av{width:72px;height:72px;border-radius:50%;background:#1d1d22;border:2px solid #c9a84c;color:#c9a84c;display:flex;align-items:center;justify-content:center;font:700 28px 'Oswald',sans-serif;overflow:hidden;flex:none}.dvp-av img{width:100%;height:100%;object-fit:cover}
         .dvp-row{display:flex;justify-content:space-between;gap:12px;padding:9px 0;border-top:1px solid #2b2b2f;font-size:14px}.dvp-row span:first-child{color:#8b8b95}.dvp-row span:last-child{color:#fff;text-align:right}
@@ -530,6 +531,7 @@
             <div class="md:col-span-2"><label class="block text-xs text-gray-300 mb-2" for="cr-new-title">Novo cargo do comando</label><input class="field" id="cr-new-title" maxlength="60" placeholder="Ex.: Diretor Regional"></div>
             <div><label class="block text-xs text-gray-300 mb-2" for="cr-new-icon">Ícone</label><select class="field" id="cr-new-icon"></select></div>
             <div><label class="block text-xs text-gray-300 mb-2" for="cr-new-member">Integrante (Grau V)</label><select class="field" id="cr-new-member"></select></div>
+            <div class="md:col-span-4"><label class="block text-xs text-gray-300 mb-2" for="cr-new-desc">Descrição do cargo</label><textarea class="field" id="cr-new-desc" rows="3" maxlength="1500"></textarea></div>
             <div class="md:col-span-4 flex flex-wrap items-center gap-3"><button class="btn btn-primary" type="submit"><i class="fa-solid fa-plus mr-2"></i>Adicionar cargo</button><p id="cr-message" class="text-sm" role="status" aria-live="polite"></p></div>
           </form>
         </div>
@@ -1355,9 +1357,29 @@ async function loadCommand(){
     const hasWa=digits.length>=10&&digits.length<=15;
     const nm=c.display_name||'Vago';
     const wa=hasWa?`<a class="cmd-wa" href="https://wa.me/${digits}" target="_blank" rel="noopener noreferrer" aria-label="Abrir WhatsApp de ${safeText(nm)}"><i class="fa-brands fa-whatsapp"></i></a>`:`<span class="cmd-wa off" aria-hidden="true"><i class="fa-brands fa-whatsapp"></i></span>`;
-    return `<div class="role-card p-4 flex items-center gap-4 ${extra&&i===data.length-1?'lg:col-span-2':''}"><div class="cmd-icon"><i class="fa-solid ${icon}"></i></div><div class="flex-1 min-w-0"><div class="text-[11px] text-gray-500 font-heading tracking-widest uppercase">${safeText(c.role_title)}</div><div class="font-heading font-bold text-white text-xl uppercase truncate">${safeText(nm)}</div></div>${wa}</div>`;
+    return `<div class="role-card cmd-click p-4 flex items-center gap-4 ${extra&&i===data.length-1?'lg:col-span-2':''}" data-cid="${safeText(c.id)}" role="button" tabindex="0" title="Ver perfil de ${safeText(nm)}"><div class="cmd-icon"><i class="fa-solid ${icon}"></i></div><div class="flex-1 min-w-0"><div class="text-[11px] text-gray-500 font-heading tracking-widest uppercase">${safeText(c.role_title)}</div><div class="font-heading font-bold text-white text-xl uppercase truncate">${safeText(nm)}</div></div>${wa}</div>`;
   }).join('');
 }
+
+async function openCommandProfile(id){
+  $('kpi-title').textContent='Comando Regional';$('kpi-body').innerHTML='<p class="text-sm text-gray-400">Carregando perfil...</p>';$('kpi-modal').classList.remove('hidden-view');
+  const {data,error}=await supabaseClient.rpc('command_regional_profile',{p_id:Number(id)});
+  const p=Array.isArray(data)?data[0]:data;
+  if(error||!p){$('kpi-body').innerHTML='<p class="text-sm text-gray-300">Não foi possível carregar este perfil. O arquivo comando_regional_perfil.sql precisa ser rodado no Supabase.</p>';return;}
+  const name=p.display_name||'Vago',digits=String(p.whatsapp||'').replace(/\D/g,'');
+  const wa=digits.length>=10&&digits.length<=15?`<a href="https://wa.me/${digits}" target="_blank" rel="noopener noreferrer" class="text-gold">${safeText(fmtPhone(p.whatsapp))} <i class="fa-brands fa-whatsapp"></i></a>`:'<span class="text-gray-500">Não informado</span>';
+  const hon=(p.honors||[]).map(h=>`<div class="flex items-center gap-2 py-1">${emblemHtml(h.emblem_url,'w-8 h-8')}<span class="text-sm text-white">${safeText(h.name||'Honraria')}</span>${h.awarded_on?`<span class="text-xs text-gray-500 ml-auto">${fmtDay(h.awarded_on)}</span>`:''}</div>`).join('');
+  $('kpi-title').textContent=p.role_title||'Comando Regional';
+  $('kpi-body').innerHTML=`<div class="dvp-head"><div class="dvp-av">${p.photo_url&&/^https:\/\//.test(p.photo_url)?`<img src="${safeText(p.photo_url)}" alt="" referrerpolicy="no-referrer" onerror="this.remove()">`:safeText(name.trim().charAt(0).toUpperCase())}</div><div><div class="text-[11px] text-gold font-heading tracking-widest uppercase">${safeText(p.role_title||'')}</div><div class="font-display text-2xl text-white tracking-widest uppercase">${safeText(name)}</div></div></div>
+  ${p.description?`<div class="mb-3"><div class="text-[11px] text-gold font-heading tracking-widest uppercase mb-1">Sobre o cargo</div><p class="text-sm text-gray-300 leading-relaxed whitespace-pre-line">${safeText(p.description)}</p></div>`:''}
+  ${p.member_id?`<div class="dvp-row"><span>Grau</span><span>${safeText(gradeName(p.grade_id))}</span></div>
+  <div class="dvp-row"><span>Cargo ocupado</span><span>${safeText(p.cargo_id?cargoName(p.cargo_id):'Sem cargo')}</span></div>
+  <div class="dvp-row"><span>Tempo de moto clube</span><span>${p.joined_at?`${safeText(tenureText(p.joined_at))} <span class="text-xs text-gray-500">(desde ${fmtDay(String(p.joined_at).slice(0,10))})</span>`:'—'}</span></div>
+  <div class="dvp-row"><span>WhatsApp</span><span>${wa}</span></div>
+  <div class="mt-3"><div class="text-[11px] text-gold font-heading tracking-widest uppercase mb-1">Honrarias</div>${hon||'<p class="text-sm text-gray-500">Nenhuma honraria registrada.</p>'}</div>`:'<p class="text-sm text-gray-500 mt-2">Cargo sem integrante vinculado no momento.</p>'}`;
+}
+$('command-list').addEventListener('click',e=>{if(e.target.closest('a'))return;const c=e.target.closest('[data-cid]');if(c)openCommandProfile(c.dataset.cid);});
+$('command-list').addEventListener('keydown',e=>{if(e.key!=='Enter'&&e.key!==' ')return;const c=e.target.closest('[data-cid]');if(c){e.preventDefault();openCommandProfile(c.dataset.cid);}});
 
 /* Admin: Comando Regional (cargos do comando preenchidos por integrantes de Grau V) */
 const CR_ICONS=[['fa-crown','Coroa (Diretor)'],['fa-shield-halved','Escudo (Operacional)'],['fa-handshake','Aperto de mão (Social)'],['fa-file-signature','Documento (ADM)'],['fa-bullhorn','Megafone (Comunicação)'],['fa-star','Estrela'],['fa-gavel','Martelo'],['fa-scale-balanced','Balança'],['fa-motorcycle','Moto'],['fa-user-shield','Escudo com pessoa']];
@@ -1365,7 +1387,7 @@ let crRows=[];
 const crMembers=()=>membersCache.filter(m=>m.is_active&&m.grade_id===G5());
 async function loadComandoTab(){
   await ensureMembers();await loadRefs();
-  const {data,error}=await supabaseClient.from('command_contacts').select('id,role_title,display_name,icon,whatsapp,member_id,sort_order,is_active').order('sort_order',{ascending:true}).order('id',{ascending:true});
+  const {data,error}=await supabaseClient.from('command_contacts').select('id,role_title,display_name,icon,whatsapp,member_id,sort_order,is_active,description').order('sort_order',{ascending:true}).order('id',{ascending:true});
   if(error){$('cr-list').innerHTML='<p class="text-sm text-red-300">Não foi possível carregar. Rode o arquivo comando_regional.sql no Supabase.</p>';return;}
   crRows=data||[];
   const g5=crMembers().map(m=>[m.id,m.display_name||m.email]);
@@ -1380,7 +1402,7 @@ async function loadComandoTab(){
       <div><label class="block text-xs text-gray-300 mb-1">Integrante (Grau V)</label><select class="field" data-crf="member">${optsHtml(g5,c.member_id,'— Vago —')}</select></div>
       <div><label class="block text-xs text-gray-300 mb-1">Ícone</label><select class="field" data-crf="icon">${optsHtml(ics,c.icon||'fa-user')}</select></div>
       <div class="flex flex-wrap gap-2"><button class="btn btn-primary btn-sm" data-cract="save" type="button">Salvar</button><button class="btn btn-secondary btn-sm" data-cract="up" type="button" ${i===0?'disabled':''} aria-label="Subir"><i class="fa-solid fa-arrow-up"></i></button><button class="btn btn-secondary btn-sm" data-cract="down" type="button" ${i===crRows.length-1?'disabled':''} aria-label="Descer"><i class="fa-solid fa-arrow-down"></i></button><button class="btn btn-secondary btn-sm" data-cract="toggle" type="button">${c.is_active?'Ocultar':'Mostrar'}</button><button class="btn btn-danger btn-sm" data-cract="del" type="button" aria-label="Excluir"><i class="fa-solid fa-trash"></i></button></div>
-    </div>${legacy}</div>`;}).join('')||'<p class="text-sm text-gray-400">Nenhum cargo no comando. Adicione abaixo.</p>';
+    </div><div class="mt-3"><label class="block text-xs text-gray-300 mb-1">Descrição do cargo (aparece quando clicam no integrante)</label><textarea class="field" data-crf="desc" rows="3" maxlength="1500">${safeText(c.description||'')}</textarea></div>${legacy}</div>`;}).join('')||'<p class="text-sm text-gray-400">Nenhum cargo no comando. Adicione abaixo.</p>';
 }
 $('cr-list').addEventListener('click',async e=>{
   const b=e.target.closest('[data-cract]');if(!b)return;
@@ -1390,7 +1412,8 @@ $('cr-list').addEventListener('click',async e=>{
     const title=card.querySelector('[data-crf="title"]').value.trim(),mem=card.querySelector('[data-crf="member"]').value,icon=card.querySelector('[data-crf="icon"]').value;
     if(title.length<2)return message('cr-message','Informe o nome do cargo.','error');
     if(mem){const m=membersCache.find(x=>x.id===mem);if(!m||m.grade_id!==G5())return message('cr-message','Só integrantes de Grau V podem ocupar o Comando Regional.','error');}
-    ({error}=await T().update({role_title:title,icon,member_id:mem||null,display_name:null,whatsapp:null}).eq('id',id));
+    const desc=card.querySelector('[data-crf="desc"]').value.trim();
+    ({error}=await T().update({role_title:title,icon,member_id:mem||null,display_name:null,whatsapp:null,description:desc||null}).eq('id',id));
   }else if(act==='toggle'){({error}=await T().update({is_active:!c.is_active}).eq('id',id));}
   else if(act==='del'){if(!confirm(`Excluir o cargo "${c.role_title}" do Comando Regional?`))return;({error}=await T().delete().eq('id',id));}
   else{
@@ -1406,9 +1429,9 @@ $('cr-new').addEventListener('submit',async e=>{
   if(title.length<2)return message('cr-message','Informe o nome do cargo.','error');
   if(mem){const m=membersCache.find(x=>x.id===mem);if(!m||m.grade_id!==G5())return message('cr-message','Só integrantes de Grau V podem ocupar o Comando Regional.','error');}
   const next=(crRows.reduce((a,r)=>Math.max(a,r.sort_order||0),0))+1;
-  const {error}=await supabaseClient.from('command_contacts').insert({role_title:title,icon:$('cr-new-icon').value,member_id:mem||null,sort_order:next,is_active:true});
+  const {error}=await supabaseClient.from('command_contacts').insert({role_title:title,icon:$('cr-new-icon').value,member_id:mem||null,sort_order:next,is_active:true,description:$('cr-new-desc').value.trim()||null});
   if(error)return message('cr-message','Não foi possível adicionar. Rode o arquivo comando_regional.sql no Supabase.','error');
-  $('cr-new-title').value='';await loadComandoTab();loadCommand();message('cr-message','Cargo adicionado.','success');
+  $('cr-new-title').value='';$('cr-new-desc').value='';await loadComandoTab();loadCommand();message('cr-message','Cargo adicionado.','success');
 });
 
 /* Admin: Comando de Divisão (cargos por divisão, só Grau VI da própria divisão) */
