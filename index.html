@@ -308,6 +308,28 @@
         .ui-dlg-body{padding:18px 20px;color:#ddd;font-size:15px;line-height:1.5}.ui-dlg-body p{margin:0;white-space:pre-line;word-break:break-word}.ui-dlg-body textarea{margin-top:12px;width:100%}
         .ui-dlg-foot{display:flex;justify-content:flex-end;flex-wrap:wrap;gap:10px;padding:0 20px 18px}
         .btn-danger-solid{background:#b91c1c;color:#fff}.btn-danger-solid:hover{background:#dc2626}
+        .tv-hero{border-radius:14px;padding:18px 20px;border:1px solid #2b2b2f;background:#0f0f12}.tv-hero.live{background:linear-gradient(135deg,#0e1f14,#0c0c0e);border-color:#22c55e66}.tv-hero.next{background:linear-gradient(135deg,#0f1828,#0c0c0e);border-color:#3b82f666}.tv-hero.done{background:linear-gradient(135deg,#221b08,#0c0c0e);border-color:#c9a84caa}.tv-hero.idle{border-style:dashed;border-color:#3f3f46}
+        .tv-pulse{display:inline-block;width:10px;height:10px;border-radius:50%;background:#22c55e;box-shadow:0 0 0 0 #22c55e99;animation:tvPulse 1.6s infinite}@keyframes tvPulse{70%{box-shadow:0 0 0 10px #22c55e00}100%{box-shadow:0 0 0 0 #22c55e00}}
+        .tv-help{margin-top:10px;border:1px solid #2b2b2f;border-radius:10px;padding:10px 12px;background:#0b0b0d}
+        .tv-trip.completed{background:linear-gradient(90deg,#c9a84c14,#0f0f12 55%)}.tv-trip.cancelled{opacity:.8}
+        .act-ico{display:inline-flex;width:26px;height:26px;border-radius:50%;border:1px solid currentColor;align-items:center;justify-content:center;font-size:12px;margin-right:8px;flex:none;vertical-align:middle}.act-tag{font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase}
+        .atv-card{cursor:pointer;transition:border-color .2s,background .2s}.atv-card:hover,.atv-card.on{background:#17171c;border-color:#c9a84c}
+        .nav-count{margin-left:auto;background:#ef4444;color:#fff;border-radius:999px;font-size:11px;font-weight:700;padding:1px 8px;line-height:1.5}
+        #sos-dialog{position:fixed;inset:0;z-index:600;background:rgba(0,0,0,.78);backdrop-filter:blur(3px);align-items:center;justify-content:center;padding:18px;overflow-y:auto}#sos-dialog:not(.hidden-view){display:flex}
+        #sos-box{border-top-color:var(--c,#ef4444);max-height:96vh;overflow-y:auto}#sos-box .ui-dlg-head i,#sos-box .ui-dlg-head h3{color:var(--c,#ef4444)}
+        .sos-types{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}.sos-chip{border:1px solid #3a3a42;background:#0f0f12;color:#ddd;border-radius:999px;padding:6px 12px;font-size:13px;cursor:pointer}.sos-chip:hover{border-color:var(--c)}.sos-chip.on{background:var(--c);border-color:var(--c);color:#111;font-weight:700}
+        .sos-share{display:flex;gap:8px;align-items:flex-start;margin-top:12px;font-size:13px;color:#cfcfd6;cursor:pointer}.sos-share input{margin-top:3px;accent-color:#c9a84c}
+        .sos-box{margin-top:14px;padding:14px;border:1px solid #2b2b2f;border-radius:12px;background:#0b0b0d}.sos-grid{display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}
+        .sos-btn{display:flex;align-items:center;gap:12px;text-align:left;padding:12px 14px;border-radius:12px;border:1px solid var(--c);background:linear-gradient(135deg,color-mix(in srgb,var(--c) 22%,#0c0c0e),#0c0c0e);color:#fff;cursor:pointer;transition:transform .15s,box-shadow .15s}.sos-btn:hover{transform:translateY(-2px);box-shadow:0 6px 18px color-mix(in srgb,var(--c) 35%,transparent)}
+        .sos-btn b{display:block;font-family:'Oswald',sans-serif;letter-spacing:.06em;text-transform:uppercase;font-size:14px;color:var(--c)}.sos-btn small{display:block;color:#a1a1aa;font-size:11px;margin-top:2px}.sos-ic{width:38px;height:38px;border-radius:50%;background:var(--c);color:#111;display:flex;align-items:center;justify-content:center;font-size:16px;flex:none}
+        .geo-box{margin-top:14px;padding:12px 14px;border:1px solid #3b82f655;border-radius:12px;background:#0a1220}
+        .br-wrap{position:relative;width:100%}.br-wrap>.field{width:100%}.br-wrap:has(.br-cal)>.field{padding-right:42px}.br-cal{position:absolute;right:10px;top:50%;transform:translateY(-50%);background:none;border:0;color:#c9a84c;font-size:16px;cursor:pointer;padding:4px}.br-bad{border-color:#ef4444!important}
+        .br-pop{position:absolute;z-index:700;top:calc(100% + 6px);left:0;width:290px;max-width:90vw;background:#141418;border:1px solid #c9a84c88;border-radius:12px;padding:10px;box-shadow:0 14px 40px rgba(0,0,0,.7)}
+        .br-head{display:flex;gap:6px;align-items:center;margin-bottom:8px}.br-sel{flex:1;background:#0c0c0e;color:#fff;border:1px solid #2b2b2f;border-radius:8px;padding:5px 6px;font-size:13px;min-width:0}.br-nav{width:30px;height:30px;border-radius:8px;border:1px solid #2b2b2f;background:#0c0c0e;color:#c9a84c;font-size:18px;cursor:pointer}
+        .br-wd,.br-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:2px;text-align:center}.br-wd span{font-size:11px;color:#8b8b95;padding:4px 0}.br-day{height:32px;border-radius:8px;border:0;background:none;color:#e5e5e5;font-size:13px;cursor:pointer}.br-day:hover{background:#2a2a32}.br-day.today{border:1px solid #c9a84c}.br-day.on{background:#c9a84c;color:#111;font-weight:700}
+        .br-foot{display:flex;justify-content:space-between;margin-top:8px}.br-foot button{background:none;border:0;color:#c9a84c;font-size:13px;cursor:pointer}
+        .lm-wrap{margin-top:4px}.lm-head{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;margin-bottom:6px}.lm-legend{display:flex;flex-wrap:wrap;gap:12px;font-size:11px;color:#a1a1aa}.lm-legend i{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:5px}
+        #live-map{height:380px;border-radius:12px;border:1px solid #c9a84c66;margin-top:8px;background:#0c0c0e;z-index:0}.lm-pin{background:none;border:0}.lm-dot{width:34px;height:34px;border-radius:50%;border:3px solid #fff;color:#111;font:700 14px 'Oswald',sans-serif;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 8px rgba(0,0,0,.6)}.lm-dot.help{animation:lmPulse 1.4s infinite}@keyframes lmPulse{0%{box-shadow:0 0 0 0 color-mix(in srgb,var(--c) 70%,transparent)}100%{box-shadow:0 0 0 16px transparent}}.lm-pop{font-size:13px;line-height:1.5;color:#222}
         .org-grp{margin-bottom:10px}.org-tog{display:flex;width:100%;align-items:center;justify-content:space-between;gap:12px;padding:12px 16px;background:#141418;border:1px solid #c9a84c55;border-radius:10px;cursor:pointer;text-align:left;transition:border-color .2s,background .2s}.org-tog:hover,.org-tog:focus-visible{border-color:#c9a84c;background:#1a1a20;outline:none}.org-chev{color:#c9a84c;transition:transform .2s}.org-tog[aria-expanded=true] .org-chev{transform:rotate(180deg)}.org-body{margin-top:10px}
         .cmd-click{cursor:pointer;transition:border-color .2s,transform .2s}.cmd-click:hover,.cmd-click:focus-visible{border-color:#c9a84c!important;transform:translateY(-2px);outline:none}
         .dv-click{cursor:pointer;transition:border-color .2s,transform .2s}.dv-click:hover,.dv-click:focus-visible{border-color:#c9a84c;transform:translateY(-2px);outline:none}
@@ -386,6 +408,7 @@
     <div id="nav-user" class="hidden-view flex items-center gap-3"><span id="user-email" class="hidden sm:inline text-xs text-gray-400"></span><button id="logout-btn" class="btn btn-secondary text-sm"><i class="fa-solid fa-right-from-bracket mr-2"></i>Sair</button></div>
   </div></nav>
   <div id="ui-dialog" class="hidden-view" role="alertdialog" aria-modal="true" aria-labelledby="ui-dlg-title" aria-describedby="ui-dlg-msg"><div class="ui-dlg-box"><div class="ui-dlg-head"><i id="ui-dlg-icon" class="fa-solid fa-circle-question" aria-hidden="true"></i><h3 id="ui-dlg-title">Confirmação</h3></div><div class="ui-dlg-body"><p id="ui-dlg-msg"></p><textarea id="ui-dlg-input" class="field hidden-view" rows="3" maxlength="500"></textarea></div><div class="ui-dlg-foot"><button type="button" class="btn btn-secondary" id="ui-dlg-cancel">Cancelar</button><button type="button" class="btn btn-primary" id="ui-dlg-ok">Confirmar</button></div></div></div>
+  <div id="sos-dialog" class="hidden-view" role="dialog" aria-modal="true" aria-labelledby="sos-title"><div class="ui-dlg-box" id="sos-box"><div class="ui-dlg-head"><i id="sos-icon" class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i><h3 id="sos-title">Pedir ajuda</h3></div><div class="ui-dlg-body"><p id="sos-sub" style="margin-bottom:10px"></p><div id="sos-types" class="sos-types"></div><textarea id="sos-text" class="field" rows="3" maxlength="400" placeholder="Descreva o que aconteceu e onde você está (opcional)"></textarea><label class="sos-share"><input type="checkbox" id="sos-share" checked> Compartilhar minha localização em tempo real com o comando</label><p id="sos-msg" class="text-sm mt-2" style="color:#f87171"></p></div><div class="ui-dlg-foot"><button type="button" class="btn btn-secondary" id="sos-cancel">Cancelar</button><button type="button" class="btn" id="sos-send">Enviar pedido</button></div></div></div>
   <div id="kpi-modal" class="hidden-view" role="dialog" aria-modal="true"><div class="kpi-box"><div class="kpi-head"><h3 id="kpi-title"></h3><button type="button" id="kpi-x" aria-label="Fechar"><i class="fa-solid fa-xmark"></i></button></div><div id="kpi-body"></div></div></div>
   <div id="info-modal" class="hidden-view" role="dialog" aria-modal="true" aria-labelledby="info-title">
     <div class="info-card hero"><button type="button" id="info-x" class="info-x" aria-label="Fechar"><i class="fa-solid fa-xmark"></i></button>
@@ -464,7 +487,7 @@
 <button type="button" class="tab-btn grp" aria-expanded="false"><i class="fa-solid fa-users"></i>Integrantes<span class="chev"></span></button><div class="sub-wrap"><button type="button" class="tab-btn sub" role="tab" data-tab="members" aria-selected="false"><i class="fa-solid fa-users"></i>Todos os Integrantes</button><button type="button" class="tab-btn sub" role="tab" data-tab="access" aria-selected="false"><i class="fa-solid fa-user-plus"></i>Cadastrar Acesso</button><button type="button" class="tab-btn sub" role="tab" data-tab="cargos" aria-selected="false"><i class="fa-solid fa-user-tie"></i>Cargos e Funções</button><button type="button" class="tab-btn sub" role="tab" data-tab="honors" aria-selected="false"><i class="fa-solid fa-medal"></i>Honrarias</button></div>
 <button type="button" class="tab-btn grp" aria-expanded="false"><i class="fa-solid fa-sitemap"></i>Organização Regional<span class="chev"></span></button><div class="sub-wrap"><button type="button" class="tab-btn sub" role="tab" data-tab="org" aria-selected="false"><i class="fa-solid fa-sitemap"></i>Organização Regional</button><button type="button" class="tab-btn sub" role="tab" data-tab="comando" aria-selected="false"><i class="fa-solid fa-crown"></i>Comando Regional</button><button type="button" class="tab-btn sub" role="tab" data-tab="dcomando" aria-selected="false"><i class="fa-solid fa-user-shield"></i>Comando de Divisão</button><button type="button" class="tab-btn sub" role="tab" data-tab="divisions" aria-selected="false"><i class="fa-solid fa-location-dot"></i>Divisões</button></div>
 <button type="button" class="tab-btn grp" aria-expanded="false"><i class="fa-solid fa-calendar-check"></i>Eventos e Participação<span class="chev"></span></button><div class="sub-wrap"><button type="button" class="tab-btn sub" role="tab" data-tab="events" aria-selected="false"><i class="fa-solid fa-calendar-check"></i>Eventos</button></div>
-<button type="button" class="tab-btn grp" aria-expanded="false"><i class="fa-solid fa-route"></i>Viagens<span class="chev"></span></button><div class="sub-wrap"><button type="button" class="tab-btn sub" role="tab" data-tab="adm-travel" aria-selected="false"><i class="fa-solid fa-route"></i>Protocolos de Viagem</button></div>
+<button type="button" class="tab-btn grp" aria-expanded="false"><i class="fa-solid fa-route"></i>Viagens<span class="chev"></span></button><div class="sub-wrap"><button type="button" class="tab-btn sub" role="tab" data-tab="adm-travel" aria-selected="false"><i class="fa-solid fa-route"></i>Protocolos de Viagem</button><button type="button" class="tab-btn sub" role="tab" data-tab="adm-help" aria-selected="false"><i class="fa-solid fa-triangle-exclamation"></i>Pedidos de Ajuda<span id="help-badge" class="nav-count hidden-view">0</span></button></div>
 <button type="button" class="tab-btn grp" aria-expanded="false"><i class="fa-solid fa-gear"></i>Sistema<span class="chev"></span></button><div class="sub-wrap"><button type="button" class="tab-btn sub" role="tab" data-tab="config" aria-selected="false"><i class="fa-solid fa-sliders"></i>Configurações</button></div>
 </div><div class="adm-bottom"><span id="adm-email"></span><button type="button" id="adm-logout" class="btn btn-secondary text-sm" style="width:100%"><i class="fa-solid fa-right-from-bracket mr-2"></i>Sair</button></div></aside><div class="adm-main">
 <div class="adm-top"><div class="adm-logo">INSANOS MC</div><div class="adm-reg"><b>REGIONAL JARAGUÁ - SP</b><small>DISCIPLINA · LEALDADE · IRMANDADE</small></div><div class="adm-user"><i class="fa-solid fa-user-gear"></i><div><b>Administrador</b><small>Admin Principal</small></div></div></div>
@@ -601,6 +624,7 @@
         </div>
 
         <div id="tab-adm-travel" class="hidden-view space-y-4" role="tabpanel"><div id="adm-travel-body"><p class="text-sm text-gray-400">Carregando protocolos de viagem...</p></div></div>
+        <div id="tab-adm-help" class="hidden-view space-y-4" role="tabpanel"><div id="adm-help-body"><p class="text-sm text-gray-400">Carregando pedidos de ajuda...</p></div></div>
 
         <div id="tab-config" class="hidden-view space-y-6" role="tabpanel">
           <div class="space-y-3"><h4 class="font-heading text-lg uppercase text-white">Regras gerais</h4><div class="grid md:grid-cols-3 gap-3"><div><label class="block text-xs text-gray-300 mb-2" for="cfg-min">Percentual mínimo padrão (%)</label><input class="field" id="cfg-min" type="number" min="0" max="100" step="1"></div><div class="flex items-end"><label class="flex items-center gap-2 text-sm text-gray-200 pb-3"><input type="checkbox" id="cfg-just" class="accent-[#c9a84c] w-4 h-4"> Ausência justificada entra no total de eventos</label></div><div class="flex items-end pb-1"><button class="btn btn-primary" id="cfg-save-general" type="button">Salvar regras gerais</button></div></div></div>
@@ -687,7 +711,7 @@ $('create-user-form').addEventListener('submit',async e=>{e.preventDefault();con
 /* ───────── Painel do administrador ───────── */
 let me=null, adminItems=[];
 const fmtDate=(v)=>v?new Date(v).toLocaleDateString('pt-BR'):'';
-function setTab(name){document.querySelectorAll('[data-tab]').forEach(b=>b.setAttribute('aria-selected',String(b.dataset.tab===name)));['content','members','events','org','cargos','divisions','comando','dcomando','honors','perfil','dashadm','dash','config','access','adm-travel'].forEach(t=>$('tab-'+t).classList.toggle('hidden-view',t!==name));if(name==='dashadm')renderDashAdm();if(name==='dash')refreshDash();if(name==='org')loadOrgTab();if(name==='cargos')loadCargosTab();if(name==='divisions')loadDivisionsTab();if(name==='comando')loadComandoTab();if(name==='dcomando')loadDcomandoTab();if(name==='honors')loadHonorsTab();if(name==='config')loadConfig();if(name==='adm-travel')loadAdmTravelPanel();}
+function setTab(name){document.querySelectorAll('[data-tab]').forEach(b=>b.setAttribute('aria-selected',String(b.dataset.tab===name)));['content','members','events','org','cargos','divisions','comando','dcomando','honors','perfil','dashadm','dash','config','access','adm-travel','adm-help'].forEach(t=>$('tab-'+t).classList.toggle('hidden-view',t!==name));if(name==='dashadm')renderDashAdm();if(name==='dash')refreshDash();if(name==='org')loadOrgTab();if(name==='cargos')loadCargosTab();if(name==='divisions')loadDivisionsTab();if(name==='comando')loadComandoTab();if(name==='dcomando')loadDcomandoTab();if(name==='honors')loadHonorsTab();if(name==='config')loadConfig();if(name==='adm-travel')loadAdmTravelPanel();if(name==='adm-help')loadAdmHelpPanel();}
 document.querySelectorAll('[data-tab]').forEach(b=>b.addEventListener('click',()=>setTab(b.dataset.tab)));
 
 function resetContentForm(){$('content-form').reset();$('cc-id').value='';$('cc-order').value='100';$('cc-published').checked=true;$('cc-save').innerHTML='<i class="fa-solid fa-floppy-disk mr-2"></i>Publicar comunicado';$('cc-cancel').classList.add('hidden-view');}
@@ -1525,21 +1549,24 @@ function renderDashAdm(){
     const tpq=async()=>{let r=await supabaseClient.from('travel_protocols').select(TPF).order('departure_date',{ascending:false}).limit(500);if(r.error)r=await supabaseClient.from('travel_protocols').select('id,member_id,destination,departure_date,return_date,status').order('departure_date',{ascending:false}).limit(500);return r;};
     const [a,b,c]=await Promise.all([
       tpq(),
-      supabaseClient.from('travel_emergencies').select('id,member_id,location_text,description,severity,status,created_at').order('created_at',{ascending:false}).limit(500),
-      supabaseClient.from('activity_log').select('id,actor_id,action_type,description,created_at').order('created_at',{ascending:false}).limit(8)]);
+      supabaseClient.from('travel_emergencies').select('id,member_id,travel_id,location_text,description,severity,status,created_at').order('created_at',{ascending:false}).limit(500),
+      supabaseClient.from('activity_log').select('id,actor_id,action_type,description,created_at').order('created_at',{ascending:false}).limit(12)]);
     const box=$('da-extra');if(!box)return;
     if(a.error&&b.error&&c.error){box.innerHTML='<p class="text-sm text-gray-500">Viagens e atividades indisponíveis no momento.</p>';return;}
     const tr=a.data||[],em=b.data||[],ac=c.data||[];
     const cnt=(arr,map)=>Object.entries(map).map(([k,l])=>[l,arr.filter(x=>x.status===k).length]).filter(x=>x[1]>0);
     const vT=cnt(tr,{in_progress:'Em andamento',completed:'Concluídas',planned:'Planejadas',cancelled:'Canceladas'});
     const eT=cnt(em,{active:'Ativas',acknowledged:'Em atendimento',resolved:'Resolvidas'});
-    const sev={low:'baixa',medium:'média',high:'alta',critical:'crítica'};
-    const live=[...tr.filter(x=>x.status==='in_progress').map(x=>[safeText(mName(x.member_id)),safeText((x.origin?x.origin+' → ':'')+x.destination)+`<div class="text-xs text-gray-500">Ida ${tvWhen(x.departure_date,x.departure_time)} · Volta ${tvWhen(x.return_date,x.return_time)}</div>`,'<span style="color:#22c55e">● Em viagem</span>']),
-      ...em.filter(x=>x.status!=='resolved').map(x=>[safeText(mName(x.member_id)),safeText(x.location_text||x.description||'—'),`<span style="color:#ef4444">● Ajuda ${x.status==='active'?'solicitada':'em atendimento'} · ${sev[x.severity]||''}</span>`])];
-    const lbl={member_created:'Novo integrante',grade_changed:'Mudança de grau',cargo_changed:'Mudança de cargo',division_changed:'Mudança de divisão',honor_awarded:'Honraria',event_created:'Evento criado',participation_recorded:'Presença registrada',travel_started:'Início de viagem',travel_ended:'Fim de viagem',help_requested:'Pedido de ajuda',comunicado_created:'Comunicado criado',comunicado_updated:'Comunicado atualizado'};
-    const acts=ac.length?T(['Data/Hora','Atividade','Responsável'],ac.map(x=>[new Date(x.created_at).toLocaleString('pt-BR',{dateStyle:'short',timeStyle:'short'}),safeText(x.description||lbl[x.action_type]||x.action_type),x.actor_id?safeText(mName(x.actor_id)):'Sistema'])):'<p class="text-sm text-gray-400">Nenhuma atividade registrada ainda.</p>';
+    const sev={low:'verde',medium:'amarelo',high:'vermelho',critical:'vermelho'};
+    const tById=Object.fromEntries(tr.map(t=>[t.id,t]));
+    const live=[...tr.filter(x=>x.status==='in_progress').map(x=>[safeText(mName(x.member_id)),safeText((x.origin?x.origin+' → ':'')+x.destination)+`<div class="text-xs text-gray-500">Ida ${tvWhen(x.departure_date,x.departure_time)} · Volta ${tvWhen(x.return_date,x.return_time)}</div>`,'<span style="color:#22c55e"><i class="fa-solid fa-motorcycle" style="margin-right:6px"></i>Em viagem</span>']),
+      ...em.filter(x=>x.status!=='resolved'&&!(x.travel_id&&tById[x.travel_id]&&['completed','cancelled'].includes(tById[x.travel_id].status))).map(x=>[safeText(mName(x.member_id)),safeText(x.location_text||x.description||'—'),`<span style="color:${(SEVLV[x.severity]||SEVLV.high)[1]}"><i class="fa-solid fa-triangle-exclamation" style="margin-right:6px"></i>Ajuda ${x.status==='active'?'solicitada':'em atendimento'} · ${sev[x.severity]||''}</span>`])];
+    const lbl={member_created:'Novo integrante',grade_changed:'Mudança de grau',cargo_changed:'Mudança de cargo',division_changed:'Mudança de divisão',honor_awarded:'Honraria',event_created:'Evento criado',participation_recorded:'Presença registrada',travel_started:'Viagem iniciada',travel_ended:'Viagem concluída',travel_created:'Viagem registrada',travel_updated:'Viagem alterada',travel_cancelled:'Viagem cancelada',help_requested:'Pedido de ajuda',help_acknowledged:'Ajuda assumida',help_resolved:'Ajuda resolvida',comunicado_created:'Comunicado criado',comunicado_updated:'Comunicado atualizado'};
+    const AS={travel_ended:['fa-flag-checkered','#c9a84c','Viagem concluída'],travel_started:['fa-motorcycle','#22c55e','Viagem iniciada'],travel_created:['fa-calendar-plus','#3b82f6','Viagem registrada'],travel_updated:['fa-pen','#3b82f6','Viagem alterada'],travel_cancelled:['fa-ban','#ef4444','Viagem cancelada'],help_requested:['fa-triangle-exclamation','#ef4444','Pedido de ajuda'],help_acknowledged:['fa-hand-holding-heart','#f59e0b','Ajuda assumida'],help_resolved:['fa-circle-check','#22c55e','Ajuda resolvida']};
+    const acts=ac.length?T(['Data/Hora','Atividade','Responsável'],ac.map(x=>{const a=AS[x.action_type],txt=safeText(x.description||lbl[x.action_type]||x.action_type);return [new Date(x.created_at).toLocaleString('pt-BR',{dateStyle:'short',timeStyle:'short'}),a?`<div class="flex items-start gap-2"><span class="act-ico" style="color:${a[1]}"><i class="fa-solid ${a[0]}"></i></span><div><span class="act-tag" style="color:${a[1]}">${a[2]}</span><div>${txt}</div></div></div>`:txt,x.actor_id?safeText(mName(x.actor_id)):'Sistema'];})):'<p class="text-sm text-gray-400">Nenhuma atividade registrada ainda.</p>';
     box.innerHTML=`<div class="grid md:grid-cols-2 gap-3"><div class="row-card">${H('Viagens')}${donut(vT,tr.length)}</div><div class="row-card">${H('Solicitações de ajuda')}${donut(eT,em.length)}</div></div>
-    <div class="grid md:grid-cols-2 gap-3"><div class="row-card overflow-x-auto">${H('Em andamento agora')}${live.length?T(['Integrante','Destino / Local','Situação'],live):'<p class="text-sm text-gray-400">Nenhuma viagem em andamento nem pedido de ajuda ativo.</p>'}</div><div class="row-card overflow-x-auto">${H('Atividades recentes')}${acts}</div></div>`;
+    <div class="grid md:grid-cols-2 gap-3"><div class="row-card overflow-x-auto">${H('Em andamento agora')}${live.length?T(['Integrante','Destino / Local','Situação'],live):'<p class="text-sm text-gray-400">Nenhuma viagem em andamento nem pedido de ajuda ativo.</p>'}<div id="da-map-slot" class="mt-4"></div></div><div class="row-card overflow-x-auto">${H('Atividades recentes')}${acts}</div></div>`;
+    lmAttach(tr,em);
   };
   loadExtra();window._daExtra=loadExtra;
 }
@@ -1657,20 +1684,161 @@ function uiConfirm(message){
 }
 function uiAlert(message){return uiDialog({title:'Aviso',message:String(message),kind:'info',okText:'OK',cancelText:''});}
 function uiPrompt(message){return uiDialog({title:'Informe',message:String(message),kind:'question',okText:'Enviar',cancelText:'Cancelar',input:true});}
+/* ───────── Datas e horas no padrão brasileiro (dd/mm/aaaa e 24 h) ───────── */
+const BR={
+  maskDate:v=>{const d=String(v).replace(/\D/g,'').slice(0,8);return d.length>4?d.slice(0,2)+'/'+d.slice(2,4)+'/'+d.slice(4):d.length>2?d.slice(0,2)+'/'+d.slice(2):d;},
+  maskTime:v=>{const d=String(v).replace(/\D/g,'').slice(0,4);return d.length>2?d.slice(0,2)+':'+d.slice(2):d;},
+  dateToIso:t=>{const m=/^(\d{2})\/(\d{2})\/(\d{4})$/.exec(t);if(!m)return '';const d=+m[1],mo=+m[2],y=+m[3],dt=new Date(y,mo-1,d);if(y<1900||dt.getFullYear()!==y||dt.getMonth()!==mo-1||dt.getDate()!==d)return '';return m[3]+'-'+m[2]+'-'+m[1];},
+  isoToDate:i=>{const m=/^(\d{4})-(\d{2})-(\d{2})/.exec(i||'');return m?m[3]+'/'+m[2]+'/'+m[1]:'';},
+  timeToIso:t=>{const m=/^(\d{2}):(\d{2})$/.exec(t);return m&&+m[1]<24&&+m[2]<60?t:'';},
+  isoToTime:i=>{const m=/^(\d{2}):(\d{2})/.exec(i||'');return m?m[1]+':'+m[2]:'';}
+};
+const BR_MONTHS=['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'];
+function brCloseCal(){document.querySelectorAll('.br-pop').forEach(p=>p.remove());}
+function brCalendar(h,wrap){
+  brCloseCal();
+  const pop=document.createElement('div');pop.className='br-pop';wrap.appendChild(pop);
+  const sel=h.value||'',base=/^\d{4}-\d{2}-\d{2}$/.test(sel)?new Date(sel+'T12:00:00'):new Date();
+  let y=base.getFullYear(),m=base.getMonth();const todayIso=new Date().toISOString().slice(0,10);
+  const pick=iso=>{h.value=iso;h.dispatchEvent(new Event('input',{bubbles:true}));h.dispatchEvent(new Event('change',{bubbles:true}));brCloseCal();};
+  const draw=()=>{
+    const first=new Date(y,m,1).getDay(),days=new Date(y,m+1,0).getDate(),cy=new Date().getFullYear();
+    let cells='';for(let i=0;i<first;i++)cells+='<span></span>';
+    for(let d=1;d<=days;d++){const iso=`${y}-${String(m+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;cells+=`<button type="button" class="br-day${iso===sel?' on':''}${iso===todayIso?' today':''}" data-iso="${iso}">${d}</button>`;}
+    pop.innerHTML=`<div class="br-head"><button type="button" class="br-nav" data-nav="-1" aria-label="Mês anterior">‹</button><select class="br-sel" data-k="m">${BR_MONTHS.map((n,i)=>`<option value="${i}" ${i===m?'selected':''}>${n}</option>`).join('')}</select><select class="br-sel" data-k="y">${Array.from({length:cy+11-1900},(_,i)=>1900+i).map(v=>`<option ${v===y?'selected':''}>${v}</option>`).join('')}</select><button type="button" class="br-nav" data-nav="1" aria-label="Próximo mês">›</button></div><div class="br-wd"><span>D</span><span>S</span><span>T</span><span>Q</span><span>Q</span><span>S</span><span>S</span></div><div class="br-grid">${cells}</div><div class="br-foot"><button type="button" data-a="today">Hoje</button><button type="button" data-a="clear">Limpar</button></div>`;
+  };
+  pop.addEventListener('click',e=>{
+    e.stopPropagation();const t=e.target.closest('button');if(!t)return;
+    if(t.dataset.iso)return pick(t.dataset.iso);
+    if(t.dataset.nav){m+=+t.dataset.nav;if(m>11){m=0;y++;}if(m<0){m=11;y--;}draw();}
+    else if(t.dataset.a==='today')pick(todayIso);
+    else if(t.dataset.a==='clear')pick('');
+  });
+  pop.addEventListener('change',e=>{const s=e.target.closest('select');if(!s)return;if(s.dataset.k==='m')m=+s.value;else y=+s.value;draw();});
+  draw();
+}
+function brEnhance(h){
+  if(h.dataset.br||!(h.type==='date'||h.type==='time'))return;
+  const isDate=h.type==='date',init=h.value,desc=Object.getOwnPropertyDescriptor(HTMLInputElement.prototype,'value');
+  const toIso=isDate?BR.dateToIso:BR.timeToIso,toBr=isDate?BR.isoToDate:BR.isoToTime,mask=isDate?BR.maskDate:BR.maskTime;
+  const vis=document.createElement('input');vis.type='text';vis.className=h.className;vis.setAttribute('inputmode','numeric');vis.autocomplete='off';
+  vis.placeholder=isDate?'dd/mm/aaaa':'hh:mm';vis.maxLength=isDate?10:5;vis.dataset.brVis='1';
+  const lab=h.id?document.querySelector('label[for="'+h.id+'"]'):null;if(lab)vis.setAttribute('aria-label',lab.textContent.trim());
+  const wrap=document.createElement('div');wrap.className='br-wrap';
+  h.parentNode.insertBefore(wrap,h);wrap.appendChild(vis);wrap.appendChild(h);
+  h.dataset.br='1';h.type='hidden';
+  Object.defineProperty(h,'value',{configurable:true,get(){return desc.get.call(h);},set(v){desc.set.call(h,v==null?'':String(v));vis.value=toBr(desc.get.call(h));vis.classList.remove('br-bad');}});
+  vis.addEventListener('input',()=>{
+    vis.value=mask(vis.value);const full=vis.value.length===vis.maxLength,iso=full?toIso(vis.value):'',prev=desc.get.call(h);
+    desc.set.call(h,iso);vis.classList.toggle('br-bad',full&&!iso);
+    if(prev!==iso){h.dispatchEvent(new Event('input',{bubbles:true}));h.dispatchEvent(new Event('change',{bubbles:true}));}
+  });
+  vis.addEventListener('blur',()=>{vis.classList.toggle('br-bad',!!vis.value&&!desc.get.call(h));});
+  if(isDate){
+    const b=document.createElement('button');b.type='button';b.className='br-cal';b.setAttribute('aria-label','Abrir calendário');b.innerHTML='<i class="fa-regular fa-calendar"></i>';
+    b.addEventListener('click',e=>{e.stopPropagation();wrap.querySelector('.br-pop')?brCloseCal():brCalendar(h,wrap);});wrap.appendChild(b);
+  }
+  h.value=init;
+}
+function brScan(root){if(root.querySelectorAll)root.querySelectorAll('input[type="date"],input[type="time"]').forEach(brEnhance);}
+brScan(document);
+new MutationObserver(ms=>{for(const m of ms)for(const n of m.addedNodes)if(n.nodeType===1){if(n.matches&&n.matches('input[type="date"],input[type="time"]'))brEnhance(n);brScan(n);}}).observe(document.body,{childList:true,subtree:true});
+document.addEventListener('click',e=>{
+  if(!e.target.closest('.br-pop'))brCloseCal();
+  const l=e.target.closest('label[for]');if(l){const el=document.getElementById(l.htmlFor);if(el&&el.dataset.br){const v=el.parentNode.querySelector('[data-br-vis]');if(v)v.focus();}}
+});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')brCloseCal();},true);
+document.addEventListener('reset',e=>{e.target.querySelectorAll('[data-br]').forEach(h=>{h.value='';});},true);
+
 const closeKpi=()=>$('kpi-modal').classList.add('hidden-view');$('kpi-x').addEventListener('click',closeKpi);$('kpi-modal').addEventListener('click',e=>{if(e.target.id==='kpi-modal')closeKpi();});document.addEventListener('keydown',e=>{if(e.key==='Escape')closeKpi();});
 document.querySelectorAll('#admin-panel .grp').forEach(b=>b.addEventListener('click',()=>{const w=b.nextElementSibling,o=!w.classList.contains('open');w.classList.toggle('open',o);b.setAttribute('aria-expanded',String(o));}));
-let tvEdit=null;
-const TV={planned:['Planejada','#3b82f6'],in_progress:['Em andamento','#22c55e'],completed:['Concluída','#9ca3af'],cancelled:['Cancelada','#ef4444']};
+let tvEdit=null,tvRows=[],tvEms=[];
+const TVS={planned:['Planejada','#3b82f6','fa-calendar-days'],in_progress:['Em andamento','#22c55e','fa-motorcycle'],completed:['Concluída','#c9a84c','fa-flag-checkered'],cancelled:['Cancelada','#ef4444','fa-ban']};
+const EMS={active:['Ajuda solicitada','#ef4444','fa-triangle-exclamation'],acknowledged:['Em atendimento','#f59e0b','fa-hand-holding-heart'],resolved:['Resolvida','#22c55e','fa-circle-check']};
+const tvBadge=(map,k)=>{const s=map[k]||[k,'#999','fa-circle'];return `<span class="tv-badge" style="color:${s[1]}"><i class="fa-solid ${s[2]}" style="margin-right:5px"></i>${s[0]}</span>`;};
 async function tvLog(type,desc,payload){await supabaseClient.from('activity_log').insert({actor_id:me.id,subject_id:me.id,action_type:type,description:desc,payload:payload||null});}
 const tvWhen=(d,t)=>d?fmtDate(d+'T12:00:00')+(t?' às '+t.slice(0,5):''):'—';
+const tvStamp=ts=>ts?new Date(ts).toLocaleString('pt-BR',{dateStyle:'short',timeStyle:'short'}):'';
+const tvSpan=ms=>{ms=Math.max(0,ms);const m=Math.floor(ms/60000),h=Math.floor(m/60),d=Math.floor(h/24);return d?`${d} d ${h%24} h`:h?`${h} h ${m%60} min`:`${m} min`;};
+const tvAgo=ts=>ts?'há '+tvSpan(Date.now()-new Date(ts).getTime()):'';
+const tvDur=(a,b)=>a&&b?tvSpan(new Date(b)-new Date(a)):'';
+const tvRoute=t=>`${t.origin?safeText(t.origin)+' → ':''}${safeText(t.destination)}`;
+const waUrl=v=>{let d=String(v||'').replace(/\D/g,'');if(d.length<10||d.length>13)return '';if(d.length<=11)d='55'+d;return 'https://wa.me/'+d;};
+const waBtn=(v,label)=>{const u=waUrl(v);return u?`<a class="btn btn-secondary btn-sm" href="${u}" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-whatsapp" style="color:#25d366;margin-right:6px"></i>${label}</a>`:'';};
+const TP_SEL='id,origin,destination,departure_date,departure_time,return_date,return_time,route_notes,status';
+const EM_SEL='id,member_id,travel_id,location_text,description,severity,status,created_at';
+
+/* ───────── Painel do integrante: Protocolo de Viagem ───────── */
+async function tvFetch(){
+  let r=await supabaseClient.from('travel_protocols').select(TP_SEL+',started_at,ended_at').eq('member_id',me.id).order('departure_date',{ascending:false}).order('id',{ascending:false}).limit(30);
+  if(r.error)r=await supabaseClient.from('travel_protocols').select(TP_SEL).eq('member_id',me.id).order('departure_date',{ascending:false}).order('id',{ascending:false}).limit(30);
+  let e=await supabaseClient.from('travel_emergencies').select(EM_SEL+',acknowledged_at,resolved_at,resolution_note').eq('member_id',me.id).order('created_at',{ascending:false}).limit(50);
+  if(e.error)e=await supabaseClient.from('travel_emergencies').select(EM_SEL).eq('member_id',me.id).order('created_at',{ascending:false}).limit(50);
+  return {data:r.data||[],error:r.error,ems:e.data||[]};
+}
+function tvHelpHtml(tid){
+  const list=tvEms.filter(x=>x.travel_id===tid);if(!list.length)return '';
+  return list.map(x=>{const s=EMS[x.status]||EMS.active,lv=SEVLV[x.severity]||SEVLV.high;let note;
+    if(x.status==='active')note='Aguardando o comando assumir o seu atendimento.';
+    else if(x.status==='acknowledged')note='O comando assumiu o seu atendimento'+(x.acknowledged_at?' às '+tvStamp(x.acknowledged_at):'')+'.';
+    else note='Encerrada'+(x.resolved_at?' em '+tvStamp(x.resolved_at):'')+(x.resolution_note?' · '+safeText(x.resolution_note):'')+'.';
+    return `<div class="tv-help" style="border-color:${lv[1]}88;border-left:4px solid ${lv[1]}"><div class="flex flex-wrap items-center justify-between gap-2"><div class="flex flex-wrap items-center gap-2"><span class="tv-badge" style="color:${lv[1]}">● ${lv[0]}</span>${tvBadge(EMS,x.status)}</div><span class="text-xs text-gray-500">${tvStamp(x.created_at)}</span></div><div class="text-sm text-gray-200 mt-1">${safeText(x.description||'')}</div><div class="text-xs text-gray-400 mt-1">${note}</div></div>`;}).join('');
+}
+function tvLiveHtml(){
+  const cur=tvRows.find(t=>t.status==='in_progress');
+  if(cur){
+    const since=cur.started_at?`<div class="text-sm mt-1" style="color:#4ade80"><i class="fa-regular fa-clock mr-1"></i>Em viagem ${tvAgo(cur.started_at)} · iniciada em ${tvStamp(cur.started_at)}</div>`:'';
+    return `<div class="tv-hero live"><div class="flex items-center gap-2 text-xs font-heading tracking-widest uppercase" style="color:#22c55e"><span class="tv-pulse"></span>Viagem em andamento</div><div class="font-display text-white text-3xl tracking-widest uppercase mt-2">${tvRoute(cur)}</div><div class="text-sm text-gray-400 mt-1">Ida ${tvWhen(cur.departure_date,cur.departure_time)} · Volta ${tvWhen(cur.return_date,cur.return_time)}</div>${since}${tvHelpHtml(cur.id)}${geoBoxHtml()}${sosBoxHtml(cur.id)}<div class="tv-act" data-trip="${cur.id}"><button type="button" class="btn btn-primary" data-tv="finish"><i class="fa-solid fa-flag-checkered mr-2"></i>Concluir viagem</button></div></div>`;
+  }
+  const today=new Date();today.setHours(0,0,0,0);
+  const next=tvRows.filter(t=>t.status==='planned').sort((a,b)=>String(a.departure_date).localeCompare(String(b.departure_date)))[0];
+  const last=tvRows.filter(t=>t.status==='completed').sort((a,b)=>String(b.ended_at||b.departure_date).localeCompare(String(a.ended_at||a.departure_date)))[0];
+  const recentDone=last&&last.ended_at&&(Date.now()-new Date(last.ended_at).getTime())<48*3600*1000;
+  if(recentDone){
+    const dur=tvDur(last.started_at,last.ended_at);
+    return `<div class="tv-hero done"><div class="flex items-center gap-2 text-xs font-heading tracking-widest uppercase" style="color:#c9a84c"><i class="fa-solid fa-flag-checkered"></i>Viagem concluída</div><div class="font-display text-white text-3xl tracking-widest uppercase mt-2">${tvRoute(last)}</div><div class="text-sm mt-1" style="color:#e5c76b"><i class="fa-solid fa-circle-check mr-1"></i>Concluída em ${tvStamp(last.ended_at)}${dur?' · duração '+dur:''}. Boa chegada!</div>${tvHelpHtml(last.id)}</div>`;
+  }
+  if(next){
+    const d=new Date(next.departure_date+'T00:00:00'),diff=Math.round((d-today)/86400000);
+    const when=diff===0?'hoje':diff===1?'amanhã':diff>1?'em '+diff+' dias':'atrasada ('+Math.abs(diff)+' d)';
+    return `<div class="tv-hero next"><div class="flex items-center gap-2 text-xs font-heading tracking-widest uppercase" style="color:#60a5fa"><i class="fa-solid fa-calendar-days"></i>Próxima viagem · ${when}</div><div class="font-display text-white text-3xl tracking-widest uppercase mt-2">${tvRoute(next)}</div><div class="text-sm text-gray-400 mt-1">Ida ${tvWhen(next.departure_date,next.departure_time)} · Volta ${tvWhen(next.return_date,next.return_time)}</div><div class="tv-act" data-trip="${next.id}"><button type="button" class="btn btn-primary" data-tv="start"><i class="fa-solid fa-motorcycle mr-2"></i>Iniciar viagem</button><button type="button" class="btn btn-secondary" data-tv="edit">Editar</button><button type="button" class="btn btn-secondary" data-tv="cancel">Cancelar</button></div></div>`;
+  }
+  return `<div class="tv-hero idle"><div class="text-sm text-gray-300"><i class="fa-solid fa-road mr-2" style="color:#c9a84c"></i>Nenhuma viagem em andamento ou planejada. Registre a próxima abaixo para o comando acompanhar você.</div></div>`;
+}
+function tvStatsHtml(){
+  const c=k=>tvRows.filter(t=>t.status===k).length;
+  const it=(n,l,col,ic)=>`<div class="row-card text-center" style="border-top:3px solid ${col}"><div class="font-display text-2xl text-white"><i class="fa-solid ${ic} text-sm mr-2" style="color:${col}"></i>${n}</div><div class="text-[11px] text-gray-400 uppercase font-heading tracking-widest">${l}</div></div>`;
+  return it(tvRows.length,'Registradas','#9ca3af','fa-route')+it(c('in_progress'),'Em andamento','#22c55e','fa-motorcycle')+it(c('planned'),'Planejadas','#3b82f6','fa-calendar-days')+it(c('completed'),'Concluídas','#c9a84c','fa-flag-checkered');
+}
+function tvListHtml(){
+  if(!tvRows.length)return '<p class="text-sm text-gray-400">Você ainda não registrou nenhuma viagem.</p>';
+  return tvRows.map(t=>{
+    const s=TVS[t.status]||[t.status,'#999','fa-circle'],done=t.status==='completed';
+    const dur=done?tvDur(t.started_at,t.ended_at):'';
+    const line=done?`<div class="text-xs mt-2" style="color:#e5c76b"><i class="fa-solid fa-flag-checkered mr-1"></i>Concluída${t.ended_at?' em '+tvStamp(t.ended_at):''}${dur?' · duração '+dur:''}</div>`:(t.status==='cancelled'?'<div class="text-xs mt-2" style="color:#f87171"><i class="fa-solid fa-ban mr-1"></i>Viagem cancelada</div>':(t.started_at?`<div class="text-xs mt-2 text-gray-400">Iniciada em ${tvStamp(t.started_at)}</div>`:''));
+    return `<div class="row-card tv-trip ${t.status}" style="border-left:3px solid ${s[1]}"><div class="flex flex-wrap items-center justify-between gap-2"><div class="text-white font-medium"><span class="act-ico" style="color:${s[1]}"><i class="fa-solid ${s[2]}"></i></span>${tvRoute(t)}</div>${tvBadge(TVS,t.status)}</div><div class="text-xs text-gray-400 mt-1">Ida: ${tvWhen(t.departure_date,t.departure_time)} · Volta: ${tvWhen(t.return_date,t.return_time)}</div>${t.route_notes?`<div class="text-xs text-gray-500 mt-1">${safeText(t.route_notes)}</div>`:''}${line}${tvHelpHtml(t.id)}<div class="tv-act" data-trip="${t.id}">${t.status==='planned'?'<button type="button" class="btn btn-secondary btn-sm" data-tv="start">Iniciar viagem</button><button type="button" class="btn btn-secondary btn-sm" data-tv="edit">Editar</button><button type="button" class="btn btn-secondary btn-sm" data-tv="cancel">Cancelar</button>':''}${t.status==='in_progress'?'<button type="button" class="btn btn-secondary btn-sm" data-tv="finish">Concluir viagem</button>':''}</div></div>`;}).join('');
+}
+function tvRenderLive(){if(!$('tv-live'))return;$('tv-live').innerHTML=tvLiveHtml();$('tv-stats').innerHTML=tvStatsHtml();$('tv-list').innerHTML=tvListHtml();}
+async function tvRefresh(){const r=await tvFetch();if(r.error)return;tvRows=r.data;tvEms=r.ems;tvRenderLive();}
+async function tvLoadContacts(){
+  const box=$('tv-contacts');if(!box)return;
+  const [c,p]=await Promise.all([supabaseClient.rpc('command_regional'),supabaseClient.from('member_profiles').select('emergency_whatsapp').eq('id',me.id).maybeSingle()]);
+  const cmd=(!c.error&&Array.isArray(c.data)?c.data:[]).filter(x=>waUrl(x.whatsapp)&&x.member_id!==me.id);
+  const own=p.data?.emergency_whatsapp,hasOwn=!!waUrl(own);
+  if(!box.isConnected)return;
+  box.innerHTML=`<div class="row-card"><h4 class="font-heading text-gold text-sm uppercase tracking-widest mb-1">Contatos para emergência</h4><p class="text-xs text-gray-400 mb-3">Problema na estrada? Fale direto com o comando pelo WhatsApp.</p><div class="tv-act" style="margin-top:0">${cmd.map(x=>waBtn(x.whatsapp,safeText(x.role_title)+' · '+safeText(x.display_name))).join('')}${hasOwn?waBtn(own,'Meu contato de emergência'):''}</div>${hasOwn?'':'<p class="text-xs mt-3" style="color:#fcd34d"><i class="fa-solid fa-triangle-exclamation mr-1"></i>Você ainda não cadastrou o seu WhatsApp de emergência em Meu Perfil.</p>'}</div>`;
+}
 async function loadTravelPanel(){
   const body=$('travel-body');
-  const {data,error}=await supabaseClient.from('travel_protocols').select('id,origin,destination,departure_date,departure_time,return_date,return_time,route_notes,status').eq('member_id',me.id).order('departure_date',{ascending:false}).order('id',{ascending:false}).limit(30);
-  if(error){body.innerHTML='<div class="row-card"><p class="text-sm text-gray-300">Protocolo de viagem indisponível. Rode o arquivo viagem.sql no Supabase.</p></div>';return;}
-  const e=tvEdit?data.find(x=>x.id===tvEdit):null,v=k=>safeText(e?.[k]??'');
-  const list=data.length?data.map(t=>{const st=TV[t.status]||[t.status,'#999'];return `<div class="row-card"><div class="flex flex-wrap items-center justify-between gap-2"><div class="text-white font-medium">${t.origin?safeText(t.origin)+' → ':''}${safeText(t.destination)}</div><span class="tv-badge" style="color:${st[1]}">${st[0]}</span></div><div class="text-xs text-gray-400 mt-1">Ida: ${tvWhen(t.departure_date,t.departure_time)} · Volta: ${tvWhen(t.return_date,t.return_time)}</div>${t.route_notes?`<div class="text-xs text-gray-500 mt-1">${safeText(t.route_notes)}</div>`:''}<div class="tv-act" data-trip="${t.id}">${t.status==='planned'?'<button type="button" class="btn btn-secondary btn-sm" data-tv="start">Iniciar viagem</button><button type="button" class="btn btn-secondary btn-sm" data-tv="edit">Editar</button><button type="button" class="btn btn-secondary btn-sm" data-tv="cancel">Cancelar</button>':''}${t.status==='in_progress'?'<button type="button" class="btn btn-secondary btn-sm" data-tv="finish">Concluir viagem</button><button type="button" class="btn btn-secondary btn-sm" data-tv="sos" style="border-color:#ef4444;color:#ef4444">Pedir ajuda (SOS)</button>':''}</div></div>`;}).join(''):'<p class="text-sm text-gray-400">Você ainda não registrou nenhuma viagem.</p>';
-  body.innerHTML=`<div class="mb-5"><h3 class="font-display text-white text-3xl tracking-widest uppercase">Protocolo de Viagem</h3><p class="text-sm text-gray-400">Registre sua viagem. O comando acompanha pelo painel administrativo.</p></div>
-  <form id="tv-form" class="row-card mb-6" novalidate><h4 class="font-heading text-gold text-sm uppercase tracking-widest mb-3">${e?'Editar viagem':'Nova viagem'}</h4><div class="tv-form">
+  const r=await tvFetch();
+  if(r.error){body.innerHTML='<div class="row-card"><p class="text-sm text-gray-300">Protocolo de viagem indisponível. Rode o arquivo viagem.sql no Supabase.</p></div>';return;}
+  tvRows=r.data;tvEms=r.ems;
+  const e=tvEdit?tvRows.find(x=>x.id===tvEdit):null,v=k=>safeText(e?.[k]??'');
+  body.innerHTML=`<div class="mb-5"><h3 class="font-display text-white text-3xl tracking-widest uppercase">Protocolo de Viagem</h3><p class="text-sm text-gray-400">Registre sua viagem. O comando acompanha em tempo real pelo painel administrativo e você vê aqui o andamento de qualquer pedido de ajuda.</p></div>
+  <div id="tv-live" class="mb-5"></div>
+  <div id="tv-stats" class="grid grid-cols-2 md:grid-cols-4 gap-2 mb-5"></div>
+  <div id="tv-contacts" class="mb-5"></div>
+  <details id="tv-new" class="row-card mb-6" ${(e||!tvRows.some(t=>t.status==='in_progress'))?'open':''}><summary class="font-heading text-gold text-sm uppercase tracking-widest cursor-pointer"><i class="fa-solid fa-plus mr-2"></i>${e?'Editar viagem':'Nova viagem'}</summary><form id="tv-form" class="mt-3" novalidate><div class="tv-form">
   <div><label for="tv-origin">Local de saída</label><input class="field" id="tv-origin" maxlength="120" placeholder="Ex.: Jaraguá - São Paulo/SP" value="${v('origin')}"></div>
   <div><label for="tv-dest">Para onde vai (cidade)*</label><input class="field" id="tv-dest" maxlength="120" placeholder="Ex.: Santos/SP" value="${v('destination')}"></div>
   <div><label for="tv-dd">Data de ida*</label><input class="field" id="tv-dd" type="date" value="${v('departure_date')}"></div>
@@ -1678,12 +1846,15 @@ async function loadTravelPanel(){
   <div><label for="tv-rd">Data de volta</label><input class="field" id="tv-rd" type="date" value="${v('return_date')}"></div>
   <div><label for="tv-rt">Horário de volta</label><input class="field" id="tv-rt" type="time" value="${e?.return_time?safeText(e.return_time.slice(0,5)):''}"></div></div>
   <div class="mt-3"><label class="block text-xs text-gray-300 mb-2" for="tv-notes">Observações da rota</label><input class="field" id="tv-notes" maxlength="300" value="${v('route_notes')}"></div>
-  <div class="tv-act"><button type="submit" class="btn btn-primary">${e?'Salvar alterações':'Registrar viagem'}</button>${e?'<button type="button" class="btn btn-secondary" id="tv-cancel-edit">Cancelar edição</button>':''}</div><p id="tv-message" class="text-sm mt-2"></p></form>
-  <h4 class="font-heading text-gold text-sm uppercase tracking-widest mb-3">Minhas viagens</h4><div class="space-y-3" id="tv-list">${list}</div>`;
+  <div class="tv-act"><button type="submit" class="btn btn-primary">${e?'Salvar alterações':'Registrar viagem'}</button>${e?'<button type="button" class="btn btn-secondary" id="tv-cancel-edit">Cancelar edição</button>':''}</div><p id="tv-message" class="text-sm mt-2"></p></form></details>
+  <h4 class="font-heading text-gold text-sm uppercase tracking-widest mb-3">Minhas viagens</h4><div class="space-y-3" id="tv-list"></div>
+  <details class="row-card mt-6"><summary class="font-heading text-gold text-sm uppercase tracking-widest cursor-pointer">Antes de pegar a estrada</summary><ul class="text-sm text-gray-300 mt-3 space-y-2"><li><i class="fa-solid fa-check mr-2" style="color:#c9a84c"></i>Revise pneus, freios, óleo e combustível.</li><li><i class="fa-solid fa-check mr-2" style="color:#c9a84c"></i>Deixe o celular carregado e leve um carregador portátil.</li><li><i class="fa-solid fa-check mr-2" style="color:#c9a84c"></i>Registre a viagem aqui e clique em Iniciar ao sair.</li><li><i class="fa-solid fa-check mr-2" style="color:#c9a84c"></i>Confira se o seu WhatsApp de emergência está cadastrado em Meu Perfil.</li><li><i class="fa-solid fa-check mr-2" style="color:#c9a84c"></i>Em caso de problema, use o botão SOS: o comando é avisado na hora.</li><li><i class="fa-solid fa-check mr-2" style="color:#c9a84c"></i>Ao chegar, clique em Concluir viagem.</li></ul></details>`;
   $('tv-form').addEventListener('submit',tvSubmit);
   if($('tv-cancel-edit'))$('tv-cancel-edit').addEventListener('click',()=>{tvEdit=null;loadTravelPanel();});
-  $('tv-list').addEventListener('click',tvAction);
-  $('tv-list').dataset.rows=JSON.stringify(data.map(t=>({id:t.id,origin:t.origin,destination:t.destination})));
+  tvRenderLive();tvLoadContacts();
+  const cur=tvRows.find(t=>t.status==='in_progress');
+  if(cur&&geo.watch===null){let sh=null;try{sh=localStorage.getItem('tv_share');}catch(_){}if(sh===String(cur.id))geoStart(cur.id);}
+  if(!cur&&geo.watch!==null)geoStop(true);
 }
 async function tvSubmit(ev){
   ev.preventDefault();const g=i=>$(i).value.trim(),msg=(t,k)=>message('tv-message',t,k);
@@ -1696,46 +1867,340 @@ async function tvSubmit(ev){
   if(error)return msg('Não foi possível salvar: '+error.message,'error');
   tvEdit=null;await loadTravelPanel();message('tv-message','Viagem salva. O comando já pode ver no painel.','success');
 }
+/* encerra pedidos de ajuda em aberto da viagem (ao concluir ou cancelar) */
+async function tvResolveHelp(travelId,note){
+  const now=new Date().toISOString(),T=()=>supabaseClient.from('travel_emergencies');
+  let r=await T().update({status:'resolved',resolved_at:now,resolved_by:me.id,resolution_note:note}).eq('travel_id',travelId).eq('member_id',me.id).in('status',['active','acknowledged']).select('id');
+  if(r.error)r=await T().update({status:'resolved'}).eq('travel_id',travelId).eq('member_id',me.id).in('status',['active','acknowledged']).select('id');
+  return r.error?0:(r.data||[]).length;
+}
 async function tvAction(ev){
-  const b=ev.target.closest('[data-tv]');if(!b)return;const id=Number(b.closest('[data-trip]').dataset.trip),act=b.dataset.tv;
-  const t=JSON.parse($('tv-list').dataset.rows).find(x=>x.id===id);if(!t)return;const trip=`${t.origin?t.origin+' → ':''}${t.destination}`,T=supabaseClient.from('travel_protocols');
+  const b=ev.target.closest('[data-tv]');if(!b)return;const wrap=b.closest('[data-trip]');if(!wrap)return;
+  const id=Number(wrap.dataset.trip),act=b.dataset.tv,t=tvRows.find(x=>x.id===id);if(!t)return;
+  const trip=`${t.origin?t.origin+' → ':''}${t.destination}`,T=()=>supabaseClient.from('travel_protocols'),now=new Date().toISOString();
   if(act==='edit'){tvEdit=id;await loadTravelPanel();$('tv-form').scrollIntoView({behavior:'smooth'});return;}
   let error;
-  if(act==='start'){({error}=await supabaseClient.from('travel_protocols').update({status:'in_progress'}).eq('id',id).eq('member_id',me.id));if(!error)await tvLog('travel_started','Início de viagem: '+trip,{travel_id:id});}
-  if(act==='finish'){if(!await uiConfirm('Concluir esta viagem?'))return;({error}=await supabaseClient.from('travel_protocols').update({status:'completed'}).eq('id',id).eq('member_id',me.id));if(!error)await tvLog('travel_ended','Fim de viagem: '+trip,{travel_id:id});}
-  if(act==='cancel'){if(!await uiConfirm('Cancelar esta viagem?'))return;({error}=await supabaseClient.from('travel_protocols').update({status:'cancelled'}).eq('id',id).eq('member_id',me.id));if(!error)await tvLog('travel_cancelled','Viagem cancelada: '+trip,{travel_id:id});}
-  if(act==='sos'){const d=await uiPrompt('Descreva rapidamente o que aconteceu (ex.: acidente, problema mecânico) e onde você está:');if(d===null)return;if(!d.trim()){uiAlert('Descreva a situação para o comando poder ajudar.');return;}
-    ({error}=await supabaseClient.from('travel_emergencies').insert({member_id:me.id,travel_id:id,location_text:t.destination,description:d.trim(),severity:'high',status:'active'}));if(!error){await tvLog('help_requested','Pedido de ajuda: '+d.trim().slice(0,120),{travel_id:id});uiAlert('Pedido de ajuda enviado ao comando.');}}
+  if(act==='start'){let r=await T().update({status:'in_progress',started_at:now}).eq('id',id).eq('member_id',me.id);if(r.error)r=await T().update({status:'in_progress'}).eq('id',id).eq('member_id',me.id);error=r.error;if(!error)await tvLog('travel_started','Viagem iniciada: '+trip,{travel_id:id});}
+  if(act==='finish'){if(!await uiConfirm('Concluir esta viagem?'))return;let r=await T().update({status:'completed',ended_at:now}).eq('id',id).eq('member_id',me.id);if(r.error)r=await T().update({status:'completed'}).eq('id',id).eq('member_id',me.id);error=r.error;
+    if(!error){geoStop(true);const n=await tvResolveHelp(id,'Encerrado ao concluir a viagem');await tvLog('travel_ended','Viagem concluída: '+trip,{travel_id:id,ended_at:now});if(n)await tvLog('help_resolved','Ajuda encerrada ao concluir a viagem: '+trip,{travel_id:id});}}
+  if(act==='cancel'){if(!await uiConfirm('Cancelar esta viagem?'))return;const r=await T().update({status:'cancelled'}).eq('id',id).eq('member_id',me.id);error=r.error;if(!error){geoStop(true);const n=await tvResolveHelp(id,'Encerrado ao cancelar a viagem');await tvLog('travel_cancelled','Viagem cancelada: '+trip,{travel_id:id});if(n)await tvLog('help_resolved','Ajuda encerrada ao cancelar a viagem: '+trip,{travel_id:id});}}
+  if(act==='sos'){sosOpen(b.dataset.level||'red',id);return;}
   if(error)return message('tv-message','Não foi possível atualizar: '+error.message,'error');
-  await loadTravelPanel();
+  await tvRefresh();
 }
+$('travel-body').addEventListener('click',tvAction);
 document.querySelectorAll('[data-mside="travel"]').forEach(b=>b.addEventListener('click',()=>{tvEdit=null;loadTravelPanel();}));
 
-/* ───────── Painel Administrativo: Protocolos de Viagem ───────── */
+/* ───────── Pedido de ajuda em 3 níveis (verde, amarelo, vermelho) ───────── */
+const SOS={
+  green:{sev:'low',color:'#22c55e',label:'Verde',title:'Apoio',icon:'fa-hand-holding-hand',hint:'Sem risco: pneu, combustível, rota',sub:'Sem risco para você. Só precisa de apoio do comando.',types:['Pneu furado','Pouco combustível','Dúvida de rota','Parada para descanso','Outro']},
+  yellow:{sev:'medium',color:'#f59e0b',label:'Amarelo',title:'Ajuda',icon:'fa-screwdriver-wrench',hint:'Imprevisto: pane, mal-estar',sub:'Imprevisto na estrada. Você precisa de ajuda para seguir viagem.',types:['Moto parou / pane mecânica','Moto não liga','Mal-estar','Clima ou pista perigosa','Outro']},
+  red:{sev:'high',color:'#ef4444',label:'Vermelho',title:'Emergência',icon:'fa-triangle-exclamation',hint:'Acidente, ferimento ou perigo',sub:'Risco à sua vida ou integridade. O comando é avisado com prioridade máxima.',types:['Acidente','Ferimento','Assalto ou ameaça','Risco de vida','Outro']}
+};
+const SEVLV={low:['Verde','#22c55e'],medium:['Amarelo','#f59e0b'],high:['Vermelho','#ef4444'],critical:['Vermelho','#ef4444']};
+const sevRank=s=>({low:1,medium:2,high:3,critical:4}[s]||3);
+const gmaps=(la,ln)=>`https://www.google.com/maps?q=${la},${ln}`;
+const sosBoxHtml=id=>`<div class="sos-box" data-trip="${id}"><div class="font-heading text-xs uppercase tracking-widest text-gray-300 mb-2"><i class="fa-solid fa-life-ring mr-1"></i>Pedir ajuda ao comando</div><div class="sos-grid">${Object.entries(SOS).map(([k,l])=>`<button type="button" class="sos-btn" data-tv="sos" data-level="${k}" style="--c:${l.color}"><span class="sos-ic"><i class="fa-solid ${l.icon}"></i></span><span><b>${l.label} · ${l.title}</b><small>${l.hint}</small></span></button>`).join('')}</div></div>`;
+let sosCtx=null;
+function sosOpen(level,tripId){
+  const t=tvRows.find(x=>x.id===tripId);if(!t)return;
+  const open=tvEms.filter(x=>x.travel_id===tripId&&x.status!=='resolved'),L=SOS[level]||SOS.red;
+  if(open.some(x=>sevRank(x.severity)>=sevRank(L.sev))){uiAlert('Você já tem um pedido de ajuda de nível igual ou maior em aberto nesta viagem. O comando já foi avisado e você acompanha o andamento aqui.');return;}
+  sosCtx={level,tripId,type:null,busy:false};
+  $('sos-box').style.setProperty('--c',L.color);
+  $('sos-icon').className='fa-solid '+L.icon;$('sos-title').textContent=`${L.label} · ${L.title}`;$('sos-sub').textContent=L.sub;
+  $('sos-types').innerHTML=L.types.map(x=>`<button type="button" class="sos-chip" data-type="${safeText(x)}">${safeText(x)}</button>`).join('');
+  $('sos-text').value='';$('sos-msg').textContent='';$('sos-share').checked=true;
+  $('sos-send').style.background=L.color;$('sos-send').style.color=level==='yellow'?'#111':'#fff';$('sos-send').textContent='Enviar pedido';$('sos-send').disabled=false;
+  $('sos-dialog').classList.remove('hidden-view');$('sos-types').querySelector('button').focus();
+}
+function sosClose(){$('sos-dialog').classList.add('hidden-view');sosCtx=null;}
+async function sosSend(){
+  if(!sosCtx||sosCtx.busy)return;
+  const {level,tripId,type}=sosCtx,L=SOS[level],text=$('sos-text').value.trim(),t=tvRows.find(x=>x.id===tripId);
+  if(!type&&!text){$('sos-msg').textContent='Escolha o tipo de problema ou descreva o que aconteceu.';return;}
+  sosCtx.busy=true;$('sos-send').disabled=true;$('sos-send').textContent='Enviando...';$('sos-msg').textContent='';
+  const share=$('sos-share').checked,description=(type?type+(text?': '+text:''):text).slice(0,400);
+  let pos=null;if(share)pos=await geoOnce(6000);
+  const base={member_id:me.id,travel_id:tripId,location_text:t?t.destination:null,description,severity:L.sev,status:'active'};
+  const T=()=>supabaseClient.from('travel_emergencies');
+  let r=await T().insert({...base,category:type||null,lat:pos?pos.latitude:null,lng:pos?pos.longitude:null});
+  if(r.error)r=await T().insert(base);
+  if(r.error){sosCtx.busy=false;$('sos-send').disabled=false;$('sos-send').textContent='Enviar pedido';$('sos-msg').textContent='Não foi possível enviar: '+r.error.message;return;}
+  await tvLog('help_requested',`Pedido de ajuda (${L.label}): ${description.slice(0,120)}`,{travel_id:tripId,severity:L.sev});
+  if(share)geoStart(tripId);
+  sosClose();await tvRefresh();
+  uiAlert(`Pedido de ajuda ${L.label.toLowerCase()} enviado ao comando.${share?' Sua localização está sendo compartilhada ao vivo.':''} Você acompanha o atendimento aqui no painel.`);
+}
+$('sos-types').addEventListener('click',e=>{const b=e.target.closest('[data-type]');if(!b||!sosCtx)return;sosCtx.type=b.dataset.type;$('sos-types').querySelectorAll('.sos-chip').forEach(x=>x.classList.toggle('on',x===b));});
+$('sos-cancel').addEventListener('click',sosClose);$('sos-send').addEventListener('click',sosSend);
+$('sos-dialog').addEventListener('click',e=>{if(e.target.id==='sos-dialog')sosClose();});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&sosCtx)sosClose();});
+
+/* ───────── Localização em tempo real do integrante ───────── */
+const geo={watch:null,beat:null,trip:null,last:0,sent:null,pos:null,state:'off',msg:'',wake:null,okAt:0,test:'',testErr:false};
+const geoDist=(a,b)=>{const R=6371000,r=x=>x*Math.PI/180,dl=r(b.latitude-a.latitude),dn=r(b.longitude-a.longitude),q=Math.sin(dl/2)**2+Math.cos(r(a.latitude))*Math.cos(r(b.latitude))*Math.sin(dn/2)**2;return 2*R*Math.asin(Math.sqrt(q));};
+const geoErrMsg=e=>e&&e.code===1?'Permissão negada. Libere a localização nas configurações do navegador para este site.':e&&e.code===2?'Não foi possível obter a posição (sem sinal de GPS).':e&&e.code===3?'O GPS demorou para responder. Tentando de novo...':'Erro ao obter a localização.';
+function geoSet(state,msg){geo.state=state;geo.msg=msg||'';geoUi();}
+function geoStatusHtml(){
+  const t=geo.test?`<div class="mt-1" style="color:${geo.testErr?'#fca5a5':'#93c5fd'}">${safeText(geo.test)}</div>`:'';
+  return geoStatusMain()+t;
+}
+function geoStatusMain(){
+  if(geo.state==='on'){const p=geo.pos;return `<span style="color:#4ade80"><span class="tv-pulse" style="width:8px;height:8px;margin-right:6px"></span>Compartilhando ao vivo${geo.okAt?' · enviado '+tvAgo(new Date(geo.okAt)):''}${p&&p.accuracy?' · precisão ±'+Math.round(p.accuracy)+' m':''}</span>${p?` · <a class="underline" href="${gmaps(p.latitude,p.longitude)}" target="_blank" rel="noopener noreferrer">ver no Google Maps</a>`:''}`;}
+  if(geo.state==='starting')return '<span class="text-gray-300">Pedindo permissão e buscando o GPS...</span>';
+  if(geo.state==='error')return `<span style="color:#fca5a5">${safeText(geo.msg)}</span>`;
+  return '<span class="text-gray-400">Desligado. O comando só vê a sua posição se você compartilhar.</span>';
+}
+function geoBoxHtml(){
+  const on=geo.state==='on'||geo.state==='starting';
+  return `<div class="geo-box"><div class="font-heading text-xs uppercase tracking-widest" style="color:#60a5fa"><i class="fa-solid fa-location-crosshairs mr-1"></i>Localização ao vivo</div><div class="text-xs mt-1" id="geo-status">${geoStatusHtml()}</div><div class="tv-act" style="margin-top:8px"><button type="button" class="btn ${on?'btn-secondary':'btn-primary'} btn-sm" data-geo="toggle" id="geo-toggle">${on?'Parar de compartilhar':'Compartilhar minha localização'}</button><button type="button" class="btn btn-secondary btn-sm" data-geo="test">Testar GPS</button></div><div class="text-[11px] text-gray-500 mt-2">Só o comando vê. Mantenha esta página aberta durante a viagem. Encerra sozinho ao concluir a viagem.</div></div>`;
+}
+function geoUi(){
+  const s=$('geo-status');if(s)s.innerHTML=geoStatusHtml();
+  const b=$('geo-toggle');if(b){const on=geo.state==='on'||geo.state==='starting';b.textContent=on?'Parar de compartilhar':'Compartilhar minha localização';b.classList.toggle('btn-primary',!on);b.classList.toggle('btn-secondary',on);}
+}
+async function geoWake(on){
+  try{if(on&&'wakeLock' in navigator&&!geo.wake){geo.wake=await navigator.wakeLock.request('screen');geo.wake.addEventListener('release',()=>{geo.wake=null;});}
+      if(!on&&geo.wake){await geo.wake.release();geo.wake=null;}}catch(_){}
+}
+document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible'&&geo.watch!==null)geoWake(true);});
+async function geoSend(c){
+  geo.last=Date.now();geo.sent={latitude:c.latitude,longitude:c.longitude};
+  const row={member_id:me.id,travel_id:geo.trip,lat:c.latitude,lng:c.longitude,accuracy:c.accuracy??null,speed:c.speed??null,heading:c.heading??null,updated_at:new Date().toISOString()};
+  const r=await supabaseClient.from('travel_live_location').upsert(row,{onConflict:'member_id'});
+  if(r.error){geoSet('error','Não foi possível enviar a localização'+(/relation|does not exist|schema cache/i.test(r.error.message||'')?'. Rode o arquivo viagem_localizacao.sql no Supabase.':': '+r.error.message));return false;}
+  geo.okAt=Date.now();geoSet('on');return true;
+}
+function geoOnPos(p){
+  const c=p.coords;geo.pos={latitude:c.latitude,longitude:c.longitude,accuracy:c.accuracy};
+  const moved=geo.sent?geoDist(geo.sent,c):Infinity;
+  if(Date.now()-geo.last<10000&&moved<30){geoUi();return;}
+  geoSend(c);
+}
+function geoOnErr(e){
+  if(e&&e.code===1){geoStop(true);geoSet('error',geoErrMsg(e));return;}
+  geoSet('error',geoErrMsg(e));
+}
+function geoStart(tripId){
+  if(!('geolocation' in navigator)){geoSet('error','Este aparelho ou navegador não permite localização.');return false;}
+  if(geo.watch!==null){navigator.geolocation.clearWatch(geo.watch);geo.watch=null;}
+  clearInterval(geo.beat);geo.trip=tripId;geo.sent=null;geo.last=0;
+  geoSet('starting');
+  geo.watch=navigator.geolocation.watchPosition(geoOnPos,geoOnErr,{enableHighAccuracy:true,maximumAge:5000,timeout:20000});
+  geo.beat=setInterval(()=>{if(geo.pos&&geo.state==='on'&&Date.now()-geo.last>=25000)geoSend(geo.pos);},5000);
+  try{localStorage.setItem('tv_share',String(tripId));}catch(_){}
+  geoWake(true);return true;
+}
+async function geoStop(removeRow){
+  if(geo.watch!==null){navigator.geolocation.clearWatch(geo.watch);geo.watch=null;}
+  clearInterval(geo.beat);geo.beat=null;geo.pos=null;geo.sent=null;
+  try{localStorage.removeItem('tv_share');}catch(_){}
+  geoWake(false);geoSet('off');
+  if(removeRow&&typeof me!=='undefined'&&me)await supabaseClient.from('travel_live_location').delete().eq('member_id',me.id);
+}
+function geoOnce(timeout){
+  return new Promise(res=>{if(!('geolocation' in navigator))return res(null);
+    navigator.geolocation.getCurrentPosition(p=>res(p.coords),()=>res(null),{enableHighAccuracy:true,maximumAge:10000,timeout:timeout||8000});});
+}
+async function geoTest(){
+  const say=(t,err)=>{geo.test=t;geo.testErr=!!err;geoUi();};
+  if(!('geolocation' in navigator)){say('Este aparelho ou navegador não permite localização.',true);return;}
+  say('Testando o GPS...');
+  navigator.geolocation.getCurrentPosition(
+    p=>say(`GPS funcionando: precisão ±${Math.round(p.coords.accuracy)} m (${p.coords.latitude.toFixed(5)}, ${p.coords.longitude.toFixed(5)}).${geo.state==='on'?'':' Nada foi enviado.'}`),
+    e=>say(geoErrMsg(e),true),{enableHighAccuracy:true,timeout:15000,maximumAge:0});
+}
+$('travel-body').addEventListener('click',async e=>{
+  const b=e.target.closest('[data-geo]');if(!b)return;
+  if(b.dataset.geo==='test')return geoTest();
+  const cur=tvRows.find(t=>t.status==='in_progress');
+  if(geo.state==='on'||geo.state==='starting')return geoStop(true);
+  if(!cur){uiAlert('Inicie a viagem para compartilhar a localização.');return;}
+  geoStart(cur.id);
+});
+
+/* ───────── Mapa ao vivo (painel administrativo) ───────── */
+const LM={wrap:null,el:null,map:null,L:null,markers:{},trails:{},fitted:false,locs:[],tr:[],em:[],busy:false};
+function loadLeaflet(){
+  if(window.L&&window.L.map)return Promise.resolve(window.L);
+  return window._lp||(window._lp=new Promise((res,rej)=>{
+    const l=document.createElement('link');l.rel='stylesheet';l.href='https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css';document.head.appendChild(l);
+    const s=document.createElement('script');s.src='https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js';s.onload=()=>res(window.L);s.onerror=()=>{window._lp=null;rej(new Error('leaflet'));};document.head.appendChild(s);}));
+}
+async function lmEnsure(){
+  if(LM.map)return true;
+  try{
+    const L=await loadLeaflet();LM.L=L;
+    LM.wrap=document.createElement('div');LM.wrap.className='lm-wrap';
+    LM.wrap.innerHTML='<div class="lm-head"><div class="font-heading text-xs uppercase tracking-widest" style="color:#c9a84c"><i class="fa-solid fa-location-dot mr-1"></i>Mapa ao vivo</div><div class="lm-legend"><span><i style="background:#22c55e"></i>Compartilhando</span><span><i style="background:#9ca3af"></i>Sem sinal recente</span><span><i style="background:#f59e0b"></i>Ajuda amarela</span><span><i style="background:#ef4444"></i>Emergência</span></div><button type="button" class="btn btn-secondary btn-sm" id="lm-center">Centralizar</button></div><div class="lm-count text-xs text-gray-400" id="lm-count"></div>';
+    LM.el=document.createElement('div');LM.el.id='live-map';LM.wrap.appendChild(LM.el);
+    LM.map=L.map(LM.el,{zoomControl:true}).setView([-14.2,-51.9],4);
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'&copy; OpenStreetMap'}).addTo(LM.map);
+    LM.wrap.querySelector('#lm-center').addEventListener('click',()=>lmFit(true));
+    return true;
+  }catch(_){return false;}
+}
+function lmFit(force){
+  const pts=Object.values(LM.markers).map(m=>m.getLatLng());
+  if(!pts.length)return;
+  if(pts.length===1)LM.map.setView(pts[0],Math.max(LM.map.getZoom(),14));else LM.map.fitBounds(LM.L.latLngBounds(pts),{padding:[40,40],maxZoom:16});
+  LM.fitted=true;
+}
+async function lmAttach(tr,em){
+  LM.tr=tr||[];LM.em=em||[];
+  const slot=$('da-map-slot');if(!slot)return;
+  if(!(await lmEnsure())){slot.innerHTML='<p class="text-xs text-gray-500">Não foi possível carregar o mapa (sem internet ou bloqueio do serviço de mapas).</p>';return;}
+  if(LM.wrap.parentNode!==slot)slot.appendChild(LM.wrap);
+  LM.map.invalidateSize();await lmUpdate();
+}
+async function lmUpdate(){
+  if(!LM.map||LM.busy)return;LM.busy=true;
+  try{
+    const r=await supabaseClient.from('travel_live_location').select('member_id,travel_id,lat,lng,accuracy,speed,heading,updated_at');
+    if(r.error){const c=$('lm-count');if(c)c.textContent=/relation|does not exist|schema cache/i.test(r.error.message||'')?'Rode o arquivo viagem_localizacao.sql no Supabase para ativar o mapa.':'Mapa indisponível: '+r.error.message;return;}
+    LM.locs=r.data||[];lmDraw();
+  }finally{LM.busy=false;}
+}
+function lmDraw(){
+  const L=LM.L,now=Date.now(),seen=new Set();let live=0;
+  LM.locs.forEach(l=>{
+    seen.add(l.member_id);
+    const age=now-new Date(l.updated_at).getTime(),fresh=age<90000,help=LM.em.filter(x=>x.member_id===l.member_id&&x.status!=='resolved').sort((a,b)=>sevRank(b.severity)-sevRank(a.severity))[0];
+    if(fresh)live++;
+    let col=fresh?'#22c55e':'#9ca3af';if(help)col=(SEVLV[help.severity]||SEVLV.high)[1];
+    const nm=mName(l.member_id),ini=safeText((nm||'?').trim().charAt(0).toUpperCase()),trip=LM.tr.find(t=>t.id===l.travel_id);
+    const icon=L.divIcon({className:'lm-pin',html:`<div class="lm-dot${help?' help':''}" style="background:${col};--c:${col}">${ini}</div>`,iconSize:[34,34],iconAnchor:[17,17],popupAnchor:[0,-18]});
+    const pop=`<div class="lm-pop"><b>${safeText(nm)}</b>${trip?'<br>'+tvRoute(trip):''}<br><span style="color:${col}">${help?'Ajuda '+(SEVLV[help.severity]||SEVLV.high)[0].toLowerCase()+' · '+safeText(help.category||help.description||''):(fresh?'Ao vivo':'Sem sinal recente')}</span><br>Atualizado ${tvAgo(l.updated_at)}${l.speed!=null?'<br>Velocidade: '+Math.round(l.speed*3.6)+' km/h':''}${l.accuracy?'<br>Precisão: ±'+Math.round(l.accuracy)+' m':''}<br><a href="${gmaps(l.lat,l.lng)}" target="_blank" rel="noopener noreferrer">Abrir no Google Maps</a></div>`;
+    const ll=[l.lat,l.lng];let mk=LM.markers[l.member_id];
+    if(mk){mk.setLatLng(ll);mk.setIcon(icon);mk.getPopup()&&mk.getPopup().setContent(pop);}
+    else{mk=L.marker(ll,{icon}).addTo(LM.map).bindPopup(pop);LM.markers[l.member_id]=mk;}
+    const tr=LM.trails[l.member_id]=LM.trails[l.member_id]||{pts:[],line:null},lp=tr.pts[tr.pts.length-1];
+    if(!lp||lp[0]!==l.lat||lp[1]!==l.lng){tr.pts.push(ll);if(tr.pts.length>40)tr.pts.shift();}
+    if(tr.pts.length>1){if(tr.line)tr.line.setLatLngs(tr.pts);else tr.line=L.polyline(tr.pts,{color:col,weight:3,opacity:.6}).addTo(LM.map);tr.line.setStyle({color:col});}
+  });
+  Object.keys(LM.markers).forEach(id=>{if(!seen.has(id)){LM.map.removeLayer(LM.markers[id]);delete LM.markers[id];if(LM.trails[id]&&LM.trails[id].line)LM.map.removeLayer(LM.trails[id].line);delete LM.trails[id];}});
+  const c=$('lm-count');if(c)c.textContent=LM.locs.length?`${live} compartilhando ao vivo · ${LM.locs.length-live} sem sinal recente`:'Ninguém está compartilhando localização agora. Quando um integrante em viagem ativar, ele aparece aqui.';
+  if(!LM.fitted&&LM.locs.length)lmFit();
+}
+async function lmFocus(memberId){
+  setTab('dashadm');
+  for(let i=0;i<30&&!($('da-map-slot')&&LM.map&&LM.markers[memberId]);i++){await new Promise(r=>setTimeout(r,300));if(i===3)await lmUpdate();}
+  const mk=LM.markers[memberId];if(!mk)return;
+  $('da-map-slot').scrollIntoView({behavior:'smooth',block:'center'});LM.map.setView(mk.getLatLng(),16);mk.openPopup();
+}
+setInterval(()=>{const adm=$('admin-panel')&&!$('admin-panel').classList.contains('hidden-view'),vis=$('tab-dashadm')&&!$('tab-dashadm').classList.contains('hidden-view');if(adm&&vis&&LM.map&&document.visibilityState==='visible')lmUpdate();},10000);
+
+/* ───────── Painel Administrativo: Viagens e Pedidos de Ajuda ───────── */
+let atvTrips=[],atvEms=[],atvF={status:'',q:''},ahF='open';
+let atvLoc=[];
+async function atvFetch(){
+  let a=await supabaseClient.from('travel_protocols').select(TP_SEL+',member_id,started_at,ended_at').order('departure_date',{ascending:false}).limit(300);
+  if(a.error)a=await supabaseClient.from('travel_protocols').select(TP_SEL+',member_id').order('departure_date',{ascending:false}).limit(300);
+  let b=null;
+  for(const extra of [',acknowledged_by,acknowledged_at,resolved_by,resolved_at,resolution_note,category,lat,lng',',acknowledged_by,acknowledged_at,resolved_by,resolved_at,resolution_note','']){
+    b=await supabaseClient.from('travel_emergencies').select(EM_SEL+extra).order('created_at',{ascending:false}).limit(300);if(!b.error)break;}
+  const c=await supabaseClient.from('travel_live_location').select('member_id,travel_id,lat,lng,accuracy,speed,updated_at');
+  atvLoc=c.error?[]:(c.data||[]);
+  return {a,b};
+}
+const mChips=m=>m?`<span class="text-[11px] text-gray-400">${safeText(gradeName(m.grade_id))} · ${safeText(divName(m.division_id))}</span>`:'';
+const mWa=m=>m?waBtn(m.whatsapp,'WhatsApp')+waBtn(m.emergency_whatsapp,'Emergência'):'';
+function atvHelpLines(tid){
+  return atvEms.filter(x=>x.travel_id===tid).map(x=>{const s=EMS[x.status]||EMS.active;return `<div class="tv-help" style="border-color:${s[1]}66"><div class="flex flex-wrap items-center justify-between gap-2">${tvBadge(EMS,x.status)}<span class="text-xs text-gray-500">${tvStamp(x.created_at)} · ${tvAgo(x.created_at)}</span></div><div class="text-sm text-gray-200 mt-1">${safeText(x.description||'')}</div></div>`;}).join('');
+}
+function atvRender(){
+  if(!$('atv-list'))return;
+  const c=k=>atvTrips.filter(t=>t.status===k).length,helpOpen=atvEms.filter(x=>x.status==='active').length;
+  const card=(k,n,l,col,ic)=>`<button type="button" class="row-card text-center atv-card ${atvF.status===k?'on':''}" data-atvf="${k}" style="border-top:3px solid ${col}"><div class="font-display text-2xl text-white"><i class="fa-solid ${ic} text-sm mr-2" style="color:${col}"></i>${n}</div><div class="text-[11px] text-gray-400 uppercase font-heading tracking-widest">${l}</div></button>`;
+  $('atv-cards').innerHTML=card('in_progress',c('in_progress'),'Em andamento','#22c55e','fa-motorcycle')+card('planned',c('planned'),'Planejadas','#3b82f6','fa-calendar-days')+card('completed',c('completed'),'Concluídas','#c9a84c','fa-flag-checkered')+card('cancelled',c('cancelled'),'Canceladas','#ef4444','fa-ban')+`<button type="button" class="row-card text-center atv-card" data-gohelp="1" style="border-top:3px solid #ef4444"><div class="font-display text-2xl text-white"><i class="fa-solid fa-triangle-exclamation text-sm mr-2" style="color:#ef4444"></i>${helpOpen}</div><div class="text-[11px] text-gray-400 uppercase font-heading tracking-widest">Ajuda ativa</div></button>`;
+  const q=atvF.q.trim().toLowerCase(),rank={in_progress:0,planned:1,completed:2,cancelled:3};
+  const list=atvTrips.filter(t=>(!atvF.status||t.status===atvF.status)&&(!q||(mName(t.member_id)+' '+(t.origin||'')+' '+t.destination).toLowerCase().includes(q)))
+    .sort((a,b)=>(rank[a.status]??9)-(rank[b.status]??9)||String(b.ended_at||b.departure_date).localeCompare(String(a.ended_at||a.departure_date)));
+  $('atv-list').innerHTML=list.map(t=>{
+    const s=TVS[t.status]||[t.status,'#999','fa-circle'],m=membersCache.find(x=>x.id===t.member_id),done=t.status==='completed';
+    const dur=done?tvDur(t.started_at,t.ended_at):'';
+    let extra='';
+    if(t.status==='in_progress')extra=`<div class="text-xs mt-2" style="color:#4ade80"><span class="tv-pulse" style="width:8px;height:8px;margin-right:6px"></span>${t.started_at?'Em viagem '+tvAgo(t.started_at)+' · iniciada em '+tvStamp(t.started_at):'Em viagem agora'}</div>`;
+    else if(false)extra='';
+    else if(done)extra=`<div class="text-xs mt-2" style="color:#e5c76b"><i class="fa-solid fa-flag-checkered mr-1"></i>Viagem concluída${t.ended_at?' em '+tvStamp(t.ended_at):''}${dur?' · duração '+dur:''}</div>`;
+    else if(t.status==='cancelled')extra='<div class="text-xs mt-2" style="color:#f87171"><i class="fa-solid fa-ban mr-1"></i>Viagem cancelada</div>';
+    return `<div class="row-card tv-trip ${t.status}" style="border-left:3px solid ${s[1]}"><div class="flex flex-wrap items-start justify-between gap-2"><div><div class="text-white font-medium">${safeText(mName(t.member_id))}</div>${mChips(m)}</div>${tvBadge(TVS,t.status)}</div><div class="text-sm text-gray-200 mt-2"><i class="fa-solid ${s[2]} mr-2" style="color:${s[1]}"></i>${tvRoute(t)}</div><div class="text-xs text-gray-400 mt-1">Ida: ${tvWhen(t.departure_date,t.departure_time)} · Volta: ${tvWhen(t.return_date,t.return_time)}</div>${t.route_notes?`<div class="text-xs text-gray-500 mt-1">${safeText(t.route_notes)}</div>`:''}${extra}${atvHelpLines(t.id)}<div class="tv-act">${mWa(m)}${t.status==='in_progress'&&atvLoc.some(l=>l.member_id===t.member_id)?`<button type="button" class="btn btn-secondary btn-sm" data-ahmap="${t.member_id}"><i class="fa-solid fa-location-dot mr-1" style="color:#22c55e"></i>Ver no mapa ao vivo</button>`:''}</div></div>`;}).join('')||'<p class="text-sm text-gray-400">Nenhuma viagem encontrada com esses filtros.</p>';
+}
+async function atvRefresh(){
+  const {a,b}=await atvFetch();
+  if(a.error){if($('adm-travel-body'))$('adm-travel-body').innerHTML='<div class="row-card"><p class="text-sm text-red-300">Não foi possível carregar os protocolos. Rode o arquivo viagem.sql no Supabase.</p></div>';return;}
+  atvTrips=a.data||[];atvEms=b.data||[];atvRender();ahRender();
+}
 async function loadAdmTravelPanel(){
   const body=$('adm-travel-body');
-  body.innerHTML='<p class="text-sm text-gray-400">Carregando protocolos de viagem...</p>';
-  const TPF='id,member_id,origin,destination,departure_date,departure_time,return_date,return_time,route_notes,status';
-  const {data,error}=await supabaseClient.from('travel_protocols').select(TPF).order('departure_date',{ascending:false}).limit(200);
-  if(error){body.innerHTML='<div class="row-card"><p class="text-sm text-red-300">Não foi possível carregar os protocolos. Rode o arquivo viagem.sql no Supabase.</p></div>';return;}
-  if(!data||!data.length){body.innerHTML='<p class="text-sm text-gray-400">Nenhum protocolo de viagem registrado ainda.</p>';return;}
-  const ST={planned:['Planejada','#3b82f6'],in_progress:['Em andamento','#22c55e'],completed:['Concluída','#9ca3af'],cancelled:['Cancelada','#ef4444']};
-  const rows=data.map(t=>{
-    const st=ST[t.status]||[t.status,'#999'];
-    const name=safeText(mName(t.member_id));
-    return `<div class="row-card"><div class="flex flex-wrap items-center justify-between gap-2 mb-2">
-      <div class="text-white font-medium">${name}</div>
-      <span class="tv-badge" style="color:${st[1]};border-color:${st[1]}">${st[0]}</span>
-    </div>
-    <div class="text-sm text-gray-200">${t.origin?safeText(t.origin)+' → ':''}${safeText(t.destination)}</div>
-    <div class="text-xs text-gray-400 mt-1">Ida: ${tvWhen(t.departure_date,t.departure_time)} · Volta: ${tvWhen(t.return_date,t.return_time)}</div>
-    ${t.route_notes?`<div class="text-xs text-gray-500 mt-1">${safeText(t.route_notes)}</div>`:''}</div>`;
-  }).join('');
-  const counts=Object.entries(ST).map(([k,[l,c]])=>{const n=data.filter(x=>x.status===k).length;return n?`<div class="row-card text-center" style="border-left:3px solid ${c}"><div class="font-display text-2xl text-white">${n}</div><div class="text-[11px] text-gray-400 uppercase font-heading tracking-widest">${l}</div></div>`:'';}).join('');
-  body.innerHTML=`<div class="mb-4"><h3 class="font-display text-white text-3xl tracking-widest uppercase">Protocolos de Viagem</h3><p class="text-sm text-gray-400 mt-1">Visualize e acompanhe as viagens registradas pelos integrantes.</p></div>
-  <div class="grid grid-cols-2 md:grid-cols-4 gap-2 mb-5">${counts}</div>
-  <div class="space-y-2">${rows}</div>`;
+  await ensureMembers();await loadRefs();
+  body.innerHTML=`<div class="mb-4"><h3 class="font-display text-white text-3xl tracking-widest uppercase">Protocolos de Viagem</h3><p class="text-sm text-gray-400 mt-1">Acompanhe as viagens dos integrantes. A tela atualiza sozinha a cada 20 segundos. Clique em um quadro para filtrar.</p></div>
+  <div id="atv-cards" class="grid grid-cols-2 md:grid-cols-5 gap-2 mb-4"></div>
+  <div class="grid md:grid-cols-3 gap-3 mb-4"><div><label class="block text-xs text-gray-300 mb-2" for="atv-status">Situação</label><select class="field" id="atv-status"><option value="">Todas</option>${Object.entries(TVS).map(([k,v])=>`<option value="${k}" ${atvF.status===k?'selected':''}>${v[0]}</option>`).join('')}</select></div><div class="md:col-span-2"><label class="block text-xs text-gray-300 mb-2" for="atv-q">Buscar integrante, origem ou destino</label><input class="field" id="atv-q" value="${safeText(atvF.q)}" placeholder="Digite para filtrar"></div></div>
+  <div id="atv-list" class="space-y-3"><p class="text-sm text-gray-400">Carregando protocolos de viagem...</p></div>`;
+  $('atv-status').addEventListener('change',e=>{atvF.status=e.target.value;atvRender();});
+  $('atv-q').addEventListener('input',e=>{atvF.q=e.target.value;atvRender();});
+  await atvRefresh();
 }
+$('adm-travel-body').addEventListener('click',e=>{
+  const f=e.target.closest('[data-atvf]');if(f){atvF.status=atvF.status===f.dataset.atvf?'':f.dataset.atvf;if($('atv-status'))$('atv-status').value=atvF.status;atvRender();return;}
+  const mp=e.target.closest('[data-ahmap]');if(mp){lmFocus(mp.dataset.ahmap);return;}
+  if(e.target.closest('[data-gohelp]'))setTab('adm-help');
+});
+
+/* Pedidos de ajuda (separado) */
+function ahRender(){
+  const box=$('ah-list');if(!box)return;
+  const c=k=>atvEms.filter(x=>x.status===k).length;
+  const card=(k,l,col,ic)=>`<button type="button" class="row-card text-center atv-card ${ahF===k?'on':''}" data-ahf="${k}" style="border-top:3px solid ${col}"><div class="font-display text-2xl text-white"><i class="fa-solid ${ic} text-sm mr-2" style="color:${col}"></i>${k==='open'?c('active')+c('acknowledged'):k==='resolved'?c('resolved'):atvEms.length}</div><div class="text-[11px] text-gray-400 uppercase font-heading tracking-widest">${l}</div></button>`;
+  $('ah-cards').innerHTML=card('open','Em aberto','#ef4444','fa-triangle-exclamation')+card('resolved','Resolvidos','#22c55e','fa-circle-check')+card('all','Todos','#9ca3af','fa-list');
+  const rank={active:0,acknowledged:1,resolved:2};
+  const list=atvEms.filter(x=>ahF==='all'||(ahF==='open'?x.status!=='resolved':x.status==='resolved')).sort((a,b)=>(rank[a.status]??9)-(rank[b.status]??9)||(sevRank(b.severity)-sevRank(a.severity))||String(b.created_at).localeCompare(String(a.created_at)));
+    box.innerHTML=list.map(x=>{
+    const s=EMS[x.status]||EMS.active,lv=SEVLV[x.severity]||SEVLV.high,m=membersCache.find(y=>y.id===x.member_id),t=atvTrips.find(y=>y.id===x.travel_id),lc=atvLoc.find(y=>y.member_id===x.member_id);
+    const ended=t&&['completed','cancelled'].includes(t.status);
+    let hist=`<div class="text-xs text-gray-400">Solicitado em ${tvStamp(x.created_at)} · ${tvAgo(x.created_at)}</div>`;
+    if(x.acknowledged_at)hist+=`<div class="text-xs text-gray-400">Atendimento assumido${x.acknowledged_by?' por '+safeText(mName(x.acknowledged_by)):''} em ${tvStamp(x.acknowledged_at)}</div>`;
+    if(x.resolved_at)hist+=`<div class="text-xs text-gray-400">Resolvido${x.resolved_by?' por '+safeText(mName(x.resolved_by)):''} em ${tvStamp(x.resolved_at)}${x.resolution_note?' · '+safeText(x.resolution_note):''}</div>`;
+    const btns=(x.status==='active'?`<button type="button" class="btn btn-primary btn-sm" data-ah="ack" data-id="${x.id}"><i class="fa-solid fa-hand-holding-heart mr-1"></i>Assumir atendimento</button>`:'')+(x.status!=='resolved'?`<button type="button" class="btn btn-secondary btn-sm" data-ah="resolve" data-id="${x.id}"><i class="fa-solid fa-circle-check mr-1"></i>Marcar como resolvido</button>`:`<button type="button" class="btn btn-secondary btn-sm" data-ah="reopen" data-id="${x.id}">Reabrir</button>`);
+    return `<div class="row-card tv-trip" style="border-left:4px solid ${x.status==='resolved'?'#22c55e':lv[1]}"><div class="flex flex-wrap items-start justify-between gap-2"><div><div class="text-white font-medium">${safeText(mName(x.member_id))}</div>${mChips(m)}</div><div class="text-right"><span class="tv-badge" style="color:${lv[1]};border-color:${lv[1]}">● ${lv[0]}</span> ${tvBadge(EMS,x.status)}</div></div><div class="tv-help" style="border-color:${lv[1]}66">${x.category?`<div class="text-[11px] uppercase font-heading tracking-widest" style="color:${lv[1]}">${safeText(x.category)}</div>`:''}<div class="text-sm text-gray-100">${safeText(x.description||'—')}</div></div>${t?`<div class="text-xs text-gray-400 mt-2"><i class="fa-solid ${(TVS[t.status]||[])[2]||'fa-route'} mr-1" style="color:${(TVS[t.status]||[])[1]||'#999'}"></i>Viagem ${tvRoute(t)} · ${(TVS[t.status]||[t.status])[0]}${ended&&x.status!=='resolved'?' <span style="color:#fcd34d">(viagem já encerrada: confirme se o pedido pode ser resolvido)</span>':''}</div>`:`<div class="text-xs text-gray-400 mt-2">Local: ${safeText(x.location_text||'—')}</div>`}<div class="mt-2">${hist}</div><div class="tv-act">${mWa(m)}${lc?`<button type="button" class="btn btn-secondary btn-sm" data-ahmap="${x.member_id}"><i class="fa-solid fa-location-dot mr-1" style="color:#22c55e"></i>Ver no mapa ao vivo (${tvAgo(lc.updated_at)})</button><a class="btn btn-secondary btn-sm" href="${gmaps(lc.lat,lc.lng)}" target="_blank" rel="noopener noreferrer">Google Maps</a>`:(x.lat!=null?`<a class="btn btn-secondary btn-sm" href="${gmaps(x.lat,x.lng)}" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-location-dot mr-1"></i>Local enviado no pedido</a>`:'')}${btns}</div></div>`;}).join('')||`<p class="text-sm text-gray-400">${ahF==='open'?'Nenhum pedido de ajuda em aberto. Tudo certo por aqui.':'Nenhum pedido encontrado.'}</p>`;
+}
+async function loadAdmHelpPanel(){
+  const body=$('adm-help-body');
+  await ensureMembers();await loadRefs();
+  body.innerHTML=`<div class="mb-4"><h3 class="font-display text-white text-3xl tracking-widest uppercase">Pedidos de Ajuda</h3><p class="text-sm text-gray-400 mt-1">Pedidos de SOS enviados pelos integrantes em viagem. Ao assumir ou resolver, o integrante vê o andamento no painel dele. Atualiza sozinho a cada 20 segundos.</p></div><div id="ah-cards" class="grid grid-cols-3 gap-2 mb-4"></div><div id="ah-list" class="space-y-3"><p class="text-sm text-gray-400">Carregando pedidos de ajuda...</p></div>`;
+  await atvRefresh();
+}
+$('adm-help-body').addEventListener('click',async e=>{
+  const f=e.target.closest('[data-ahf]');if(f){ahF=f.dataset.ahf;ahRender();return;}
+  const mp=e.target.closest('[data-ahmap]');if(mp){lmFocus(mp.dataset.ahmap);return;}
+  const b=e.target.closest('[data-ah]');if(!b)return;
+  const id=Number(b.dataset.id),act=b.dataset.ah,x=atvEms.find(y=>y.id===id);if(!x)return;
+  const T=()=>supabaseClient.from('travel_emergencies'),now=new Date().toISOString(),nm=mName(x.member_id);let upd,fb,type,desc;
+  if(act==='ack'){upd={status:'acknowledged',acknowledged_by:me.id,acknowledged_at:now};fb={status:'acknowledged'};type='help_acknowledged';desc='Ajuda assumida: '+nm;}
+  else if(act==='resolve'){const note=await uiPrompt('Observação sobre o atendimento (opcional):');if(note===null)return;upd={status:'resolved',resolved_by:me.id,resolved_at:now,resolution_note:note.trim()||null};fb={status:'resolved'};type='help_resolved';desc='Ajuda resolvida: '+nm;}
+  else{if(!await uiConfirm('Reabrir este pedido de ajuda?'))return;upd={status:'active',acknowledged_by:null,acknowledged_at:null,resolved_by:null,resolved_at:null};fb={status:'active'};type='help_requested';desc='Pedido de ajuda reaberto: '+nm;}
+  let r=await T().update(upd).eq('id',id).select('id');if(r.error)r=await T().update(fb).eq('id',id).select('id');
+  if(r.error){uiAlert('Não foi possível atualizar: '+r.error.message);return;}
+  if(!(r.data||[]).length){uiAlert('Sem permissão para alterar este pedido. Rode o arquivo viagem_melhorias.sql no Supabase.');return;}
+  await supabaseClient.from('activity_log').insert({actor_id:me.id,subject_id:x.member_id,action_type:type,description:desc,payload:{emergency_id:id,travel_id:x.travel_id}});
+  await atvRefresh();refreshHelpBadge();
+});
+async function refreshHelpBadge(){
+  const bd=$('help-badge');if(!bd)return;
+  const r=await supabaseClient.from('travel_emergencies').select('id',{count:'exact',head:true}).eq('status','active');
+  const n=r.error?0:(r.count||0);bd.textContent=n;bd.classList.toggle('hidden-view',!n);
+}
+setInterval(()=>{
+  if(document.visibilityState!=='visible')return;
+  const tp=$('travel-panel');if(typeof me!=='undefined'&&me&&tp&&tp.offsetParent!==null)tvRefresh();
+  const adm=$('admin-panel')&&!$('admin-panel').classList.contains('hidden-view');if(!adm)return;
+  refreshHelpBadge();
+  if(!$('tab-adm-travel').classList.contains('hidden-view')&&$('atv-list'))atvRefresh();
+  if(!$('tab-adm-help').classList.contains('hidden-view')&&$('ah-list'))atvRefresh();
+},20000);
+setTimeout(refreshHelpBadge,3000);
 setInterval(()=>{if(window._daExtra&&$('tab-dashadm')&&!$('tab-dashadm').classList.contains('hidden-view')&&!$('admin-panel').classList.contains('hidden-view'))window._daExtra();},20000);
 supabaseClient?.auth.onAuthStateChange((event,session)=>{if(event==='SIGNED_OUT'){showView('login-view');} });
 checkSession();
