@@ -331,7 +331,7 @@
         .lm-wrap{margin-top:4px}.lm-head{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;margin-bottom:6px}.lm-legend{display:flex;flex-wrap:wrap;gap:12px;font-size:11px;color:#a1a1aa}.lm-legend i{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:5px}
         #live-map{height:380px;border-radius:12px;border:1px solid #c9a84c66;margin-top:8px;background:#0c0c0e;z-index:0}.lm-pin{background:none;border:0}.lm-dot{width:34px;height:34px;border-radius:50%;border:3px solid #fff;color:#111;font:700 14px 'Oswald',sans-serif;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 8px rgba(0,0,0,.6)}.lm-dot.help{animation:lmPulse 1.4s infinite}@keyframes lmPulse{0%{box-shadow:0 0 0 0 color-mix(in srgb,var(--c) 70%,transparent)}100%{box-shadow:0 0 0 16px transparent}}.lm-pop{font-size:13px;line-height:1.5;color:#222}
         /* menu lateral acima da barra superior (corrige o empilhamento) */
-        body:has(#portal-view.mm-on:not(.hidden-view)) main{z-index:auto}#portal-view.mm-on{z-index:auto}
+        body:has(#portal-view:not(.hidden-view)) main{z-index:auto}#portal-view:not(.hidden-view){z-index:auto}
         #sb-backdrop{display:none;position:fixed;inset:0;z-index:55;background:rgba(0,0,0,.55)}
         @media(max-width:900px){body:not(.sb-min):has(#portal-view:not(.hidden-view)) #sb-backdrop{display:block}}
         /* janelas flutuantes: centralizadas, rolagem só dentro delas, fundo travado */
