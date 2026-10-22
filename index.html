@@ -330,6 +330,29 @@
         .br-foot{display:flex;justify-content:space-between;margin-top:8px}.br-foot button{background:none;border:0;color:#c9a84c;font-size:13px;cursor:pointer}
         .lm-wrap{margin-top:4px}.lm-head{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;margin-bottom:6px}.lm-legend{display:flex;flex-wrap:wrap;gap:12px;font-size:11px;color:#a1a1aa}.lm-legend i{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:5px}
         #live-map{height:380px;border-radius:12px;border:1px solid #c9a84c66;margin-top:8px;background:#0c0c0e;z-index:0}.lm-pin{background:none;border:0}.lm-dot{width:34px;height:34px;border-radius:50%;border:3px solid #fff;color:#111;font:700 14px 'Oswald',sans-serif;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 8px rgba(0,0,0,.6)}.lm-dot.help{animation:lmPulse 1.4s infinite}@keyframes lmPulse{0%{box-shadow:0 0 0 0 color-mix(in srgb,var(--c) 70%,transparent)}100%{box-shadow:0 0 0 16px transparent}}.lm-pop{font-size:13px;line-height:1.5;color:#222}
+        /* menu lateral acima da barra superior (corrige o empilhamento) */
+        body:has(#portal-view.mm-on:not(.hidden-view)) main{z-index:auto}#portal-view.mm-on{z-index:auto}
+        #sb-backdrop{display:none;position:fixed;inset:0;z-index:55;background:rgba(0,0,0,.55)}
+        @media(max-width:900px){body:not(.sb-min):has(#portal-view:not(.hidden-view)) #sb-backdrop{display:block}}
+        /* janelas flutuantes: centralizadas, rolagem só dentro delas, fundo travado */
+        html{scrollbar-gutter:stable}body.modal-lock{position:fixed;left:0;right:0;overflow:hidden}
+        #kpi-modal,#info-modal,#member-modal,#ui-dialog,#sos-dialog,#pop-modal{overscroll-behavior:contain}
+        .kpi-box{max-height:calc(100vh - 36px);max-height:calc(100dvh - 36px)}#kpi-body{overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch}
+        #info-modal{overflow:hidden!important;align-items:center}#info-modal .info-card{max-height:calc(100vh - 36px);max-height:calc(100dvh - 36px);overflow-y:auto;overscroll-behavior:contain;margin:0}
+        #member-modal:not(.hidden-view){display:flex;align-items:center;justify-content:center;overflow:hidden!important}#member-modal>.panel{width:100%;margin:0!important;max-height:calc(100vh - 32px);max-height:calc(100dvh - 32px);overflow-y:auto;overscroll-behavior:contain}
+        #sos-dialog{overflow:hidden!important}#sos-box{max-height:calc(100vh - 36px);max-height:calc(100dvh - 36px)}.ui-dlg-box{max-height:calc(100dvh - 36px);overflow-y:auto;overscroll-behavior:contain}
+        #pop-modal{position:fixed;inset:0;z-index:450;background:rgba(0,0,0,.86);align-items:center;justify-content:center;padding:18px;overflow:hidden}#pop-modal:not(.hidden-view){display:flex}
+        .pop-box{position:relative;width:100%;max-width:520px;max-height:calc(100vh - 36px);max-height:calc(100dvh - 36px);overflow-y:auto;overscroll-behavior:contain;background:linear-gradient(180deg,#141418,#0c0c0e);border:1px solid #2b2b2f;border-top:3px solid #c9a84c;border-radius:14px;padding:26px 22px 22px;box-shadow:0 20px 60px rgba(0,0,0,.75);animation:kpiIn .2s ease;text-align:center}
+        #pop-modal.pop-photo .pop-box{background:none;border:0;box-shadow:none;max-width:min(92vw,760px);padding:34px 0 0}.pop-img{max-width:100%;max-height:76vh;max-height:76dvh;object-fit:contain;border-radius:12px;border:2px solid #c9a84c;background:#0c0c0e}.pop-cap{margin-top:10px;font-family:'Oswald',sans-serif;letter-spacing:.12em;text-transform:uppercase;color:#fff}
+        .pop-x{position:absolute;top:8px;right:10px;width:34px;height:34px;border-radius:50%;border:0;background:#1d1d22;color:#ddd;font-size:16px;cursor:pointer;z-index:2}.pop-x:hover{background:#c9a84c;color:#111}
+        .pop-sec{margin-top:16px;text-align:left}.pop-lab{font-size:11px;font-family:'Oswald',sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#c9a84c;margin-bottom:4px}.pop-sec p{margin:0;color:#d4d4d8;font-size:14px;line-height:1.6;white-space:pre-line;word-break:break-word}
+        .hon-click{cursor:pointer;border-radius:8px;transition:background .2s}.hon-click:hover,.hon-click:focus-visible{background:#ffffff10;outline:none}
+        #mp-avatar img,.dvp-av img,#mm-avatar img{cursor:zoom-in}
+        /* cabeçalho da divisão */
+        .dv-hero{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:18px;padding:20px 22px;margin-bottom:24px;border-radius:16px;border:1px solid #c9a84c66;background:linear-gradient(135deg,#1d1709,#0e0e11 62%);box-shadow:0 10px 30px rgba(0,0,0,.35)}
+        .dv-id{display:flex;align-items:center;gap:16px;min-width:0}.dv-badge{width:62px;height:62px;border-radius:16px;background:linear-gradient(145deg,#c9a84c,#8a6d1f);color:#111;display:flex;align-items:center;justify-content:center;font-size:26px;flex:none;box-shadow:0 6px 18px rgba(201,168,76,.25)}
+        .dv-kicker{font-family:'Oswald',sans-serif;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:#c9a84c}.dv-title{font-family:'Bebas Neue','Oswald',sans-serif;font-size:clamp(2rem,5vw,3rem);line-height:1;letter-spacing:.12em;color:#fff;text-transform:uppercase;overflow-wrap:anywhere}
+        .dv-stats{display:flex;flex-wrap:wrap;gap:10px}.dv-stat{min-width:104px;text-align:center;padding:10px 14px;border:1px solid #2b2b2f;border-radius:12px;background:#0c0c0e}.dv-stat b{display:block;font:700 26px 'Oswald',sans-serif;color:#fff;line-height:1.1}.dv-stat b i{font-size:15px;color:#c9a84c;margin-right:6px}.dv-stat small{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#a1a1aa}
         .org-grp{margin-bottom:10px}.org-tog{display:flex;width:100%;align-items:center;justify-content:space-between;gap:12px;padding:12px 16px;background:#141418;border:1px solid #c9a84c55;border-radius:10px;cursor:pointer;text-align:left;transition:border-color .2s,background .2s}.org-tog:hover,.org-tog:focus-visible{border-color:#c9a84c;background:#1a1a20;outline:none}.org-chev{color:#c9a84c;transition:transform .2s}.org-tog[aria-expanded=true] .org-chev{transform:rotate(180deg)}.org-body{margin-top:10px}
         .cmd-click{cursor:pointer;transition:border-color .2s,transform .2s}.cmd-click:hover,.cmd-click:focus-visible{border-color:#c9a84c!important;transform:translateY(-2px);outline:none}
         .dv-click{cursor:pointer;transition:border-color .2s,transform .2s}.dv-click:hover,.dv-click:focus-visible{border-color:#c9a84c;transform:translateY(-2px);outline:none}
@@ -409,6 +432,8 @@
   </div></nav>
   <div id="ui-dialog" class="hidden-view" role="alertdialog" aria-modal="true" aria-labelledby="ui-dlg-title" aria-describedby="ui-dlg-msg"><div class="ui-dlg-box"><div class="ui-dlg-head"><i id="ui-dlg-icon" class="fa-solid fa-circle-question" aria-hidden="true"></i><h3 id="ui-dlg-title">Confirmação</h3></div><div class="ui-dlg-body"><p id="ui-dlg-msg"></p><textarea id="ui-dlg-input" class="field hidden-view" rows="3" maxlength="500"></textarea></div><div class="ui-dlg-foot"><button type="button" class="btn btn-secondary" id="ui-dlg-cancel">Cancelar</button><button type="button" class="btn btn-primary" id="ui-dlg-ok">Confirmar</button></div></div></div>
   <div id="sos-dialog" class="hidden-view" role="dialog" aria-modal="true" aria-labelledby="sos-title"><div class="ui-dlg-box" id="sos-box"><div class="ui-dlg-head"><i id="sos-icon" class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i><h3 id="sos-title">Pedir ajuda</h3></div><div class="ui-dlg-body"><p id="sos-sub" style="margin-bottom:10px"></p><div id="sos-types" class="sos-types"></div><textarea id="sos-text" class="field" rows="3" maxlength="400" placeholder="Descreva o que aconteceu e onde você está (opcional)"></textarea><label class="sos-share"><input type="checkbox" id="sos-share" checked> Compartilhar minha localização em tempo real com o comando</label><p id="sos-msg" class="text-sm mt-2" style="color:#f87171"></p></div><div class="ui-dlg-foot"><button type="button" class="btn btn-secondary" id="sos-cancel">Cancelar</button><button type="button" class="btn" id="sos-send">Enviar pedido</button></div></div></div>
+  <div id="sb-backdrop" aria-hidden="true"></div>
+  <div id="pop-modal" class="hidden-view" role="dialog" aria-modal="true"><div class="pop-box"><button type="button" class="pop-x" id="pop-x" aria-label="Fechar"><i class="fa-solid fa-xmark"></i></button><div id="pop-body"></div></div></div>
   <div id="kpi-modal" class="hidden-view" role="dialog" aria-modal="true"><div class="kpi-box"><div class="kpi-head"><h3 id="kpi-title"></h3><button type="button" id="kpi-x" aria-label="Fechar"><i class="fa-solid fa-xmark"></i></button></div><div id="kpi-body"></div></div></div>
   <div id="info-modal" class="hidden-view" role="dialog" aria-modal="true" aria-labelledby="info-title">
     <div class="info-card hero"><button type="button" id="info-x" class="info-x" aria-label="Fechar"><i class="fa-solid fa-xmark"></i></button>
@@ -774,7 +799,7 @@ const fmtPhone=v=>{const d=digitsOf(v).slice(0,11);if(!d)return'';if(d.length<=2
 const bindMask=el=>el&&el.addEventListener('input',()=>{el.value=fmtPhone(el.value);});
 const validPhone=d=>!d||/^\d{10,11}$/.test(d);
 const initial=n=>(String(n||'?').trim()[0]||'?').toUpperCase();
-function setAvatar(el,url,name){el.textContent='';if(url&&/^https:\/\//.test(url)){const i=new Image();i.alt='Foto de perfil';i.referrerPolicy='no-referrer';i.className='w-full h-full object-cover';i.onerror=()=>{el.textContent=initial(name);};i.src=url;el.appendChild(i);}else el.textContent=initial(name);}
+function setAvatar(el,url,name){el.textContent='';if(url&&/^https:\/\//.test(url)){const i=new Image();i.alt='Foto de perfil';i.dataset.name=name||'';i.referrerPolicy='no-referrer';i.className='w-full h-full object-cover';i.onerror=()=>{el.textContent=initial(name);};i.src=url;el.appendChild(i);}else el.textContent=initial(name);}
 const gradesAsc=()=>gradesList.slice().reverse(); // CAMISETA → GRAU I (ordem de progressão)
 const gradeName=id=>gradesList.find(g=>g.id===id)?.name||'—';
 const gradeIdOf=rx=>gradesList.find(g=>rx.test(String(g.name).trim()))?.id??-1,G5=()=>gradeIdOf(/(^|\s)v$/i),G6=()=>gradeIdOf(/(^|\s)vi$/i),topGrade=()=>Math.min(1e9,...gradesList.map(x=>x.id));
@@ -1210,7 +1235,7 @@ async function loadMyRank(p){
 async function loadMyHonors(){
   const {data,error}=await supabaseClient.from('member_honors').select('awarded_on,reason,honor_types(name,description,emblem_url)').eq('member_id',me.id).order('awarded_on',{ascending:false});
   const box=$('mp-honors');if(error){box.innerHTML='<p class="text-sm text-red-300">Não foi possível carregar. Rode o fase8 no Supabase.</p>';return;}
-  box.innerHTML=(data||[]).length?`<div class="grid sm:grid-cols-2 gap-3">${data.map(h=>`<div class="row-card flex gap-3">${emblemHtml(h.honor_types?.emblem_url)}<div class="min-w-0"><div class="font-heading text-white uppercase">${safeText(h.honor_types?.name||'Honraria')}</div><div class="text-xs text-gold">${fmtDay(h.awarded_on)}</div>${h.honor_types?.description?`<div class="text-xs text-gray-400 mt-1">${safeText(h.honor_types.description)}</div>`:''}${h.reason?`<div class="text-xs text-gray-300 mt-1">Motivo: ${safeText(h.reason)}</div>`:''}</div></div>`).join('')}</div>`:'<p class="text-sm text-gray-400">Nenhuma honraria registrada até o momento.</p>';
+  box.innerHTML=(data||[]).length?`<div class="grid sm:grid-cols-2 gap-3">${data.map(h=>`<div class="row-card flex gap-3 hon-click" data-hon="${honReg({name:h.honor_types?.name,emblem_url:h.honor_types?.emblem_url,description:h.honor_types?.description,reason:h.reason,awarded_on:h.awarded_on})}" role="button" tabindex="0" title="Ver informações da honraria">${emblemHtml(h.honor_types?.emblem_url)}<div class="min-w-0"><div class="font-heading text-white uppercase">${safeText(h.honor_types?.name||'Honraria')}</div><div class="text-xs text-gold">${fmtDay(h.awarded_on)}</div>${h.honor_types?.description?`<div class="text-xs text-gray-400 mt-1">${safeText(h.honor_types.description)}</div>`:''}${h.reason?`<div class="text-xs text-gray-300 mt-1">Motivo: ${safeText(h.reason)}</div>`:''}</div></div>`).join('')}</div>`:'<p class="text-sm text-gray-400">Nenhuma honraria registrada até o momento.</p>';
 }
 
 /* Gerenciar Cargos */
@@ -1395,9 +1420,9 @@ async function openCommandProfile(memberId){
   if(error||!p){$('kpi-body').innerHTML='<p class="text-sm text-gray-300">Não foi possível carregar este perfil. O arquivo comando_regional_cargos.sql precisa ser rodado no Supabase.</p>';return;}
   const name=p.display_name||'Vago',digits=String(p.whatsapp||'').replace(/\D/g,'');
   const wa=digits.length>=10&&digits.length<=15?`<a href="https://wa.me/${digits}" target="_blank" rel="noopener noreferrer" class="text-gold">${safeText(fmtPhone(p.whatsapp))} <i class="fa-brands fa-whatsapp"></i></a>`:'<span class="text-gray-500">Não informado</span>';
-  const hon=(p.honors||[]).map(h=>`<div class="flex items-center gap-2 py-1">${emblemHtml(h.emblem_url,'w-8 h-8')}<span class="text-sm text-white">${safeText(h.name||'Honraria')}</span>${h.awarded_on?`<span class="text-xs text-gray-500 ml-auto">${fmtDay(h.awarded_on)}</span>`:''}</div>`).join('');
+  const hon=(p.honors||[]).map(h=>`<div class="flex items-center gap-2 py-1 px-1 hon-click" data-hon="${honReg(h)}" role="button" tabindex="0" title="Ver informações da honraria">${emblemHtml(h.emblem_url,'w-8 h-8')}<span class="text-sm text-white">${safeText(h.name||'Honraria')}</span>${h.awarded_on?`<span class="text-xs text-gray-500 ml-auto">${fmtDay(h.awarded_on)}</span>`:'<span class="ml-auto"></span>'}<i class="fa-solid fa-circle-info text-gray-500 text-xs"></i></div>`).join('');
   $('kpi-title').textContent=p.role_title||'Comando Regional';
-  $('kpi-body').innerHTML=`<div class="dvp-head"><div class="dvp-av">${p.photo_url&&/^https:\/\//.test(p.photo_url)?`<img src="${safeText(p.photo_url)}" alt="" referrerpolicy="no-referrer" onerror="this.remove()">`:safeText(name.trim().charAt(0).toUpperCase())}</div><div><div class="text-[11px] text-gold font-heading tracking-widest uppercase">${safeText(p.role_title||'')}</div><div class="font-display text-2xl text-white tracking-widest uppercase">${safeText(name)}</div></div></div>
+  $('kpi-body').innerHTML=`<div class="dvp-head"><div class="dvp-av">${p.photo_url&&/^https:\/\//.test(p.photo_url)?`<img src="${safeText(p.photo_url)}" alt="" referrerpolicy="no-referrer" data-name="${safeText(name)}" onerror="this.remove()">`:safeText(name.trim().charAt(0).toUpperCase())}</div><div><div class="text-[11px] text-gold font-heading tracking-widest uppercase">${safeText(p.role_title||'')}</div><div class="font-display text-2xl text-white tracking-widest uppercase">${safeText(name)}</div></div></div>
   ${p.description?`<div class="mb-3"><div class="text-[11px] text-gold font-heading tracking-widest uppercase mb-1">Sobre o cargo</div><p class="text-sm text-gray-300 leading-relaxed whitespace-pre-line">${safeText(p.description)}</p></div>`:''}
   ${p.member_id?`<div class="dvp-row"><span>Grau</span><span>${safeText(gradeName(p.grade_id))}</span></div>
   <div class="dvp-row"><span>Cargo ocupado</span><span>${safeText(p.cargo_id?cargoName(p.cargo_id):'Sem cargo')}</span></div>
@@ -1597,9 +1622,9 @@ function hideInfo(){$('info-modal').classList.add('hidden-view');document.body.s
 ['info-x','info-ok'].forEach(i=>$(i).addEventListener('click',hideInfo));$('info-open').addEventListener('click',()=>showInfo(true));
 $('info-modal').addEventListener('click',e=>{if(e.target.id==='info-modal')hideInfo();});document.addEventListener('keydown',e=>{if(e.key==='Escape')hideInfo();});
 (function(){const b=document.body,mob=()=>matchMedia('(max-width:900px)').matches;let v=null;try{v=localStorage.getItem('sbmin');}catch(e){}
-b.classList.toggle('sb-min',v==null?mob():v==='1');
-$('sb-toggle').addEventListener('click',()=>{const m=b.classList.toggle('sb-min');try{localStorage.setItem('sbmin',m?'1':'0');}catch(e){}});
-document.querySelectorAll('#member-side .tab-btn').forEach(x=>x.addEventListener('click',()=>{if(mob())b.classList.add('sb-min');}));})();
+b.classList.toggle('sb-min',mob()?true:v==='1');
+$('sb-toggle').addEventListener('click',()=>{const m=b.classList.toggle('sb-min');if(!mob()){try{localStorage.setItem('sbmin',m?'1':'0');}catch(e){}}});
+$('sb-backdrop').addEventListener('click',()=>b.classList.add('sb-min'));})();
 $('perfil-main').addEventListener('click',()=>{const w=$('perfil-subs'),o=!w.classList.contains('open');w.classList.toggle('open',o);$('perfil-main').setAttribute('aria-expanded',String(o));});
 document.querySelectorAll('[data-mside="home"]').forEach(b=>b.addEventListener('click',()=>{$('perfil-subs').classList.remove('open');$('perfil-main').setAttribute('aria-expanded','false');}));
 async function loadDivisionPanel(){
@@ -1618,11 +1643,14 @@ async function loadDivisionPanel(){
   const cmdBy={};(cmdRows||[]).forEach(c=>{if(c.member_id)(cmdBy[c.member_id]=cmdBy[c.member_id]||[]).push(c.role_title);});
   const cmdHtml=cmdRows===null?'<p class="text-sm text-gray-400">O arquivo comando_divisao.sql precisa ser rodado no Supabase para mostrar o comando.</p>':(cmdRows.length?cmdRows.map(c=>{const ic=/^fa-[a-z0-9-]+$/.test(c.icon||'')?c.icon:'fa-user';return c.member_id&&c.display_name?`<div class="dv-card cmd dv-click" data-mid="${safeText(c.member_id)}" role="button" tabindex="0" title="Ver perfil">${av(c.display_name,c.photo_url)}<div style="min-width:0"><div class="dv-role"><i class="fa-solid ${ic}" style="margin-right:4px"></i>${safeText(c.role_title)}</div><div class="dv-name">${safeText(c.display_name)}</div><div class="dv-sub">${safeText(gradeName(c.grade_id))}</div></div></div>`:`<div class="dv-card cmd" style="opacity:.55"><div class="dv-av"><i class="fa-solid ${ic}"></i></div><div><div class="dv-role">${safeText(c.role_title)}</div><div class="dv-sub">Vago</div></div></div>`;}).join(''):'<p class="text-sm text-gray-400">O comando desta divisão ainda não foi definido pela administração.</p>');
   const sorted=list.slice().sort((a,b)=>(a.display_name||'').localeCompare(b.display_name||'','pt-BR'));
-  const memHtml=sorted.map(m=>`<div class="dv-card dv-click" data-mid="${safeText(m.id)}" role="button" tabindex="0" title="Ver perfil">${av(m.display_name,m.photo_url)}<div style="min-width:0"><div class="dv-name">${safeText(m.display_name||'—')}</div><div class="dv-sub">${safeText(gradeName(m.grade_id))}</div></div>${cmdBy[m.id]?`<span class="dv-tag">${safeText(cmdBy[m.id].join(' / '))}</span>`:''}</div>`).join('');
+  const rest=sorted.filter(m=>!cmdBy[m.id]);
+  const memHtml=rest.map(m=>`<div class="dv-card dv-click" data-mid="${safeText(m.id)}" role="button" tabindex="0" title="Ver perfil">${av(m.display_name,m.photo_url)}<div style="min-width:0"><div class="dv-name">${safeText(m.display_name||'—')}</div><div class="dv-sub">${safeText(gradeName(m.grade_id))}</div></div></div>`).join('');
   const hint=(!viaRpc&&list.length<=1)?'<p class="text-xs text-gray-500 mt-3">Se faltarem integrantes, rode o arquivo divisao.sql no Supabase para liberar a lista da sua divisão.</p>':'';
-  body.innerHTML=`<div class="mb-5"><h3 class="font-display text-white text-3xl tracking-widest uppercase">${safeText(divName(p.division_id))}</h3><p class="text-sm text-gray-400">Sua divisão · ${list.length} integrante${list.length===1?'':'s'}</p></div>
+  const seats=cmdRows||[],filled=seats.filter(c=>c.member_id&&c.display_name).length,vagas=seats.length-filled;
+  const stat=(ic,n,l)=>`<div class="dv-stat"><b><i class="fa-solid ${ic}"></i>${n}</b><small>${l}</small></div>`;
+  body.innerHTML=`<div class="dv-hero"><div class="dv-id"><div class="dv-badge"><i class="fa-solid fa-people-group"></i></div><div style="min-width:0"><div class="dv-kicker">Sua divisão</div><h3 class="dv-title">${safeText(divName(p.division_id))}</h3></div></div><div class="dv-stats">${stat('fa-users',list.length,list.length===1?'Integrante':'Integrantes')}${cmdRows!==null&&seats.length?stat('fa-user-shield',`${filled}<span style="font-size:15px;color:#71717a">/${seats.length}</span>`,'No comando')+(vagas>0?stat('fa-user-plus',vagas,vagas===1?'Vaga no comando':'Vagas no comando'):''):''}</div></div>
   <h4 class="font-heading text-gold text-sm uppercase tracking-widest mb-3">Comando de Divisão</h4><div class="dv-grid mb-7">${cmdHtml}</div>
-  <h4 class="font-heading text-gold text-sm uppercase tracking-widest mb-3">Integrantes da divisão</h4><div class="dv-grid">${memHtml||'<p class="text-sm text-gray-400">Nenhum integrante encontrado.</p>'}</div>${hint}`;
+  <h4 class="font-heading text-gold text-sm uppercase tracking-widest mb-3">Demais integrantes <span class="text-gray-500">(${rest.length})</span></h4><div class="dv-grid">${memHtml||`<p class="text-sm text-gray-400">${list.length&&!rest.length?'Todos os integrantes desta divisão fazem parte do comando.':'Nenhum integrante encontrado.'}</p>`}</div>${hint}`;
 }
 document.querySelectorAll('[data-mside="divisao"]').forEach(b=>b.addEventListener('click',loadDivisionPanel));
 function tenureText(d){
@@ -1634,13 +1662,13 @@ async function openDivisionMember(id){
   const box=$('kpi-modal');$('kpi-title').textContent='Perfil do integrante';$('kpi-body').innerHTML='<p class="text-sm text-gray-400">Carregando perfil...</p>';box.classList.remove('hidden-view');
   const {data,error}=await supabaseClient.rpc('division_member_profile',{p_member:id});
   const p=Array.isArray(data)?data[0]:data;
-  if(error||!p){$('kpi-body').innerHTML='<p class="text-sm text-gray-300">Não foi possível carregar este perfil. O arquivo divisao_perfil.sql precisa ser rodado no Supabase.</p>';return;}
+  if(error||!p){$('kpi-body').innerHTML='<p class="text-sm text-gray-300">Não foi possível carregar este perfil. O arquivo comando_divisao.sql precisa ser rodado no Supabase.</p>';return;}
   const name=p.display_name||'—',digits=String(p.whatsapp||'').replace(/\D/g,'');
   const wa=digits.length>=10&&digits.length<=15?`<a href="https://wa.me/${digits}" target="_blank" rel="noopener noreferrer" class="text-gold">${safeText(fmtPhone(p.whatsapp))} <i class="fa-brands fa-whatsapp"></i></a>`:'<span class="text-gray-500">Não informado</span>';
   const bd=p.birth_date?String(p.birth_date).slice(0,10).split('-').reverse().slice(0,2).join('/'):'';
-  const hon=(p.honors||[]).map(h=>`<div class="flex items-center gap-2 py-1">${emblemHtml(h.emblem_url,'w-8 h-8')}<span class="text-sm text-white">${safeText(h.name||'Honraria')}</span>${h.awarded_on?`<span class="text-xs text-gray-500 ml-auto">${fmtDay(h.awarded_on)}</span>`:''}</div>`).join('');
+  const hon=(p.honors||[]).map(h=>`<div class="flex items-center gap-2 py-1 px-1 hon-click" data-hon="${honReg(h)}" role="button" tabindex="0" title="Ver informações da honraria">${emblemHtml(h.emblem_url,'w-8 h-8')}<span class="text-sm text-white">${safeText(h.name||'Honraria')}</span>${h.awarded_on?`<span class="text-xs text-gray-500 ml-auto">${fmtDay(h.awarded_on)}</span>`:'<span class="ml-auto"></span>'}<i class="fa-solid fa-circle-info text-gray-500 text-xs"></i></div>`).join('');
   $('kpi-title').textContent=name;
-  $('kpi-body').innerHTML=`<div class="dvp-head"><div class="dvp-av">${p.photo_url&&/^https:\/\//.test(p.photo_url)?`<img src="${safeText(p.photo_url)}" alt="" referrerpolicy="no-referrer" onerror="this.remove()">`:safeText(name.trim().charAt(0).toUpperCase())}</div><div><div class="font-display text-2xl text-white tracking-widest uppercase">${safeText(name)}</div><div class="text-xs text-gold font-heading tracking-widest uppercase">${safeText(gradeName(p.grade_id))}${p.cargo_id?' · '+safeText(cargoName(p.cargo_id)):''}</div></div></div>
+  $('kpi-body').innerHTML=`<div class="dvp-head"><div class="dvp-av">${p.photo_url&&/^https:\/\//.test(p.photo_url)?`<img src="${safeText(p.photo_url)}" alt="" referrerpolicy="no-referrer" data-name="${safeText(name)}" onerror="this.remove()">`:safeText(name.trim().charAt(0).toUpperCase())}</div><div><div class="font-display text-2xl text-white tracking-widest uppercase">${safeText(name)}</div><div class="text-xs text-gold font-heading tracking-widest uppercase">${safeText(gradeName(p.grade_id))}${p.cargo_id?' · '+safeText(cargoName(p.cargo_id)):''}</div></div></div>
   <div class="dvp-row"><span>WhatsApp</span><span>${wa}</span></div>
   <div class="dvp-row"><span>Data de aniversário</span><span>${bd?safeText(bd):'Não informada'}</span></div>
   <div class="dvp-row"><span>Grau</span><span>${safeText(gradeName(p.grade_id))}</span></div>
@@ -1749,6 +1777,32 @@ document.addEventListener('click',e=>{
 });
 document.addEventListener('keydown',e=>{if(e.key==='Escape')brCloseCal();},true);
 document.addEventListener('reset',e=>{e.target.querySelectorAll('[data-br]').forEach(h=>{h.value='';});},true);
+
+/* ───────── Janelas flutuantes: trava a rolagem do fundo, honrarias e foto ampliada ───────── */
+const LOCK_IDS=['ui-dialog','sos-dialog','kpi-modal','info-modal','member-modal','pop-modal'];let lockY=null;
+function syncLock(){
+  const any=LOCK_IDS.some(id=>{const e=document.getElementById(id);return e&&!e.classList.contains('hidden-view');}),b=document.body;
+  if(any&&lockY===null){lockY=window.scrollY;b.style.top=(-lockY)+'px';b.classList.add('modal-lock');}
+  else if(!any&&lockY!==null){b.classList.remove('modal-lock');b.style.top='';window.scrollTo(0,lockY);lockY=null;}
+}
+{const mo=new MutationObserver(syncLock);LOCK_IDS.forEach(id=>{const e=document.getElementById(id);if(e)mo.observe(e,{attributes:true,attributeFilter:['class']});});}
+const HON=[];
+const honReg=h=>{HON.push(h);return HON.length-1;};
+function popOpen(html,photo){$('pop-body').innerHTML=html;$('pop-modal').classList.toggle('pop-photo',!!photo);$('pop-modal').classList.remove('hidden-view');$('pop-x').focus();}
+function popClose(){$('pop-modal').classList.add('hidden-view');$('pop-body').innerHTML='';}
+function popHonor(h){
+  if(!h)return;const dt=h.awarded_on?fmtDay(String(h.awarded_on).slice(0,10)):'';
+  popOpen(`<div>${emblemHtml(h.emblem_url,'w-32 h-32')}<div class="font-display text-white text-2xl tracking-widest uppercase mt-3">${safeText(h.name||'Honraria')}</div>${dt?`<div class="text-xs text-gold font-heading tracking-widest uppercase mt-1">Concedida em ${dt}</div>`:''}</div>${h.reason?`<div class="pop-sec"><div class="pop-lab">Motivo da concessão</div><p>${safeText(h.reason)}</p></div>`:''}<div class="pop-sec"><div class="pop-lab">Sobre a honraria</div><p>${h.description?safeText(h.description):'<span style="color:#71717a">Nenhuma informação cadastrada para esta honraria.</span>'}</p></div>`,false);
+}
+function popPhoto(url,name){popOpen(`<img class="pop-img" src="${safeText(url)}" alt="${safeText(name||'Foto de perfil')}" referrerpolicy="no-referrer">${name?`<div class="pop-cap">${safeText(name)}</div>`:''}`,true);}
+$('pop-x').addEventListener('click',popClose);
+$('pop-modal').addEventListener('click',e=>{if(e.target.id==='pop-modal')popClose();});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!$('pop-modal').classList.contains('hidden-view')){e.stopImmediatePropagation();popClose();}},true);
+document.addEventListener('click',e=>{
+  const h=e.target.closest('[data-hon]');if(h){popHonor(HON[+h.dataset.hon]);return;}
+  const im=e.target.closest('#mp-avatar img,.dvp-av img,#mm-avatar img');if(im)popPhoto(im.currentSrc||im.src,im.dataset.name||'');
+});
+document.addEventListener('keydown',e=>{if(e.key!=='Enter'&&e.key!==' ')return;const h=e.target.closest&&e.target.closest('[data-hon]');if(h){e.preventDefault();popHonor(HON[+h.dataset.hon]);}});
 
 const closeKpi=()=>$('kpi-modal').classList.add('hidden-view');$('kpi-x').addEventListener('click',closeKpi);$('kpi-modal').addEventListener('click',e=>{if(e.target.id==='kpi-modal')closeKpi();});document.addEventListener('keydown',e=>{if(e.key==='Escape')closeKpi();});
 document.querySelectorAll('#admin-panel .grp').forEach(b=>b.addEventListener('click',()=>{const w=b.nextElementSibling,o=!w.classList.contains('open');w.classList.toggle('open',o);b.setAttribute('aria-expanded',String(o));}));
