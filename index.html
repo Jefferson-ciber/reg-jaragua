@@ -1938,13 +1938,14 @@ $('sos-dialog').addEventListener('click',e=>{if(e.target.id==='sos-dialog')sosCl
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&sosCtx)sosClose();});
 
 /* ───────── Localização em tempo real do integrante ───────── */
-const geo={watch:null,beat:null,trip:null,last:0,sent:null,pos:null,state:'off',msg:'',wake:null,okAt:0,test:'',testErr:false};
+const geo={watch:null,beat:null,trip:null,last:0,sent:null,pos:null,state:'off',msg:'',wake:null,okAt:0,test:'',testErr:false,noState:false};
 const geoDist=(a,b)=>{const R=6371000,r=x=>x*Math.PI/180,dl=r(b.latitude-a.latitude),dn=r(b.longitude-a.longitude),q=Math.sin(dl/2)**2+Math.cos(r(a.latitude))*Math.cos(r(b.latitude))*Math.sin(dn/2)**2;return 2*R*Math.asin(Math.sqrt(q));};
 const geoErrMsg=e=>e&&e.code===1?'Permissão negada. Libere a localização nas configurações do navegador para este site.':e&&e.code===2?'Não foi possível obter a posição (sem sinal de GPS).':e&&e.code===3?'O GPS demorou para responder. Tentando de novo...':'Erro ao obter a localização.';
 function geoSet(state,msg){geo.state=state;geo.msg=msg||'';geoUi();}
 function geoStatusHtml(){
   const t=geo.test?`<div class="mt-1" style="color:${geo.testErr?'#fca5a5':'#93c5fd'}">${safeText(geo.test)}</div>`:'';
-  return geoStatusMain()+t;
+  const w=geo.state==='on'?(geo.wake?'<div class="mt-1 text-gray-400"><i class="fa-solid fa-mobile-screen mr-1"></i>Tela mantida ligada enquanto esta página estiver aberta.</div>':'<div class="mt-1" style="color:#fcd34d"><i class="fa-solid fa-triangle-exclamation mr-1"></i>Este navegador não conseguiu manter a tela ligada: deixe a tela acesa e esta página aberta.</div>'):'';
+  return geoStatusMain()+w+t;
 }
 function geoStatusMain(){
   if(geo.state==='on'){const p=geo.pos;return `<span style="color:#4ade80"><span class="tv-pulse" style="width:8px;height:8px;margin-right:6px"></span>Compartilhando ao vivo${geo.okAt?' · enviado '+tvAgo(new Date(geo.okAt)):''}${p&&p.accuracy?' · precisão ±'+Math.round(p.accuracy)+' m':''}</span>${p?` · <a class="underline" href="${gmaps(p.latitude,p.longitude)}" target="_blank" rel="noopener noreferrer">ver no Google Maps</a>`:''}`;}
@@ -1954,21 +1955,35 @@ function geoStatusMain(){
 }
 function geoBoxHtml(){
   const on=geo.state==='on'||geo.state==='starting';
-  return `<div class="geo-box"><div class="font-heading text-xs uppercase tracking-widest" style="color:#60a5fa"><i class="fa-solid fa-location-crosshairs mr-1"></i>Localização ao vivo</div><div class="text-xs mt-1" id="geo-status">${geoStatusHtml()}</div><div class="tv-act" style="margin-top:8px"><button type="button" class="btn ${on?'btn-secondary':'btn-primary'} btn-sm" data-geo="toggle" id="geo-toggle">${on?'Parar de compartilhar':'Compartilhar minha localização'}</button><button type="button" class="btn btn-secondary btn-sm" data-geo="test">Testar GPS</button></div><div class="text-[11px] text-gray-500 mt-2">Só o comando vê. Mantenha esta página aberta durante a viagem. Encerra sozinho ao concluir a viagem.</div></div>`;
+  return `<div class="geo-box"><div class="font-heading text-xs uppercase tracking-widest" style="color:#60a5fa"><i class="fa-solid fa-location-crosshairs mr-1"></i>Localização ao vivo</div><div class="text-xs mt-1" id="geo-status">${geoStatusHtml()}</div><div class="tv-act" style="margin-top:8px"><button type="button" class="btn ${on?'btn-secondary':'btn-primary'} btn-sm" data-geo="toggle" id="geo-toggle">${on?'Parar de compartilhar':'Compartilhar minha localização'}</button><button type="button" class="btn btn-secondary btn-sm" data-geo="test">Testar GPS</button></div><div class="text-[11px] text-gray-500 mt-2">Só o comando vê. O celular só envia a posição com <b>esta página aberta e a tela ligada</b>: se você minimizar ou apagar a tela, o envio pausa (o comando vê “app minimizado”) e volta sozinho quando você reabrir. Dica: deixe o celular no suporte da moto com a tela acesa. Encerra sozinho ao concluir a viagem.</div></div>`;
 }
 function geoUi(){
   const s=$('geo-status');if(s)s.innerHTML=geoStatusHtml();
   const b=$('geo-toggle');if(b){const on=geo.state==='on'||geo.state==='starting';b.textContent=on?'Parar de compartilhar':'Compartilhar minha localização';b.classList.toggle('btn-primary',!on);b.classList.toggle('btn-secondary',on);}
 }
 async function geoWake(on){
-  try{if(on&&'wakeLock' in navigator&&!geo.wake){geo.wake=await navigator.wakeLock.request('screen');geo.wake.addEventListener('release',()=>{geo.wake=null;});}
+  try{if(on&&'wakeLock' in navigator&&!geo.wake){geo.wake=await navigator.wakeLock.request('screen');geo.wake.addEventListener('release',()=>{geo.wake=null;geoUi();});}
       if(!on&&geo.wake){await geo.wake.release();geo.wake=null;}}catch(_){}
+  geoUi();
 }
-document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible'&&geo.watch!==null)geoWake(true);});
+async function geoMark(state){
+  if(geo.noState||typeof me==='undefined'||!me)return;
+  const r=await supabaseClient.from('travel_live_location').update({app_state:state}).eq('member_id',me.id);
+  if(r.error&&/app_state|schema cache|column/i.test(r.error.message||''))geo.noState=true;
+}
+document.addEventListener('visibilitychange',async()=>{
+  if(geo.watch===null||typeof me==='undefined'||!me)return;
+  if(document.visibilityState==='hidden'){geoMark('background');return;}
+  geoWake(true);geoUi();
+  const c=(await geoOnce(8000))||geo.pos;
+  if(c){geo.pos={latitude:c.latitude,longitude:c.longitude,accuracy:c.accuracy};await geoSend(c);}else geoMark('active');
+});
 async function geoSend(c){
   geo.last=Date.now();geo.sent={latitude:c.latitude,longitude:c.longitude};
   const row={member_id:me.id,travel_id:geo.trip,lat:c.latitude,lng:c.longitude,accuracy:c.accuracy??null,speed:c.speed??null,heading:c.heading??null,updated_at:new Date().toISOString()};
-  const r=await supabaseClient.from('travel_live_location').upsert(row,{onConflict:'member_id'});
+  if(!geo.noState)row.app_state='active';
+  let r=await supabaseClient.from('travel_live_location').upsert(row,{onConflict:'member_id'});
+  if(r.error&&/app_state/i.test(r.error.message||'')){geo.noState=true;delete row.app_state;r=await supabaseClient.from('travel_live_location').upsert(row,{onConflict:'member_id'});}
   if(r.error){geoSet('error','Não foi possível enviar a localização'+(/relation|does not exist|schema cache/i.test(r.error.message||'')?'. Rode o arquivo viagem_localizacao.sql no Supabase.':': '+r.error.message));return false;}
   geo.okAt=Date.now();geoSet('on');return true;
 }
@@ -2033,7 +2048,7 @@ async function lmEnsure(){
   try{
     const L=await loadLeaflet();LM.L=L;
     LM.wrap=document.createElement('div');LM.wrap.className='lm-wrap';
-    LM.wrap.innerHTML='<div class="lm-head"><div class="font-heading text-xs uppercase tracking-widest" style="color:#c9a84c"><i class="fa-solid fa-location-dot mr-1"></i>Mapa ao vivo</div><div class="lm-legend"><span><i style="background:#22c55e"></i>Compartilhando</span><span><i style="background:#9ca3af"></i>Sem sinal recente</span><span><i style="background:#f59e0b"></i>Ajuda amarela</span><span><i style="background:#ef4444"></i>Emergência</span></div><button type="button" class="btn btn-secondary btn-sm" id="lm-center">Centralizar</button></div><div class="lm-count text-xs text-gray-400" id="lm-count"></div>';
+    LM.wrap.innerHTML='<div class="lm-head"><div class="font-heading text-xs uppercase tracking-widest" style="color:#c9a84c"><i class="fa-solid fa-location-dot mr-1"></i>Mapa ao vivo</div><div class="lm-legend"><span><i style="background:#22c55e"></i>Compartilhando</span><span><i style="background:#9ca3af"></i>Minimizado / sem sinal</span><span><i style="background:#f59e0b"></i>Ajuda amarela</span><span><i style="background:#ef4444"></i>Emergência</span></div><button type="button" class="btn btn-secondary btn-sm" id="lm-center">Centralizar</button></div><div class="lm-count text-xs text-gray-400" id="lm-count"></div>';
     LM.el=document.createElement('div');LM.el.id='live-map';LM.wrap.appendChild(LM.el);
     LM.map=L.map(LM.el,{zoomControl:true}).setView([-14.2,-51.9],4);
     L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'&copy; OpenStreetMap'}).addTo(LM.map);
@@ -2057,7 +2072,8 @@ async function lmAttach(tr,em){
 async function lmUpdate(){
   if(!LM.map||LM.busy)return;LM.busy=true;
   try{
-    const r=await supabaseClient.from('travel_live_location').select('member_id,travel_id,lat,lng,accuracy,speed,heading,updated_at');
+    let r=await supabaseClient.from('travel_live_location').select('member_id,travel_id,lat,lng,accuracy,speed,heading,updated_at,app_state');
+    if(r.error)r=await supabaseClient.from('travel_live_location').select('member_id,travel_id,lat,lng,accuracy,speed,heading,updated_at');
     if(r.error){const c=$('lm-count');if(c)c.textContent=/relation|does not exist|schema cache/i.test(r.error.message||'')?'Rode o arquivo viagem_localizacao.sql no Supabase para ativar o mapa.':'Mapa indisponível: '+r.error.message;return;}
     LM.locs=r.data||[];lmDraw();
   }finally{LM.busy=false;}
@@ -2066,12 +2082,12 @@ function lmDraw(){
   const L=LM.L,now=Date.now(),seen=new Set();let live=0;
   LM.locs.forEach(l=>{
     seen.add(l.member_id);
-    const age=now-new Date(l.updated_at).getTime(),fresh=age<90000,help=LM.em.filter(x=>x.member_id===l.member_id&&x.status!=='resolved').sort((a,b)=>sevRank(b.severity)-sevRank(a.severity))[0];
+    const age=now-new Date(l.updated_at).getTime(),bg=l.app_state==='background',fresh=age<90000&&!bg,help=LM.em.filter(x=>x.member_id===l.member_id&&x.status!=='resolved').sort((a,b)=>sevRank(b.severity)-sevRank(a.severity))[0];
     if(fresh)live++;
     let col=fresh?'#22c55e':'#9ca3af';if(help)col=(SEVLV[help.severity]||SEVLV.high)[1];
     const nm=mName(l.member_id),ini=safeText((nm||'?').trim().charAt(0).toUpperCase()),trip=LM.tr.find(t=>t.id===l.travel_id);
     const icon=L.divIcon({className:'lm-pin',html:`<div class="lm-dot${help?' help':''}" style="background:${col};--c:${col}">${ini}</div>`,iconSize:[34,34],iconAnchor:[17,17],popupAnchor:[0,-18]});
-    const pop=`<div class="lm-pop"><b>${safeText(nm)}</b>${trip?'<br>'+tvRoute(trip):''}<br><span style="color:${col}">${help?'Ajuda '+(SEVLV[help.severity]||SEVLV.high)[0].toLowerCase()+' · '+safeText(help.category||help.description||''):(fresh?'Ao vivo':'Sem sinal recente')}</span><br>Atualizado ${tvAgo(l.updated_at)}${l.speed!=null?'<br>Velocidade: '+Math.round(l.speed*3.6)+' km/h':''}${l.accuracy?'<br>Precisão: ±'+Math.round(l.accuracy)+' m':''}<br><a href="${gmaps(l.lat,l.lng)}" target="_blank" rel="noopener noreferrer">Abrir no Google Maps</a></div>`;
+    const pop=`<div class="lm-pop"><b>${safeText(nm)}</b>${trip?'<br>'+tvRoute(trip):''}<br><span style="color:${col}">${help?'Ajuda '+(SEVLV[help.severity]||SEVLV.high)[0].toLowerCase()+' · '+safeText(help.category||help.description||''):(fresh?'Ao vivo':(bg?'App minimizado ou tela apagada':'Sem sinal recente'))}</span><br>Atualizado ${tvAgo(l.updated_at)}${l.speed!=null?'<br>Velocidade: '+Math.round(l.speed*3.6)+' km/h':''}${l.accuracy?'<br>Precisão: ±'+Math.round(l.accuracy)+' m':''}<br><a href="${gmaps(l.lat,l.lng)}" target="_blank" rel="noopener noreferrer">Abrir no Google Maps</a></div>`;
     const ll=[l.lat,l.lng];let mk=LM.markers[l.member_id];
     if(mk){mk.setLatLng(ll);mk.setIcon(icon);mk.getPopup()&&mk.getPopup().setContent(pop);}
     else{mk=L.marker(ll,{icon}).addTo(LM.map).bindPopup(pop);LM.markers[l.member_id]=mk;}
@@ -2080,7 +2096,7 @@ function lmDraw(){
     if(tr.pts.length>1){if(tr.line)tr.line.setLatLngs(tr.pts);else tr.line=L.polyline(tr.pts,{color:col,weight:3,opacity:.6}).addTo(LM.map);tr.line.setStyle({color:col});}
   });
   Object.keys(LM.markers).forEach(id=>{if(!seen.has(id)){LM.map.removeLayer(LM.markers[id]);delete LM.markers[id];if(LM.trails[id]&&LM.trails[id].line)LM.map.removeLayer(LM.trails[id].line);delete LM.trails[id];}});
-  const c=$('lm-count');if(c)c.textContent=LM.locs.length?`${live} compartilhando ao vivo · ${LM.locs.length-live} sem sinal recente`:'Ninguém está compartilhando localização agora. Quando um integrante em viagem ativar, ele aparece aqui.';
+  const c=$('lm-count');if(c)c.textContent=LM.locs.length?`${live} compartilhando ao vivo · ${LM.locs.length-live} pausado(s) (app minimizado ou sem sinal)`:'Ninguém está compartilhando localização agora. Quando um integrante em viagem ativar, ele aparece aqui.';
   if(!LM.fitted&&LM.locs.length)lmFit();
 }
 async function lmFocus(memberId){
