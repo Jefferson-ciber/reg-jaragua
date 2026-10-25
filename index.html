@@ -377,6 +377,22 @@
         .rules-foot{text-align:center}
         .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
         @media(max-width:760px){.rules-grid{grid-template-columns:1fr;gap:16px}.rules-art{max-width:250px;margin:0 auto}.rules-scroll{padding:20px 16px 20px}.rules-shield{height:72px}.rules-skull{height:80%;right:-14%;opacity:.12}}
+        /* Insight */
+        #member-main>#insight-panel{display:none}#member-main.view-insight>#insight-panel{display:block}#member-main.view-insight>:not(#insight-panel){display:none!important}
+        #member-side #div-main[aria-expanded="true"] .chev{transform:rotate(-135deg)}
+        .ins-card{border:1px solid #2b2b2f;border-left:4px solid var(--c,#c9a84c);border-radius:12px;background:linear-gradient(135deg,#121216,#0c0c0e);padding:16px 18px}.ins-card.pending{background:linear-gradient(135deg,#1d1010,#0c0c0e)}.ins-card.closed{opacity:.88}
+        .ins-chip{display:inline-flex;align-items:center;gap:6px;padding:3px 10px;border-radius:999px;border:1px solid var(--c,#c9a84c);color:var(--c,#c9a84c);font:600 11px 'Oswald',sans-serif;letter-spacing:.1em;text-transform:uppercase;white-space:nowrap}
+        .ins-cd{margin-top:10px;font-size:13px;color:#d4d4d8}.ins-cd .cd-t{font-weight:600}.ins-bar{height:8px;border-radius:999px;background:#1d1d22;overflow:hidden;margin-top:6px}.ins-bar i{display:block;height:100%;width:100%;background:linear-gradient(90deg,#c9a84c,#e5c76b);transition:width 1s linear}
+        .ins-cd.near .cd-t{color:#fbbf24}.ins-cd.near .ins-bar i{background:linear-gradient(90deg,#f59e0b,#fbbf24)}.ins-cd.crit .cd-t{color:#f87171}.ins-cd.crit .ins-bar i{background:linear-gradient(90deg,#dc2626,#f87171)}.ins-cd.crit{animation:insPulse 1.6s infinite}.ins-cd.over .cd-t{color:#9ca3af}@keyframes insPulse{50%{opacity:.72}}
+        .ins-q,.ie-q{border:1px solid #2b2b2f;border-radius:12px;background:#0f0f12;padding:14px}.ins-qh{display:flex;gap:10px;align-items:flex-start;margin-bottom:10px}.ins-qb{padding-left:46px}@media(max-width:600px){.ins-qb{padding-left:0}}
+        .ins-opt{display:flex;gap:8px;align-items:flex-start;padding:6px 8px;border-radius:8px;cursor:pointer;color:#e5e5e5;font-size:14px}.ins-opt:hover{background:#ffffff0d}.ins-opt input{margin-top:3px;accent-color:#c9a84c}
+        .ins-note{border:1px solid var(--c,#c9a84c);border-radius:10px;background:#0c0c0ecc;padding:10px 14px;margin-top:12px;font-size:14px;color:#e5e5e5}
+        .ins-secs{display:flex;flex-wrap:wrap;gap:8px}.ins-sec{display:inline-flex;align-items:center;gap:8px;padding:8px 14px;border:1px solid #2b2b2f;border-radius:999px;background:#0f0f12;color:#cfcfd6;font-size:13px;cursor:pointer}.ins-sec:hover{border-color:#c9a84c}.ins-sec.on{background:linear-gradient(135deg,#d6b65a,#a8872f);color:#111;font-weight:600;border-color:#c9a84c}
+        .ins-tb{width:100%;border-collapse:collapse;font-size:13px}.ins-tb th{text-align:left;padding:8px 10px;border-bottom:1px solid #c9a84c66;color:#c9a84c;font:600 11px 'Oswald',sans-serif;letter-spacing:.12em;text-transform:uppercase;white-space:nowrap}.ins-tb td{padding:8px 10px;border-bottom:1px solid #2b2b2f;color:#e5e5e5;vertical-align:top}
+        .pbar{height:9px;border-radius:999px;background:#1d1d22;overflow:hidden;margin-top:8px}.pbar i{display:block;height:100%;border-radius:999px;transition:width .4s}
+        .rep-k{text-align:center;border:1px solid #2b2b2f;border-radius:10px;padding:8px}.rep-k b{display:block;font:700 24px 'Oswald',sans-serif;color:#fff}.rep-k span{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#a1a1aa}
+        #ins-print-root{display:none}
+        @media print{html,body.ins-printing{background:#fff!important}body.ins-printing{position:static!important;overflow:visible!important;padding:0!important;margin:0!important}body.ins-printing>*:not(#ins-print-root){display:none!important}body.ins-printing #ins-print-root{display:block!important;padding:8px 4px}#ins-print-root *{color:#000!important;background:transparent!important;border-color:#999!important;box-shadow:none!important;text-shadow:none!important}#ins-print-root .font-display{font-size:22px!important}#ins-print-root table{width:100%;border-collapse:collapse}#ins-print-root th,#ins-print-root td{padding:4px 6px;border-bottom:1px solid #999;text-align:left;font-size:12px}#ins-print-root .rep-k{display:inline-block;min-width:150px;margin-right:8px;border:1px solid #999}#ins-print-root tr{break-inside:avoid}.no-print{display:none!important}}
         .org-grp{margin-bottom:10px}.org-tog{display:flex;width:100%;align-items:center;justify-content:space-between;gap:12px;padding:12px 16px;background:#141418;border:1px solid #c9a84c55;border-radius:10px;cursor:pointer;text-align:left;transition:border-color .2s,background .2s}.org-tog:hover,.org-tog:focus-visible{border-color:#c9a84c;background:#1a1a20;outline:none}.org-chev{color:#c9a84c;transition:transform .2s}.org-tog[aria-expanded=true] .org-chev{transform:rotate(180deg)}.org-body{margin-top:10px}
         .cmd-click{cursor:pointer;transition:border-color .2s,transform .2s}.cmd-click:hover,.cmd-click:focus-visible{border-color:#c9a84c!important;transform:translateY(-2px);outline:none}
         .dv-click{cursor:pointer;transition:border-color .2s,transform .2s}.dv-click:hover,.dv-click:focus-visible{border-color:#c9a84c;transform:translateY(-2px);outline:none}
@@ -518,12 +534,17 @@
   <button type="button" class="tab-btn sub" role="tab" data-mside="perfil" data-pgo="addresses" aria-selected="false"><i class="fa-solid fa-house"></i>Endereços</button>
   <button type="button" class="tab-btn sub" role="tab" data-mside="perfil" data-pgo="qual" aria-selected="false"><i class="fa-solid fa-graduation-cap"></i>Profissão e qualificações</button>
 </div>
-<button type="button" class="tab-btn" role="tab" data-mside="divisao" aria-selected="false"><i class="fa-solid fa-people-group"></i>Divisão</button>
+<button type="button" class="tab-btn" id="div-main" role="tab" data-mside="divisao" aria-selected="false" aria-expanded="false" aria-controls="div-subs"><i class="fa-solid fa-people-group"></i>Divisão<span class="chev"></span></button>
+<div id="div-subs" class="sub-wrap">
+  <button type="button" class="tab-btn sub" role="tab" data-mside="divisao" aria-selected="false"><i class="fa-solid fa-users"></i>Minha divisão</button>
+  <button type="button" class="tab-btn sub" role="tab" data-mside="insight" aria-selected="false"><i class="fa-solid fa-lightbulb"></i>Insight<span id="ins-badge" class="nav-count hidden-view" aria-label="Insights pendentes">0</span></button>
+</div>
 <button type="button" class="tab-btn" role="tab" data-mside="travel" aria-selected="false"><i class="fa-solid fa-route"></i>Protocolo de Viagem</button>
 </div></aside><div id="member-main" class="space-y-10">
       <div class="flex flex-wrap items-end justify-between gap-4"><div><p class="text-xs text-gold font-heading tracking-widest uppercase mb-1">Área restrita</p><h2 class="font-display text-4xl tracking-widest">Bem-vindo ao Portal</h2><p id="welcome-text" class="text-sm text-gray-400 mt-2"></p></div><span id="role-badge" class="patch-badge"><i class="fa-solid fa-user-check"></i> Integrante autorizado</span></div>
       <section id="travel-panel" aria-live="polite"><div id="travel-body"></div></section>
       <section id="division-panel" aria-live="polite"><div id="division-body"></div></section>
+      <section id="insight-panel" aria-live="polite"><div id="insight-body"></div></section>
       <div id="perfil-home"></div>
       <section id="my-profile" class="panel p-5 md:p-6 space-y-5">
         <div class="flex flex-wrap items-center gap-4"><div id="mp-avatar" class="w-20 h-20 rounded-full overflow-hidden bg-[#c9a84c22] border border-[#c9a84c55] flex items-center justify-center font-display text-4xl text-gold shrink-0">?</div><div><p class="text-xs text-gold font-heading tracking-widest uppercase">Meu perfil</p><h3 id="mp-title" class="font-display text-3xl tracking-widest text-white">Meus dados</h3><div class="flex flex-wrap gap-2 mt-2"><span class="patch-badge"><i class="fa-solid fa-stairs"></i> <span id="mp-grade">—</span></span><span class="patch-badge"><i class="fa-solid fa-star"></i> <span id="mp-cargo">—</span></span><span class="patch-badge"><i class="fa-solid fa-location-dot"></i> <span id="mp-div">—</span></span><span class="patch-badge hidden-view" id="mp-dcmd-wrap"><i class="fa-solid fa-user-shield"></i> Comando de Divisão: <span id="mp-dcmd"></span></span><span class="patch-badge">Situação: <span id="mp-status">—</span></span><span class="patch-badge">Desde <span id="mp-since">—</span></span></div></div></div>
@@ -564,7 +585,7 @@
 <div role="tablist" aria-label="Seções do painel">
 <button type="button" class="tab-btn grp" aria-expanded="true"><i class="fa-solid fa-chart-pie"></i>Visão Geral<span class="chev"></span></button><div class="sub-wrap open"><button type="button" class="tab-btn sub" role="tab" data-tab="dashadm" aria-selected="false"><i class="fa-solid fa-gauge-high"></i>Dashboard</button><button type="button" class="tab-btn sub" role="tab" data-tab="perfil" aria-selected="false"><i class="fa-solid fa-id-card"></i>Meu Perfil</button><button type="button" class="tab-btn sub" role="tab" data-tab="content" aria-selected="true"><i class="fa-solid fa-bullhorn"></i>Comunicados</button><button type="button" class="tab-btn sub" role="tab" data-tab="dash" aria-selected="false"><i class="fa-solid fa-chart-column"></i>Indicadores</button></div>
 <button type="button" class="tab-btn grp" aria-expanded="false"><i class="fa-solid fa-users"></i>Integrantes<span class="chev"></span></button><div class="sub-wrap"><button type="button" class="tab-btn sub" role="tab" data-tab="members" aria-selected="false"><i class="fa-solid fa-users"></i>Todos os Integrantes</button><button type="button" class="tab-btn sub" role="tab" data-tab="access" aria-selected="false"><i class="fa-solid fa-user-plus"></i>Cadastrar Acesso</button><button type="button" class="tab-btn sub" role="tab" data-tab="cargos" aria-selected="false"><i class="fa-solid fa-user-tie"></i>Cargos e Funções</button><button type="button" class="tab-btn sub" role="tab" data-tab="honors" aria-selected="false"><i class="fa-solid fa-medal"></i>Honrarias</button></div>
-<button type="button" class="tab-btn grp" aria-expanded="false"><i class="fa-solid fa-sitemap"></i>Organização Regional<span class="chev"></span></button><div class="sub-wrap"><button type="button" class="tab-btn sub" role="tab" data-tab="org" aria-selected="false"><i class="fa-solid fa-sitemap"></i>Organização Regional</button><button type="button" class="tab-btn sub" role="tab" data-tab="comando" aria-selected="false"><i class="fa-solid fa-crown"></i>Comando Regional</button><button type="button" class="tab-btn sub" role="tab" data-tab="dcomando" aria-selected="false"><i class="fa-solid fa-user-shield"></i>Comando de Divisão</button><button type="button" class="tab-btn sub" role="tab" data-tab="divisions" aria-selected="false"><i class="fa-solid fa-location-dot"></i>Divisões</button></div>
+<button type="button" class="tab-btn grp" aria-expanded="false"><i class="fa-solid fa-sitemap"></i>Organização Regional<span class="chev"></span></button><div class="sub-wrap"><button type="button" class="tab-btn sub" role="tab" data-tab="org" aria-selected="false"><i class="fa-solid fa-sitemap"></i>Organização Regional</button><button type="button" class="tab-btn sub" role="tab" data-tab="comando" aria-selected="false"><i class="fa-solid fa-crown"></i>Comando Regional</button><button type="button" class="tab-btn sub" role="tab" data-tab="dcomando" aria-selected="false"><i class="fa-solid fa-user-shield"></i>Comando de Divisão</button><button type="button" class="tab-btn sub" role="tab" data-tab="divisions" aria-selected="false"><i class="fa-solid fa-location-dot"></i>Divisões</button><button type="button" class="tab-btn sub" role="tab" data-tab="insight" aria-selected="false"><i class="fa-solid fa-lightbulb"></i>Insight de Divisões</button></div>
 <button type="button" class="tab-btn grp" aria-expanded="false"><i class="fa-solid fa-calendar-check"></i>Eventos e Participação<span class="chev"></span></button><div class="sub-wrap"><button type="button" class="tab-btn sub" role="tab" data-tab="events" aria-selected="false"><i class="fa-solid fa-calendar-check"></i>Eventos</button></div>
 <button type="button" class="tab-btn grp" aria-expanded="false"><i class="fa-solid fa-route"></i>Viagens<span class="chev"></span></button><div class="sub-wrap"><button type="button" class="tab-btn sub" role="tab" data-tab="adm-travel" aria-selected="false"><i class="fa-solid fa-route"></i>Protocolos de Viagem</button><button type="button" class="tab-btn sub" role="tab" data-tab="adm-help" aria-selected="false"><i class="fa-solid fa-triangle-exclamation"></i>Pedidos de Ajuda<span id="help-badge" class="nav-count hidden-view">0</span></button></div>
 <button type="button" class="tab-btn grp" aria-expanded="false"><i class="fa-solid fa-gear"></i>Sistema<span class="chev"></span></button><div class="sub-wrap"><button type="button" class="tab-btn sub" role="tab" data-tab="config" aria-selected="false"><i class="fa-solid fa-sliders"></i>Configurações</button></div>
@@ -703,6 +724,7 @@
         </div>
 
         <div id="tab-adm-travel" class="hidden-view space-y-4" role="tabpanel"><div id="adm-travel-body"><p class="text-sm text-gray-400">Carregando protocolos de viagem...</p></div></div>
+        <div id="tab-insight" class="hidden-view space-y-4" role="tabpanel"><div id="ins-admin-body"><p class="text-sm text-gray-400">Carregando...</p></div></div>
         <div id="tab-adm-help" class="hidden-view space-y-4" role="tabpanel"><div id="adm-help-body"><p class="text-sm text-gray-400">Carregando pedidos de ajuda...</p></div></div>
 
         <div id="tab-config" class="hidden-view space-y-6" role="tabpanel">
@@ -790,7 +812,7 @@ $('create-user-form').addEventListener('submit',async e=>{e.preventDefault();con
 /* ───────── Painel do administrador ───────── */
 let me=null, adminItems=[];
 const fmtDate=(v)=>v?new Date(v).toLocaleDateString('pt-BR'):'';
-function setTab(name){document.querySelectorAll('[data-tab]').forEach(b=>b.setAttribute('aria-selected',String(b.dataset.tab===name)));['content','members','events','org','cargos','divisions','comando','dcomando','honors','perfil','dashadm','dash','config','access','adm-travel','adm-help'].forEach(t=>$('tab-'+t).classList.toggle('hidden-view',t!==name));if(name==='dashadm')renderDashAdm();if(name==='dash')refreshDash();if(name==='org')loadOrgTab();if(name==='cargos')loadCargosTab();if(name==='divisions')loadDivisionsTab();if(name==='comando')loadComandoTab();if(name==='dcomando')loadDcomandoTab();if(name==='honors')loadHonorsTab();if(name==='config')loadConfig();if(name==='adm-travel')loadAdmTravelPanel();if(name==='adm-help')loadAdmHelpPanel();}
+function setTab(name){document.querySelectorAll('[data-tab]').forEach(b=>b.setAttribute('aria-selected',String(b.dataset.tab===name)));['content','members','events','org','cargos','divisions','comando','dcomando','honors','perfil','dashadm','dash','config','access','adm-travel','adm-help','insight'].forEach(t=>$('tab-'+t).classList.toggle('hidden-view',t!==name));if(name==='dashadm')renderDashAdm();if(name==='dash')refreshDash();if(name==='org')loadOrgTab();if(name==='cargos')loadCargosTab();if(name==='divisions')loadDivisionsTab();if(name==='comando')loadComandoTab();if(name==='dcomando')loadDcomandoTab();if(name==='honors')loadHonorsTab();if(name==='config')loadConfig();if(name==='adm-travel')loadAdmTravelPanel();if(name==='adm-help')loadAdmHelpPanel();if(name==='insight')loadInsightAdmin();}
 document.querySelectorAll('[data-tab]').forEach(b=>b.addEventListener('click',()=>setTab(b.dataset.tab)));
 
 function resetContentForm(){$('content-form').reset();$('cc-id').value='';$('cc-order').value='100';$('cc-published').checked=true;$('cc-save').innerHTML='<i class="fa-solid fa-floppy-disk mr-2"></i>Publicar comunicado';$('cc-cancel').classList.add('hidden-view');}
@@ -1653,14 +1675,15 @@ function renderDashAdm(){
 function setMemberView(v){
   const mm=$('member-main');
   // Remove todas as classes de view
-  mm.classList.remove('view-home','view-perfil','view-divisao','view-travel');
+  mm.classList.remove('view-home','view-perfil','view-divisao','view-travel','view-insight');
   // Adiciona apenas a necessária
   if(v==='perfil') mm.classList.add('view-perfil');
   else if(v==='divisao') mm.classList.add('view-divisao');
   else if(v==='travel') mm.classList.add('view-travel');
+  else if(v==='insight') mm.classList.add('view-insight');
   else mm.classList.add('view-home'); // início: o CSS esconde #my-profile (só aparece em Meu Perfil)
   // Garante que my-profile esteja visível nas views onde deve aparecer
-  if(v!=='divisao'&&v!=='travel') $('my-profile').classList.remove('hidden-view');
+  if(v!=='divisao'&&v!=='travel'&&v!=='insight') $('my-profile').classList.remove('hidden-view');
 }
 document.querySelectorAll('[data-mside]').forEach(b=>b.addEventListener('click',()=>{
   const v=b.dataset.mside;
@@ -2232,6 +2255,457 @@ async function lmFocus(memberId){
   $('da-map-slot').scrollIntoView({behavior:'smooth',block:'center'});LM.map.setView(mk.getLatLng(),16);mk.openPopup();
 }
 setInterval(()=>{const adm=$('admin-panel')&&!$('admin-panel').classList.contains('hidden-view'),vis=$('tab-dashadm')&&!$('tab-dashadm').classList.contains('hidden-view');if(adm&&vis&&LM.map&&document.visibilityState==='visible')lmUpdate();},10000);
+
+/* ═════════════ INSIGHT (perguntas obrigatórias por divisão) ═════════════ */
+let insOffset=0;
+const insNow=()=>Date.now()+insOffset;
+const insSyncClock=sn=>{if(sn)insOffset=new Date(sn).getTime()-Date.now();};
+const p2=n=>String(n).padStart(2,'0');
+const insFmt=ts=>{if(!ts)return '—';const d=new Date(ts);return isNaN(d)?'—':`${p2(d.getDate())}/${p2(d.getMonth()+1)}/${d.getFullYear()} ${p2(d.getHours())}:${p2(d.getMinutes())}`;};
+const insPl=(n,s,p)=>`${n} ${n===1?s:p}`;
+function insSpan(ms){
+  const t=Math.max(0,Math.floor(ms/1000)),d=Math.floor(t/86400),h=Math.floor(t%86400/3600),m=Math.floor(t%3600/60),s=t%60,p=[];
+  if(d)p.push(insPl(d,'dia','dias'));
+  if(d||h)p.push(insPl(h,'hora','horas'));
+  if(t<3600){if(m)p.push(insPl(m,'minuto','minutos'));p.push(insPl(s,'segundo','segundos'));}
+  else p.push(insPl(m,'minuto','minutos'));
+  return p.length>1?p.slice(0,-1).join(', ')+' e '+p[p.length-1]:p[0];
+}
+const insPct=v=>v==null?'—':(Math.abs(v-Math.round(v))<1e-9?Math.round(v)+'%':v.toFixed(1).replace('.',',')+'%');
+async function insRpc(name,args){
+  const r=await supabaseClient.rpc(name,args||{});
+  if(r.error){const m=String(r.error.message||'');throw new Error(/could not find the function|schema cache|does not exist|relation/i.test(m)?'O módulo Insight ainda não foi instalado. Rode o arquivo insight.sql no Supabase.':m);}
+  return r.data;
+}
+/* contagem regressiva + barra de prazo (hora oficial do servidor) */
+function insCd(startIso,endIso,bar){
+  return `<div class="ins-cd" data-ins-start="${safeText(startIso)}" data-ins-end="${safeText(endIso)}"><span class="cd-t"></span>${bar===false?'':'<div class="ins-bar"><i class="cd-b"></i></div>'}</div>`;
+}
+function insTick(){
+  const now=insNow();
+  document.querySelectorAll('[data-ins-end]').forEach(el=>{
+    const end=new Date(el.dataset.insEnd).getTime(),start=new Date(el.dataset.insStart).getTime(),left=end-now,t=el.querySelector('.cd-t'),b=el.querySelector('.cd-b');
+    if(left<=0){t.textContent='Prazo encerrado';if(b)b.style.width='0%';el.classList.add('over');el.classList.remove('near','crit');if(!el.dataset.fired){el.dataset.fired='1';insExpired();}}
+    else{t.textContent='Prazo restante: '+insSpan(left);if(b)b.style.width=Math.max(0,Math.min(100,left/Math.max(1,end-start)*100)).toFixed(2)+'%';el.classList.remove('over');el.classList.toggle('crit',left<3600000);el.classList.toggle('near',left>=3600000&&left<86400000);}
+  });
+}
+setInterval(insTick,1000);
+let insExpT=null;
+function insExpired(){clearTimeout(insExpT);insExpT=setTimeout(()=>{const mp=$('insight-panel');if(mp&&mp.offsetParent!==null&&!insMemS.cur)loadInsightPanel(true);const ap=$('tab-insight');if(ap&&!ap.classList.contains('hidden-view'))insAdminRefresh();},1500);}
+
+/* ───────── Integrante ───────── */
+const INS_ST={pending:['Pendente','#ef4444','fa-circle-exclamation'],in_progress:['Em andamento','#3b82f6','fa-pen-to-square'],answered:['Respondido','#22c55e','fa-circle-check'],closed:['Encerrado','#9ca3af','fa-lock'],completed:['Concluído','#c9a84c','fa-flag-checkered']};
+const insChip=st=>{const s=INS_ST[st]||INS_ST.closed;return `<span class="ins-chip" style="--c:${s[1]}"><i class="fa-solid ${s[2]}"></i>${s[0]}</span>`;};
+let insMemS={items:[],cur:null};
+function insBadgeUpdate(){
+  const n=insMemS.items.filter(x=>x.status==='pending'||x.status==='in_progress').length,b=$('ins-badge');
+  if(b){b.textContent=n;b.classList.toggle('hidden-view',!n);}
+}
+async function insBadgeRefresh(){
+  if(typeof me==='undefined'||!me||$('portal-view').classList.contains('hidden-view'))return;
+  try{const d=await insRpc('insight_member_list');insSyncClock(d.server_now);insMemS.items=d.items||[];insBadgeUpdate();}catch(_){}
+}
+function insListHtml(){
+  const intro=`<div class="mb-5"><h3 class="font-display text-white text-3xl tracking-widest uppercase">Insight</h3><p class="text-sm text-gray-300 mt-2">Este espaço foi criado para que o irmão responda às perguntas enviadas diretamente pelo Comando Brasil.</p><p class="text-sm text-gray-400 mt-2">Aprofunde seu conhecimento sobre a história e as regras do Insanos MC. Consulte o Manual do Integrante e utilize também a vivência com os irmãos do clube.</p></div>`;
+  if(!insMemS.items.length)return intro+'<div class="row-card"><p class="text-sm text-gray-400"><i class="fa-solid fa-circle-check mr-2" style="color:#22c55e"></i>Nenhum Insight para a sua divisão no momento. Quando o Comando publicar um, ele aparece aqui.</p></div>';
+  return intro+'<div class="space-y-3">'+insMemS.items.map(it=>{
+    const open=it.status==='pending'||it.status==='in_progress'||it.status==='answered';
+    const btn=it.status==='pending'?['Responder','btn-primary']:it.status==='in_progress'?['Continuar respostas','btn-primary']:it.status==='answered'?[it.allow_edit?'Ver ou editar respostas':'Ver minhas respostas','btn-secondary']:it.status==='completed'?['Ver minhas respostas','btn-secondary']:['Ver detalhes','btn-secondary'];
+    const done=it.submitted_at?`<div class="text-xs mt-2" style="color:#4ade80"><i class="fa-solid fa-circle-check mr-1"></i>Enviado em ${insFmt(it.submitted_at)}${it.submitted_late?' (fora do prazo)':''}</div>`:'';
+    return `<div class="ins-card ${it.status}" style="--c:${(INS_ST[it.status]||INS_ST.closed)[1]}"><div class="flex flex-wrap items-start justify-between gap-2"><div class="min-w-0"><div class="text-white font-medium text-lg">${safeText(it.title)}</div></div>${insChip(it.status)}</div>${it.description?`<p class="text-sm text-gray-300 mt-2" style="white-space:pre-line">${safeText(it.description)}</p>`:''}<div class="text-xs text-gray-400 mt-3 grid sm:grid-cols-2 gap-1"><span><i class="fa-regular fa-calendar-plus mr-1"></i>Abertura: <b class="text-gray-200">${insFmt(it.starts_at)}</b></span><span><i class="fa-regular fa-calendar-xmark mr-1"></i>Limite para responder: <b class="text-gray-200">${insFmt(it.ends_at)}</b></span></div>${open?insCd(it.starts_at,it.ends_at):`<div class="text-xs mt-3" style="color:#9ca3af"><i class="fa-solid fa-lock mr-1"></i>Prazo encerrado</div>`}${done}<div class="tv-act"><button type="button" class="btn ${btn[1]} btn-sm" data-insopen="${it.id}">${btn[0]}</button><span class="text-xs text-gray-500 self-center">${it.questions_count} ${it.questions_count===1?'pergunta':'perguntas'}</span></div></div>`;}).join('')+'</div>';
+}
+async function loadInsightPanel(silent){
+  const body=$('insight-body');
+  if(!silent)body.innerHTML='<p class="text-sm text-gray-400">Carregando Insights...</p>';
+  try{const d=await insRpc('insight_member_list');insSyncClock(d.server_now);insMemS.items=d.items||[];insMemS.cur=null;body.innerHTML=insListHtml();insBadgeUpdate();insTick();}
+  catch(e){body.innerHTML=`<div class="row-card"><p class="text-sm" style="color:#fca5a5">${safeText(e.message)}</p></div>`;}
+}
+function insQHtml(q,ans,editable){
+  const a=ans[q.id]||{},dis=editable?'':'disabled';
+  let f='';
+  if(q.kind==='text')f=`<textarea class="field" rows="4" maxlength="4000" ${dis} placeholder="Escreva a sua resposta">${safeText(a.text||'')}</textarea>`;
+  else if(q.kind==='single')f=q.options.map(o=>`<label class="ins-opt"><input type="radio" name="q${q.id}" value="${o.id}" ${(a.options||[]).includes(o.id)?'checked':''} ${dis}><span>${safeText(o.label)}</span></label>`).join('');
+  else if(q.kind==='multiple')f=q.options.map(o=>`<label class="ins-opt"><input type="checkbox" value="${o.id}" ${(a.options||[]).includes(o.id)?'checked':''} ${dis}><span>${safeText(o.label)}</span></label>`).join('')+'<div class="text-[11px] text-gray-500 mt-1">Marque quantas alternativas quiser.</div>';
+  else f=[['true','Verdadeiro'],['false','Falso']].map(([v,l])=>`<label class="ins-opt"><input type="radio" name="q${q.id}" value="${v}" ${a.bool!=null&&String(a.bool)===v?'checked':''} ${dis}><span>${l}</span></label>`).join('');
+  return `<div class="ins-q" data-q="${q.id}"><div class="ins-qh"><span class="rules-n">${p2(q.sort_order)}</span><div class="text-white">${safeText(q.prompt)}${q.required?' <span style="color:#f87171" title="Obrigatória">*</span>':''}</div></div><div class="ins-qb">${f}</div></div>`;
+}
+async function insOpen(id){
+  const body=$('insight-body');body.innerHTML='<p class="text-sm text-gray-400">Abrindo Insight...</p>';
+  try{
+    const d=await insRpc('insight_member_get',{p_insight:id});insSyncClock(d.server_now);insMemS.cur=d;
+    const ans={};(d.answers||[]).forEach(a=>{ans[a.question_id]=a;});
+    const ins=d.insight,open=d.status==='pending'||d.status==='in_progress'||d.status==='answered';
+    const banner=d.status==='closed'?'<div class="ins-note" style="--c:#9ca3af"><i class="fa-solid fa-lock mr-2"></i>O prazo terminou e não há respostas enviadas. Se precisar de mais tempo, fale com o seu comando.</div>'
+      :d.status==='completed'?`<div class="ins-note" style="--c:#c9a84c"><i class="fa-solid fa-flag-checkered mr-2"></i>Insight concluído. Suas respostas foram enviadas em ${insFmt(d.submitted_at)}${d.submitted_late?' (fora do prazo)':''}.</div>`
+      :d.status==='answered'?`<div class="ins-note" style="--c:#22c55e"><i class="fa-solid fa-circle-check mr-2"></i>Respostas enviadas em ${insFmt(d.submitted_at)}${d.submitted_late?' (fora do prazo)':''}.${d.editable?' Você pode alterar até o prazo.':''}</div>`:'';
+    const btns=d.editable?`${ins.allow_draft&&d.status!=='answered'?'<button type="button" class="btn btn-secondary" data-insact="draft"><i class="fa-regular fa-floppy-disk mr-2"></i>Salvar rascunho</button>':''}<button type="button" class="btn btn-primary" data-insact="send"><i class="fa-solid fa-paper-plane mr-2"></i>${d.status==='answered'?'Reenviar respostas':'Enviar respostas'}</button>`:'';
+    body.innerHTML=`<div class="mb-4"><button type="button" class="btn btn-secondary btn-sm" data-insact="back"><i class="fa-solid fa-arrow-left mr-2"></i>Voltar</button></div><div class="ins-card ${d.status}" style="--c:${(INS_ST[d.status]||INS_ST.closed)[1]}"><div class="flex flex-wrap items-start justify-between gap-2"><h3 class="font-display text-white text-2xl tracking-widest uppercase">${safeText(ins.title)}</h3>${insChip(d.status)}</div>${ins.description?`<p class="text-sm text-gray-300 mt-2" style="white-space:pre-line"><b class="text-gold">Instruções:</b> ${safeText(ins.description)}</p>`:''}<div class="text-xs text-gray-400 mt-3"><i class="fa-regular fa-calendar-xmark mr-1"></i>Limite para responder: <b class="text-gray-200">${insFmt(ins.ends_at)}</b></div>${open?insCd(ins.starts_at,ins.ends_at):''}</div>${banner}<div id="ins-form" class="space-y-3 mt-4">${d.questions.map(q=>insQHtml(q,ans,d.editable)).join('')}</div><p id="ins-msg" class="text-sm mt-3" role="status" aria-live="polite"></p><div class="tv-act">${btns}</div>`;
+    insTick();window.scrollTo({top:0,behavior:'smooth'});
+  }catch(e){body.innerHTML=`<div class="mb-4"><button type="button" class="btn btn-secondary btn-sm" data-insact="back">Voltar</button></div><div class="row-card"><p class="text-sm" style="color:#fca5a5">${safeText(e.message)}</p></div>`;}
+}
+function insCollect(){
+  return insMemS.cur.questions.map(q=>{
+    const root=document.querySelector(`#ins-form [data-q="${q.id}"]`),a={question_id:q.id};
+    if(q.kind==='text')a.text=root.querySelector('textarea').value;
+    else if(q.kind==='single'){const c=root.querySelector('input:checked');a.options=c?[+c.value]:[];}
+    else if(q.kind==='multiple')a.options=[...root.querySelectorAll('input:checked')].map(x=>+x.value);
+    else{const c=root.querySelector('input:checked');if(c)a.bool=c.value==='true';}
+    return a;});
+}
+const insFilled=(q,a)=>q.kind==='text'?!!(a.text||'').trim():q.kind==='boolean'?a.bool!=null:(a.options||[]).length>0;
+async function insSend(submit){
+  const cur=insMemS.cur,msg=t=>{const e=$('ins-msg');if(e){e.textContent=t||'';e.style.color='#f87171';}};
+  const answers=insCollect();
+  if(submit){
+    const bad=cur.questions.find(q=>q.required&&!insFilled(q,answers.find(a=>a.question_id===q.id)||{}));
+    if(bad){msg('Responda a pergunta '+p2(bad.sort_order)+' (obrigatória) antes de enviar.');const el=document.querySelector(`#ins-form [data-q="${bad.id}"]`);if(el)el.scrollIntoView({behavior:'smooth',block:'center'});return;}
+    if(!await uiConfirm(cur.insight.allow_edit?'Confirmar o envio das respostas? Você poderá alterar até o prazo final.':'Confirmar o envio das respostas? Depois de enviadas, elas não poderão ser alteradas.'))return;
+  }
+  const btns=document.querySelectorAll('[data-insact="draft"],[data-insact="send"]');btns.forEach(b=>b.disabled=true);
+  try{
+    const r=await insRpc('insight_member_save',{p_insight:cur.insight.id,p_answers:answers,p_submit:submit});insSyncClock(r.server_now);
+    if(submit){uiAlert('Respostas enviadas com sucesso! Obrigado, irmão.'+(r.late?' (O envio foi registrado fora do prazo.)':''));await loadInsightPanel();insBadgeRefresh();}
+    else{const e=$('ins-msg');if(e){e.style.color='#4ade80';e.textContent='Rascunho salvo em '+insFmt(new Date(insNow()).toISOString())+'.';}btns.forEach(b=>b.disabled=false);insBadgeRefresh();}
+  }catch(e){msg(e.message);btns.forEach(b=>b.disabled=false);}
+}
+$('insight-body').addEventListener('click',e=>{
+  const o=e.target.closest('[data-insopen]');if(o){insOpen(+o.dataset.insopen);return;}
+  const a=e.target.closest('[data-insact]');if(!a)return;
+  if(a.dataset.insact==='back')loadInsightPanel();else if(a.dataset.insact==='draft')insSend(false);else if(a.dataset.insact==='send')insSend(true);
+});
+document.querySelectorAll('[data-mside="insight"]').forEach(b=>b.addEventListener('click',()=>loadInsightPanel()));
+$('div-main').addEventListener('click',()=>{const w=$('div-subs'),o=!w.classList.contains('open');w.classList.toggle('open',o);$('div-main').setAttribute('aria-expanded',String(o));});
+document.querySelectorAll('[data-mside="home"]').forEach(b=>b.addEventListener('click',()=>{$('div-subs').classList.remove('open');$('div-main').setAttribute('aria-expanded','false');}));
+setInterval(()=>{if(document.visibilityState==='visible')insBadgeRefresh();},90000);
+setTimeout(insBadgeRefresh,4000);
+
+/* ───────── Administrador ───────── */
+const INS={mem:[],insights:[],links:[],assigns:[],sec:'overview',scope:'',fDiv:'',fSt:'',fName:'',fIns:'',fFrom:'',fTo:'',ed:null,resp:null,loaded:false,busy:false};
+const INS_EFF={draft:['Rascunho','#9ca3af'],scheduled:['Agendado','#3b82f6'],active:['Ativo','#22c55e'],closed:['Encerrado','#c9a84c']};
+const INS_AST={answered:['Respondido','#22c55e'],pending:['Pendente','#ef4444'],in_progress:['Em andamento','#3b82f6'],noanswer:['Encerrado sem resposta','#9ca3af']};
+const insById=id=>INS.insights.find(i=>i.id===id);
+const insMem2=id=>INS.mem.find(m=>m.id===id)||membersCache.find(m=>m.id===id);
+const insName=id=>insMem2(id)?.display_name||'—';
+const insEff=i=>i.status==='draft'?'draft':(i.status==='closed'||insNow()>new Date(i.ends_at).getTime())?'closed':insNow()<new Date(i.starts_at).getTime()?'scheduled':'active';
+const insElig=a=>{const m=insMem2(a.member_id);return a.status==='submitted'||!!(m&&m.is_active);};
+const insOpenNow=(a,i)=>(i.status==='published'&&insNow()<=new Date(i.ends_at).getTime())||(a.deadline_override&&insNow()<=new Date(a.deadline_override).getTime());
+function insAStatus(a){const i=insById(a.insight_id);if(!i)return 'pending';if(a.status==='submitted')return 'answered';if(!insOpenNow(a,i))return 'noanswer';return a.status==='in_progress'?'in_progress':'pending';}
+const insDeadline=(a,i)=>new Date(Math.max(new Date(i.ends_at).getTime(),a.deadline_override?new Date(a.deadline_override).getTime():0)).toISOString();
+const insAsgs=scope=>INS.assigns.filter(a=>{const i=insById(a.insight_id);return i&&i.status!=='draft'&&(!scope||String(i.id)===String(scope))&&insElig(a);});
+function insStats(list){
+  const ans=list.filter(a=>a.status==='submitted'),late=ans.filter(a=>a.submitted_late).length;
+  const times=ans.map(a=>a.submitted_at).filter(Boolean).sort();
+  return {total:list.length,answered:ans.length,pending:list.length-ans.length,onTime:ans.length-late,late,pct:list.length?ans.length/list.length*100:null,members:new Set(list.map(a=>a.member_id)).size,last:times.length?times[times.length-1]:null};
+}
+function insDivStats(scope){
+  const list=insAsgs(scope),ids=new Set(list.map(a=>a.division_id??insMem2(a.member_id)?.division_id));
+  if(scope){const i=insById(+scope);if(i)(i.all_divisions?divisionsList.map(d=>d.id):INS.links.filter(l=>l.insight_id===i.id).map(l=>l.division_id)).forEach(d=>ids.add(d));}
+  return [...ids].filter(x=>x!=null).map(did=>{const l=list.filter(a=>(a.division_id??insMem2(a.member_id)?.division_id)===did);return {id:did,name:divName(did),...insStats(l)};}).sort((a,b)=>(b.pct??-1)-(a.pct??-1)||a.name.localeCompare(b.name,'pt-BR'));
+}
+async function insAdminFetch(){
+  try{const c=await supabaseClient.rpc('insight_server_now');if(!c.error)insSyncClock(c.data);}catch(_){}
+  await supabaseClient.rpc('insight_admin_refresh');
+  const [a,b,c,d]=await Promise.all([
+    supabaseClient.from('insights').select('*').order('created_at',{ascending:false}),
+    supabaseClient.from('insight_divisions').select('insight_id,division_id'),
+    supabaseClient.from('insight_assignments').select('id,insight_id,member_id,division_id,status,started_at,submitted_at,submitted_late,deadline_override,reopened_count,review_status,admin_note,created_at').limit(10000),
+    supabaseClient.from('member_profiles').select('id,display_name,is_active,division_id,role').limit(5000)]);
+  const err=a.error||b.error||c.error;
+  if(err)throw new Error(/relation|schema cache|does not exist/i.test(err.message||'')?'O módulo Insight ainda não foi instalado. Rode o arquivo insight.sql no Supabase.':err.message);
+  INS.insights=a.data||[];INS.links=b.data||[];INS.assigns=c.data||[];INS.mem=d.error?[]:(d.data||[]);INS.loaded=true;
+}
+async function insAdminRefresh(){try{await insAdminFetch();insAdminRender();}catch(_){}}
+async function loadInsightAdmin(){
+  const body=$('ins-admin-body');body.innerHTML='<p class="text-sm text-gray-400">Carregando Insights...</p>';
+  try{await ensureMembers();await loadRefs();await insAdminFetch();INS.ed=null;insAdminRender();}
+  catch(e){body.innerHTML=`<div class="row-card"><p class="text-sm" style="color:#fca5a5">${safeText(e.message)}</p></div>`;}
+}
+const INS_SECS=[['overview','Visão geral','fa-chart-pie'],['list','Insights','fa-lightbulb'],['track','Acompanhamento','fa-list-check'],['part','Participação por divisão','fa-chart-simple'],['pend','Pendências','fa-hourglass-half'],['resp','Respostas','fa-comments'],['report','Relatório','fa-file-lines']];
+function insAdminRender(){
+  const body=$('ins-admin-body');if(!body)return;
+  if(INS.ed){insEdRender();return;}
+  const nav=INS_SECS.map(([k,l,ic])=>`<button type="button" class="ins-sec ${INS.sec===k?'on':''}" data-insec="${k}"><i class="fa-solid ${ic}"></i>${l}</button>`).join('');
+  const head=`<div class="flex flex-wrap items-start justify-between gap-3 mb-4"><div><h3 class="font-display text-white text-3xl tracking-widest uppercase">Insight de Divisões</h3><p class="text-sm text-gray-400 mt-1">Perguntas enviadas pelo Comando, respostas obrigatórias por divisão e acompanhamento da participação. Atualizado ${insFmt(new Date(insNow()).toISOString())}.</p></div><div class="flex gap-2 no-print"><button type="button" class="btn btn-secondary btn-sm" data-insact2="refresh"><i class="fa-solid fa-rotate mr-2"></i>Atualizar</button><button type="button" class="btn btn-primary" data-insact2="new"><i class="fa-solid fa-plus mr-2"></i>Criar Insight</button></div></div><div class="ins-secs no-print">${nav}</div>`;
+  const fn={overview:insSecOverview,list:insSecList,track:insSecTrack,part:insSecPart,pend:insSecPend,resp:insSecResp,report:insSecReport}[INS.sec];
+  body.innerHTML=head+'<div id="ins-sec-body" class="mt-4">'+fn()+'</div>';
+  insTick();
+  if(INS.sec==='resp'&&INS.fIns)insRespLoad();
+}
+const insScopeSel=(id,val,all)=>`<select class="field" id="${id}"><option value="">${all}</option>${INS.insights.filter(i=>i.status!=='draft').map(i=>`<option value="${i.id}" ${String(val)===String(i.id)?'selected':''}>${safeText(i.title)}</option>`).join('')}</select>`;
+const insKpi=(ic,col,n,l,sub)=>`<div class="row-card" style="border-top:3px solid ${col}"><div class="font-display text-3xl text-white"><i class="fa-solid ${ic} text-base mr-2" style="color:${col}"></i>${n}</div><div class="text-[11px] text-gray-400 uppercase font-heading tracking-widest">${l}</div>${sub?`<div class="text-xs text-gray-500 mt-1">${sub}</div>`:''}</div>`;
+const insBar=(pct,col)=>`<div class="pbar"><i style="width:${pct==null?0:pct}%;background:${col||'#c9a84c'}"></i></div>`;
+
+function insSecOverview(){
+  const eff=INS.insights.map(insEff),c=k=>eff.filter(x=>x===k).length,st=insStats(insAsgs(INS.scope)),ds=insDivStats(INS.scope).filter(d=>d.total>0);
+  const near=INS.insights.filter(i=>insEff(i)==='active'&&new Date(i.ends_at).getTime()-insNow()<72*3600000).sort((a,b)=>new Date(a.ends_at)-new Date(b.ends_at));
+  const top=ds.slice(0,3),low=ds.slice().reverse().slice(0,3);
+  const li=l=>l.length?l.map(d=>`<div class="flex items-center gap-3 py-1"><span class="text-sm text-white flex-1">${safeText(d.name)}</span><span class="text-sm text-gold">${insPct(d.pct)}</span></div>`).join(''):'<p class="text-sm text-gray-500">Sem dados ainda.</p>';
+  return `<div class="grid md:grid-cols-3 gap-2 mb-4"><div class="md:col-span-1"><label class="block text-xs text-gray-300 mb-1" for="ins-scope">Ver números de</label>${insScopeSel('ins-scope',INS.scope,'Todos os Insights publicados')}</div></div>
+  <div class="grid grid-cols-2 lg:grid-cols-4 gap-2">${insKpi('fa-lightbulb','#c9a84c',INS.insights.length,'Insights cadastrados',`${c('draft')} rascunho(s) · ${c('scheduled')} agendado(s)`)}${insKpi('fa-bolt','#22c55e',c('active'),'Insights ativos')}${insKpi('fa-flag-checkered','#9ca3af',c('closed'),'Insights encerrados')}${insKpi('fa-users','#3b82f6',st.members,'Integrantes elegíveis',`${st.total} obrigação(ões)`)}${insKpi('fa-circle-check','#22c55e',st.answered,'Respostas enviadas',`${st.onTime} no prazo · ${st.late} fora do prazo`)}${insKpi('fa-hourglass-half','#ef4444',st.pending,'Pendentes')}${insKpi('fa-clock','#22c55e',st.onTime,'Enviadas no prazo')}${insKpi('fa-percent','#c9a84c',insPct(st.pct),'Participação geral',st.total?'':'Sem integrantes elegíveis')}</div>
+  <div class="grid md:grid-cols-3 gap-3 mt-4"><div class="row-card"><h4 class="font-heading text-gold text-sm uppercase tracking-widest mb-2">Maior participação</h4>${li(top)}</div><div class="row-card"><h4 class="font-heading text-gold text-sm uppercase tracking-widest mb-2">Menor participação</h4>${li(low)}</div><div class="row-card"><h4 class="font-heading text-gold text-sm uppercase tracking-widest mb-2">Próximos do encerramento</h4>${near.length?near.map(i=>`<div class="py-1"><div class="text-sm text-white">${safeText(i.title)}</div>${insCd(i.starts_at,i.ends_at,false)}</div>`).join(''):'<p class="text-sm text-gray-500">Nenhum nas próximas 72 horas.</p>'}</div></div>`;
+}
+function insDivsText(i){return i.all_divisions?'Todas as divisões':INS.links.filter(l=>l.insight_id===i.id).map(l=>divName(l.division_id)).join(', ')||'—';}
+function insSecList(){
+  const rows=INS.insights.map(i=>{
+    const e=insEff(i),s=INS_EFF[e],st=insStats(insAsgs(i.id));
+    const acts=[['resp','Respostas','fa-comments']];
+    if(i.status==='draft')acts.unshift(['edit','Editar','fa-pen'],['publish','Publicar','fa-paper-plane']);
+    else{acts.unshift(['edit','Editar','fa-pen']);if(e==='active'||e==='scheduled')acts.push(['close','Encerrar','fa-lock']);acts.push(['reopen',e==='closed'?'Reabrir':'Alterar prazo','fa-rotate-left']);}
+    acts.push(['hist','Histórico','fa-clock-rotate-left']);if(i.status==='draft')acts.push(['del','Excluir','fa-trash']);
+    return `<div class="row-card tv-trip" style="border-left:3px solid ${s[1]}"><div class="flex flex-wrap items-start justify-between gap-2"><div class="min-w-0"><div class="text-white font-medium">${safeText(i.title)}</div><div class="text-xs text-gray-400 mt-1">${insFmt(i.starts_at)} até ${insFmt(i.ends_at)} · ${safeText(insDivsText(i))}</div></div><span class="ins-chip" style="--c:${s[1]}">${s[0]}</span></div>${i.status!=='draft'?`<div class="text-xs text-gray-400 mt-2">${st.answered}/${st.total} responderam · participação ${insPct(st.pct)}${st.late?` · ${st.late} fora do prazo`:''}</div>${insBar(st.pct)}`:''}<div class="tv-act">${acts.map(([k,l,ic])=>`<button type="button" class="btn ${k==='publish'?'btn-primary':k==='del'?'btn-danger':'btn-secondary'} btn-sm" data-inslist="${k}" data-id="${i.id}"><i class="fa-solid ${ic} mr-1"></i>${l}</button>`).join('')}</div></div>`;}).join('');
+  return rows?`<div class="space-y-3">${rows}</div>`:'<div class="row-card"><p class="text-sm text-gray-400">Nenhum Insight cadastrado. Use “Criar Insight” para começar.</p></div>';
+}
+function insTrackRows(){
+  return insAsgs(INS.fIns).filter(a=>{
+    const i=insById(a.insight_id),m=insMem2(a.member_id),st=insAStatus(a),did=a.division_id??m?.division_id;
+    if(INS.fDiv&&String(did)!==String(INS.fDiv))return false;if(INS.fSt&&st!==INS.fSt)return false;
+    if(INS.fName&&!(m?.display_name||'').toLowerCase().includes(INS.fName.toLowerCase()))return false;
+    const ref=(a.submitted_at||i.ends_at||'').slice(0,10);if(INS.fFrom&&ref<INS.fFrom)return false;if(INS.fTo&&ref>INS.fTo)return false;return true;
+  }).map(a=>{const i=insById(a.insight_id),m=insMem2(a.member_id);return {a,i,name:m?.display_name||'—',div:divName(a.division_id??m?.division_id),st:insAStatus(a),dl:insDeadline(a,i)};})
+  .sort((x,y)=>x.div.localeCompare(y.div,'pt-BR')||x.name.localeCompare(y.name,'pt-BR'));
+}
+function insFilters(){
+  return `<div class="grid md:grid-cols-3 lg:grid-cols-6 gap-2 mb-3 no-print"><div><label class="block text-xs text-gray-300 mb-1" for="insf-ins">Insight</label>${insScopeSel('insf-ins',INS.fIns,'Todos')}</div><div><label class="block text-xs text-gray-300 mb-1" for="insf-div">Divisão</label><select class="field" id="insf-div"><option value="">Todas</option>${divisionsList.map(d=>`<option value="${d.id}" ${String(INS.fDiv)===String(d.id)?'selected':''}>${safeText(d.name)}</option>`).join('')}</select></div><div><label class="block text-xs text-gray-300 mb-1" for="insf-st">Status</label><select class="field" id="insf-st"><option value="">Todos</option>${Object.entries(INS_AST).map(([k,v])=>`<option value="${k}" ${INS.fSt===k?'selected':''}>${v[0]}</option>`).join('')}</select></div><div><label class="block text-xs text-gray-300 mb-1" for="insf-from">Período (de)</label><input class="field" id="insf-from" type="date" value="${INS.fFrom}"></div><div><label class="block text-xs text-gray-300 mb-1" for="insf-to">Período (até)</label><input class="field" id="insf-to" type="date" value="${INS.fTo}"></div><div><label class="block text-xs text-gray-300 mb-1" for="insf-name">Integrante</label><input class="field" id="insf-name" value="${safeText(INS.fName)}" placeholder="Buscar por nome"></div></div>`;
+}
+function insTable(heads,rows){return `<div class="overflow-x-auto"><table class="ins-tb"><thead><tr>${heads.map(h=>`<th>${h}</th>`).join('')}</tr></thead><tbody>${rows.join('')||`<tr><td colspan="${heads.length}" class="text-gray-500">Nenhum registro encontrado.</td></tr>`}</tbody></table></div>`;}
+const insAChip=st=>`<span class="ins-chip" style="--c:${INS_AST[st][1]}">${INS_AST[st][0]}</span>`;
+function insSecTrack(){
+  const all=insTrackRows(),rows=all.slice(0,400);
+  return insFilters()+`<div class="flex flex-wrap items-center justify-between gap-2 mb-2 no-print"><p class="text-xs text-gray-400">${all.length} registro(s)${all.length>400?' (mostrando os 400 primeiros; use o CSV para ver tudo)':''}</p><button type="button" class="btn btn-secondary btn-sm" data-insact2="csv-track"><i class="fa-solid fa-file-csv mr-2"></i>Exportar CSV</button></div>`+insTable(['Integrante','Divisão','Insight','Status','Data da resposta','Prazo'],rows.map(r=>`<tr><td>${safeText(r.name)}</td><td>${safeText(r.div)}</td><td>${safeText(r.i.title)}</td><td>${insAChip(r.st)}</td><td>${insFmt(r.a.submitted_at)}</td><td>${insFmt(r.dl)}</td></tr>`));
+}
+function insPartHtml(scope){
+  const ds=insDivStats(scope),tot=insStats(insAsgs(scope));
+  return `<div class="grid md:grid-cols-2 gap-3">${ds.map(d=>`<div class="row-card"><div class="flex items-center justify-between gap-2"><div class="text-white font-medium">${safeText(d.name)}</div><div class="font-display text-2xl text-gold">${d.total?insPct(d.pct):'—'}</div></div>${d.total?insBar(d.pct,d.pct>=75?'#22c55e':d.pct>=50?'#c9a84c':'#ef4444')+`<div class="grid grid-cols-3 gap-2 text-center mt-3"><div><b class="text-white">${d.total}</b><div class="text-[10px] text-gray-500 uppercase">Elegíveis</div></div><div><b style="color:#4ade80">${d.answered}</b><div class="text-[10px] text-gray-500 uppercase">Respondidos</div></div><div><b style="color:#f87171">${d.pending}</b><div class="text-[10px] text-gray-500 uppercase">Pendentes</div></div></div><div class="text-xs text-gray-400 mt-2">${d.onTime} no prazo · ${d.late} atrasada(s) · última atualização: ${insFmt(d.last)}</div>`:'<p class="text-sm text-gray-500 mt-2">Sem integrantes elegíveis</p>'}</div>`).join('')||'<p class="text-sm text-gray-400">Nenhuma divisão com obrigações ainda.</p>'}</div><p class="text-xs text-gray-500 mt-3">Participação = integrantes elegíveis que responderam ÷ total de elegíveis × 100. Total geral: ${tot.answered}/${tot.total} (${insPct(tot.pct)}).</p>`;
+}
+function insSecPart(){
+  return `<div class="grid md:grid-cols-3 gap-2 mb-3 no-print"><div><label class="block text-xs text-gray-300 mb-1" for="ins-scope">Insight</label>${insScopeSel('ins-scope',INS.scope,'Consolidado (todos os publicados)')}</div></div>`+insPartHtml(INS.scope)+`<div class="mt-3 no-print"><button type="button" class="btn btn-secondary btn-sm" data-insact2="csv-part"><i class="fa-solid fa-file-csv mr-2"></i>Exportar CSV</button></div>`;
+}
+function insPendRows(){
+  return insAsgs(INS.fIns).filter(a=>a.status!=='submitted').filter(a=>{const m=insMem2(a.member_id),did=a.division_id??m?.division_id;return !INS.fDiv||String(did)===String(INS.fDiv);})
+  .map(a=>{const i=insById(a.insight_id),m=insMem2(a.member_id),dl=insDeadline(a,i),left=new Date(dl).getTime()-insNow(),open=insOpenNow(a,i)&&left>0;
+    const sit=!open?'Prazo vencido':left<48*3600000?'Próximo do encerramento':'No prazo';
+    return {a,i,name:m?.display_name||'—',div:divName(a.division_id??m?.division_id),dl,left,open,sit};})
+  .sort((x,y)=>(x.open===y.open?0:x.open?1:-1)||x.left-y.left||x.name.localeCompare(y.name,'pt-BR'));
+}
+function insSecPend(){
+  const rows=insPendRows(),col={'Prazo vencido':'#ef4444','Próximo do encerramento':'#f59e0b','No prazo':'#22c55e'};
+  return `<div class="grid md:grid-cols-3 gap-2 mb-3 no-print"><div><label class="block text-xs text-gray-300 mb-1" for="insf-ins">Insight</label>${insScopeSel('insf-ins',INS.fIns,'Todos')}</div><div><label class="block text-xs text-gray-300 mb-1" for="insf-div">Divisão</label><select class="field" id="insf-div"><option value="">Todas</option>${divisionsList.map(d=>`<option value="${d.id}" ${String(INS.fDiv)===String(d.id)?'selected':''}>${safeText(d.name)}</option>`).join('')}</select></div></div><div class="flex flex-wrap items-center justify-between gap-2 mb-2"><h4 class="font-heading text-gold text-sm uppercase tracking-widest">Integrantes com respostas pendentes (${rows.length})</h4><button type="button" class="btn btn-secondary btn-sm no-print" data-insact2="csv-pend"><i class="fa-solid fa-file-csv mr-2"></i>Exportar CSV</button></div>`+insTable(['Integrante','Divisão','Insight pendente','Abertura','Data limite','Tempo restante','Situação','<span class="no-print">Ação</span>'],rows.slice(0,400).map(r=>`<tr><td>${safeText(r.name)}</td><td>${safeText(r.div)}</td><td>${safeText(r.i.title)}</td><td>${insFmt(r.i.starts_at)}</td><td>${insFmt(r.dl)}</td><td>${r.open?insCd(r.i.starts_at,r.dl,false):'<span class="text-gray-500">—</span>'}</td><td><span class="ins-chip" style="--c:${col[r.sit]}">${r.sit}</span></td><td class="no-print"><button type="button" class="btn btn-secondary btn-sm" data-insexc="${r.a.id}" title="Conceder exceção de prazo"><i class="fa-solid fa-clock-rotate-left"></i></button></td></tr>`))+'<p class="text-xs text-gray-500 mt-3">Este painel só mostra a situação. O sistema não envia cobranças automáticas por WhatsApp ou outros canais.</p>';
+}
+function insSecResp(){
+  return `<div class="grid md:grid-cols-3 gap-2 mb-3 no-print"><div><label class="block text-xs text-gray-300 mb-1" for="insf-ins">Insight</label>${insScopeSel('insf-ins',INS.fIns,'Escolha um Insight')}</div><div><label class="block text-xs text-gray-300 mb-1" for="insf-name">Buscar integrante</label><input class="field" id="insf-name" value="${safeText(INS.fName)}" placeholder="Nome do integrante"></div></div><div id="ins-resp-body">${INS.fIns?'<p class="text-sm text-gray-400">Carregando respostas...</p>':'<p class="text-sm text-gray-400">Escolha um Insight para ver as respostas.</p>'}</div>`;
+}
+async function insRespLoad(){
+  const id=+INS.fIns,box=$('ins-resp-body');if(!box)return;
+  const qs=await supabaseClient.from('insight_questions').select('id,sort_order,kind,prompt,required').eq('insight_id',id).order('sort_order');
+  const qids=(qs.data||[]).map(q=>q.id),ops=qids.length?await supabaseClient.from('insight_options').select('id,question_id,label').in('question_id',qids):{data:[]};
+  const sub=INS.assigns.filter(a=>a.insight_id===id&&a.status==='submitted'),aids=sub.map(a=>a.id);
+  const an=aids.length?await supabaseClient.from('insight_answers').select('assignment_id,question_id,answer_text,answer_options,answer_bool').in('assignment_id',aids):{data:[]};
+  INS.resp={id,qs:qs.data||[],ops:ops.data||[],an:an.data||[]};insRespRender();
+}
+function insRespRender(){
+  const box=$('ins-resp-body'),R=INS.resp;if(!box||!R||String(R.id)!==String(INS.fIns))return;
+  const i=insById(R.id),q=INS.fName.toLowerCase();
+  const subs=INS.assigns.filter(a=>a.insight_id===R.id&&a.status==='submitted').map(a=>({a,m:insMem2(a.member_id)})).filter(x=>!q||(x.m?.display_name||'').toLowerCase().includes(q)).sort((x,y)=>String(y.a.submitted_at).localeCompare(String(x.a.submitted_at)));
+  const show=(qq,a)=>{const r=R.an.find(x=>x.assignment_id===a.id&&x.question_id===qq.id);if(!r)return '<span class="text-gray-500">Sem resposta</span>';
+    if(qq.kind==='text')return safeText(r.answer_text||'—');if(qq.kind==='boolean')return r.answer_bool==null?'—':r.answer_bool?'Verdadeiro':'Falso';
+    return (r.answer_options||[]).map(o=>safeText(R.ops.find(x=>x.id===o)?.label||'?')).join(', ')||'—';};
+  box.innerHTML=`<p class="text-xs text-gray-400 mb-2">${subs.length} resposta(s) enviada(s) em “${safeText(i?.title||'')}”.</p><div class="space-y-2">${subs.map(({a,m})=>`<details class="row-card"><summary class="cursor-pointer flex flex-wrap items-center gap-2"><b class="text-white">${safeText(m?.display_name||'—')}</b><span class="text-xs text-gray-400">${safeText(divName(a.division_id??m?.division_id))} · enviado em ${insFmt(a.submitted_at)}</span><span class="ins-chip" style="--c:${a.submitted_late?'#f59e0b':'#22c55e'}">${a.submitted_late?'Fora do prazo':'No prazo'}</span>${a.review_status?`<span class="ins-chip" style="--c:#3b82f6">${{pending:'Em revisão',reviewed:'Revisado',needs_fix:'Precisa de ajuste'}[a.review_status]}</span>`:''}</summary><div class="mt-3 space-y-3">${R.qs.map(qq=>`<div><div class="text-xs text-gold font-heading uppercase tracking-widest">Pergunta ${p2(qq.sort_order)}</div><div class="text-sm text-white">${safeText(qq.prompt)}</div><div class="text-sm text-gray-300 mt-1" style="white-space:pre-line">${show(qq,a)}</div></div>`).join('')}<div class="grid md:grid-cols-3 gap-2 items-end"><div class="md:col-span-2"><label class="block text-xs text-gray-300 mb-1">Observação do administrador (não é a confirmação de envio)</label><textarea class="field" rows="2" maxlength="600" data-insnote="${a.id}">${safeText(a.admin_note||'')}</textarea></div><div><label class="block text-xs text-gray-300 mb-1">Revisão</label><select class="field" data-insrev="${a.id}"><option value="">Sem revisão</option><option value="pending" ${a.review_status==='pending'?'selected':''}>Em revisão</option><option value="reviewed" ${a.review_status==='reviewed'?'selected':''}>Revisado</option><option value="needs_fix" ${a.review_status==='needs_fix'?'selected':''}>Precisa de ajuste</option></select></div></div><div class="tv-act"><button type="button" class="btn btn-primary btn-sm" data-inssavenote="${a.id}">Salvar observação</button><button type="button" class="btn btn-secondary btn-sm" data-insexc="${a.id}"><i class="fa-solid fa-rotate-left mr-1"></i>Reabrir resposta</button></div>${a.reopened_count?`<div class="text-xs text-gray-500">Reaberta ${a.reopened_count}x</div>`:''}</div></details>`).join('')||'<p class="text-sm text-gray-500">Nenhuma resposta enviada ainda.</p>'}</div>`;
+}
+function insReportRows(scope){
+  const ds=insDivStats(scope),pend=insAsgs(scope).filter(a=>a.status!=='submitted').map(a=>{const i=insById(a.insight_id),m=insMem2(a.member_id);return {name:m?.display_name||'—',div:divName(a.division_id??m?.division_id),ins:i.title,dl:insDeadline(a,i)};}).sort((x,y)=>x.div.localeCompare(y.div,'pt-BR')||x.name.localeCompare(y.name,'pt-BR'));
+  return {ds,pend,tot:insStats(insAsgs(scope))};
+}
+function insSecReport(){
+  const sc=INS.scope,i=sc?insById(+sc):null,R=insReportRows(sc),now=new Date(insNow()).toISOString();
+  const period=i?`${insFmt(i.starts_at)} a ${insFmt(i.ends_at)}`:'Todos os Insights publicados';
+  return `<div class="grid md:grid-cols-3 gap-2 mb-3 no-print"><div><label class="block text-xs text-gray-300 mb-1" for="ins-scope">Insight</label>${insScopeSel('ins-scope',sc,'Consolidado (todos os publicados)')}</div><div class="flex items-end gap-2"><button type="button" class="btn btn-primary btn-sm" data-insact2="print"><i class="fa-solid fa-print mr-2"></i>Imprimir</button><button type="button" class="btn btn-secondary btn-sm" data-insact2="csv-report"><i class="fa-solid fa-file-csv mr-2"></i>CSV</button></div></div>
+  <div id="ins-print" class="row-card"><h3 class="font-display text-white text-2xl tracking-widest uppercase">Relatório de Insight</h3><p class="text-sm text-gray-300 mt-1"><b>Insight:</b> ${safeText(i?i.title:'Consolidado')}</p><p class="text-sm text-gray-300"><b>Vigência:</b> ${safeText(period)}</p><p class="text-sm text-gray-300"><b>Divisões participantes:</b> ${safeText(R.ds.map(d=>d.name).join(', ')||'—')}</p><p class="text-sm text-gray-300"><b>Atualizado em:</b> ${insFmt(now)}</p>
+  <div class="grid grid-cols-3 gap-2 my-3"><div class="rep-k"><b>${R.tot.total}</b><span>Elegíveis</span></div><div class="rep-k"><b>${R.tot.answered}</b><span>Respostas recebidas</span></div><div class="rep-k"><b>${R.tot.pending}</b><span>Pendências</span></div></div>
+  <h4 class="font-heading text-gold text-sm uppercase tracking-widest mb-2">Participação por divisão</h4>${insTable(['Divisão','Elegíveis','Respondidos','Pendentes','Participação'],R.ds.map(d=>`<tr><td>${safeText(d.name)}</td><td>${d.total}</td><td>${d.answered}</td><td>${d.pending}</td><td>${d.total?insPct(d.pct):'Sem integrantes elegíveis'}</td></tr>`))}
+  <h4 class="font-heading text-gold text-sm uppercase tracking-widest mt-4 mb-2">Integrantes que ainda precisam responder (${R.pend.length})</h4>${insTable(['Integrante','Divisão','Insight','Prazo'],R.pend.map(p=>`<tr><td>${safeText(p.name)}</td><td>${safeText(p.div)}</td><td>${safeText(p.ins)}</td><td>${insFmt(p.dl)}</td></tr>`))}</div>`;
+}
+/* Impressão do relatório: copia só o relatório para um contêiner próprio (sem sidebar, sem folhas em branco) */
+function insPrint(){
+  const src=$('ins-print');if(!src)return;
+  const old=$('ins-print-root');if(old)old.remove();
+  const root=document.createElement('div');root.id='ins-print-root';root.innerHTML=src.innerHTML;document.body.appendChild(root);document.body.classList.add('ins-printing');
+  const done=()=>{document.body.classList.remove('ins-printing');root.remove();window.removeEventListener('afterprint',done);};
+  window.addEventListener('afterprint',done);setTimeout(done,60000);
+  window.print();
+}
+/* CSV */
+function insCsvFile(name,rows){
+  const esc=v=>{const s=String(v??'');return /[";\n\r]/.test(s)?'"'+s.replace(/"/g,'""')+'"':s;};
+  const txt='\ufeff'+rows.map(r=>r.map(esc).join(';')).join('\r\n'),b=new Blob([txt],{type:'text/csv;charset=utf-8'}),a=document.createElement('a');
+  a.href=URL.createObjectURL(b);a.download=name;document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove();},800);return txt;
+}
+const insCsvData={
+  track:()=>[['Integrante','Divisão','Insight','Status','Data da resposta','Prazo'],...insTrackRows().map(r=>[r.name,r.div,r.i.title,INS_AST[r.st][0],insFmt(r.a.submitted_at),insFmt(r.dl)])],
+  pend:()=>[['Integrante','Divisão','Insight pendente','Abertura','Data limite','Situação'],...insPendRows().map(r=>[r.name,r.div,r.i.title,insFmt(r.i.starts_at),insFmt(r.dl),r.sit])],
+  part:()=>[['Divisão','Elegíveis','Respondidos','Pendentes','Participação','No prazo','Atrasadas','Última atualização'],...insDivStats(INS.scope).map(d=>[d.name,d.total,d.answered,d.pending,d.total?insPct(d.pct):'Sem integrantes elegíveis',d.onTime,d.late,insFmt(d.last)])],
+  report:()=>{const R=insReportRows(INS.scope);return [['Divisão','Elegíveis','Respondidos','Pendentes','Participação'],...R.ds.map(d=>[d.name,d.total,d.answered,d.pending,d.total?insPct(d.pct):'Sem integrantes elegíveis']),[],['Pendências'],['Integrante','Divisão','Insight','Prazo'],...R.pend.map(p=>[p.name,p.div,p.ins,insFmt(p.dl)])];}
+};
+/* diálogos auxiliares */
+function insAskDeadline(title,hint){
+  return new Promise(res=>{
+    const d=new Date(insNow()+48*3600000),iso=`${d.getFullYear()}-${p2(d.getMonth()+1)}-${p2(d.getDate())}`;
+    $('kpi-title').textContent=title;
+    $('kpi-body').innerHTML=`<p class="text-sm text-gray-400 mb-3">${hint}</p><div class="grid grid-cols-2 gap-3"><div><label class="block text-xs text-gray-300 mb-1" for="ia-d">Novo prazo (data)</label><input class="field" id="ia-d" type="date" value="${iso}"></div><div><label class="block text-xs text-gray-300 mb-1" for="ia-t">Horário</label><input class="field" id="ia-t" type="time" value="23:59"></div></div><div class="mt-3"><label class="block text-xs text-gray-300 mb-1" for="ia-r">Motivo (opcional)</label><textarea class="field" id="ia-r" rows="2" maxlength="300"></textarea></div><p id="ia-m" class="text-sm mt-2" style="color:#f87171"></p><div class="mt-4 flex gap-2 justify-end"><button class="btn btn-secondary" id="ia-c" type="button">Cancelar</button><button class="btn btn-primary" id="ia-ok" type="button">Confirmar</button></div>`;
+    $('kpi-modal').classList.remove('hidden-view');
+    $('ia-c').onclick=()=>{closeKpi();res(null);};
+    $('ia-ok').onclick=()=>{const dv=$('ia-d').value,tv=$('ia-t').value,dt=dv&&tv?new Date(dv+'T'+tv+':00'):null;
+      if(!dt||isNaN(dt)||dt.getTime()<=insNow()){$('ia-m').textContent='Informe uma data e um horário futuros.';return;}
+      closeKpi();res({iso:dt.toISOString(),reason:$('ia-r').value.trim()});};
+  });
+}
+const INS_LOG={created:'Insight criado',updated:'Insight editado',published:'Insight publicado',closed:'Insight encerrado',reopened:'Prazo reaberto ou prorrogado',answers_submitted:'Resposta enviada',answers_resubmitted:'Resposta reenviada',answer_reopened:'Resposta reaberta / exceção de prazo',reviewed:'Observação ou revisão registrada'};
+async function insHistory(id){
+  $('kpi-title').textContent='Histórico do Insight';$('kpi-body').innerHTML='<p class="text-sm text-gray-400">Carregando...</p>';$('kpi-modal').classList.remove('hidden-view');
+  const r=await supabaseClient.from('insight_log').select('action,actor_id,assignment_id,details,created_at').eq('insight_id',id).order('created_at',{ascending:false}).limit(200);
+  if(r.error){$('kpi-body').innerHTML='<p class="text-sm" style="color:#fca5a5">Não foi possível carregar o histórico.</p>';return;}
+  const det=l=>{const d=l.details||{},p=[];if(d.member_id)p.push(safeText(insName(d.member_id)));if(d.old_ends_at&&d.new_ends_at)p.push(`prazo ${insFmt(d.old_ends_at)} → ${insFmt(d.new_ends_at)}`);if(d.deadline)p.push('novo prazo '+insFmt(d.deadline));if(d.reason)p.push('motivo: '+safeText(d.reason));if(d.assignments!=null)p.push(d.assignments+' obrigações criadas');if(d.late)p.push('fora do prazo');return p.join(' · ');};
+  $('kpi-body').innerHTML=(r.data||[]).map(l=>`<div class="py-2" style="border-top:1px solid #2b2b2f"><div class="text-sm text-white">${INS_LOG[l.action]||safeText(l.action)}</div><div class="text-xs text-gray-400">${insFmt(l.created_at)} · ${l.actor_id?safeText(insName(l.actor_id)):'Sistema'}</div>${det(l)?`<div class="text-xs text-gray-500">${det(l)}</div>`:''}</div>`).join('')||'<p class="text-sm text-gray-500">Sem registros.</p>';
+}
+/* ações */
+async function insDo(fn,okMsg){try{const r=await fn();await insAdminFetch();insAdminRender();if(okMsg)uiAlert(okMsg);return r;}catch(e){uiAlert(e.message);return null;}}
+async function insListAction(k,id){
+  const i=insById(id);if(!i)return;
+  if(k==='edit')return insEdOpen(i);
+  if(k==='resp'){INS.fIns=String(id);INS.sec='resp';return insAdminRender();}
+  if(k==='hist')return insHistory(id);
+  if(k==='publish'){if(!await uiConfirm('Publicar este Insight? Ao publicar, os integrantes elegíveis recebem a obrigação de responder e as perguntas não poderão mais ser alteradas.'))return;return insDo(async()=>{const r=await insRpc('insight_admin_publish',{p_insight:id});return r;},'Insight publicado. As obrigações de resposta foram criadas para os integrantes elegíveis.');}
+  if(k==='close'){if(!await uiConfirm('Encerrar este Insight agora? Ninguém poderá enviar novas respostas (exceto exceções de prazo).'))return;return insDo(()=>insRpc('insight_admin_close',{p_insight:id}));}
+  if(k==='del'){if(!await uiConfirm('Excluir este rascunho? Esta ação não pode ser desfeita.'))return;return insDo(()=>insRpc('insight_admin_delete',{p_insight:id}));}
+  if(k==='reopen'){const r=await insAskDeadline(insEff(i)==='closed'?'Reabrir Insight':'Alterar prazo','Defina o novo prazo final para todos os integrantes. A ação fica registrada no histórico.');if(!r)return;return insDo(()=>insRpc('insight_admin_reopen',{p_insight:id,p_ends_at:r.iso,p_reason:r.reason}),'Prazo atualizado.');}
+}
+async function insExcAction(aid){
+  const r=await insAskDeadline('Reabrir resposta / exceção de prazo','O integrante poderá responder (ou editar a resposta) até o novo prazo. A ação fica registrada no histórico.');if(!r)return;
+  await insDo(()=>insRpc('insight_admin_reopen_answer',{p_assignment:aid,p_deadline:r.iso,p_reason:r.reason}),'Exceção registrada.');
+  if(INS.sec==='resp')insRespLoad();
+}
+/* editor */
+const insDateIso=ts=>{const d=new Date(ts);return `${d.getFullYear()}-${p2(d.getMonth()+1)}-${p2(d.getDate())}`;};
+const insTimeIso=ts=>{const d=new Date(ts);return `${p2(d.getHours())}:${p2(d.getMinutes())}`;};
+const insLocal=(d,t)=>{if(!d||!t)return null;const x=new Date(d+'T'+t+':00');return isNaN(x)?null:x;};
+function insEdNew(){const s=new Date(insNow()+5*60000),e=new Date(insNow()+7*86400000);return {id:null,status:'draft',title:'',description:'',sd:insDateIso(s),st:insTimeIso(s),ed:insDateIso(e),et:'23:59',all:false,divs:[],allowEdit:false,allowDraft:true,questions:[insQNew()]};}
+const insQNew=()=>({kind:'text',prompt:'',required:true,options:['','']});
+async function insEdOpen(i){
+  if(!i){INS.ed=insEdNew();return insAdminRender();}
+  const qs=await supabaseClient.from('insight_questions').select('id,sort_order,kind,prompt,required').eq('insight_id',i.id).order('sort_order');
+  const ids=(qs.data||[]).map(q=>q.id),ops=ids.length?await supabaseClient.from('insight_options').select('question_id,label,sort_order').in('question_id',ids):{data:[]};
+  INS.ed={id:i.id,status:i.status,title:i.title,description:i.description||'',sd:insDateIso(i.starts_at),st:insTimeIso(i.starts_at),ed:insDateIso(i.ends_at),et:insTimeIso(i.ends_at),all:i.all_divisions,divs:INS.links.filter(l=>l.insight_id===i.id).map(l=>l.division_id),allowEdit:i.allow_edit,allowDraft:i.allow_draft,
+    questions:(qs.data||[]).map(q=>({kind:q.kind,prompt:q.prompt,required:q.required,options:(ops.data||[]).filter(o=>o.question_id===q.id).sort((a,b)=>a.sort_order-b.sort_order).map(o=>o.label)}))};
+  insAdminRender();
+}
+function insEdRender(){
+  const E=INS.ed,lock=E.status!=='draft',dis=lock?'disabled':'',K={text:'Resposta em texto livre',single:'Escolha única',multiple:'Múltipla escolha',boolean:'Verdadeiro ou falso'};
+  $('ins-admin-body').innerHTML=`<div class="mb-4 no-print"><button type="button" class="btn btn-secondary btn-sm" data-ined="cancel"><i class="fa-solid fa-arrow-left mr-2"></i>Voltar</button></div><div class="row-card"><h3 class="font-display text-white text-2xl tracking-widest uppercase mb-3">${E.id?'Editar Insight':'Criar Insight'}</h3>${lock?'<div class="ins-note" style="--c:#f59e0b"><i class="fa-solid fa-lock mr-2"></i>Este Insight já foi publicado: só é possível alterar título, instruções e opções. Para mudar o prazo, use “Alterar prazo” na lista.</div>':''}
+  <div class="grid md:grid-cols-2 gap-3 mt-3"><div class="md:col-span-2"><label class="block text-xs text-gray-300 mb-1" for="ied-title">Título do Insight *</label><input class="field" id="ied-title" data-f="title" maxlength="160" value="${safeText(E.title)}"></div><div class="md:col-span-2"><label class="block text-xs text-gray-300 mb-1" for="ied-desc">Descrição ou instruções</label><textarea class="field" id="ied-desc" data-f="description" rows="3" maxlength="1500">${safeText(E.description)}</textarea></div>
+  <div><label class="block text-xs text-gray-300 mb-1" for="ied-sd">Início (data) *</label><input class="field" id="ied-sd" data-f="sd" type="date" value="${E.sd}" ${dis}></div><div><label class="block text-xs text-gray-300 mb-1" for="ied-st">Início (horário) *</label><input class="field" id="ied-st" data-f="st" type="time" value="${E.st}" ${dis}></div>
+  <div><label class="block text-xs text-gray-300 mb-1" for="ied-ed">Encerramento (data) *</label><input class="field" id="ied-ed" data-f="ed" type="date" value="${E.ed}" ${dis}></div><div><label class="block text-xs text-gray-300 mb-1" for="ied-et">Encerramento (horário) *</label><input class="field" id="ied-et" data-f="et" type="time" value="${E.et}" ${dis}></div></div>
+  <h4 class="font-heading text-gold text-sm uppercase tracking-widest mt-4 mb-2">Divisões destinatárias *</h4><label class="ins-opt"><input type="checkbox" data-f="all" ${E.all?'checked':''} ${dis}><span>Todas as divisões</span></label><div class="grid sm:grid-cols-2 md:grid-cols-3 gap-1 mt-1">${divisionsList.map(d=>`<label class="ins-opt"><input type="checkbox" data-div="${d.id}" ${E.all||E.divs.includes(d.id)?'checked':''} ${E.all||lock?'disabled':''}><span>${safeText(d.name)}</span></label>`).join('')||'<p class="text-sm text-gray-500">Nenhuma divisão cadastrada.</p>'}</div>
+  <h4 class="font-heading text-gold text-sm uppercase tracking-widest mt-4 mb-2">Regras</h4><label class="ins-opt"><input type="checkbox" data-f="allowDraft" ${E.allowDraft?'checked':''}><span>Permitir que o integrante salve rascunho</span></label><label class="ins-opt"><input type="checkbox" data-f="allowEdit" ${E.allowEdit?'checked':''}><span>Permitir alterar as respostas depois de enviar (até o prazo)</span></label>
+  <h4 class="font-heading text-gold text-sm uppercase tracking-widest mt-4 mb-2">Perguntas (${E.questions.length})</h4><div class="space-y-3" id="ied-qs">${E.questions.map((q,n)=>`<div class="ie-q" data-qi="${n}"><div class="flex flex-wrap items-center gap-2 mb-2"><span class="rules-n">${p2(n+1)}</span><select class="field" style="max-width:240px" data-qf="kind" ${dis}>${Object.entries(K).map(([k,l])=>`<option value="${k}" ${q.kind===k?'selected':''}>${l}</option>`).join('')}</select><label class="ins-opt" style="margin:0"><input type="checkbox" data-qf="required" ${q.required?'checked':''} ${dis}><span>Obrigatória</span></label><span class="flex-1"></span>${lock?'':`<button type="button" class="btn btn-secondary btn-sm" data-qa="up" ${n===0?'disabled':''} aria-label="Subir"><i class="fa-solid fa-arrow-up"></i></button><button type="button" class="btn btn-secondary btn-sm" data-qa="down" ${n===E.questions.length-1?'disabled':''} aria-label="Descer"><i class="fa-solid fa-arrow-down"></i></button><button type="button" class="btn btn-danger btn-sm" data-qa="del" aria-label="Remover"><i class="fa-solid fa-trash"></i></button>`}</div><textarea class="field" rows="2" maxlength="600" data-qf="prompt" placeholder="Digite a pergunta" ${dis}>${safeText(q.prompt)}</textarea>${q.kind==='single'||q.kind==='multiple'?`<div class="mt-2 space-y-1"><div class="text-xs text-gray-400">Alternativas (mínimo 2)</div>${q.options.map((o,k)=>`<div class="flex gap-2"><input class="field" data-qo="${k}" maxlength="200" value="${safeText(o)}" placeholder="Alternativa ${k+1}" ${dis}>${lock||q.options.length<=2?'':`<button type="button" class="btn btn-secondary btn-sm" data-qa="delopt" data-k="${k}" aria-label="Remover alternativa"><i class="fa-solid fa-xmark"></i></button>`}</div>`).join('')}${lock?'':'<button type="button" class="btn btn-secondary btn-sm" data-qa="addopt"><i class="fa-solid fa-plus mr-1"></i>Alternativa</button>'}</div>`:''}</div>`).join('')}</div>${lock?'':'<button type="button" class="btn btn-secondary btn-sm mt-3" data-ined="addq"><i class="fa-solid fa-plus mr-2"></i>Adicionar pergunta</button>'}
+  <p id="ied-msg" class="text-sm mt-3" style="color:#f87171" role="status" aria-live="polite"></p><div class="tv-act">${lock?'<button type="button" class="btn btn-primary" data-ined="save">Salvar alterações</button>':'<button type="button" class="btn btn-secondary" data-ined="save">Salvar rascunho</button><button type="button" class="btn btn-primary" data-ined="publish"><i class="fa-solid fa-paper-plane mr-2"></i>Publicar</button>'}<button type="button" class="btn btn-secondary" data-ined="cancel">Cancelar</button></div></div>`;
+}
+function insEdPayload(){
+  const E=INS.ed,s=insLocal(E.sd,E.st),e=insLocal(E.ed,E.et);
+  return {id:E.id,title:E.title.trim(),description:E.description.trim(),starts_at:s?s.toISOString():null,ends_at:e?e.toISOString():null,all_divisions:E.all,divisions:E.all?[]:E.divs,allow_edit:E.allowEdit,allow_draft:E.allowDraft,
+    questions:E.questions.map(q=>({kind:q.kind,prompt:q.prompt.trim(),required:q.required,options:(q.kind==='single'||q.kind==='multiple')?q.options.map(o=>o.trim()).filter(Boolean):[]}))};
+}
+function insEdValidate(forPublish){
+  const E=INS.ed,s=insLocal(E.sd,E.st),e=insLocal(E.ed,E.et);
+  if(E.title.trim().length<3)return 'Informe o título do Insight (mínimo 3 letras).';
+  if(E.status==='draft'){
+    if(!s)return 'Informe a data e o horário de início.';if(!e)return 'Informe a data e o horário de encerramento.';
+    if(e<=s)return 'A data de encerramento precisa ser posterior à data de início.';
+  }
+  if(forPublish){
+    if(e&&e.getTime()<=insNow())return 'A data de encerramento precisa ser futura para publicar.';
+    if(!E.all&&!E.divs.length)return 'Selecione ao menos uma divisão (ou marque “Todas as divisões”).';
+    if(!E.questions.length)return 'Cadastre ao menos uma pergunta.';
+  }
+  for(let n=0;n<E.questions.length;n++){const q=E.questions[n];
+    if(q.prompt.trim().length<3&&(forPublish||q.prompt.trim()))return `Digite o texto da pergunta ${p2(n+1)}.`;
+    if(forPublish&&(q.kind==='single'||q.kind==='multiple')&&q.options.filter(o=>o.trim()).length<2)return `A pergunta ${p2(n+1)} precisa de ao menos 2 alternativas.`;}
+  return '';
+}
+async function insEdSave(publish){
+  const E=INS.ed,m=insEdValidate(publish),msgEl=$('ied-msg');
+  if(m){msgEl.textContent=m;return;}
+  if(publish&&!await uiConfirm('Publicar este Insight? Ao publicar, os integrantes elegíveis recebem a obrigação de responder e as perguntas não poderão mais ser alteradas.'))return;
+  try{
+    const id=await insRpc('insight_admin_save',{p_payload:insEdPayload()});
+    if(publish)await insRpc('insight_admin_publish',{p_insight:id});
+    await insAdminFetch();INS.ed=null;INS.sec='list';insAdminRender();
+    uiAlert(publish?'Insight publicado. As obrigações de resposta foram criadas para os integrantes elegíveis.':(E.status==='draft'?'Rascunho salvo.':'Alterações salvas.'));
+  }catch(e){msgEl.textContent=e.message;}
+}
+$('ins-admin-body').addEventListener('input',e=>{
+  const E=INS.ed,t=e.target;
+  if(!E){
+    if(t.id==='insf-name'){INS.fName=t.value;if(INS.sec==='resp')insRespRender();else insReRenderSec(true);}
+    else if(t.id==='insf-from'||t.id==='insf-to'){INS[t.id==='insf-from'?'fFrom':'fTo']=t.value;insReRenderSec();}
+    return;
+  }
+  if(t.dataset.f&&t.type!=='checkbox'){E[t.dataset.f]=t.value;return;}
+  const qi=t.closest('[data-qi]');
+  if(qi){const q=E.questions[+qi.dataset.qi];if(t.dataset.qf==='prompt')q.prompt=t.value;else if(t.dataset.qo!=null)q.options[+t.dataset.qo]=t.value;}
+});
+function insReRenderSec(keepFocus){
+  const sb=$('ins-sec-body');if(!sb)return;const act=document.activeElement&&document.activeElement.id,pos=document.activeElement&&document.activeElement.selectionStart;
+  sb.innerHTML=({track:insSecTrack,pend:insSecPend}[INS.sec]||(()=>sb.innerHTML))();insTick();
+  if(act&&$(act)){$(act).focus();try{if(pos!=null)$(act).setSelectionRange(pos,pos);}catch(_){}}
+}
+$('ins-admin-body').addEventListener('change',e=>{
+  const E=INS.ed,t=e.target;
+  if(E){
+    if(t.dataset.f==='all'){E.all=t.checked;insEdRender();return;}
+    if(t.dataset.f&&t.type==='checkbox'){E[t.dataset.f]=t.checked;return;}
+    if(t.dataset.f){E[t.dataset.f]=t.value;return;}
+    if(t.dataset.div){const id=+t.dataset.div;E.divs=t.checked?[...new Set([...E.divs,id])]:E.divs.filter(x=>x!==id);return;}
+    const qi=t.closest('[data-qi]');
+    if(qi){const q=E.questions[+qi.dataset.qi];if(t.dataset.qf==='kind'){q.kind=t.value;if((t.value==='single'||t.value==='multiple')&&q.options.length<2)q.options=['',''];insEdRender();}else if(t.dataset.qf==='required')q.required=t.checked;}
+    return;
+  }
+  const id=t.id;
+  if(id==='ins-scope'){INS.scope=t.value;insAdminRender();}
+  else if(id==='insf-ins'){INS.fIns=t.value;insAdminRender();}
+  else if(id==='insf-div'){INS.fDiv=t.value;insAdminRender();}
+  else if(id==='insf-st'){INS.fSt=t.value;insAdminRender();}
+  else if(id==='insf-from'||id==='insf-to'){INS[id==='insf-from'?'fFrom':'fTo']=t.value;insReRenderSec();}
+});
+$('ins-admin-body').addEventListener('click',async e=>{
+  const E=INS.ed,t=e.target;
+  const sec=t.closest('[data-insec]');if(sec){INS.sec=sec.dataset.insec;insAdminRender();return;}
+  const a2=t.closest('[data-insact2]');
+  if(a2){const k=a2.dataset.insact2;
+    if(k==='new')return insEdOpen(null);
+    if(k==='refresh'){await insAdminRefresh();return;}
+    if(k==='print'){insPrint();return;}
+    if(k.startsWith('csv-')){const m=k.slice(4);insCsvFile(`insight-${m}-${new Date(insNow()).toISOString().slice(0,10)}.csv`,insCsvData[m]());return;}}
+  const la=t.closest('[data-inslist]');if(la){insListAction(la.dataset.inslist,+la.dataset.id);return;}
+  const ex=t.closest('[data-insexc]');if(ex){insExcAction(+ex.dataset.insexc);return;}
+  const sn=t.closest('[data-inssavenote]');
+  if(sn){const id=+sn.dataset.inssavenote,note=document.querySelector(`[data-insnote="${id}"]`).value,rev=document.querySelector(`[data-insrev="${id}"]`).value||null;
+    try{await insRpc('insight_admin_note',{p_assignment:id,p_note:note,p_review:rev});await insAdminFetch();insRespRender();uiAlert('Observação salva.');}catch(er){uiAlert(er.message);}return;}
+  if(!E)return;
+  const ed=t.closest('[data-ined]');
+  if(ed){const k=ed.dataset.ined;
+    if(k==='cancel'){INS.ed=null;insAdminRender();}
+    else if(k==='addq'){E.questions.push(insQNew());insEdRender();}
+    else if(k==='save')insEdSave(false);
+    else if(k==='publish')insEdSave(true);
+    return;}
+  const qa=t.closest('[data-qa]'),qi=t.closest('[data-qi]');
+  if(qa&&qi){const n=+qi.dataset.qi,q=E.questions[n],k=qa.dataset.qa;
+    if(k==='del')E.questions.splice(n,1);
+    else if(k==='up'&&n>0)[E.questions[n-1],E.questions[n]]=[E.questions[n],E.questions[n-1]];
+    else if(k==='down'&&n<E.questions.length-1)[E.questions[n+1],E.questions[n]]=[E.questions[n],E.questions[n+1]];
+    else if(k==='addopt')q.options.push('');
+    else if(k==='delopt')q.options.splice(+qa.dataset.k,1);
+    insEdRender();}
+});
 
 /* ───────── Painel Administrativo: Viagens e Pedidos de Ajuda ───────── */
 let atvTrips=[],atvEms=[],atvF={status:'',q:''},ahF='open';
