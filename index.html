@@ -391,6 +391,15 @@
         .ins-tb{width:100%;border-collapse:collapse;font-size:13px}.ins-tb th{text-align:left;padding:8px 10px;border-bottom:1px solid #c9a84c66;color:#c9a84c;font:600 11px 'Oswald',sans-serif;letter-spacing:.12em;text-transform:uppercase;white-space:nowrap}.ins-tb td{padding:8px 10px;border-bottom:1px solid #2b2b2f;color:#e5e5e5;vertical-align:top}
         .pbar{height:9px;border-radius:999px;background:#1d1d22;overflow:hidden;margin-top:8px}.pbar i{display:block;height:100%;border-radius:999px;transition:width .4s}
         .rep-k{text-align:center;border:1px solid #2b2b2f;border-radius:10px;padding:8px}.rep-k b{display:block;font:700 24px 'Oswald',sans-serif;color:#fff}.rep-k span{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#a1a1aa}
+        #ins-modal{position:fixed;inset:0;z-index:320;background:rgba(0,0,0,.8);align-items:center;justify-content:center;padding:18px;overflow:hidden;overscroll-behavior:contain}#ins-modal:not(.hidden-view){display:flex}
+        .ins-mbox{width:100%;max-width:1080px;max-height:calc(100vh - 36px);max-height:calc(100dvh - 36px);display:flex;flex-direction:column;background:linear-gradient(180deg,#141418,#0c0c0e);border:1px solid #2b2b2f;border-top:3px solid #c9a84c;border-radius:14px;box-shadow:0 20px 60px rgba(0,0,0,.75);animation:kpiIn .2s ease;overflow:hidden}
+        .ins-mhead{display:flex;align-items:center;gap:12px;padding:16px 18px;border-bottom:1px solid #2b2b2f}.ins-mhead h3{margin:0;font-family:'Oswald',sans-serif;font-size:20px;letter-spacing:.1em;text-transform:uppercase;color:#c9a84c;overflow-wrap:anywhere}.ins-mhead p{margin:2px 0 0;font-size:12px;color:#a1a1aa}
+        .ins-mbody{padding:16px 18px;overflow:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch}.ins-mfoot{display:flex;justify-content:flex-end;gap:10px;padding:12px 18px;border-top:1px solid #2b2b2f}
+        .insm-h{margin:18px 0 8px;font-family:'Oswald',sans-serif;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:#c9a84c}
+        .ins-kv{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px}.ins-kv small{display:block;font:11px 'Oswald',sans-serif;letter-spacing:.12em;text-transform:uppercase;color:#8b8b95}.ins-kv>div>div{color:#fff;font-size:14px;margin-top:2px}
+        .ins-clk{position:relative;cursor:pointer;transition:border-color .2s,background .2s}.ins-clk:hover,.ins-clk:focus-visible{background:#17171c!important;border-color:#c9a84c!important;outline:none}.ins-go{position:absolute;right:10px;top:10px;font-size:11px;color:#6b7280}.ins-clk:hover .ins-go{color:#c9a84c}
+        .ins-tb tr.ins-clk:hover td{background:#17171c}
+        body.sb-min .ins-top{padding-left:44px}
         #ins-print-root{display:none}
         @media print{html,body.ins-printing{background:#fff!important}body.ins-printing{position:static!important;overflow:visible!important;padding:0!important;margin:0!important}body.ins-printing>*:not(#ins-print-root){display:none!important}body.ins-printing #ins-print-root{display:block!important;padding:8px 4px}#ins-print-root *{color:#000!important;background:transparent!important;border-color:#999!important;box-shadow:none!important;text-shadow:none!important}#ins-print-root .font-display{font-size:22px!important}#ins-print-root table{width:100%;border-collapse:collapse}#ins-print-root th,#ins-print-root td{padding:4px 6px;border-bottom:1px solid #999;text-align:left;font-size:12px}#ins-print-root .rep-k{display:inline-block;min-width:150px;margin-right:8px;border:1px solid #999}#ins-print-root tr{break-inside:avoid}.no-print{display:none!important}}
         .org-grp{margin-bottom:10px}.org-tog{display:flex;width:100%;align-items:center;justify-content:space-between;gap:12px;padding:12px 16px;background:#141418;border:1px solid #c9a84c55;border-radius:10px;cursor:pointer;text-align:left;transition:border-color .2s,background .2s}.org-tog:hover,.org-tog:focus-visible{border-color:#c9a84c;background:#1a1a20;outline:none}.org-chev{color:#c9a84c;transition:transform .2s}.org-tog[aria-expanded=true] .org-chev{transform:rotate(180deg)}.org-body{margin-top:10px}
@@ -473,6 +482,7 @@
   <div id="ui-dialog" class="hidden-view" role="alertdialog" aria-modal="true" aria-labelledby="ui-dlg-title" aria-describedby="ui-dlg-msg"><div class="ui-dlg-box"><div class="ui-dlg-head"><i id="ui-dlg-icon" class="fa-solid fa-circle-question" aria-hidden="true"></i><h3 id="ui-dlg-title">Confirmação</h3></div><div class="ui-dlg-body"><p id="ui-dlg-msg"></p><textarea id="ui-dlg-input" class="field hidden-view" rows="3" maxlength="500"></textarea></div><div class="ui-dlg-foot"><button type="button" class="btn btn-secondary" id="ui-dlg-cancel">Cancelar</button><button type="button" class="btn btn-primary" id="ui-dlg-ok">Confirmar</button></div></div></div>
   <div id="sos-dialog" class="hidden-view" role="dialog" aria-modal="true" aria-labelledby="sos-title"><div class="ui-dlg-box" id="sos-box"><div class="ui-dlg-head"><i id="sos-icon" class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i><h3 id="sos-title">Pedir ajuda</h3></div><div class="ui-dlg-body"><p id="sos-sub" style="margin-bottom:10px"></p><div id="sos-types" class="sos-types"></div><textarea id="sos-text" class="field" rows="3" maxlength="400" placeholder="Descreva o que aconteceu e onde você está (opcional)"></textarea><label class="sos-share"><input type="checkbox" id="sos-share" checked> Compartilhar minha localização em tempo real com o comando</label><p id="sos-msg" class="text-sm mt-2" style="color:#f87171"></p></div><div class="ui-dlg-foot"><button type="button" class="btn btn-secondary" id="sos-cancel">Cancelar</button><button type="button" class="btn" id="sos-send">Enviar pedido</button></div></div></div>
   <div id="sb-backdrop" aria-hidden="true"></div>
+  <div id="ins-modal" class="hidden-view" role="dialog" aria-modal="true" aria-labelledby="insm-title"><div class="ins-mbox"><div class="ins-mhead"><button type="button" class="btn btn-secondary btn-sm hidden-view" id="insm-back"><i class="fa-solid fa-arrow-left mr-1"></i>Voltar</button><div class="min-w-0" style="flex:1"><h3 id="insm-title"></h3><p id="insm-sub"></p></div><button type="button" class="pop-x" id="insm-x" aria-label="Fechar" style="position:static"><i class="fa-solid fa-xmark"></i></button></div><div id="insm-body" class="ins-mbody"></div><div class="ins-mfoot"><button type="button" class="btn btn-secondary btn-sm" id="insm-csv"><i class="fa-solid fa-file-csv mr-2"></i>Exportar CSV</button><button type="button" class="btn btn-secondary btn-sm" id="insm-close">Fechar</button></div></div></div>
   <div id="pop-modal" class="hidden-view" role="dialog" aria-modal="true"><div class="pop-box"><button type="button" class="pop-x" id="pop-x" aria-label="Fechar"><i class="fa-solid fa-xmark"></i></button><div id="pop-body"></div></div></div>
   <div id="kpi-modal" class="hidden-view" role="dialog" aria-modal="true"><div class="kpi-box"><div class="kpi-head"><h3 id="kpi-title"></h3><button type="button" id="kpi-x" aria-label="Fechar"><i class="fa-solid fa-xmark"></i></button></div><div id="kpi-body"></div></div></div>
   <div id="rules-modal" class="hidden-view" role="dialog" aria-modal="true" aria-labelledby="rules-title">
@@ -1874,7 +1884,7 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape')brCloseCal();},true)
 document.addEventListener('reset',e=>{e.target.querySelectorAll('[data-br]').forEach(h=>{h.value='';});},true);
 
 /* ───────── Janelas flutuantes: trava a rolagem do fundo, honrarias e foto ampliada ───────── */
-const LOCK_IDS=['ui-dialog','sos-dialog','kpi-modal','info-modal','rules-modal','rules-detail','member-modal','pop-modal'];let lockY=null;
+const LOCK_IDS=['ui-dialog','sos-dialog','kpi-modal','info-modal','rules-modal','rules-detail','ins-modal','member-modal','pop-modal'];let lockY=null;
 function syncLock(){
   const any=LOCK_IDS.some(id=>{const e=document.getElementById(id);return e&&!e.classList.contains('hidden-view');}),b=document.body;
   if(any&&lockY===null){lockY=window.scrollY;b.style.top=(-lockY)+'px';b.classList.add('modal-lock');}
@@ -2425,14 +2435,14 @@ function insAdminRender(){
   const body=$('ins-admin-body');if(!body)return;
   if(INS.ed){insEdRender();return;}
   const nav=INS_SECS.map(([k,l,ic])=>`<button type="button" class="ins-sec ${INS.sec===k?'on':''}" data-insec="${k}"><i class="fa-solid ${ic}"></i>${l}</button>`).join('');
-  const head=`<div class="flex flex-wrap items-start justify-between gap-3 mb-4"><div><h3 class="font-display text-white text-3xl tracking-widest uppercase">Insight de Divisões</h3><p class="text-sm text-gray-400 mt-1">Perguntas enviadas pelo Comando, respostas obrigatórias por divisão e acompanhamento da participação. Atualizado ${insFmt(new Date(insNow()).toISOString())}.</p></div><div class="flex gap-2 no-print"><button type="button" class="btn btn-secondary btn-sm" data-insact2="refresh"><i class="fa-solid fa-rotate mr-2"></i>Atualizar</button><button type="button" class="btn btn-primary" data-insact2="new"><i class="fa-solid fa-plus mr-2"></i>Criar Insight</button></div></div><div class="ins-secs no-print">${nav}</div>`;
+  const head=`<div class="ins-top flex flex-wrap items-start justify-between gap-3 mb-4"><div><h3 class="font-display text-white text-3xl tracking-widest uppercase">Insight de Divisões</h3><p class="text-sm text-gray-400 mt-1">Perguntas enviadas pelo Comando, respostas obrigatórias por divisão e acompanhamento da participação. Atualizado ${insFmt(new Date(insNow()).toISOString())}.</p></div><div class="flex gap-2 no-print"><button type="button" class="btn btn-secondary btn-sm" data-insact2="refresh"><i class="fa-solid fa-rotate mr-2"></i>Atualizar</button><button type="button" class="btn btn-primary" data-insact2="new"><i class="fa-solid fa-plus mr-2"></i>Criar Insight</button></div></div><div class="ins-secs no-print">${nav}</div>`;
   const fn={overview:insSecOverview,list:insSecList,track:insSecTrack,part:insSecPart,pend:insSecPend,resp:insSecResp,report:insSecReport}[INS.sec];
   body.innerHTML=head+'<div id="ins-sec-body" class="mt-4">'+fn()+'</div>';
   insTick();
   if(INS.sec==='resp'&&INS.fIns)insRespLoad();
 }
 const insScopeSel=(id,val,all)=>`<select class="field" id="${id}"><option value="">${all}</option>${INS.insights.filter(i=>i.status!=='draft').map(i=>`<option value="${i.id}" ${String(val)===String(i.id)?'selected':''}>${safeText(i.title)}</option>`).join('')}</select>`;
-const insKpi=(ic,col,n,l,sub)=>`<div class="row-card" style="border-top:3px solid ${col}"><div class="font-display text-3xl text-white"><i class="fa-solid ${ic} text-base mr-2" style="color:${col}"></i>${n}</div><div class="text-[11px] text-gray-400 uppercase font-heading tracking-widest">${l}</div>${sub?`<div class="text-xs text-gray-500 mt-1">${sub}</div>`:''}</div>`;
+const insKpi=(ic,col,n,l,sub,kind)=>`<div class="row-card${kind?' ins-clk':''}" ${kind?`data-insdet="${kind}" role="button" tabindex="0" title="Ver relatório detalhado"`:''} style="border-top:3px solid ${col}">${kind?'<i class="fa-solid fa-up-right-from-square ins-go"></i>':''}<div class="font-display text-3xl text-white"><i class="fa-solid ${ic} text-base mr-2" style="color:${col}"></i>${n}</div><div class="text-[11px] text-gray-400 uppercase font-heading tracking-widest">${l}</div>${sub?`<div class="text-xs text-gray-500 mt-1">${sub}</div>`:''}</div>`;
 const insBar=(pct,col)=>`<div class="pbar"><i style="width:${pct==null?0:pct}%;background:${col||'#c9a84c'}"></i></div>`;
 
 function insSecOverview(){
@@ -2441,8 +2451,8 @@ function insSecOverview(){
   const top=ds.slice(0,3),low=ds.slice().reverse().slice(0,3);
   const li=l=>l.length?l.map(d=>`<div class="flex items-center gap-3 py-1"><span class="text-sm text-white flex-1">${safeText(d.name)}</span><span class="text-sm text-gold">${insPct(d.pct)}</span></div>`).join(''):'<p class="text-sm text-gray-500">Sem dados ainda.</p>';
   return `<div class="grid md:grid-cols-3 gap-2 mb-4"><div class="md:col-span-1"><label class="block text-xs text-gray-300 mb-1" for="ins-scope">Ver números de</label>${insScopeSel('ins-scope',INS.scope,'Todos os Insights publicados')}</div></div>
-  <div class="grid grid-cols-2 lg:grid-cols-4 gap-2">${insKpi('fa-lightbulb','#c9a84c',INS.insights.length,'Insights cadastrados',`${c('draft')} rascunho(s) · ${c('scheduled')} agendado(s)`)}${insKpi('fa-bolt','#22c55e',c('active'),'Insights ativos')}${insKpi('fa-flag-checkered','#9ca3af',c('closed'),'Insights encerrados')}${insKpi('fa-users','#3b82f6',st.members,'Integrantes elegíveis',`${st.total} obrigação(ões)`)}${insKpi('fa-circle-check','#22c55e',st.answered,'Respostas enviadas',`${st.onTime} no prazo · ${st.late} fora do prazo`)}${insKpi('fa-hourglass-half','#ef4444',st.pending,'Pendentes')}${insKpi('fa-clock','#22c55e',st.onTime,'Enviadas no prazo')}${insKpi('fa-percent','#c9a84c',insPct(st.pct),'Participação geral',st.total?'':'Sem integrantes elegíveis')}</div>
-  <div class="grid md:grid-cols-3 gap-3 mt-4"><div class="row-card"><h4 class="font-heading text-gold text-sm uppercase tracking-widest mb-2">Maior participação</h4>${li(top)}</div><div class="row-card"><h4 class="font-heading text-gold text-sm uppercase tracking-widest mb-2">Menor participação</h4>${li(low)}</div><div class="row-card"><h4 class="font-heading text-gold text-sm uppercase tracking-widest mb-2">Próximos do encerramento</h4>${near.length?near.map(i=>`<div class="py-1"><div class="text-sm text-white">${safeText(i.title)}</div>${insCd(i.starts_at,i.ends_at,false)}</div>`).join(''):'<p class="text-sm text-gray-500">Nenhum nas próximas 72 horas.</p>'}</div></div>`;
+  <div class="grid grid-cols-2 lg:grid-cols-4 gap-2">${insKpi('fa-lightbulb','#c9a84c',INS.insights.length,'Insights cadastrados',`${c('draft')} rascunho(s) · ${c('scheduled')} agendado(s)`,'total')}${insKpi('fa-bolt','#22c55e',c('active'),'Insights ativos','','active')}${insKpi('fa-flag-checkered','#9ca3af',c('closed'),'Insights encerrados','','closed')}${insKpi('fa-users','#3b82f6',st.members,'Integrantes elegíveis',`${st.total} obrigação(ões)`,'eligible')}${insKpi('fa-circle-check','#22c55e',st.answered,'Respostas enviadas',`${st.onTime} no prazo · ${st.late} fora do prazo`,'answered')}${insKpi('fa-hourglass-half','#ef4444',st.pending,'Pendentes','','pending')}${insKpi('fa-clock','#22c55e',st.onTime,'Enviadas no prazo','','ontime')}${insKpi('fa-percent','#c9a84c',insPct(st.pct),'Participação geral',st.total?'':'Sem integrantes elegíveis','participation')}</div>
+  <div class="grid md:grid-cols-3 gap-3 mt-4"><div class="row-card ins-clk" data-insdet="top" role="button" tabindex="0" title="Ver ranking completo"><i class="fa-solid fa-up-right-from-square ins-go"></i><h4 class="font-heading text-gold text-sm uppercase tracking-widest mb-2">Maior participação</h4>${li(top)}</div><div class="row-card ins-clk" data-insdet="low" role="button" tabindex="0" title="Ver ranking completo"><i class="fa-solid fa-up-right-from-square ins-go"></i><h4 class="font-heading text-gold text-sm uppercase tracking-widest mb-2">Menor participação</h4>${li(low)}</div><div class="row-card ins-clk" data-insdet="near" role="button" tabindex="0" title="Ver detalhes"><i class="fa-solid fa-up-right-from-square ins-go"></i><h4 class="font-heading text-gold text-sm uppercase tracking-widest mb-2">Próximos do encerramento</h4>${near.length?near.map(i=>`<div class="py-1"><div class="text-sm text-white">${safeText(i.title)}</div>${insCd(i.starts_at,i.ends_at,false)}</div>`).join(''):'<p class="text-sm text-gray-500">Nenhum nas próximas 72 horas.</p>'}</div></div>`;
 }
 function insDivsText(i){return i.all_divisions?'Todas as divisões':INS.links.filter(l=>l.insight_id===i.id).map(l=>divName(l.division_id)).join(', ')||'—';}
 function insSecList(){
@@ -2451,8 +2461,8 @@ function insSecList(){
     const acts=[['resp','Respostas','fa-comments']];
     if(i.status==='draft')acts.unshift(['edit','Editar','fa-pen'],['publish','Publicar','fa-paper-plane']);
     else{acts.unshift(['edit','Editar','fa-pen']);if(e==='active'||e==='scheduled')acts.push(['close','Encerrar','fa-lock']);acts.push(['reopen',e==='closed'?'Reabrir':'Alterar prazo','fa-rotate-left']);}
-    acts.push(['hist','Histórico','fa-clock-rotate-left']);if(i.status==='draft')acts.push(['del','Excluir','fa-trash']);
-    return `<div class="row-card tv-trip" style="border-left:3px solid ${s[1]}"><div class="flex flex-wrap items-start justify-between gap-2"><div class="min-w-0"><div class="text-white font-medium">${safeText(i.title)}</div><div class="text-xs text-gray-400 mt-1">${insFmt(i.starts_at)} até ${insFmt(i.ends_at)} · ${safeText(insDivsText(i))}</div></div><span class="ins-chip" style="--c:${s[1]}">${s[0]}</span></div>${i.status!=='draft'?`<div class="text-xs text-gray-400 mt-2">${st.answered}/${st.total} responderam · participação ${insPct(st.pct)}${st.late?` · ${st.late} fora do prazo`:''}</div>${insBar(st.pct)}`:''}<div class="tv-act">${acts.map(([k,l,ic])=>`<button type="button" class="btn ${k==='publish'?'btn-primary':k==='del'?'btn-danger':'btn-secondary'} btn-sm" data-inslist="${k}" data-id="${i.id}"><i class="fa-solid ${ic} mr-1"></i>${l}</button>`).join('')}</div></div>`;}).join('');
+    acts.push(['rel','Relatório','fa-file-lines'],['hist','Histórico','fa-clock-rotate-left']);if(i.status==='draft')acts.push(['del','Excluir','fa-trash']);
+    return `<div class="row-card tv-trip" style="border-left:3px solid ${s[1]}"><div class="flex flex-wrap items-start justify-between gap-2"><div class="min-w-0 ins-clk" data-insdet="insight:${i.id}" role="button" tabindex="0" title="Abrir relatório detalhado" style="padding:2px 6px;margin:-2px -6px;border-radius:8px"><div class="text-white font-medium">${safeText(i.title)} <i class="fa-solid fa-up-right-from-square text-xs" style="color:#6b7280"></i></div><div class="text-xs text-gray-400 mt-1">${insFmt(i.starts_at)} até ${insFmt(i.ends_at)} · ${safeText(insDivsText(i))}</div></div><span class="ins-chip" style="--c:${s[1]}">${s[0]}</span></div>${i.status!=='draft'?`<div class="text-xs text-gray-400 mt-2">${st.answered}/${st.total} responderam · participação ${insPct(st.pct)}${st.late?` · ${st.late} fora do prazo`:''}</div>${insBar(st.pct)}`:''}<div class="tv-act">${acts.map(([k,l,ic])=>`<button type="button" class="btn ${k==='publish'?'btn-primary':k==='del'?'btn-danger':'btn-secondary'} btn-sm" data-inslist="${k}" data-id="${i.id}"><i class="fa-solid ${ic} mr-1"></i>${l}</button>`).join('')}</div></div>`;}).join('');
   return rows?`<div class="space-y-3">${rows}</div>`:'<div class="row-card"><p class="text-sm text-gray-400">Nenhum Insight cadastrado. Use “Criar Insight” para começar.</p></div>';
 }
 function insTrackRows(){
@@ -2475,13 +2485,13 @@ function insSecTrack(){
 }
 function insPartHtml(scope){
   const ds=insDivStats(scope),tot=insStats(insAsgs(scope));
-  return `<div class="grid md:grid-cols-2 gap-3">${ds.map(d=>`<div class="row-card"><div class="flex items-center justify-between gap-2"><div class="text-white font-medium">${safeText(d.name)}</div><div class="font-display text-2xl text-gold">${d.total?insPct(d.pct):'—'}</div></div>${d.total?insBar(d.pct,d.pct>=75?'#22c55e':d.pct>=50?'#c9a84c':'#ef4444')+`<div class="grid grid-cols-3 gap-2 text-center mt-3"><div><b class="text-white">${d.total}</b><div class="text-[10px] text-gray-500 uppercase">Elegíveis</div></div><div><b style="color:#4ade80">${d.answered}</b><div class="text-[10px] text-gray-500 uppercase">Respondidos</div></div><div><b style="color:#f87171">${d.pending}</b><div class="text-[10px] text-gray-500 uppercase">Pendentes</div></div></div><div class="text-xs text-gray-400 mt-2">${d.onTime} no prazo · ${d.late} atrasada(s) · última atualização: ${insFmt(d.last)}</div>`:'<p class="text-sm text-gray-500 mt-2">Sem integrantes elegíveis</p>'}</div>`).join('')||'<p class="text-sm text-gray-400">Nenhuma divisão com obrigações ainda.</p>'}</div><p class="text-xs text-gray-500 mt-3">Participação = integrantes elegíveis que responderam ÷ total de elegíveis × 100. Total geral: ${tot.answered}/${tot.total} (${insPct(tot.pct)}).</p>`;
+  return `<div class="grid md:grid-cols-2 gap-3">${ds.map(d=>`<div class="row-card ins-clk" data-insdet="division:${d.id}" role="button" tabindex="0" title="Ver integrantes da divisão"><i class="fa-solid fa-up-right-from-square ins-go"></i><div class="flex items-center justify-between gap-2"><div class="text-white font-medium">${safeText(d.name)}</div><div class="font-display text-2xl text-gold">${d.total?insPct(d.pct):'—'}</div></div>${d.total?insBar(d.pct,d.pct>=75?'#22c55e':d.pct>=50?'#c9a84c':'#ef4444')+`<div class="grid grid-cols-3 gap-2 text-center mt-3"><div><b class="text-white">${d.total}</b><div class="text-[10px] text-gray-500 uppercase">Elegíveis</div></div><div><b style="color:#4ade80">${d.answered}</b><div class="text-[10px] text-gray-500 uppercase">Respondidos</div></div><div><b style="color:#f87171">${d.pending}</b><div class="text-[10px] text-gray-500 uppercase">Pendentes</div></div></div><div class="text-xs text-gray-400 mt-2">${d.onTime} no prazo · ${d.late} atrasada(s) · última atualização: ${insFmt(d.last)}</div>`:'<p class="text-sm text-gray-500 mt-2">Sem integrantes elegíveis</p>'}</div>`).join('')||'<p class="text-sm text-gray-400">Nenhuma divisão com obrigações ainda.</p>'}</div><p class="text-xs text-gray-500 mt-3">Participação = integrantes elegíveis que responderam ÷ total de elegíveis × 100. Total geral: ${tot.answered}/${tot.total} (${insPct(tot.pct)}).</p>`;
 }
 function insSecPart(){
   return `<div class="grid md:grid-cols-3 gap-2 mb-3 no-print"><div><label class="block text-xs text-gray-300 mb-1" for="ins-scope">Insight</label>${insScopeSel('ins-scope',INS.scope,'Consolidado (todos os publicados)')}</div></div>`+insPartHtml(INS.scope)+`<div class="mt-3 no-print"><button type="button" class="btn btn-secondary btn-sm" data-insact2="csv-part"><i class="fa-solid fa-file-csv mr-2"></i>Exportar CSV</button></div>`;
 }
-function insPendRows(){
-  return insAsgs(INS.fIns).filter(a=>a.status!=='submitted').filter(a=>{const m=insMem2(a.member_id),did=a.division_id??m?.division_id;return !INS.fDiv||String(did)===String(INS.fDiv);})
+function insPendRows(sc=INS.fIns,dv=INS.fDiv){
+  return insAsgs(sc).filter(a=>a.status!=='submitted').filter(a=>{const m=insMem2(a.member_id),did=a.division_id??m?.division_id;return !dv||String(did)===String(dv);})
   .map(a=>{const i=insById(a.insight_id),m=insMem2(a.member_id),dl=insDeadline(a,i),left=new Date(dl).getTime()-insNow(),open=insOpenNow(a,i)&&left>0;
     const sit=!open?'Prazo vencido':left<48*3600000?'Próximo do encerramento':'No prazo';
     return {a,i,name:m?.display_name||'—',div:divName(a.division_id??m?.division_id),dl,left,open,sit};})
@@ -2524,6 +2534,122 @@ function insSecReport(){
   <h4 class="font-heading text-gold text-sm uppercase tracking-widest mb-2">Participação por divisão</h4>${insTable(['Divisão','Elegíveis','Respondidos','Pendentes','Participação'],R.ds.map(d=>`<tr><td>${safeText(d.name)}</td><td>${d.total}</td><td>${d.answered}</td><td>${d.pending}</td><td>${d.total?insPct(d.pct):'Sem integrantes elegíveis'}</td></tr>`))}
   <h4 class="font-heading text-gold text-sm uppercase tracking-widest mt-4 mb-2">Integrantes que ainda precisam responder (${R.pend.length})</h4>${insTable(['Integrante','Divisão','Insight','Prazo'],R.pend.map(p=>`<tr><td>${safeText(p.name)}</td><td>${safeText(p.div)}</td><td>${safeText(p.ins)}</td><td>${insFmt(p.dl)}</td></tr>`))}</div>`;
 }
+/* ───────── Relatórios detalhados (janela própria) ───────── */
+let insmCur=null,insmStack=[];
+const insEnr=a=>{const i=insById(a.insight_id),m=insMem2(a.member_id),did=a.division_id??m?.division_id;return {a,i,m,name:m?.display_name||'—',div:divName(did),did,st:insAStatus(a),dl:insDeadline(a,i)};};
+const insStChip=st=>`<span class="ins-chip" style="--c:${INS_AST[st][1]}">${INS_AST[st][0]}</span>`;
+const INS_REV={pending:'Em revisão',reviewed:'Revisado',needs_fix:'Precisa de ajuste'};
+function insDT(heads,rows){
+  return `<div class="overflow-x-auto"><table class="ins-tb"><thead><tr>${heads.map(h=>`<th>${h}</th>`).join('')}</tr></thead><tbody>${rows.map(r=>`<tr${r.det?` class="ins-clk" data-insdet="${r.det}" role="button" tabindex="0"`:''}>${r.c.map(x=>`<td>${x}</td>`).join('')}</tr>`).join('')||`<tr><td colspan="${heads.length}" class="text-gray-500">Nenhum registro encontrado.</td></tr>`}</tbody></table></div>`;
+}
+const insDCsv=(heads,rows)=>[heads,...rows.map(r=>r.csv)];
+const insKv=pairs=>`<div class="ins-kv">${pairs.map(([k,v])=>`<div><small>${k}</small><div>${v}</div></div>`).join('')}</div>`;
+const insMini=(st)=>`<div class="grid grid-cols-3 md:grid-cols-6 gap-2 my-3"><div class="rep-k"><b>${st.total}</b><span>Elegíveis</span></div><div class="rep-k"><b>${st.answered}</b><span>Respondidos</span></div><div class="rep-k"><b>${st.pending}</b><span>Pendentes</span></div><div class="rep-k"><b>${st.onTime}</b><span>No prazo</span></div><div class="rep-k"><b>${st.late}</b><span>Fora do prazo</span></div><div class="rep-k"><b>${st.total?insPct(st.pct):'—'}</b><span>Participação</span></div></div>`;
+function insDivRows(ds){
+  return ds.map(d=>({det:'division:'+d.id,c:[safeText(d.name),d.total,d.answered,d.pending,d.total?`${insPct(d.pct)}${insBar(d.pct,d.pct>=75?'#22c55e':d.pct>=50?'#c9a84c':'#ef4444')}`:'Sem integrantes elegíveis',d.onTime,d.late,insFmt(d.last)],csv:[d.name,d.total,d.answered,d.pending,d.total?insPct(d.pct):'Sem integrantes elegíveis',d.onTime,d.late,insFmt(d.last)]}));
+}
+const INS_DIVH=['Divisão','Elegíveis','Respondidos','Pendentes','Participação','No prazo','Atrasadas','Última atualização'];
+function insDetail(kind,arg){
+  const sc=INS.scope,scTxt=sc?'Insight: '+(insById(+sc)?.title||''):'Todos os Insights publicados';
+  if(kind==='total'||kind==='active'||kind==='closed'){
+    let list=INS.insights;if(kind!=='total')list=list.filter(i=>insEff(i)===kind);
+    const heads=['Título','Status','Início','Encerramento','Divisões','Elegíveis','Respondidos','Pendentes','Participação'];
+    const rows=list.map(i=>{const e=insEff(i),s=insStats(insAsgs(i.id)),pc=i.status==='draft'||!s.total?'—':insPct(s.pct);return {det:'insight:'+i.id,c:[safeText(i.title),`<span class="ins-chip" style="--c:${INS_EFF[e][1]}">${INS_EFF[e][0]}</span>`,insFmt(i.starts_at),insFmt(i.ends_at),safeText(insDivsText(i)),s.total,s.answered,s.pending,pc],csv:[i.title,INS_EFF[e][0],insFmt(i.starts_at),insFmt(i.ends_at),insDivsText(i),s.total,s.answered,s.pending,pc]};});
+    return {title:{total:'Insights cadastrados',active:'Insights ativos',closed:'Insights encerrados'}[kind],sub:`${rows.length} registro(s). Clique em um Insight para abrir o relatório completo.`,html:insDT(heads,rows),csv:insDCsv(heads,rows)};
+  }
+  if(kind==='eligible'){
+    const by={};insAsgs(sc).forEach(a=>{(by[a.member_id]=by[a.member_id]||[]).push(a);});
+    const heads=['Integrante','Divisão','Obrigações','Respondidas','Pendentes','Última resposta'];
+    const rows=Object.entries(by).map(([id,l])=>{const e=insEnr(l[0]),s=insStats(l);return {name:e.name,div:e.div,c:[safeText(e.name),safeText(e.div),l.length,s.answered,s.pending,insFmt(s.last)],csv:[e.name,e.div,l.length,s.answered,s.pending,insFmt(s.last)]};}).sort((x,y)=>x.div.localeCompare(y.div,'pt-BR')||x.name.localeCompare(y.name,'pt-BR'));
+    return {title:'Integrantes elegíveis',sub:`${rows.length} integrante(s) com obrigação · ${scTxt}`,html:insDT(heads,rows),csv:insDCsv(heads,rows)};
+  }
+  if(kind==='answered'||kind==='ontime'){
+    const heads=['Integrante','Divisão','Insight','Enviado em','Prazo','Revisão','Observação'];
+    const rows=insAsgs(sc).filter(a=>a.status==='submitted'&&(kind==='answered'||!a.submitted_late)).map(insEnr).sort((x,y)=>String(y.a.submitted_at).localeCompare(String(x.a.submitted_at))).map(e=>({c:[safeText(e.name),safeText(e.div),safeText(e.i.title),insFmt(e.a.submitted_at),e.a.submitted_late?'<span style="color:#fbbf24">Fora do prazo</span>':'<span style="color:#4ade80">No prazo</span>',e.a.review_status?INS_REV[e.a.review_status]:'—',safeText(e.a.admin_note||'—')],csv:[e.name,e.div,e.i.title,insFmt(e.a.submitted_at),e.a.submitted_late?'Fora do prazo':'No prazo',e.a.review_status?INS_REV[e.a.review_status]:'',e.a.admin_note||'']}));
+    return {title:kind==='answered'?'Respostas enviadas':'Respostas enviadas no prazo',sub:`${rows.length} resposta(s) · ${scTxt}`,html:insDT(heads,rows),csv:insDCsv(heads,rows)};
+  }
+  if(kind==='pending'){
+    const heads=['Integrante','Divisão','Insight pendente','Abertura','Data limite','Tempo restante','Situação'];
+    const rows=insPendRows(sc,'').map(r=>({c:[safeText(r.name),safeText(r.div),safeText(r.i.title),insFmt(r.i.starts_at),insFmt(r.dl),r.open?insSpan(r.left):'—',r.sit],csv:[r.name,r.div,r.i.title,insFmt(r.i.starts_at),insFmt(r.dl),r.open?insSpan(r.left):'',r.sit]}));
+    return {title:'Respostas pendentes',sub:`${rows.length} pendência(s) · ${scTxt}`,html:insDT(heads,rows),csv:insDCsv(heads,rows)};
+  }
+  if(kind==='participation'){
+    const st=insStats(insAsgs(sc)),rows=insDivRows(insDivStats(sc));
+    const ih=['Insight','Elegíveis','Respondidos','Pendentes','Participação'];
+    const irows=INS.insights.filter(i=>i.status!=='draft'&&(!sc||String(i.id)===String(sc))).map(i=>{const s=insStats(insAsgs(i.id));return {det:'insight:'+i.id,c:[safeText(i.title),s.total,s.answered,s.pending,s.total?`${insPct(s.pct)}${insBar(s.pct)}`:'—'],csv:[i.title,s.total,s.answered,s.pending,s.total?insPct(s.pct):'—']};});
+    return {title:'Participação geral',sub:`${scTxt} · fórmula: respondidos ÷ elegíveis × 100`,html:insMini(st)+'<h4 class="insm-h">Por divisão</h4>'+insDT(INS_DIVH,rows)+'<h4 class="insm-h">Por Insight</h4>'+insDT(ih,irows),csv:[...insDCsv(INS_DIVH,rows),[],...insDCsv(ih,irows)]};
+  }
+  if(kind==='top'||kind==='low'){
+    const ds=insDivStats(sc).filter(d=>d.total>0);if(kind==='low')ds.reverse();
+    const heads=['#',...INS_DIVH];const rows=insDivRows(ds).map((r,n)=>({det:r.det,c:[n+1,...r.c],csv:[n+1,...r.csv]}));
+    return {title:kind==='top'?'Maior participação por divisão':'Menor participação por divisão',sub:`Ranking completo · ${scTxt}. Clique em uma divisão para ver os integrantes.`,html:insDT(heads,rows),csv:insDCsv(heads,rows)};
+  }
+  if(kind==='near'){
+    const list=INS.insights.filter(i=>insEff(i)==='active'&&new Date(i.ends_at).getTime()-insNow()<72*3600000).sort((a,b)=>new Date(a.ends_at)-new Date(b.ends_at));
+    const heads=['Insight','Encerra em','Prazo restante','Elegíveis','Respondidos','Pendentes','Quem ainda não respondeu'];
+    const rows=list.map(i=>{const s=insStats(insAsgs(i.id)),names=insAsgs(i.id).filter(a=>a.status!=='submitted').map(a=>insName(a.member_id)).sort((x,y)=>x.localeCompare(y,'pt-BR')),left=new Date(i.ends_at).getTime()-insNow(),nm=names.slice(0,10).join(', ')+(names.length>10?` e mais ${names.length-10}`:'');
+      return {det:'insight:'+i.id,c:[safeText(i.title),insFmt(i.ends_at),insSpan(left),s.total,s.answered,s.pending,safeText(nm||'—')],csv:[i.title,insFmt(i.ends_at),insSpan(left),s.total,s.answered,s.pending,names.join(', ')]};});
+    return {title:'Próximos do encerramento',sub:'Insights ativos que encerram nas próximas 72 horas.',html:insDT(heads,rows),csv:insDCsv(heads,rows)};
+  }
+  if(kind==='division'){
+    const did=+arg,list=insAsgs(sc).map(insEnr).filter(e=>String(e.did)===String(did)),st=insStats(list.map(e=>e.a));
+    const heads=['Integrante','Insight','Status','Enviado em','Prazo'];
+    const rows=list.sort((x,y)=>x.name.localeCompare(y.name,'pt-BR')||x.i.title.localeCompare(y.i.title,'pt-BR')).map(e=>({det:'insight:'+e.i.id,c:[safeText(e.name),safeText(e.i.title),insStChip(e.st),insFmt(e.a.submitted_at),insFmt(e.dl)],csv:[e.name,e.i.title,INS_AST[e.st][0],insFmt(e.a.submitted_at),insFmt(e.dl)]}));
+    return {title:'Divisão '+divName(did),sub:`${scTxt} · ${new Set(list.map(e=>e.a.member_id)).size} integrante(s)`,html:insMini(st)+insDT(heads,rows),csv:insDCsv(heads,rows)};
+  }
+  if(kind==='insight')return insDetailInsight(+arg);
+  return null;
+}
+function insDetailInsight(id){
+  const i=insById(id);if(!i)return null;
+  const o={title:i.title,sub:'Relatório detalhado do Insight',html:'<p class="text-sm text-gray-400">Carregando relatório...</p>',csv:null,id};
+  (async()=>{
+    const e=insEff(i),list=insAsgs(id),st=insStats(list),ds=insDivStats(String(id));
+    const [qs,lg]=await Promise.all([supabaseClient.from('insight_questions').select('id,sort_order,kind,prompt,required').eq('insight_id',id).order('sort_order'),supabaseClient.from('insight_log').select('action,actor_id,details,created_at').eq('insight_id',id).order('created_at',{ascending:false}).limit(100)]);
+    const qids=(qs.data||[]).map(q=>q.id),sub=INS.assigns.filter(a=>a.insight_id===id&&a.status==='submitted');
+    const [ops,an]=await Promise.all([qids.length?supabaseClient.from('insight_options').select('id,question_id,label,sort_order').in('question_id',qids):{data:[]},sub.length?supabaseClient.from('insight_answers').select('assignment_id,question_id,answer_text,answer_options,answer_bool').in('assignment_id',sub.map(a=>a.id)):{data:[]}]);
+    const K={text:'Texto livre',single:'Escolha única',multiple:'Múltipla escolha',boolean:'Verdadeiro ou falso'};
+    const qh=(qs.data||[]).map(q=>{const ra=(an.data||[]).filter(r=>r.question_id===q.id);let body='';
+      if(q.kind==='text')body=`<p class="text-sm text-gray-300">${ra.filter(r=>r.answer_text).length} de ${sub.length} resposta(s) em texto. Leia cada uma em <a href="#" data-insgoto="${id}" class="text-gold underline">Respostas</a>.</p>`;
+      else{const opts=q.kind==='boolean'?[{id:'t',label:'Verdadeiro'},{id:'f',label:'Falso'}]:(ops.data||[]).filter(x=>x.question_id===q.id).sort((a,b)=>a.sort_order-b.sort_order);
+        body=opts.map(op=>{const n=ra.filter(r=>q.kind==='boolean'?(op.id==='t'?r.answer_bool===true:r.answer_bool===false):(r.answer_options||[]).includes(op.id)).length,pc=sub.length?n/sub.length*100:null;return `<div class="flex items-center gap-3 py-1"><span class="text-sm text-gray-200" style="flex:1">${safeText(op.label)}</span><span class="text-xs text-gray-400">${n} (${insPct(pc)})</span></div>${insBar(pc)}`;}).join('');}
+      return `<div class="ins-q"><div class="text-xs text-gold font-heading uppercase tracking-widest">Pergunta ${p2(q.sort_order)} · ${K[q.kind]}${q.required?' · obrigatória':''}</div><div class="text-white mb-2">${safeText(q.prompt)}</div>${body}</div>`;}).join('')||'<p class="text-sm text-gray-500">Sem perguntas.</p>';
+    const mh=['Integrante','Divisão','Status','Enviado em','Prazo','Revisão','Observação'];
+    const mr=list.map(insEnr).sort((x,y)=>x.div.localeCompare(y.div,'pt-BR')||x.name.localeCompare(y.name,'pt-BR')).map(r=>({c:[safeText(r.name),safeText(r.div),insStChip(r.st),insFmt(r.a.submitted_at)+(r.a.submitted_late?' <span style="color:#fbbf24">(fora do prazo)</span>':''),insFmt(r.dl),r.a.review_status?INS_REV[r.a.review_status]:'—',safeText(r.a.admin_note||'—')],csv:[r.name,r.div,INS_AST[r.st][0],insFmt(r.a.submitted_at),insFmt(r.dl),r.a.review_status?INS_REV[r.a.review_status]:'',r.a.admin_note||'']}));
+    const lh=(lg.data||[]).map(l=>{const d=l.details||{},p=[];if(d.member_id)p.push(safeText(insName(d.member_id)));if(d.old_ends_at&&d.new_ends_at)p.push(`prazo ${insFmt(d.old_ends_at)} → ${insFmt(d.new_ends_at)}`);if(d.deadline)p.push('novo prazo '+insFmt(d.deadline));if(d.reason)p.push('motivo: '+safeText(d.reason));if(d.assignments!=null)p.push(d.assignments+' obrigações criadas');return `<div class="py-2" style="border-top:1px solid #2b2b2f"><div class="text-sm text-white">${INS_LOG[l.action]||safeText(l.action)}</div><div class="text-xs text-gray-400">${insFmt(l.created_at)} · ${l.actor_id?safeText(insName(l.actor_id)):'Sistema'}${p.length?' · '+p.join(' · '):''}</div></div>`;}).join('')||'<p class="text-sm text-gray-500">Sem registros.</p>';
+    o.csv=insDCsv(mh,mr);
+    o.html=insKv([['Status',`<span class="ins-chip" style="--c:${INS_EFF[e][1]}">${INS_EFF[e][0]}</span>`],['Início',insFmt(i.starts_at)],['Encerramento',insFmt(i.ends_at)],['Divisões',safeText(insDivsText(i))],['Criado por',safeText(i.created_by?insName(i.created_by):'—')],['Criado em',insFmt(i.created_at)],['Publicado em',insFmt(i.published_at)],['Encerrado manualmente em',i.closed_at?insFmt(i.closed_at):'—'],['Rascunho do integrante',i.allow_draft?'Permitido':'Bloqueado'],['Alterar após enviar',i.allow_edit?'Permitido':'Bloqueado']])
+      +(i.description?`<p class="text-sm text-gray-300 mt-2" style="white-space:pre-line"><b class="text-gold">Instruções:</b> ${safeText(i.description)}</p>`:'')
+      +(e==='active'||e==='scheduled'?`<div class="mt-2">${insCd(i.starts_at,i.ends_at)}</div>`:'')+insMini(st)
+      +'<h4 class="insm-h">Participação por divisão</h4>'+insDT(INS_DIVH,insDivRows(ds))
+      +`<h4 class="insm-h">Perguntas e resultados (${(qs.data||[]).length})</h4><div class="space-y-3">${qh}</div>`
+      +`<h4 class="insm-h">Integrantes (${mr.length})</h4>`+insDT(mh,mr)+'<h4 class="insm-h">Histórico</h4>'+lh;
+    if(insmCur===o){$('insm-body').innerHTML=o.html;$('insm-csv').classList.remove('hidden-view');insTick();}
+  })().catch(er=>{if(insmCur===o)$('insm-body').innerHTML=`<p class="text-sm" style="color:#fca5a5">${safeText(er.message)}</p>`;});
+  return o;
+}
+function insmRender(){
+  const o=insmCur;$('insm-title').textContent=o.title;$('insm-sub').textContent=o.sub||'';$('insm-body').innerHTML=o.html;
+  $('insm-back').classList.toggle('hidden-view',!insmStack.length);$('insm-csv').classList.toggle('hidden-view',!o.csv);
+  $('ins-modal').classList.remove('hidden-view');$('insm-body').scrollTop=0;insTick();
+}
+function insOpenDetail(spec,push){
+  const [kind,arg]=String(spec).split(':'),o=insDetail(kind,arg);if(!o)return;
+  if(push&&insmCur)insmStack.push(insmCur);else if(!push)insmStack=[];
+  insmCur=o;insmRender();
+}
+function insmClose(){$('ins-modal').classList.add('hidden-view');insmCur=null;insmStack=[];}
+$('insm-x').addEventListener('click',insmClose);$('insm-close').addEventListener('click',insmClose);
+$('insm-back').addEventListener('click',()=>{if(insmStack.length){insmCur=insmStack.pop();insmRender();}});
+$('insm-csv').addEventListener('click',()=>{if(insmCur&&insmCur.csv)insCsvFile(`insight-detalhe-${String(insmCur.title).toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'').slice(0,40)}-${new Date(insNow()).toISOString().slice(0,10)}.csv`,insmCur.csv);});
+$('ins-modal').addEventListener('click',e=>{
+  if(e.target.id==='ins-modal'){insmClose();return;}
+  const g=e.target.closest('[data-insgoto]');if(g){e.preventDefault();const id=g.dataset.insgoto;insmClose();INS.fIns=String(id);INS.sec='resp';insAdminRender();return;}
+  const d=e.target.closest('[data-insdet]');if(d)insOpenDetail(d.dataset.insdet,true);
+});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!$('ins-modal').classList.contains('hidden-view')&&$('ui-dialog').classList.contains('hidden-view')){e.stopImmediatePropagation();insmClose();}},true);
+document.addEventListener('keydown',e=>{if(e.key!=='Enter'&&e.key!==' ')return;const d=e.target.closest&&e.target.closest('[data-insdet][role="button"]');if(!d||e.target.closest('button,a,input,select,textarea'))return;if(!d.closest('#ins-admin-body,#ins-modal'))return;e.preventDefault();insOpenDetail(d.dataset.insdet,!!d.closest('#ins-modal'));});
+
 /* Impressão do relatório: copia só o relatório para um contêiner próprio (sem sidebar, sem folhas em branco) */
 function insPrint(){
   const src=$('ins-print');if(!src)return;
@@ -2573,6 +2699,7 @@ async function insListAction(k,id){
   if(k==='edit')return insEdOpen(i);
   if(k==='resp'){INS.fIns=String(id);INS.sec='resp';return insAdminRender();}
   if(k==='hist')return insHistory(id);
+  if(k==='rel')return insOpenDetail('insight:'+id,false);
   if(k==='publish'){if(!await uiConfirm('Publicar este Insight? Ao publicar, os integrantes elegíveis recebem a obrigação de responder e as perguntas não poderão mais ser alteradas.'))return;return insDo(async()=>{const r=await insRpc('insight_admin_publish',{p_insight:id});return r;},'Insight publicado. As obrigações de resposta foram criadas para os integrantes elegíveis.');}
   if(k==='close'){if(!await uiConfirm('Encerrar este Insight agora? Ninguém poderá enviar novas respostas (exceto exceções de prazo).'))return;return insDo(()=>insRpc('insight_admin_close',{p_insight:id}));}
   if(k==='del'){if(!await uiConfirm('Excluir este rascunho? Esta ação não pode ser desfeita.'))return;return insDo(()=>insRpc('insight_admin_delete',{p_insight:id}));}
@@ -2677,6 +2804,7 @@ $('ins-admin-body').addEventListener('change',e=>{
 });
 $('ins-admin-body').addEventListener('click',async e=>{
   const E=INS.ed,t=e.target;
+  const det=t.closest('[data-insdet]');if(det&&(!t.closest('button')||t.closest('button')===det)){insOpenDetail(det.dataset.insdet,false);return;}
   const sec=t.closest('[data-insec]');if(sec){INS.sec=sec.dataset.insec;insAdminRender();return;}
   const a2=t.closest('[data-insact2]');
   if(a2){const k=a2.dataset.insact2;
