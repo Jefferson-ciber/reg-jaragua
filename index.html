@@ -400,6 +400,11 @@
         .ins-clk{position:relative;cursor:pointer;transition:border-color .2s,background .2s}.ins-clk:hover,.ins-clk:focus-visible{background:#17171c!important;border-color:#c9a84c!important;outline:none}.ins-go{position:absolute;right:10px;top:10px;font-size:11px;color:#6b7280}.ins-clk:hover .ins-go{color:#c9a84c}
         .ins-tb tr.ins-clk:hover td{background:#17171c}
         body.sb-min .ins-top{padding-left:44px}
+        #member-main>#social-panel{display:none}#member-main.view-social>#social-panel{display:block}#member-main.view-social>:not(#social-panel){display:none!important}
+        .soc-k{display:block;font:11px 'Oswald',sans-serif;letter-spacing:.12em;text-transform:uppercase;color:#8b8b95}.soc-h{margin:0 0 10px;font-family:'Oswald',sans-serif;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:#c9a84c}
+        .soc-bar{display:flex;align-items:center;gap:10px;padding:5px 6px;border-radius:8px}.soc-bar b{min-width:28px;text-align:right;color:#fff;font-size:13px}.soc-bl{flex:0 0 38%;max-width:260px;font-size:12.5px;color:#d4d4d8;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+        .soc-donut{width:110px;height:110px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex:none;position:relative}.soc-donut::after{content:'';position:absolute;inset:18px;border-radius:50%;background:#101014}.soc-donut span{position:relative;z-index:1;font:700 24px 'Oswald',sans-serif;color:#fff}.soc-dot{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:8px}
+        .soc-cols{display:flex;align-items:flex-end;gap:6px;height:170px}.soc-col{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%;min-width:0}.soc-col b{font-size:11px;color:#fff;min-height:14px}.soc-col i{display:block;width:100%;max-width:26px;min-height:2px;background:linear-gradient(180deg,#e5c76b,#a8872f);border-radius:4px 4px 0 0}.soc-col span{font-size:10px;color:#8b8b95;margin-top:4px}
         #ins-print-root{display:none}
         @media print{html,body.ins-printing{background:#fff!important}body.ins-printing{position:static!important;overflow:visible!important;padding:0!important;margin:0!important}body.ins-printing>*:not(#ins-print-root){display:none!important}body.ins-printing #ins-print-root{display:block!important;padding:8px 4px}#ins-print-root *{color:#000!important;background:transparent!important;border-color:#999!important;box-shadow:none!important;text-shadow:none!important}#ins-print-root .font-display{font-size:22px!important}#ins-print-root table{width:100%;border-collapse:collapse}#ins-print-root th,#ins-print-root td{padding:4px 6px;border-bottom:1px solid #999;text-align:left;font-size:12px}#ins-print-root .rep-k{display:inline-block;min-width:150px;margin-right:8px;border:1px solid #999}#ins-print-root tr{break-inside:avoid}.no-print{display:none!important}}
         .org-grp{margin-bottom:10px}.org-tog{display:flex;width:100%;align-items:center;justify-content:space-between;gap:12px;padding:12px 16px;background:#141418;border:1px solid #c9a84c55;border-radius:10px;cursor:pointer;text-align:left;transition:border-color .2s,background .2s}.org-tog:hover,.org-tog:focus-visible{border-color:#c9a84c;background:#1a1a20;outline:none}.org-chev{color:#c9a84c;transition:transform .2s}.org-tog[aria-expanded=true] .org-chev{transform:rotate(180deg)}.org-body{margin-top:10px}
@@ -547,6 +552,7 @@
 <button type="button" class="tab-btn" id="div-main" role="tab" data-mside="divisao" aria-selected="false" aria-expanded="false" aria-controls="div-subs"><i class="fa-solid fa-people-group"></i>Divisão<span class="chev"></span></button>
 <div id="div-subs" class="sub-wrap">
   <button type="button" class="tab-btn sub" role="tab" data-mside="divisao" aria-selected="false"><i class="fa-solid fa-users"></i>Minha divisão</button>
+  <button type="button" class="tab-btn sub" role="tab" data-mside="social" aria-selected="false"><i class="fa-solid fa-hand-holding-heart"></i>Ação social</button>
   <button type="button" class="tab-btn sub" role="tab" data-mside="insight" aria-selected="false"><i class="fa-solid fa-lightbulb"></i>Insight<span id="ins-badge" class="nav-count hidden-view" aria-label="Insights pendentes">0</span></button>
 </div>
 <button type="button" class="tab-btn" role="tab" data-mside="travel" aria-selected="false"><i class="fa-solid fa-route"></i>Protocolo de Viagem</button>
@@ -555,6 +561,7 @@
       <section id="travel-panel" aria-live="polite"><div id="travel-body"></div></section>
       <section id="division-panel" aria-live="polite"><div id="division-body"></div></section>
       <section id="insight-panel" aria-live="polite"><div id="insight-body"></div></section>
+      <section id="social-panel" aria-live="polite"><div id="social-body"></div></section>
       <div id="perfil-home"></div>
       <section id="my-profile" class="panel p-5 md:p-6 space-y-5">
         <div class="flex flex-wrap items-center gap-4"><div id="mp-avatar" class="w-20 h-20 rounded-full overflow-hidden bg-[#c9a84c22] border border-[#c9a84c55] flex items-center justify-center font-display text-4xl text-gold shrink-0">?</div><div><p class="text-xs text-gold font-heading tracking-widest uppercase">Meu perfil</p><h3 id="mp-title" class="font-display text-3xl tracking-widest text-white">Meus dados</h3><div class="flex flex-wrap gap-2 mt-2"><span class="patch-badge"><i class="fa-solid fa-stairs"></i> <span id="mp-grade">—</span></span><span class="patch-badge"><i class="fa-solid fa-star"></i> <span id="mp-cargo">—</span></span><span class="patch-badge"><i class="fa-solid fa-location-dot"></i> <span id="mp-div">—</span></span><span class="patch-badge hidden-view" id="mp-dcmd-wrap"><i class="fa-solid fa-user-shield"></i> Comando de Divisão: <span id="mp-dcmd"></span></span><span class="patch-badge">Situação: <span id="mp-status">—</span></span><span class="patch-badge">Desde <span id="mp-since">—</span></span></div></div></div>
@@ -595,7 +602,7 @@
 <div role="tablist" aria-label="Seções do painel">
 <button type="button" class="tab-btn grp" aria-expanded="true"><i class="fa-solid fa-chart-pie"></i>Visão Geral<span class="chev"></span></button><div class="sub-wrap open"><button type="button" class="tab-btn sub" role="tab" data-tab="dashadm" aria-selected="false"><i class="fa-solid fa-gauge-high"></i>Dashboard</button><button type="button" class="tab-btn sub" role="tab" data-tab="perfil" aria-selected="false"><i class="fa-solid fa-id-card"></i>Meu Perfil</button><button type="button" class="tab-btn sub" role="tab" data-tab="content" aria-selected="true"><i class="fa-solid fa-bullhorn"></i>Comunicados</button><button type="button" class="tab-btn sub" role="tab" data-tab="dash" aria-selected="false"><i class="fa-solid fa-chart-column"></i>Indicadores</button></div>
 <button type="button" class="tab-btn grp" aria-expanded="false"><i class="fa-solid fa-users"></i>Integrantes<span class="chev"></span></button><div class="sub-wrap"><button type="button" class="tab-btn sub" role="tab" data-tab="members" aria-selected="false"><i class="fa-solid fa-users"></i>Todos os Integrantes</button><button type="button" class="tab-btn sub" role="tab" data-tab="access" aria-selected="false"><i class="fa-solid fa-user-plus"></i>Cadastrar Acesso</button><button type="button" class="tab-btn sub" role="tab" data-tab="cargos" aria-selected="false"><i class="fa-solid fa-user-tie"></i>Cargos e Funções</button><button type="button" class="tab-btn sub" role="tab" data-tab="honors" aria-selected="false"><i class="fa-solid fa-medal"></i>Honrarias</button></div>
-<button type="button" class="tab-btn grp" aria-expanded="false"><i class="fa-solid fa-sitemap"></i>Organização Regional<span class="chev"></span></button><div class="sub-wrap"><button type="button" class="tab-btn sub" role="tab" data-tab="org" aria-selected="false"><i class="fa-solid fa-sitemap"></i>Organização Regional</button><button type="button" class="tab-btn sub" role="tab" data-tab="comando" aria-selected="false"><i class="fa-solid fa-crown"></i>Comando Regional</button><button type="button" class="tab-btn sub" role="tab" data-tab="dcomando" aria-selected="false"><i class="fa-solid fa-user-shield"></i>Comando de Divisão</button><button type="button" class="tab-btn sub" role="tab" data-tab="divisions" aria-selected="false"><i class="fa-solid fa-location-dot"></i>Divisões</button><button type="button" class="tab-btn sub" role="tab" data-tab="insight" aria-selected="false"><i class="fa-solid fa-lightbulb"></i>Insight de Divisões</button></div>
+<button type="button" class="tab-btn grp" aria-expanded="false"><i class="fa-solid fa-sitemap"></i>Organização Regional<span class="chev"></span></button><div class="sub-wrap"><button type="button" class="tab-btn sub" role="tab" data-tab="org" aria-selected="false"><i class="fa-solid fa-sitemap"></i>Organização Regional</button><button type="button" class="tab-btn sub" role="tab" data-tab="comando" aria-selected="false"><i class="fa-solid fa-crown"></i>Comando Regional</button><button type="button" class="tab-btn sub" role="tab" data-tab="dcomando" aria-selected="false"><i class="fa-solid fa-user-shield"></i>Comando de Divisão</button><button type="button" class="tab-btn sub" role="tab" data-tab="divisions" aria-selected="false"><i class="fa-solid fa-location-dot"></i>Divisões</button><button type="button" class="tab-btn sub" role="tab" data-tab="social" aria-selected="false"><i class="fa-solid fa-hand-holding-heart"></i>Ações Sociais de Divisão</button><button type="button" class="tab-btn sub" role="tab" data-tab="insight" aria-selected="false"><i class="fa-solid fa-lightbulb"></i>Insight de Divisões</button></div>
 <button type="button" class="tab-btn grp" aria-expanded="false"><i class="fa-solid fa-calendar-check"></i>Eventos e Participação<span class="chev"></span></button><div class="sub-wrap"><button type="button" class="tab-btn sub" role="tab" data-tab="events" aria-selected="false"><i class="fa-solid fa-calendar-check"></i>Eventos</button></div>
 <button type="button" class="tab-btn grp" aria-expanded="false"><i class="fa-solid fa-route"></i>Viagens<span class="chev"></span></button><div class="sub-wrap"><button type="button" class="tab-btn sub" role="tab" data-tab="adm-travel" aria-selected="false"><i class="fa-solid fa-route"></i>Protocolos de Viagem</button><button type="button" class="tab-btn sub" role="tab" data-tab="adm-help" aria-selected="false"><i class="fa-solid fa-triangle-exclamation"></i>Pedidos de Ajuda<span id="help-badge" class="nav-count hidden-view">0</span></button></div>
 <button type="button" class="tab-btn grp" aria-expanded="false"><i class="fa-solid fa-gear"></i>Sistema<span class="chev"></span></button><div class="sub-wrap"><button type="button" class="tab-btn sub" role="tab" data-tab="config" aria-selected="false"><i class="fa-solid fa-sliders"></i>Configurações</button></div>
@@ -734,6 +741,7 @@
         </div>
 
         <div id="tab-adm-travel" class="hidden-view space-y-4" role="tabpanel"><div id="adm-travel-body"><p class="text-sm text-gray-400">Carregando protocolos de viagem...</p></div></div>
+        <div id="tab-social" class="hidden-view space-y-4" role="tabpanel"><div id="soc-admin-body"><p class="text-sm text-gray-400">Carregando...</p></div></div>
         <div id="tab-insight" class="hidden-view space-y-4" role="tabpanel"><div id="ins-admin-body"><p class="text-sm text-gray-400">Carregando...</p></div></div>
         <div id="tab-adm-help" class="hidden-view space-y-4" role="tabpanel"><div id="adm-help-body"><p class="text-sm text-gray-400">Carregando pedidos de ajuda...</p></div></div>
 
@@ -822,7 +830,7 @@ $('create-user-form').addEventListener('submit',async e=>{e.preventDefault();con
 /* ───────── Painel do administrador ───────── */
 let me=null, adminItems=[];
 const fmtDate=(v)=>v?new Date(v).toLocaleDateString('pt-BR'):'';
-function setTab(name){document.querySelectorAll('[data-tab]').forEach(b=>b.setAttribute('aria-selected',String(b.dataset.tab===name)));['content','members','events','org','cargos','divisions','comando','dcomando','honors','perfil','dashadm','dash','config','access','adm-travel','adm-help','insight'].forEach(t=>$('tab-'+t).classList.toggle('hidden-view',t!==name));if(name==='dashadm')renderDashAdm();if(name==='dash')refreshDash();if(name==='org')loadOrgTab();if(name==='cargos')loadCargosTab();if(name==='divisions')loadDivisionsTab();if(name==='comando')loadComandoTab();if(name==='dcomando')loadDcomandoTab();if(name==='honors')loadHonorsTab();if(name==='config')loadConfig();if(name==='adm-travel')loadAdmTravelPanel();if(name==='adm-help')loadAdmHelpPanel();if(name==='insight')loadInsightAdmin();}
+function setTab(name){document.querySelectorAll('[data-tab]').forEach(b=>b.setAttribute('aria-selected',String(b.dataset.tab===name)));['content','members','events','org','cargos','divisions','comando','dcomando','honors','perfil','dashadm','dash','config','access','adm-travel','adm-help','insight','social'].forEach(t=>$('tab-'+t).classList.toggle('hidden-view',t!==name));if(name==='dashadm')renderDashAdm();if(name==='dash')refreshDash();if(name==='org')loadOrgTab();if(name==='cargos')loadCargosTab();if(name==='divisions')loadDivisionsTab();if(name==='comando')loadComandoTab();if(name==='dcomando')loadDcomandoTab();if(name==='honors')loadHonorsTab();if(name==='config')loadConfig();if(name==='adm-travel')loadAdmTravelPanel();if(name==='adm-help')loadAdmHelpPanel();if(name==='insight')loadInsightAdmin();if(name==='social')loadSocialAdmin();}
 document.querySelectorAll('[data-tab]').forEach(b=>b.addEventListener('click',()=>setTab(b.dataset.tab)));
 
 function resetContentForm(){$('content-form').reset();$('cc-id').value='';$('cc-order').value='100';$('cc-published').checked=true;$('cc-save').innerHTML='<i class="fa-solid fa-floppy-disk mr-2"></i>Publicar comunicado';$('cc-cancel').classList.add('hidden-view');}
@@ -1685,15 +1693,16 @@ function renderDashAdm(){
 function setMemberView(v){
   const mm=$('member-main');
   // Remove todas as classes de view
-  mm.classList.remove('view-home','view-perfil','view-divisao','view-travel','view-insight');
+  mm.classList.remove('view-home','view-perfil','view-divisao','view-travel','view-insight','view-social');
   // Adiciona apenas a necessária
   if(v==='perfil') mm.classList.add('view-perfil');
   else if(v==='divisao') mm.classList.add('view-divisao');
   else if(v==='travel') mm.classList.add('view-travel');
   else if(v==='insight') mm.classList.add('view-insight');
+  else if(v==='social') mm.classList.add('view-social');
   else mm.classList.add('view-home'); // início: o CSS esconde #my-profile (só aparece em Meu Perfil)
   // Garante que my-profile esteja visível nas views onde deve aparecer
-  if(v!=='divisao'&&v!=='travel'&&v!=='insight') $('my-profile').classList.remove('hidden-view');
+  if(v!=='divisao'&&v!=='travel'&&v!=='insight'&&v!=='social') $('my-profile').classList.remove('hidden-view');
 }
 document.querySelectorAll('[data-mside]').forEach(b=>b.addEventListener('click',()=>{
   const v=b.dataset.mside;
@@ -2649,6 +2658,260 @@ $('ins-modal').addEventListener('click',e=>{
 });
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!$('ins-modal').classList.contains('hidden-view')&&$('ui-dialog').classList.contains('hidden-view')){e.stopImmediatePropagation();insmClose();}},true);
 document.addEventListener('keydown',e=>{if(e.key!=='Enter'&&e.key!==' ')return;const d=e.target.closest&&e.target.closest('[data-insdet][role="button"]');if(!d||e.target.closest('button,a,input,select,textarea'))return;if(!d.closest('#ins-admin-body,#ins-modal'))return;e.preventDefault();insOpenDetail(d.dataset.insdet,!!d.closest('#ins-modal'));});
+
+/* ═════════════ AÇÃO SOCIAL DE DIVISÃO ═════════════ */
+const SOC_REGIONAL='Regional Jaraguá - SP (XXXV)';
+const SOC_TYPES=['Ação de impacto ambiental','Ação Emergencial','Arrecadação / Captação de recursos','Ação em conjunto com outros Moto Clubes','Ação em cooperação com Parceiros ( Médicos do Mundo , MRSC, Pastoral , ...)','Rock Animal - Ação Pet , resgate de animais , apoio a adoção . doações ( ração , produtos de higiene para abrigos ) "Rock Animal"','Ação Social Dia das Crianças','Ação de apoio a recolocação e empregabilidade e formação Acadêmica','Apoio jurídico','Ação Saúde Mental','Atividades recreativas, Palestras, Oficina Educativa e afins...','Cadastro de doador de medula','Cadeira de rodas , muleta, andador, cama hospitalar','Doação de óculos','Cestas Básicas , Mantimentos, alimentos , Leite','Contenção e apoio operacional para realização da ação social de parceiro','Distribuição de Marmitex, Lanches , Café da manhã, Sopa','Doação de cabelos','Doação de itens de mobiliário e eletrodomésticos','Material Escolar','McDia Feliz','Doação de Sangue','Mega Campanha de Doação de Sangue ( Novembro )','Natal','Páscoa','Doação de Lacres','Produtos de Higiene pessoal ou Produtos de Limpeza','Reconstrução/Reforma de habitação','Roupas, Agasalhos, Calçados ou Cobertores','Visita de Humanização','Transtorno do Espectro Autista (TEA)','Síndrome de Down'];
+const SOC_SCOPE={internal:'Interna (ajuda ao integrante)',external:'Externa'};
+const socDate=d=>BR.isoToDate(String(d||'').slice(0,10))||'—';
+const socCepFmt=c=>String(c||'').replace(/^(\d{5})(\d{3})$/,'$1-$2');
+const socAddr=a=>`${a.street||''}, ${a.house_number||''}${a.district?' · '+a.district:''}${a.city?' · '+a.city+(a.state?'/'+a.state:''):''} · CEP ${socCepFmt(a.cep)}`;
+const socToday=()=>{const d=new Date(insNow());return `${d.getFullYear()}-${p2(d.getMonth()+1)}-${p2(d.getDate())}`;};
+async function socRpc(name,args){
+  const r=await supabaseClient.rpc(name,args||{});
+  if(r.error){const m=String(r.error.message||'');throw new Error(/could not find the function|schema cache|does not exist|relation/i.test(m)?'O módulo Ação social ainda não foi instalado. Rode o arquivo acao_social.sql no Supabase.':m);}
+  return r.data;
+}
+const socScopeChip=s=>`<span class="ins-chip" style="--c:${s==='internal'?'#3b82f6':'#22c55e'}">${s==='internal'?'Interna':'Externa'}</span>`;
+
+/* ───────── Integrante ───────── */
+let socM={ctx:null,actions:[],goals:[],q:'',formOpen:false,editing:null,cepSeq:0};
+async function loadSocialPanel(silent){
+  const body=$('social-body');if(!silent)body.innerHTML='<p class="text-sm text-gray-400">Carregando ações sociais...</p>';
+  try{
+    const ctx=await socRpc('social_member_context');
+    if(!ctx.ok)throw new Error('Acesso não autorizado.');
+    const d=ctx.division_id?await socRpc('social_actions_list'):{actions:[],goals:[]};
+    socM.ctx=ctx;socM.actions=d.actions||[];socM.goals=d.goals||[];socM.formOpen=false;socM.editing=null;socMemberRender();
+  }catch(e){body.innerHTML=`<div class="row-card"><p class="text-sm" style="color:#fca5a5">${safeText(e.message)}</p></div>`;}
+}
+function socGoalHtml(g){
+  const pct=Math.min(100,g.done/g.required_count*100),done=g.missing===0,ended=g.period_end<socToday();
+  const col=done?'#22c55e':ended?'#ef4444':'#c9a84c';
+  const extra=[g.action_type?`tipo: ${safeText(g.action_type)}`:'',g.scope?SOC_SCOPE[g.scope]:''].filter(Boolean).join(' · ');
+  return `<div class="row-card" style="border-left:3px solid ${col}"><div class="flex flex-wrap items-center justify-between gap-2"><div class="text-white font-medium">${safeText(g.title)}</div><span class="ins-chip" style="--c:${col}">${done?'Meta cumprida':ended?'Prazo encerrado':'Em andamento'}</span></div><div class="text-xs text-gray-400 mt-1">Período: ${socDate(g.period_start)} a ${socDate(g.period_end)}${extra?' · '+extra:''}</div><div class="flex items-center gap-3 mt-2"><div class="pbar" style="flex:1;margin:0"><i style="width:${pct}%;background:${col}"></i></div><b class="text-white text-sm">${g.done} de ${g.required_count}</b></div><div class="text-xs mt-1" style="color:${done?'#4ade80':'#fbbf24'}">${done?'Todas as ações obrigatórias foram registradas.':`Faltam ${g.missing} ${g.missing===1?'ação obrigatória':'ações obrigatórias'}.`}</div></div>`;
+}
+function socActionHtml(a,canEdit){
+  return `<div class="row-card soc-card"><div class="flex flex-wrap items-start justify-between gap-2"><div class="min-w-0"><div class="text-white font-medium">${safeText(a.action_type)}</div><div class="text-xs text-gray-400 mt-1"><i class="fa-regular fa-calendar mr-1"></i>${socDate(a.action_date)} · registrada por ${safeText(a.responsible_name||'—')}</div></div>${socScopeChip(a.scope)}</div>
+  <div class="grid md:grid-cols-2 gap-x-4 gap-y-2 mt-3 text-sm"><div><small class="soc-k">Beneficiário</small><div class="text-gray-100">${safeText(a.beneficiary_name)}</div></div><div><small class="soc-k">Local</small><div class="text-gray-100">${safeText(socAddr(a))}</div></div><div class="md:col-span-2"><small class="soc-k">Descrição da ação</small><div class="text-gray-200" style="white-space:pre-line">${safeText(a.description)}</div></div><div class="md:col-span-2"><small class="soc-k">O que foi doado</small><div class="text-gray-200" style="white-space:pre-line">${safeText(a.donated)}</div></div></div>
+  ${canEdit?`<div class="tv-act"><button type="button" class="btn btn-secondary btn-sm" data-socedit="${a.id}"><i class="fa-solid fa-pen mr-1"></i>Editar</button><button type="button" class="btn btn-danger btn-sm" data-socdel="${a.id}"><i class="fa-solid fa-trash mr-1"></i>Excluir</button></div>`:''}</div>`;
+}
+function socMemberRender(){
+  const body=$('social-body'),c=socM.ctx,isSoc=c.is_social;
+  if(!c.division_id){body.innerHTML='<div class="row-card"><p class="text-sm text-gray-400">Você ainda não está vinculado a uma divisão. Fale com o administrador.</p></div>';return;}
+  if(socM.formOpen){body.innerHTML=socFormHtml();socFormBind();return;}
+  const q=socM.q.trim().toLowerCase(),list=socM.actions.filter(a=>!q||[a.action_type,a.beneficiary_name,a.description,a.donated,a.street,a.district,a.city].join(' ').toLowerCase().includes(q));
+  const now=socToday(),month=now.slice(0,7),inMonth=socM.actions.filter(a=>a.action_date.slice(0,7)===month).length;
+  const kpi=(n,l,ic,col)=>`<div class="row-card text-center" style="border-top:3px solid ${col}"><div class="font-display text-2xl text-white"><i class="fa-solid ${ic} text-sm mr-2" style="color:${col}"></i>${n}</div><div class="text-[11px] text-gray-400 uppercase font-heading tracking-widest">${l}</div></div>`;
+  body.innerHTML=`<div class="mb-5"><h3 class="font-display text-white text-3xl tracking-widest uppercase">Ação social</h3><p class="text-sm text-gray-300 mt-2">Ações sociais realizadas pela divisão <b class="text-gold">${safeText(c.division_name||'')}</b>.</p>${isSoc?'<p class="text-sm text-gray-400 mt-1">Você é o <b>Social de Divisão</b>: registre aqui cada ação realizada. As informações aparecem automaticamente para o comando.</p>':'<p class="text-sm text-gray-400 mt-1">Somente o Social de Divisão registra as ações. Você pode acompanhar tudo o que a sua divisão realizou.</p>'}</div>
+  ${isSoc?'<div class="mb-4"><button type="button" class="btn btn-primary" data-socnew="1"><i class="fa-solid fa-plus mr-2"></i>Registrar ação social</button></div>':''}
+  <div class="grid grid-cols-2 md:grid-cols-4 gap-2 mb-5">${kpi(socM.actions.length,'Ações registradas','fa-hand-holding-heart','#c9a84c')}${kpi(inMonth,'Neste mês','fa-calendar-day','#3b82f6')}${kpi(socM.actions.filter(a=>a.scope==='internal').length,'Internas','fa-people-arrows','#3b82f6')}${kpi(socM.actions.filter(a=>a.scope==='external').length,'Externas','fa-earth-americas','#22c55e')}</div>
+  ${socM.goals.length?`<h4 class="font-heading text-gold text-sm uppercase tracking-widest mb-2">Ações obrigatórias definidas pelo comando</h4><div class="space-y-2 mb-5">${socM.goals.map(socGoalHtml).join('')}</div>`:''}
+  <div class="flex flex-wrap items-center justify-between gap-2 mb-2"><h4 class="font-heading text-gold text-sm uppercase tracking-widest">Ações da divisão (${list.length})</h4><input class="field" id="soc-q" style="max-width:280px" placeholder="Buscar por tipo, beneficiário, local" value="${safeText(socM.q)}"></div>
+  <div class="space-y-3" id="soc-list">${list.map(a=>socActionHtml(a,isSoc)).join('')||'<div class="row-card"><p class="text-sm text-gray-400">Nenhuma ação registrada ainda.</p></div>'}</div>`;
+}
+function socFormHtml(){
+  const c=socM.ctx,a=socM.editing||{},v=k=>safeText(a[k]??'');
+  return `<div class="mb-4"><button type="button" class="btn btn-secondary btn-sm" data-socform="cancel"><i class="fa-solid fa-arrow-left mr-2"></i>Voltar</button></div>
+  <div class="row-card"><h3 class="font-display text-white text-2xl tracking-widest uppercase mb-1">Formulário de Registro de Ações Sociais</h3><p class="text-xs text-gray-400 mb-3">Campos com * são obrigatórios.</p>
+  <div class="grid md:grid-cols-2 gap-3">
+   <div><label class="block text-xs text-gray-300 mb-1" for="sf-reg">Nome da Regional</label><input class="field" id="sf-reg" value="${safeText(SOC_REGIONAL)}" readonly></div>
+   <div><label class="block text-xs text-gray-300 mb-1" for="sf-date">Data da Ação *</label><input class="field" id="sf-date" type="date" value="${a.action_date?String(a.action_date).slice(0,10):''}"></div>
+   <div><label class="block text-xs text-gray-300 mb-1" for="sf-div">Divisão</label><input class="field" id="sf-div" value="${safeText(c.division_name||'')}" readonly></div>
+   <div><label class="block text-xs text-gray-300 mb-1" for="sf-resp">Nome do Social Responsável</label><input class="field" id="sf-resp" value="${safeText(a.responsible_name||c.member_name||'')}" readonly></div>
+   <div class="md:col-span-2"><div class="block text-xs text-gray-300 mb-1">Ação *</div><div class="flex flex-wrap gap-4"><label class="ins-opt"><input type="radio" name="sf-scope" value="internal" ${a.scope==='internal'?'checked':''}><span>Interna (ajuda ao integrante)</span></label><label class="ins-opt"><input type="radio" name="sf-scope" value="external" ${a.scope==='external'?'checked':''}><span>Externa</span></label></div></div>
+   <div class="md:col-span-2"><label class="block text-xs text-gray-300 mb-1" for="sf-type">Tipo da ação *</label><select class="field" id="sf-type"><option value="">Escolha o tipo da ação</option>${SOC_TYPES.map(t=>`<option value="${safeText(t)}" ${a.action_type===t?'selected':''}>${safeText(t)}</option>`).join('')}${a.action_type&&!SOC_TYPES.includes(a.action_type)?`<option selected value="${safeText(a.action_type)}">${safeText(a.action_type)}</option>`:''}</select></div>
+   <div class="md:col-span-2"><label class="block text-xs text-gray-300 mb-1" for="sf-desc">Descrição da Ação *</label><textarea class="field" id="sf-desc" rows="3" maxlength="2000">${v('description')}</textarea></div>
+   <div class="md:col-span-2"><label class="block text-xs text-gray-300 mb-1" for="sf-ben">Beneficiário (nome e sobrenome) *</label><input class="field" id="sf-ben" maxlength="160" value="${v('beneficiary_name')}"></div>
+   <div><label class="block text-xs text-gray-300 mb-1" for="sf-cep">CEP *</label><input class="field" id="sf-cep" inputmode="numeric" maxlength="9" placeholder="00000-000" value="${safeText(socCepFmt(a.cep||''))}"><div id="sf-cepmsg" class="text-xs mt-1 text-gray-500">Ao digitar o CEP, o endereço é preenchido automaticamente.</div></div>
+   <div><label class="block text-xs text-gray-300 mb-1" for="sf-street">Rua *</label><input class="field" id="sf-street" maxlength="200" value="${v('street')}"></div>
+   <div><label class="block text-xs text-gray-300 mb-1" for="sf-num">Número da casa *</label><input class="field" id="sf-num" maxlength="20" value="${v('house_number')}"></div>
+   <div><label class="block text-xs text-gray-300 mb-1" for="sf-dist">Bairro</label><input class="field" id="sf-dist" maxlength="120" value="${v('district')}"></div>
+   <div><label class="block text-xs text-gray-300 mb-1" for="sf-city">Cidade</label><input class="field" id="sf-city" maxlength="120" value="${v('city')}"></div>
+   <div><label class="block text-xs text-gray-300 mb-1" for="sf-uf">UF</label><input class="field" id="sf-uf" maxlength="2" value="${v('state')}"></div>
+   <div class="md:col-span-2"><label class="block text-xs text-gray-300 mb-1" for="sf-don">O que foi doado *</label><textarea class="field" id="sf-don" rows="3" maxlength="2000" placeholder='Ex.: 20 cestas básicas e 15 cobertores. Se não houve doação, escreva "Sem doação".'>${v('donated')}</textarea></div>
+  </div><p id="sf-msg" class="text-sm mt-3" style="color:#f87171" role="status" aria-live="polite"></p>
+  <div class="tv-act"><button type="button" class="btn btn-primary" data-socform="save"><i class="fa-regular fa-floppy-disk mr-2"></i>${a.id?'Salvar alterações':'Registrar ação'}</button><button type="button" class="btn btn-secondary" data-socform="cancel">Cancelar</button></div></div>`;
+}
+const socMaskCep=v=>{const d=String(v).replace(/\D/g,'').slice(0,8);return d.length>5?d.slice(0,5)+'-'+d.slice(5):d;};
+function socFormBind(){
+  $('sf-cep').addEventListener('input',async e=>{
+    e.target.value=socMaskCep(e.target.value);const d=e.target.value.replace(/\D/g,''),m=$('sf-cepmsg'),seq=++socM.cepSeq;
+    if(d.length<8){m.style.color='#6b7280';m.textContent='Ao digitar o CEP, o endereço é preenchido automaticamente.';return;}
+    m.style.color='#9ca3af';m.textContent='Buscando endereço...';
+    try{
+      const r=await fetch(`https://viacep.com.br/ws/${d}/json/`),j=await r.json();if(seq!==socM.cepSeq)return;
+      if(j.erro){m.style.color='#fbbf24';m.textContent='CEP não encontrado. Preencha o endereço manualmente.';return;}
+      $('sf-street').value=j.logradouro||$('sf-street').value;$('sf-dist').value=j.bairro||'';$('sf-city').value=j.localidade||'';$('sf-uf').value=j.uf||'';
+      m.style.color='#4ade80';m.textContent=`Endereço preenchido: ${[j.logradouro,j.bairro,(j.localidade||'')+(j.uf?'/'+j.uf:'')].filter(Boolean).join(' · ')}`;
+    }catch(_){if(seq===socM.cepSeq){m.style.color='#fbbf24';m.textContent='Não foi possível buscar o CEP agora. Preencha o endereço manualmente.';}}
+  });
+}
+function socFormCollect(){
+  const g=id=>$(id).value.trim(),sc=document.querySelector('input[name="sf-scope"]:checked');
+  return {id:socM.editing?socM.editing.id:null,action_date:$('sf-date').value,scope:sc?sc.value:'',action_type:g('sf-type'),description:g('sf-desc'),beneficiary_name:g('sf-ben'),cep:g('sf-cep').replace(/\D/g,''),street:g('sf-street'),house_number:g('sf-num'),district:g('sf-dist'),city:g('sf-city'),state:g('sf-uf').toUpperCase(),donated:g('sf-don')};
+}
+function socFormValidate(p){
+  if(!p.action_date)return 'Informe a data da ação.';
+  if(p.action_date>socToday())return 'A data da ação não pode ser futura.';
+  if(!p.scope)return 'Informe se a ação foi interna ou externa.';
+  if(!p.action_type)return 'Escolha o tipo da ação.';
+  if(p.description.length<3)return 'Descreva a ação.';
+  if(p.beneficiary_name.split(/\s+/).filter(Boolean).length<2)return 'Informe o nome e o sobrenome do beneficiário.';
+  if(p.cep.length!==8)return 'Informe um CEP válido (8 números).';
+  if(p.street.length<2)return 'Informe o nome da rua.';
+  if(!p.house_number)return 'Informe o número da casa.';
+  if(p.donated.length<2)return 'Informe o que foi doado (ou escreva "Sem doação").';
+  return '';
+}
+async function socFormSave(){
+  const p=socFormCollect(),err=socFormValidate(p),m=$('sf-msg');
+  if(err){m.textContent=err;return;}
+  const btn=document.querySelector('[data-socform="save"]');btn.disabled=true;
+  try{await socRpc('social_action_save',{p_payload:p});await loadSocialPanel(true);uiAlert(p.id?'Ação atualizada com sucesso.':'Ação social registrada com sucesso. O comando já pode ver no painel administrativo.');}
+  catch(e){m.textContent=e.message;btn.disabled=false;}
+}
+$('social-body').addEventListener('click',async e=>{
+  const t=e.target;
+  if(t.closest('[data-socnew]')){socM.formOpen=true;socM.editing=null;socMemberRender();window.scrollTo({top:0,behavior:'smooth'});return;}
+  const ed=t.closest('[data-socedit]');if(ed){socM.editing=socM.actions.find(a=>a.id===+ed.dataset.socedit)||null;socM.formOpen=true;socMemberRender();window.scrollTo({top:0,behavior:'smooth'});return;}
+  const dl=t.closest('[data-socdel]');
+  if(dl){if(!await uiConfirm('Excluir esta ação social? Esta ação não pode ser desfeita.'))return;try{await socRpc('social_action_delete',{p_id:+dl.dataset.socdel});await loadSocialPanel(true);}catch(er){uiAlert(er.message);}return;}
+  const fm=t.closest('[data-socform]');if(fm){if(fm.dataset.socform==='cancel'){socM.formOpen=false;socM.editing=null;socMemberRender();}else socFormSave();}
+});
+$('social-body').addEventListener('input',e=>{if(e.target.id==='soc-q'){socM.q=e.target.value;const pos=e.target.selectionStart;socMemberRender();const q=$('soc-q');q.focus();q.setSelectionRange(pos,pos);}});
+document.querySelectorAll('[data-mside="social"]').forEach(b=>b.addEventListener('click',()=>loadSocialPanel()));
+
+/* ───────── Administrador ───────── */
+const SOC={actions:[],goals:[],sec:'overview',fDiv:'',fType:'',fScope:'',fFrom:'',fTo:'',fQ:'',gEd:null};
+const SOC_SECS=[['overview','Visão geral','fa-chart-pie'],['actions','Ações registradas','fa-list'],['divs','Por divisão','fa-people-group'],['goals','Ações obrigatórias','fa-bullseye']];
+async function socAdminFetch(){
+  const [a,g]=await Promise.all([supabaseClient.from('social_actions').select('*').order('action_date',{ascending:false}).limit(5000),supabaseClient.from('social_goals').select('*').order('period_end',{ascending:false})]);
+  const err=a.error||g.error;if(err)throw new Error(/relation|schema cache|does not exist/i.test(err.message||'')?'O módulo Ação social ainda não foi instalado. Rode o arquivo acao_social.sql no Supabase.':err.message);
+  SOC.actions=a.data||[];SOC.goals=g.data||[];
+}
+async function loadSocialAdmin(){
+  const body=$('soc-admin-body');body.innerHTML='<p class="text-sm text-gray-400">Carregando ações sociais...</p>';
+  try{await loadRefs();await socAdminFetch();SOC.gEd=null;socAdminRender();}
+  catch(e){body.innerHTML=`<div class="row-card"><p class="text-sm" style="color:#fca5a5">${safeText(e.message)}</p></div>`;}
+}
+async function socAdminRefresh(){try{await socAdminFetch();SOC.gEd=null;socAdminRender();}catch(e){uiAlert(e.message);}}
+const socDivName=id=>divName(id);
+const socGoalDone=(g,did)=>SOC.actions.filter(a=>a.division_id===did&&a.action_date>=g.period_start&&a.action_date<=g.period_end&&(!g.action_type||a.action_type===g.action_type)&&(!g.scope||a.scope===g.scope)).length;
+const socGoalDivs=g=>g.division_id?[g.division_id]:divisionsList.map(d=>d.id);
+function socGoalState(g,done){const t=socToday();return done>=g.required_count?['Cumprida','#22c55e']:g.period_end<t?['Atrasada','#ef4444']:g.period_start>t?['Futura','#9ca3af']:['Em andamento','#c9a84c'];}
+const socMissingTotal=()=>SOC.goals.filter(g=>g.active).reduce((s,g)=>s+socGoalDivs(g).reduce((x,d)=>x+Math.max(0,g.required_count-socGoalDone(g,d)),0),0);
+function socFiltered(){
+  const q=SOC.fQ.trim().toLowerCase();
+  return SOC.actions.filter(a=>(!SOC.fDiv||String(a.division_id)===String(SOC.fDiv))&&(!SOC.fType||a.action_type===SOC.fType)&&(!SOC.fScope||a.scope===SOC.fScope)&&(!SOC.fFrom||a.action_date>=SOC.fFrom)&&(!SOC.fTo||a.action_date<=SOC.fTo)&&(!q||[a.beneficiary_name,a.responsible_name,a.description,a.donated,a.street,a.district,a.city].join(' ').toLowerCase().includes(q)));
+}
+function socAdminRender(){
+  const body=$('soc-admin-body');if(!body)return;
+  const nav=SOC_SECS.map(([k,l,ic])=>`<button type="button" class="ins-sec ${SOC.sec===k?'on':''}" data-socsec="${k}"><i class="fa-solid ${ic}"></i>${l}</button>`).join('');
+  const head=`<div class="ins-top flex flex-wrap items-start justify-between gap-3 mb-4"><div><h3 class="font-display text-white text-3xl tracking-widest uppercase">Ações Sociais de Divisão</h3><p class="text-sm text-gray-400 mt-1">Tudo o que o Social de cada divisão registra aparece aqui automaticamente. ${SOC.actions.length} ação(ões) registrada(s).</p></div><div class="flex gap-2 no-print"><button type="button" class="btn btn-secondary btn-sm" data-socact="refresh"><i class="fa-solid fa-rotate mr-2"></i>Atualizar</button><button type="button" class="btn btn-secondary btn-sm" data-socact="csv"><i class="fa-solid fa-file-csv mr-2"></i>Exportar CSV</button></div></div><div class="ins-secs no-print">${nav}</div>`;
+  body.innerHTML=head+'<div id="soc-sec-body" class="mt-4">'+({overview:socSecOverview,actions:socSecActions,divs:socSecDivs,goals:socSecGoals}[SOC.sec])()+'</div>';
+}
+const socHBars=(items,col,det)=>{const mx=Math.max(1,...items.map(i=>i.n));return items.map(i=>`<div class="soc-bar${det?' ins-clk':''}" ${det?`data-socdet="${det(i)}" role="button" tabindex="0"`:''}><span class="soc-bl" title="${safeText(i.l)}">${safeText(i.l)}</span><div class="pbar" style="flex:1;margin:0"><i style="width:${i.n/mx*100}%;background:${col}"></i></div><b>${i.n}</b></div>`).join('')||'<p class="text-sm text-gray-500">Sem dados ainda.</p>';};
+function socMonths(){const out=[],d=new Date(insNow());for(let k=11;k>=0;k--){const x=new Date(d.getFullYear(),d.getMonth()-k,1),key=`${x.getFullYear()}-${p2(x.getMonth()+1)}`;out.push({key,l:`${p2(x.getMonth()+1)}/${String(x.getFullYear()).slice(2)}`,n:SOC.actions.filter(a=>a.action_date.slice(0,7)===key).length});}return out;}
+function socSecOverview(){
+  const A=SOC.actions,month=socToday().slice(0,7),inMonth=A.filter(a=>a.action_date.slice(0,7)===month).length,divsWith=new Set(A.map(a=>a.division_id)).size,nInt=A.filter(a=>a.scope==='internal').length,nExt=A.length-nInt;
+  const byDiv=divisionsList.map(d=>({l:d.name,id:d.id,n:A.filter(a=>a.division_id===d.id).length})).sort((x,y)=>y.n-x.n);
+  const tm={};A.forEach(a=>{tm[a.action_type]=(tm[a.action_type]||0)+1;});const byType=Object.entries(tm).map(([l,n])=>({l,n})).sort((x,y)=>y.n-x.n).slice(0,10);
+  const months=socMonths(),mx=Math.max(1,...months.map(m=>m.n)),pi=A.length?nInt/A.length*100:0;
+  const kpi=(n,l,ic,col,sub)=>`<div class="row-card" style="border-top:3px solid ${col}"><div class="font-display text-3xl text-white"><i class="fa-solid ${ic} text-base mr-2" style="color:${col}"></i>${n}</div><div class="text-[11px] text-gray-400 uppercase font-heading tracking-widest">${l}</div>${sub?`<div class="text-xs text-gray-500 mt-1">${sub}</div>`:''}</div>`;
+  return `<div class="grid grid-cols-2 lg:grid-cols-4 gap-2">${kpi(A.length,'Ações registradas','fa-hand-holding-heart','#c9a84c')}${kpi(inMonth,'Neste mês','fa-calendar-day','#3b82f6')}${kpi(`${divsWith}/${divisionsList.length}`,'Divisões com ações','fa-people-group','#22c55e','já registraram ao menos uma')}${kpi(socMissingTotal(),'Ações obrigatórias faltando','fa-bullseye','#ef4444','somando as metas ativas')}</div>
+  <div class="grid lg:grid-cols-3 gap-3 mt-4"><div class="row-card lg:col-span-2"><h4 class="soc-h">Ações por divisão</h4>${socHBars(byDiv,'#c9a84c',i=>'division:'+i.id)}</div>
+  <div class="row-card"><h4 class="soc-h">Interna × Externa</h4><div class="flex items-center gap-4"><div class="soc-donut" style="background:conic-gradient(#3b82f6 0 ${pi}%,#22c55e ${pi}% 100%)"><span>${A.length}</span></div><div class="text-sm"><div><i class="soc-dot" style="background:#3b82f6"></i>Internas: <b class="text-white">${nInt}</b></div><div class="mt-1"><i class="soc-dot" style="background:#22c55e"></i>Externas: <b class="text-white">${nExt}</b></div></div></div></div></div>
+  <div class="grid lg:grid-cols-2 gap-3 mt-3"><div class="row-card"><h4 class="soc-h">Ações por mês (últimos 12 meses)</h4><div class="soc-cols">${months.map(m=>`<div class="soc-col" title="${m.l}: ${m.n}"><b>${m.n||''}</b><i style="height:${m.n/mx*100}%"></i><span>${m.l}</span></div>`).join('')}</div></div>
+  <div class="row-card"><h4 class="soc-h">Tipos de ação mais realizados</h4>${socHBars(byType,'#22c55e')}</div></div>`;
+}
+function socActionRows(list){
+  return list.map(a=>`<tr class="ins-clk" data-socdet="action:${a.id}" role="button" tabindex="0"><td>${socDate(a.action_date)}</td><td>${safeText(socDivName(a.division_id))}</td><td>${safeText(a.responsible_name||'—')}</td><td>${socScopeChip(a.scope)}</td><td>${safeText(a.action_type)}</td><td>${safeText(a.beneficiary_name)}</td><td>${safeText([a.district,a.city?a.city+(a.state?'/'+a.state:''):''].filter(Boolean).join(' · ')||'—')}</td></tr>`).join('');
+}
+const SOC_HEADS=['Data','Divisão','Social responsável','Ação','Tipo','Beneficiário','Local'];
+function socSecActions(){
+  const list=socFiltered();
+  return `<div class="grid md:grid-cols-3 lg:grid-cols-6 gap-2 mb-3 no-print"><div><label class="block text-xs text-gray-300 mb-1" for="socf-div">Divisão</label><select class="field" id="socf-div"><option value="">Todas</option>${divisionsList.map(d=>`<option value="${d.id}" ${String(SOC.fDiv)===String(d.id)?'selected':''}>${safeText(d.name)}</option>`).join('')}</select></div><div><label class="block text-xs text-gray-300 mb-1" for="socf-scope">Ação</label><select class="field" id="socf-scope"><option value="">Todas</option><option value="internal" ${SOC.fScope==='internal'?'selected':''}>Interna</option><option value="external" ${SOC.fScope==='external'?'selected':''}>Externa</option></select></div><div class="md:col-span-2"><label class="block text-xs text-gray-300 mb-1" for="socf-type">Tipo da ação</label><select class="field" id="socf-type"><option value="">Todos</option>${SOC_TYPES.map(t=>`<option value="${safeText(t)}" ${SOC.fType===t?'selected':''}>${safeText(t.slice(0,70))}</option>`).join('')}</select></div><div><label class="block text-xs text-gray-300 mb-1" for="socf-from">De</label><input class="field" id="socf-from" type="date" value="${SOC.fFrom}"></div><div><label class="block text-xs text-gray-300 mb-1" for="socf-to">Até</label><input class="field" id="socf-to" type="date" value="${SOC.fTo}"></div><div class="md:col-span-3 lg:col-span-6"><label class="block text-xs text-gray-300 mb-1" for="socf-q">Buscar (beneficiário, social, local, descrição)</label><input class="field" id="socf-q" value="${safeText(SOC.fQ)}" placeholder="Digite para filtrar"></div></div>
+  <p class="text-xs text-gray-400 mb-2">${list.length} ação(ões). Clique em uma linha para ver todas as informações.</p><div class="overflow-x-auto"><table class="ins-tb"><thead><tr>${SOC_HEADS.map(h=>`<th>${h}</th>`).join('')}</tr></thead><tbody id="soc-rows">${socActionRows(list.slice(0,500))||`<tr><td colspan="7" class="text-gray-500">Nenhuma ação encontrada.</td></tr>`}</tbody></table></div>${list.length>500?'<p class="text-xs text-gray-500 mt-2">Mostrando as 500 mais recentes. Use o CSV para ver todas.</p>':''}`;
+}
+function socDivSummary(did){
+  const l=SOC.actions.filter(a=>a.division_id===did),last=l[0],goals=SOC.goals.filter(g=>g.active&&(!g.division_id||g.division_id===did)).map(g=>({g,done:socGoalDone(g,did)}));
+  return {l,last,goals,total:l.length,nInt:l.filter(a=>a.scope==='internal').length,nExt:l.filter(a=>a.scope==='external').length};
+}
+function socSecDivs(){
+  return `<div class="grid md:grid-cols-2 gap-3">${divisionsList.map(d=>{const s=socDivSummary(d.id);
+    return `<div class="row-card ins-clk" data-socdet="division:${d.id}" role="button" tabindex="0" title="Ver as ações da divisão"><i class="fa-solid fa-up-right-from-square ins-go"></i><div class="flex items-center justify-between gap-2"><div class="text-white font-medium">${safeText(d.name)}</div><div class="font-display text-2xl text-gold">${s.total}</div></div><div class="text-xs text-gray-400 mt-1">${s.nInt} interna(s) · ${s.nExt} externa(s)${s.last?` · última em ${socDate(s.last.action_date)} (${safeText(s.last.action_type.slice(0,40))})`:' · nenhuma ação registrada'}</div>${s.goals.length?s.goals.map(({g,done})=>{const st=socGoalState(g,done);return `<div class="mt-2"><div class="flex items-center justify-between gap-2 text-xs"><span class="text-gray-300">${safeText(g.title)}</span><span style="color:${st[1]}">${done}/${g.required_count} · ${done>=g.required_count?'cumprida':'faltam '+(g.required_count-done)}</span></div>${insBar(Math.min(100,done/g.required_count*100),st[1])}</div>`;}).join(''):'<div class="text-xs text-gray-500 mt-2">Sem meta obrigatória ativa.</div>'}</div>`;}).join('')||'<p class="text-sm text-gray-400">Nenhuma divisão cadastrada.</p>'}</div>`;
+}
+function socSecGoals(){
+  const E=SOC.gEd;
+  const form=E?`<div class="row-card mb-4"><h4 class="soc-h">${E.id?'Editar meta':'Nova meta de ações obrigatórias'}</h4><div class="grid md:grid-cols-3 gap-3"><div class="md:col-span-3"><label class="block text-xs text-gray-300 mb-1" for="sg-title">Título *</label><input class="field" id="sg-title" maxlength="160" value="${safeText(E.title)}" placeholder="Ex.: Ações do 2º semestre de 2026"></div><div><label class="block text-xs text-gray-300 mb-1" for="sg-start">Período (início) *</label><input class="field" id="sg-start" type="date" value="${E.start}"></div><div><label class="block text-xs text-gray-300 mb-1" for="sg-end">Período (fim) *</label><input class="field" id="sg-end" type="date" value="${E.end}"></div><div><label class="block text-xs text-gray-300 mb-1" for="sg-count">Quantidade obrigatória *</label><input class="field" id="sg-count" type="number" min="1" max="1000" value="${E.count}"></div><div><label class="block text-xs text-gray-300 mb-1" for="sg-div">Divisão</label><select class="field" id="sg-div"><option value="">Todas as divisões</option>${divisionsList.map(d=>`<option value="${d.id}" ${String(E.div)===String(d.id)?'selected':''}>${safeText(d.name)}</option>`).join('')}</select></div><div><label class="block text-xs text-gray-300 mb-1" for="sg-scope">Ação</label><select class="field" id="sg-scope"><option value="">Interna ou externa</option><option value="internal" ${E.scope==='internal'?'selected':''}>Somente interna</option><option value="external" ${E.scope==='external'?'selected':''}>Somente externa</option></select></div><div><label class="block text-xs text-gray-300 mb-1" for="sg-type">Tipo da ação</label><select class="field" id="sg-type"><option value="">Qualquer tipo</option>${SOC_TYPES.map(t=>`<option value="${safeText(t)}" ${E.type===t?'selected':''}>${safeText(t.slice(0,70))}</option>`).join('')}</select></div><div class="md:col-span-3"><label class="ins-opt"><input type="checkbox" id="sg-active" ${E.active?'checked':''}><span>Meta ativa (aparece para os sociais das divisões)</span></label></div></div><p id="sg-msg" class="text-sm mt-3" style="color:#f87171" role="status" aria-live="polite"></p><div class="tv-act"><button type="button" class="btn btn-primary" data-socgoal="save">Salvar meta</button><button type="button" class="btn btn-secondary" data-socgoal="cancel">Cancelar</button></div></div>`:'';
+  const cards=SOC.goals.map(g=>{
+    const rows=socGoalDivs(g).map(did=>{const done=socGoalDone(g,did),st=socGoalState(g,done);return {did,done,st,miss:Math.max(0,g.required_count-done)};});
+    const tot=rows.reduce((s,r)=>s+r.miss,0),extra=[g.action_type?'tipo: '+g.action_type:'',g.scope?SOC_SCOPE[g.scope]:''].filter(Boolean).join(' · ');
+    return `<div class="row-card" style="border-left:3px solid ${g.active?'#c9a84c':'#6b7280'}"><div class="flex flex-wrap items-start justify-between gap-2"><div><div class="text-white font-medium">${safeText(g.title)} ${g.active?'':'<span class="ins-chip" style="--c:#9ca3af">Inativa</span>'}</div><div class="text-xs text-gray-400 mt-1">${socDate(g.period_start)} a ${socDate(g.period_end)} · <b class="text-gray-200">${g.required_count}</b> obrigatória(s) por divisão · ${g.division_id?safeText(socDivName(g.division_id)):'todas as divisões'}${extra?' · '+safeText(extra):''}</div></div><div class="text-right"><div class="font-display text-2xl" style="color:${tot?'#f87171':'#4ade80'}">${tot}</div><div class="text-[10px] text-gray-500 uppercase">faltando no total</div></div></div>
+    <div class="overflow-x-auto mt-3"><table class="ins-tb"><thead><tr><th>Divisão</th><th>Obrigatórias</th><th>Feitas</th><th>Faltam</th><th>Situação</th></tr></thead><tbody>${rows.map(r=>`<tr class="ins-clk" data-socdet="division:${r.did}" role="button" tabindex="0"><td>${safeText(socDivName(r.did))}</td><td>${g.required_count}</td><td>${r.done}</td><td>${r.miss}</td><td><span class="ins-chip" style="--c:${r.st[1]}">${r.st[0]}</span></td></tr>`).join('')}</tbody></table></div>
+    <div class="tv-act no-print"><button type="button" class="btn btn-secondary btn-sm" data-socgoal="edit" data-id="${g.id}"><i class="fa-solid fa-pen mr-1"></i>Editar</button><button type="button" class="btn btn-secondary btn-sm" data-socgoal="toggle" data-id="${g.id}">${g.active?'Desativar':'Ativar'}</button><button type="button" class="btn btn-danger btn-sm" data-socgoal="del" data-id="${g.id}"><i class="fa-solid fa-trash mr-1"></i>Excluir</button></div></div>`;}).join('');
+  return `<div class="flex flex-wrap items-center justify-between gap-2 mb-3"><p class="text-sm text-gray-400" style="max-width:640px">Defina quantas ações sociais cada divisão é obrigada a fazer em um período. O Social de cada divisão vê o quanto já fez e o quanto falta.</p>${E?'':'<button type="button" class="btn btn-primary" data-socgoal="new"><i class="fa-solid fa-plus mr-2"></i>Nova meta obrigatória</button>'}</div>${form}<div class="space-y-3">${cards||'<div class="row-card"><p class="text-sm text-gray-400">Nenhuma meta definida ainda.</p></div>'}</div>`;
+}
+const socActionCsvRows=list=>[['ID','Data','Regional','Divisão','Social responsável','Ação','Tipo da ação','Descrição','Beneficiário','CEP','Rua','Número','Bairro','Cidade','UF','O que foi doado','Registrado em'],...list.map(a=>[a.id,socDate(a.action_date),a.regional||SOC_REGIONAL,socDivName(a.division_id),a.responsible_name||'',SOC_SCOPE[a.scope]||a.scope,a.action_type,a.description,a.beneficiary_name,socCepFmt(a.cep),a.street,a.house_number,a.district||'',a.city||'',a.state||'',a.donated,insFmt(a.created_at)])];
+function socDetail(spec){
+  const [kind,arg]=String(spec).split(':');
+  if(kind==='action'){
+    const a=SOC.actions.find(x=>x.id===+arg);if(!a)return null;
+    return {title:a.action_type,sub:`${socDate(a.action_date)} · ${socDivName(a.division_id)}`,csv:socActionCsvRows([a]),
+      html:insKv([['Regional',safeText(a.regional||SOC_REGIONAL)],['Data da ação',socDate(a.action_date)],['Divisão',safeText(socDivName(a.division_id))],['Social responsável',safeText(a.responsible_name||'—')],['Ação',SOC_SCOPE[a.scope]||''],['Tipo da ação',safeText(a.action_type)],['Beneficiário',safeText(a.beneficiary_name)],['CEP',socCepFmt(a.cep)],['Rua',safeText(a.street)],['Número',safeText(a.house_number)],['Bairro',safeText(a.district||'—')],['Cidade/UF',safeText((a.city||'—')+(a.state?'/'+a.state:''))],['Registrada em',insFmt(a.created_at)],['Última alteração',insFmt(a.updated_at)]])
+      +`<h4 class="insm-h">Descrição da ação</h4><p class="text-sm text-gray-200" style="white-space:pre-line">${safeText(a.description)}</p><h4 class="insm-h">O que foi doado</h4><p class="text-sm text-gray-200" style="white-space:pre-line">${safeText(a.donated)}</p><div class="tv-act"><button type="button" class="btn btn-danger btn-sm" data-socdeladm="${a.id}"><i class="fa-solid fa-trash mr-1"></i>Excluir esta ação</button></div>`};
+  }
+  if(kind==='division'){
+    const did=+arg,s=socDivSummary(did);
+    return {title:'Divisão '+socDivName(did),sub:`${s.total} ação(ões) · ${s.nInt} interna(s) · ${s.nExt} externa(s)`,csv:socActionCsvRows(s.l),
+      html:(s.goals.length?`<h4 class="insm-h">Ações obrigatórias</h4>${s.goals.map(({g,done})=>{const st=socGoalState(g,done);return `<div class="mb-2"><div class="flex justify-between text-sm"><span class="text-white">${safeText(g.title)} <span class="text-xs text-gray-400">(${socDate(g.period_start)} a ${socDate(g.period_end)})</span></span><span style="color:${st[1]}">${done} de ${g.required_count} · ${done>=g.required_count?'cumprida':'faltam '+(g.required_count-done)}</span></div>${insBar(Math.min(100,done/g.required_count*100),st[1])}</div>`;}).join('')}`:'')
+      +`<h4 class="insm-h">Ações registradas</h4><div class="overflow-x-auto"><table class="ins-tb"><thead><tr>${SOC_HEADS.map(h=>`<th>${h}</th>`).join('')}</tr></thead><tbody>${socActionRows(s.l)||'<tr><td colspan="7" class="text-gray-500">Nenhuma ação registrada.</td></tr>'}</tbody></table></div>`};
+  }
+  return null;
+}
+function socOpenDetail(spec,push){
+  const o=socDetail(spec);if(!o)return;
+  if(push&&insmCur)insmStack.push(insmCur);else if(!push)insmStack=[];
+  insmCur=o;insmRender();
+}
+$('soc-admin-body').addEventListener('click',async e=>{
+  const t=e.target;
+  const sec=t.closest('[data-socsec]');if(sec){SOC.sec=sec.dataset.socsec;socAdminRender();return;}
+  const det=t.closest('[data-socdet]');if(det){socOpenDetail(det.dataset.socdet,false);return;}
+  const ac=t.closest('[data-socact]');
+  if(ac){if(ac.dataset.socact==='refresh')return socAdminRefresh();if(ac.dataset.socact==='csv'){insCsvFile(`acoes-sociais-${new Date().toISOString().slice(0,10)}.csv`,socActionCsvRows(socFiltered()));return;}}
+  const gl=t.closest('[data-socgoal]');if(!gl)return;
+  const k=gl.dataset.socgoal,g=SOC.goals.find(x=>x.id===+gl.dataset.id);
+  if(k==='new'){const n=new Date(insNow()),y=n.getFullYear();SOC.gEd={id:null,title:'',start:`${y}-01-01`,end:`${y}-12-31`,count:1,div:'',scope:'',type:'',active:true};return socAdminRender();}
+  if(k==='edit'&&g){SOC.gEd={id:g.id,title:g.title,start:g.period_start,end:g.period_end,count:g.required_count,div:g.division_id||'',scope:g.scope||'',type:g.action_type||'',active:g.active};return socAdminRender();}
+  if(k==='cancel'){SOC.gEd=null;return socAdminRender();}
+  if(k==='toggle'&&g){try{await socRpc('social_goal_save',{p_payload:{id:g.id,title:g.title,period_start:g.period_start,period_end:g.period_end,required_count:g.required_count,division_id:g.division_id,action_type:g.action_type,scope:g.scope,active:!g.active}});await socAdminRefresh();}catch(er){uiAlert(er.message);}return;}
+  if(k==='del'&&g){if(!await uiConfirm('Excluir esta meta? As ações já registradas continuam guardadas.'))return;try{await socRpc('social_goal_delete',{p_id:g.id});await socAdminRefresh();}catch(er){uiAlert(er.message);}return;}
+  if(k==='save'){
+    const E=SOC.gEd,p={id:E.id,title:$('sg-title').value.trim(),period_start:$('sg-start').value,period_end:$('sg-end').value,required_count:parseInt($('sg-count').value,10),division_id:$('sg-div').value||null,action_type:$('sg-type').value||null,scope:$('sg-scope').value||null,active:$('sg-active').checked},m=$('sg-msg');
+    if(p.title.length<3){m.textContent='Informe o título da meta.';return;}
+    if(!p.period_start||!p.period_end){m.textContent='Informe o início e o fim do período.';return;}
+    if(p.period_end<p.period_start){m.textContent='O fim do período precisa ser igual ou posterior ao início.';return;}
+    if(!(p.required_count>=1&&p.required_count<=1000)){m.textContent='A quantidade obrigatória precisa estar entre 1 e 1000.';return;}
+    try{await socRpc('social_goal_save',{p_payload:p});await socAdminRefresh();uiAlert('Meta salva. Os sociais das divisões já veem o que falta.');}catch(er){m.textContent=er.message;}
+  }
+});
+$('soc-admin-body').addEventListener('input',e=>{
+  const t=e.target;
+  if(t.id==='socf-q'){SOC.fQ=t.value;const pos=t.selectionStart;$('soc-sec-body').innerHTML=socSecActions();const n=$('socf-q');n.focus();n.setSelectionRange(pos,pos);}
+  else if(t.id==='socf-from'||t.id==='socf-to'){SOC[t.id==='socf-from'?'fFrom':'fTo']=t.value;$('soc-sec-body').innerHTML=socSecActions();}
+});
+$('soc-admin-body').addEventListener('change',e=>{
+  const t=e.target,map={'socf-div':'fDiv','socf-type':'fType','socf-scope':'fScope'};
+  if(map[t.id]){SOC[map[t.id]]=t.value;$('soc-sec-body').innerHTML=socSecActions();}
+});
+$('soc-admin-body').addEventListener('keydown',e=>{if(e.key!=='Enter'&&e.key!==' ')return;const d=e.target.closest&&e.target.closest('[data-socdet]');if(d&&!e.target.closest('button,a,input,select,textarea')){e.preventDefault();socOpenDetail(d.dataset.socdet,false);}});
+$('ins-modal').addEventListener('click',async e=>{
+  const sd=e.target.closest('[data-socdet]');if(sd){socOpenDetail(sd.dataset.socdet,true);return;}
+  const dl=e.target.closest('[data-socdeladm]');
+  if(dl){if(!await uiConfirm('Excluir esta ação social? Esta ação não pode ser desfeita.'))return;try{await socRpc('social_action_delete',{p_id:+dl.dataset.socdeladm});insmClose();await socAdminRefresh();}catch(er){uiAlert(er.message);}}
+});
 
 /* Impressão do relatório: copia só o relatório para um contêiner próprio (sem sidebar, sem folhas em branco) */
 function insPrint(){
